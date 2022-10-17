@@ -8,8 +8,6 @@ console.log('Using files in ' + buildDir);
 
 const subDir = '/';
 const logRequests = false;
-var cors = require('cors');
-app.use(cors());
 
 if (subDir === '/') {
     console.log('The server config assuming it is serving at the server root. You can control this with the `subDir` variable in index.js.');
