@@ -5,6 +5,7 @@ import './UserManage.scss';
 import {getAllUsers, createNewUserService, deleteUserService, editUserService} from '../../services/userService';
 import ModalUser from './ModalUser';
 import ModalEditUser from './ModalEditUser';
+import ModalDeleteUser from './ModalDeleteUser';
 import {emitter} from '../../utils/emitter';
 class UserManage extends Component {
 
@@ -14,7 +15,9 @@ class UserManage extends Component {
             arrUsers: [],
             isOpen: false,
             isOpenEdit: false,
-            userEdit: {}
+            isOpenDelete: false,
+            userEdit: {},
+            userDelete: {}
         }
     }
 
@@ -49,6 +52,12 @@ class UserManage extends Component {
         })
     }
 
+    toggleDeleteUserModal = () => {
+        this.setState({
+            isOpenDelete: !this.state.isOpenDelete,
+        })
+    }
+
     createNewUser = async (data) => {
         try {
             let response = await createNewUserService(data);
@@ -66,11 +75,20 @@ class UserManage extends Component {
         }
     }
 
-    handleDeleteUser = async (user) => {
-        console.log('click delete', user)
+    handleDeleteUser = (user) => {
+        this.setState({
+            isOpenDelete: true,
+            userDelete: user
+        })
+    }
+
+    deleteUser = async (user) => {
         try {
             let res = await deleteUserService(user.id);
             if(res && res.errCode === 0) {
+                this.setState({
+                    isOpenDelete: false,
+                })
                 await this.getAllUsersFromReact();
             } else {
                 alert(res.errMessage)
@@ -119,6 +137,15 @@ class UserManage extends Component {
                         toggleFromParent = {this.toggleEditUserModal}
                         currentUser = {this.state.userEdit}
                         editUser = {this.doEditUser} 
+                    />
+                }
+                {
+                    this.state.isOpenDelete &&
+                    <ModalDeleteUser
+                        isOpen = {this.state.isOpenDelete}
+                        toggleFromParent = {this.toggleDeleteUserModal}
+                        currentUser = {this.state.userDelete}
+                        deleteUser = {this.deleteUser} 
                     />
                 }
                 <div className='title text-center'>User management</div>
