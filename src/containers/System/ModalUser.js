@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import {emitter} from '../../utils/emitter';
+
 class ModalUser extends Component {
 
     constructor(props){
@@ -16,6 +18,22 @@ class ModalUser extends Component {
             gender: '',
             roleId: '',
         }
+        this.listenToEmitter();
+    }
+
+    listenToEmitter() {
+        emitter.on('EVENT_CLEAR_MODAL_DATA', ()=> {
+            this.setState({
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                address: '',
+                phonenumber: '',
+                gender: '',
+                roleId: '',
+            })
+        })
     }
 
     componentDidMount() {
@@ -33,7 +51,7 @@ class ModalUser extends Component {
         })
     }
 
-    checkValideInput = () => {
+    checkValidateInput = () => {
         let isValid = true;
         let arrInput = ['email', 'password', 'firstName', 'lastName', 'address', 'phonenumber', 'gender', 'roleId'];
         for(let i=0; i<arrInput.length; i++) {
@@ -47,7 +65,7 @@ class ModalUser extends Component {
     }
 
     handleAddNewUser = () => {
-        let isValid = this.checkValideInput();
+        let isValid = this.checkValidateInput();
         if(isValid === true) {
             this.props.createNewUser(this.state);
         }
@@ -118,6 +136,7 @@ class ModalUser extends Component {
                                 name="gender" 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "gender")}}
                                 value={this.state.gender}>
+                                <option value="">-- Choose option --</option>
                                 <option value="1">Male</option>
                                 <option value="0">Female</option>
                             </select>
@@ -128,6 +147,7 @@ class ModalUser extends Component {
                                 name="roleId" 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "roleId")}}
                                 value={this.state.roleId}>
+                                <option value="">-- Choose option --</option>
                                 <option value="0">Admin</option>
                                 <option value="1">Doctor</option>
                                 <option value="2">Patient</option>
