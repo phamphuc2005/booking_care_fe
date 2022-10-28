@@ -2,6 +2,7 @@
     height: 60px;
     width: 100%;
     padding: 0 20px;
+    background-color: #04AA6D;
 
     .home-header-content {
         width: 100%;
@@ -11,13 +12,14 @@
         .left-content {
             width: 20%;
             display: flex;
-            border: 1px solid black;
+            // border: 1px solid black;
             align-items: center;
+            color: white;
 
             .header-logo {
                 background: url(../../assets/images/LOGO.png) center center no-repeat;
                 height: 100%;
-                width: 100%;
+                width: 70%;
                 cursor: pointer;
             }
 
@@ -28,10 +30,11 @@
         }
         .center-content {
             width: 60%;
-            border: 1px solid black;
+            // border: 1px solid black;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: white;
 
             .child-content {
                 .subs-title {
@@ -42,10 +45,145 @@
         }
         .right-content {
             width: 20%;
-            border: 1px solid black;
+            // border: 1px solid black;
             display: flex;
             align-items: center;
-            justify-content: space-evenly;
+            justify-content: center;
+            color: white;
+
+            .support {
+                display: flex;
+                align-items: center;
+                padding-right: 40px;
+                cursor: pointer;
+
+                i {
+                    color: yellow;
+                    margin-left: 20px;
+                    margin-right: 5px;
+                    font-size: 16px;
+                }
+            }
+
+            .language-vi {
+                cursor: pointer;
+                margin-right: 10px;
+
+                &.active {
+                    color: gold;
+                }
+            }
+            .language-en {
+                cursor: pointer;
+
+                &.active {
+                    color: blue;
+                }
+            }
+        }
+    }
+
+}
+
+.home-header-banner {
+    background: url('../../assets/images/header-background.jpg') center center no-repeat fixed;
+    height: 550px;
+    background-size: cover;
+    // padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+
+    .banner-up {
+        // border: 1px solid black;
+        height: 60%;
+        padding-top: 15px;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.25),rgba(255, 255, 255, 0.1));
+
+        .title1 {
+            text-align: center;
+            font-size: 30px;
+            text-shadow: 1px 1px 1px #333;
+            margin-bottom: 5px;
+            margin-top: 40px;
+            color: white; 
+        }
+    
+        .title2 {
+            text-align: center;
+            font-size: 30px;
+            text-shadow: 1px 1px 1px #333;
+            color: white;
+            margin-bottom: 30px; 
+        }
+    
+        .search {
+            width: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            padding: 10px;
+            border-radius: 25px;
+            background-color: whitesmoke;
+    
+            i {
+                margin: 0 5px;
+            }
+    
+            input {
+                height: 30px;
+                width: 370px;
+                background: transparent;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+
+    .banner-down {
+        // border: 1px solid black;
+        height: 40%;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0.8),rgba(255, 255, 255, 1));
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        .options {
+            display: flex;
+            text-align: center;
+            gap: 60px;
+            justify-content: center;
+
+            .option-child {
+                width: 100px;
+                text-align: center;
+
+                .icon {
+                    background-color: white;
+                    width: 50px;
+                    height: 50px;
+                    padding: 10px;
+                    border-radius: 50%;
+                    text-align: center;
+                    margin: 0 auto;
+                    box-shadow: 0px 1px 2px #333;
+
+                    i {
+                        font-size: 30px;
+                        color: #49bce2;
+                    }
+                }
+
+                .text {
+                    font-size: 17px;
+                    font-weight: 500;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    color: blue;
+                }
+            }
         }
     }
 
