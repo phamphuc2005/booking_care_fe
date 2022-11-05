@@ -47,16 +47,16 @@ class ModalDeleteUser extends Component {
                 className={'modal-user-container'}
                 size="lg"
             >
-                <ModalHeader toggle={()=>{this.toggle()}}>Delete user</ModalHeader>
+                <ModalHeader toggle={()=>{this.toggle()}}><FormattedMessage id = "user-modal.delete-title"/></ModalHeader>
                 <ModalBody>
-                    <div>Are you sure you want to delete?</div>
+                    <div><FormattedMessage id = "user-modal.delete-content"/></div>
                 </ModalBody>
                 <ModalFooter>
                     <Button 
                         color="danger px-3" 
                         onClick={()=>{this.handleDeleteUser()}}
-                    >Delete</Button>{' '}
-                    <Button color="secondary px-3" onClick={()=>{this.toggle()}}>Cancel</Button>
+                    ><FormattedMessage id = "user-modal.delete-btn"/></Button>{' '}
+                    <Button color="secondary px-3" onClick={()=>{this.toggle()}}><FormattedMessage id = "user-modal.cancel-btn"/></Button>
                 </ModalFooter>
             </Modal>
         )

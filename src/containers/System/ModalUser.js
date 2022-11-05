@@ -79,7 +79,7 @@ class ModalUser extends Component {
                 className={'modal-user-container'}
                 size="lg"
             >
-                <ModalHeader toggle={()=>{this.toggle()}}>Create new user</ModalHeader>
+                <ModalHeader toggle={()=>{this.toggle()}}><FormattedMessage id = "user-modal.create-title"/></ModalHeader>
                 <ModalBody>
                     <div className='modal-user-body'>
                         <div className='input-container'>
@@ -91,7 +91,7 @@ class ModalUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Password:</label>
+                            <label><FormattedMessage id = "user-modal.password"/>:</label>
                             <input 
                                 type='password' 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "password")}}
@@ -99,7 +99,7 @@ class ModalUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Firstname:</label>
+                            <label><FormattedMessage id = "user-modal.firstname"/>:</label>
                             <input 
                                 type='text' 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "firstName")}}
@@ -107,7 +107,7 @@ class ModalUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Lastname:</label>
+                            <label><FormattedMessage id = "user-modal.lastname"/>:</label>
                             <input 
                                 type='text' 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "lastName")}}
@@ -115,7 +115,7 @@ class ModalUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Address:</label>
+                            <label><FormattedMessage id = "user-modal.address"/>:</label>
                             <input 
                                 type='text' 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "address")}}
@@ -123,7 +123,7 @@ class ModalUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Phonenumber:</label>
+                            <label><FormattedMessage id = "user-modal.phone"/>:</label>
                             <input 
                                 type='number' 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "phonenumber")}}
@@ -131,7 +131,7 @@ class ModalUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Gender:</label>
+                            <label><FormattedMessage id = "user-modal.gender"/>:</label>
                             <select 
                                 name="gender" 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "gender")}}
@@ -142,7 +142,7 @@ class ModalUser extends Component {
                             </select>
                         </div>
                         <FormGroup className='input-container'>
-                            <label>Role:</label>
+                            <label><FormattedMessage id = "user-modal.role"/>:</label>
                             <select
                                 name="roleId" 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "roleId")}}
@@ -160,8 +160,8 @@ class ModalUser extends Component {
                     <Button 
                         color="primary px-3" 
                         onClick={()=>{this.handleAddNewUser()}}
-                    >Add</Button>{' '}
-                    <Button color="secondary px-3" onClick={()=>{this.toggle()}}>Cancel</Button>
+                    ><FormattedMessage id = "user-modal.add-btn"/></Button>{' '}
+                    <Button color="secondary px-3" onClick={()=>{this.toggle()}}><FormattedMessage id = "user-modal.cancel-btn"/></Button>
                 </ModalFooter>
             </Modal>
         )

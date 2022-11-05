@@ -22,6 +22,16 @@
         "mentalhealth": "Mental health",
         "dental" : "Dental examination"
     },
+    "section": {
+        "specialty": "Popular specialty",
+        "medicalfacility": "Outstanding medical facility",
+        "doctor": "Featured doctor of the past week",
+        "handbook": "Handbook",
+        "about": "Overview of Hanoi University of Science and Technology",
+        "about-link": "Introduction document of Hanoi University of Science and Technology.", 
+        "more-btn": "See more",
+        "search-btn": "Search"
+    },
     "menu": {
         "system": {
             "header": "System",
@@ -48,5 +58,32 @@
             "handbook-manage": "Handbook",
             "crud-handbook": "Handbook manage"
         }
+    },
+    "usermanage": {
+        "title": "User manage",
+        "add-btn": "Add new user",
+        "firstname": "Firstname",
+        "lastname": "Lastname",
+        "address": "Address",
+        "phone": "Phonenumber",
+        "action": "Actions"
+    },
+    "user-modal": {
+        "create-title": "Create new user",
+        "edit-title": "Edit user",
+        "delete-title": "Delete user",
+        "delete-content": "Are you sure you want to delete?",
+        "password": "Password",
+        "firstname": "Firstname",
+        "lastname": "Lastname",
+        "address": "Address",
+        "phone": "Phonenumber",
+        "gender": "Gender",
+        "role": "Role",
+        "add-btn": "Add",
+        "save-btn": "Save",
+        "delete-btn": "Delete",
+        "cancel-btn": "Cancel",
+        "option": "Choose option"
     }
 }

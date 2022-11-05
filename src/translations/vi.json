@@ -22,6 +22,16 @@
         "mentalhealth": "Sức khỏe tinh thần",
         "dental" : "Khám nha khoa"
     },
+    "section": {
+        "specialty": "Chuyên khoa phổ biến",
+        "medicalfacility": "Cơ sở y tế nổi bật",
+        "doctor": "Bác sĩ nổi bật tuần qua",
+        "handbook": "Cẩm nang",
+        "about": "Tổng quan về Đại học Bách Khoa Hà Nội",
+        "about-link": "Tài liệu giới thiệu Trường ĐHBK Hà Nội.",
+        "more-btn": "Xem thêm",
+        "search-btn": "Tìm kiếm"
+    },
     "menu": {
         "system": {
             "header": "Hệ thống",
@@ -48,5 +58,32 @@
             "handbook-manage": "Cẩm nang",
             "crud-handbook": "Quản lý cẩm nang"
         }
-    }
+    },
+    "usermanage": {
+        "title": "Quản lý người dùng",
+        "add-btn": "Thêm mới người dùng",
+        "firstname": "Họ",
+        "lastname": "Tên",
+        "address": "Địa chỉ",
+        "phone": "Số điện thoại",
+        "action": "Thao tác"
+    },
+    "user-modal": {
+        "create-title": "Thêm mới người dùng",
+        "edit-title": "Chỉnh sửa người dùng",
+        "delete-title": "Xóa người dùng",
+        "delete-content": "Bạn có chắc chắn muốn xóa không?",
+        "password": "Mật khẩu",
+        "firstname": "Họ",
+        "lastname": "Tên",
+        "address": "Địa chỉ",
+        "phone": "Số điện thoại",
+        "gender": "Giới tính",
+        "role": "Vai trò",
+        "add-btn": "Thêm",
+        "save-btn": "Lưu",
+        "delete-btn": "Xóa",
+        "cancel-btn": "Hủy",
+        "option": "Lựa chọn"
+    } 
 }

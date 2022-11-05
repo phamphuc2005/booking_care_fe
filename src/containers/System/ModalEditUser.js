@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -74,7 +74,7 @@ class ModalEditUser extends Component {
                 className={'modal-user-container'}
                 size="lg"
             >
-                <ModalHeader toggle={()=>{this.toggle()}}>Edit user</ModalHeader>
+                <ModalHeader toggle={()=>{this.toggle()}}><FormattedMessage id = "user-modal.edit-title"/></ModalHeader>
                 <ModalBody>
                     <div className='modal-user-body'>
                         <div className='input-container'>
@@ -87,7 +87,7 @@ class ModalEditUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Password:</label>
+                            <label><FormattedMessage id = "user-modal.password"/>:</label>
                             <input 
                                 type='password' 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "password")}}
@@ -96,7 +96,7 @@ class ModalEditUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Firstname:</label>
+                            <label><FormattedMessage id = "user-modal.firstname"/>:</label>
                             <input 
                                 type='text' 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "firstName")}}
@@ -104,7 +104,7 @@ class ModalEditUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Lastname:</label>
+                            <label><FormattedMessage id = "user-modal.lastname"/>:</label>
                             <input 
                                 type='text' 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "lastName")}}
@@ -112,7 +112,7 @@ class ModalEditUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Address:</label>
+                            <label><FormattedMessage id = "user-modal.address"/>:</label>
                             <input 
                                 type='text' 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "address")}}
@@ -120,7 +120,7 @@ class ModalEditUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label>Phonenumber:</label>
+                            <label><FormattedMessage id = "user-modal.phone"/>:</label>
                             <input 
                                 type='number' 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "phonenumber")}}
@@ -134,8 +134,8 @@ class ModalEditUser extends Component {
                     <Button 
                         color="primary px-3" 
                         onClick={()=>{this.handleSaveUser()}}
-                    >Save</Button>{' '}
-                    <Button color="secondary px-3" onClick={()=>{this.toggle()}}>Cancel</Button>
+                    ><FormattedMessage id = "user-modal.save-btn"/></Button>{' '}
+                    <Button color="secondary px-3" onClick={()=>{this.toggle()}}><FormattedMessage id = "user-modal.cancel-btn"/></Button>
                 </ModalFooter>
             </Modal>
         )

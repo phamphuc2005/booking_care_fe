@@ -148,13 +148,13 @@ class UserManage extends Component {
                         deleteUser = {this.deleteUser} 
                     />
                 }
-                <div className='title text-center'>User management</div>
+                <div className='title text-center'><FormattedMessage id = "usermanage.title"/></div>
                 <div className='mx-4'>
                     <button 
                     className='btn btn-primary px-2'
                     onClick={()=>this.handleAddNewUser()}>
                     <i className="fas fa-plus"></i>
-                        Add new user
+                        <FormattedMessage id = "usermanage.add-btn"/>
                     </button>
                 </div>
                 <div className='users-table mt-4 mx-4'>
@@ -162,11 +162,11 @@ class UserManage extends Component {
                         <tbody>
                             <tr>
                                 <th>Email</th>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
-                                <th>Address</th>
-                                <th>Phonenumber</th>
-                                <th>Actions</th>
+                                <th><FormattedMessage id = "usermanage.firstname"/></th>
+                                <th><FormattedMessage id = "usermanage.lastname"/></th>
+                                <th><FormattedMessage id = "usermanage.address"/></th>
+                                <th><FormattedMessage id = "usermanage.phone"/></th>
+                                <th><FormattedMessage id = "usermanage.action"/></th>
                             </tr>
                             
                             {

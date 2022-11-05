@@ -10,8 +10,8 @@ class Doctor extends Component {
             <div className='section-share section-doctor'>
                 <div className='section-container'>
                     <div className='section-header'>
-                        <span className='title-section'>Bác sĩ nổi bật tuần qua</span>
-                        <button className='btn-section'>Tìm kiếm</button>
+                        <span className='title-section'><FormattedMessage id = "section.doctor"/></span>
+                        <button className='btn-section'><FormattedMessage id = "section.search-btn"/></button>
                     </div>
                     <div className='section-body'>
                         <Slider {...this.props.settings}>
