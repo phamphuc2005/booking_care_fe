@@ -8,9 +8,10 @@
         "choosedoctor": "Choose a good doctor",
         "checkpackage": "Checkup package",
         "generalexamination": "General health check",
-        "support": "Support"
+        "support": "Support",
+        "welcome": "Welcome",
+        "logout": "Log out"
     },
-
     "banner": {
         "title1": "MEDICAL BACKGROUND",
         "title2": "COMPREHENSIVE HEALTH CARE",
@@ -20,33 +21,6 @@
         "medicaltest": "Medical test",
         "mentalhealth": "Mental health",
         "dental" : "Dental examination"
-    },
-
-    "common": {
-        "add": "Add",
-        "edit": "Edit",
-        "delete": "Delete",
-        "decentralize": "Decentralize",
-        "close": "Close",
-        "save": "Save",
-        "refresh": "Refresh",
-        "accept": "Accept",
-        "confirm": "Confirm",
-        "confirm-this-task": "Are you sure to process this task?",
-        "fail-to-load-data": "Fail to load data",
-        "unknown-error": "There was an error",
-        "internal-server-error": "Internal server error",
-        "bad-request": "Bad request",
-        "forbiden-request": "Invalid input data",
-        "fail-to-load-all-code": "Fail to load data from allcode",
-        "sum": "Sum",
-        "date-range-invalid": "Date range invalid"
-    },
-    "login": {
-        "login": "Login",
-        "username": "Username",
-        "password": "Password",
-        "userpass-wrong": "Invalid username or password!"
     },
     "menu": {
         "system": {
@@ -59,37 +33,20 @@
             "system-parameter": {
                 "header": "System-parameter"
             }
-        }
-    },
-    "system": {
-        "user-manage": {
-            "fail-to-load-fouser": "Fail to load system users list",
-            "user-id": "User ID",
-            "usertype": "User type",
-            "username": "Username",
-            "fullname": "Fullname",
-            "mobile": "Phone",
-            "email": "Email",
-            "status": "Status",
-            "add-user": "Add user",
-            "edit-user": "Edit user information",
-            "password": "Password",
-            "retype-password": "Retype password",
-            "add-user-success": "Add user successfully",
-            "edit-user-success": "Change user information successfully",
-            "add-user-fail": "Fail to add user",
-            "edit-user-fail": "Fail to change user information",
-            "del-user-success": "Delete user successfully",
-            "del-user-fail": "Fail to delete user",
-            "invalid-input": {
-                "username": "Please fill in username",
-                "fullname": "Please fill in fullname",
-                "password": "Please fill in password"
-            },
-            "sure-delete-user": "Are you sure to delete this user?"
         },
-        "user-redux": {
-
+        "admin": {
+            "user-manage": "User",
+            "admin-manage": "Admin manage",
+            "doctor-manage": "Doctor manage",
+            "patient-manage": "Patient manage",
+            "crud-user": "CRUD user",
+            "crud-redux": "CRUD Redux",
+            "clinic-manage": "Clinic",
+            "crud-clinic": "Clinic manage",
+            "specialty-manage": "Specialty",
+            "crud-specialty": "Specialty manage",
+            "handbook-manage": "Handbook",
+            "crud-handbook": "Handbook manage"
         }
     }
 }

@@ -12,10 +12,14 @@
     .header-end {
         cursor: pointer;
 
+        .welcome {
+            margin-right: 20px;
+        }
+
         .languages {
             cursor: auto;
             color: greenyellow;
-            margin-right: 10px;
+            margin-right: 5px;
         }
 
         .language-vi {
@@ -27,7 +31,7 @@
 
         .language-en {
             margin-right: 20px;
-            margin-left: 10px;
+            margin-left: 5px;
 
             &.active {
                 color: darkmagenta;
