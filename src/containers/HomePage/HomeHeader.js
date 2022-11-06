@@ -47,6 +47,10 @@ class HomeHeader extends Component {
                             <div><i className="fas fa-globe languages"></i></div>
                             <div className={language === LANGUAGES.VI ? 'language-vi active' : 'language-vi'}><span onClick={()=>this.changeLanguage(LANGUAGES.VI)}>VN</span></div>
                             <div className={language === LANGUAGES.EN ? 'language-en active' : 'language-en'}><span onClick={()=>this.changeLanguage(LANGUAGES.EN)}>EN</span></div>
+                            <a target='_blank' href='http://localhost:3000/login' className='login-btn'>
+                                <i className="fas fa-sign-in-alt"></i>
+                                <FormattedMessage id = "homeheader.login"/>
+                            </a>
                         </div>
                     </div>
                 </div>

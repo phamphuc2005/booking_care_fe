@@ -47,6 +47,8 @@
             line-height: 40px;
             height: 40px;
             padding: 0 10px;
+            border-left: 1px solid white;
+            border-radius: 0;
             &:hover {
                 background-color: darken($colormain, 5);
             }

@@ -1,4 +1,12 @@
 {
+    "login": {
+        "title": "Đăng nhập",
+        "username": "Tên đăng nhập",
+        "password": "Mật khẩu",
+        "btn": "Đăng nhập",
+        "forgot": "Quên mật khẩu",
+        "otherlogin": "Hoặc đăng nhập bằng"
+    },
     "homeheader": {
         "speciality": "Chuyên khoa",
         "searchdoctor": "Tìm bác sĩ theo chuyên khoa",
@@ -10,6 +18,7 @@
         "generalexamination": "Khám sức khỏe tổng quát",
         "support": "Hỗ trợ",
         "welcome": "Xin chào",
+        "login": "Đăng nhập",
         "logout": "Đăng xuất"
     },
     "banner": {

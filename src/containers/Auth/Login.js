@@ -63,6 +63,12 @@ class Login extends Component {
             isShowPassword: !this.state.isShowPassword
         })
     }
+
+    handleKeyDown = (event) => {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            this.handleLogin();
+        }
+    }
     
     render() {
         return (
@@ -70,9 +76,9 @@ class Login extends Component {
                 <div className='text-title'>BOOKING CARE</div>
                 <div className="login-container">
                     <div className="login-content row">
-                        <div className="col-12 text-login">Login</div>
+                        <div className="col-12 text-login"><FormattedMessage id = "login.title"/></div>
                         <div className="col-12 form-group login-input">
-                            <label>Username:</label>
+                            <label><FormattedMessage id = "login.username"/>:</label>
                             <input 
                                 type="text" 
                                 className='form-control' 
@@ -82,7 +88,7 @@ class Login extends Component {
                             />
                         </div>
                         <div className="col-12 form-group login-input">
-                            <label>Password:</label>
+                            <label><FormattedMessage id = "login.password"/>:</label>
                             <div className='custom-input-pass' >
                                 <input 
                                     type={this.state.isShowPassword ? 'text' : 'password'}
@@ -90,6 +96,7 @@ class Login extends Component {
                                     placeholder='Enter your password'
                                     value={this.state.password}
                                     onChange = {(event) => this.handleOnChangePassword(event)}
+                                    onKeyDown = {(event) => this.handleKeyDown(event)}
                                 />
                                 <span onClick={() => {this.handleShowHidePass()}}>
                                     <i className={this.state.isShowPassword ? 'fas fa-eye' : 'fas fa-eye-slash'}></i>
@@ -100,13 +107,13 @@ class Login extends Component {
                             {this.state.errMessage}
                         </div>
                         <div className='col-12'>
-                            <button className='login-btn' onClick={()=>{this.handleLogin()}}>Login</button>
+                            <button className='login-btn' onClick={()=>{this.handleLogin()}}><FormattedMessage id = "login.btn"/></button>
                         </div>
                         <div className='col-12 forgot-pass'>
-                            <span>Forgot your password?</span>
+                            <span><FormattedMessage id = "login.forgot"/>?</span>
                         </div>
                         <div className='col-12 text-center mt-4'>
-                            <span className='text-other-login'>Or login with:</span>
+                            <span className='text-other-login'><FormattedMessage id = "login.otherlogin"/>:</span>
                         </div>
                         <div className='col-12 social-login'>
                             <i className="fab fa-google-plus-g google"></i>

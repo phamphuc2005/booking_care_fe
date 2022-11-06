@@ -1,4 +1,12 @@
 {
+    "login": {
+        "title": "Login",
+        "username": "Username",
+        "password": "Password",
+        "btn": "Login",
+        "forgot": "Forgot your password",
+        "otherlogin": "Or login with"
+    },
     "homeheader": {
         "speciality": "Specialist",
         "searchdoctor": "Find a doctor by specialty",
@@ -10,6 +18,7 @@
         "generalexamination": "General health check",
         "support": "Support",
         "welcome": "Welcome",
+        "login": "Login",
         "logout": "Log out"
     },
     "banner": {
