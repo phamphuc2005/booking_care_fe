@@ -94,5 +94,18 @@
         "delete-btn": "Xóa",
         "cancel-btn": "Hủy",
         "option": "Lựa chọn"
+    },
+    "user-manage": {
+        "create-title": "Thêm mới người dùng",
+        "password": "Mật khẩu",
+        "firstname": "Họ",
+        "lastname": "Tên",
+        "phone": "Số điện thoại",
+        "address": "Địa chỉ",
+        "gender": "Giới tính",
+        "role": "Vai trò",
+        "position" : "Chức vụ",
+        "avatar": "Ảnh đại diện",
+        "save-btn": "Lưu"
     } 
 }

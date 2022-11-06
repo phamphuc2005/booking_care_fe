@@ -57,8 +57,10 @@
             .support {
                 display: flex;
                 align-items: center;
-                padding-right: 40px;
+                padding-right: 20px;
                 cursor: pointer;
+                max-width: 100px;
+                font-size: 13px;
 
                 i {
                     background-color: white;
@@ -106,7 +108,7 @@
             }
 
             .login-btn {
-                margin-left: 30px;
+                margin-left: 20px;
                 color: white;
                 text-decoration: none;
                 border: 1px solid white;
@@ -114,7 +116,7 @@
                 border-radius: 4px;
                 font-weight: 600;
                 font-size: 13px;
-                width: 122px;
+                max-width: 100px;
 
                 i {
                     margin-right: 5px;
