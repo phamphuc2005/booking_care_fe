@@ -106,6 +106,7 @@
         "role": "Role",
         "position" : "Position",
         "avatar": "Avatar",
-        "save-btn": "Save"
+        "save-btn": "Save",
+        "upload": "Upload image"
     } 
 }

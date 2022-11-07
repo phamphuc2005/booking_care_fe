@@ -106,6 +106,7 @@
         "role": "Vai trò",
         "position" : "Chức vụ",
         "avatar": "Ảnh đại diện",
-        "save-btn": "Lưu"
+        "save-btn": "Lưu",
+        "upload": "Tải ảnh"
     } 
 }
