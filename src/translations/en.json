@@ -97,6 +97,7 @@
     },
     "user-manage": {
         "create-title": "Create new user",
+        "edit-title": "Edit user",
         "password": "Password",
         "firstname": "Firstname",
         "lastname": "Lastname",
@@ -106,6 +107,7 @@
         "role": "Role",
         "position" : "Position",
         "avatar": "Avatar",
+        "create-btn": "Create",
         "save-btn": "Save",
         "upload": "Upload image",
         "table-title": "User list"

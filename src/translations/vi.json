@@ -97,6 +97,7 @@
     },
     "user-manage": {
         "create-title": "Thêm mới người dùng",
+        "edit-title": "Chỉnh sửa người dùng",
         "password": "Mật khẩu",
         "firstname": "Họ",
         "lastname": "Tên",
@@ -106,6 +107,7 @@
         "role": "Vai trò",
         "position" : "Chức vụ",
         "avatar": "Ảnh đại diện",
+        "create-btn": "Thêm",
         "save-btn": "Lưu",
         "upload": "Tải ảnh",
         "table-title": "Danh sách người dùng"
