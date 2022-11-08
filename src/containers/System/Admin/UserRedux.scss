@@ -1,8 +1,21 @@
+.create-row {
+    // border: 1px solid #04AA6D;
+    background-color: #eee;
+
+    .create-title {
+        // border-bottom: 1px solid #04AA6D;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        color: white;
+        font-weight: 700;
+        background-color: #04AA6D;
+    }
+}
 .img-container {
     display: flex;
     .upload-label {
         padding: 5px;
-        background-color: #ddd;
+        background-color: #ccc;
         border-radius: 3px;
         width: 102px;
         cursor: pointer;
@@ -26,6 +39,7 @@
         border-radius: 0.25rem;
         background: center center no-repeat;
         background-size: contain;
+        background-color: white;
         cursor: pointer;
     }
 }

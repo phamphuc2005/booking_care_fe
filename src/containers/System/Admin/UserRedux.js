@@ -6,6 +6,8 @@ import * as actions from '../../../store/actions';
 import './UserRedux.scss';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import TableUser from './TableUser';
+import { toast, Toast } from 'react-toastify'; 
 
 class UserRedux extends Component {
     constructor(props) {
@@ -58,6 +60,20 @@ class UserRedux extends Component {
                 position: arrPositions && arrPositions.length>0 ? arrPositions[0].key : ''
             })
         }
+        if (prevProps.listUser !== this.props.listUser) {
+            this.setState({
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                phonenumber: '',
+                address: '',
+                gender: '',
+                role: '',
+                position: '',
+                avatar: ''
+            })
+        }
     }
 
     handleOnChangeImg = (event) => {
@@ -93,6 +109,7 @@ class UserRedux extends Component {
             roleId: this.state.role,
             positionId: this.state.position
         })
+        this.props.fetchUserRedux();
     }
 
     checkValidateInput = () => {
@@ -101,7 +118,8 @@ class UserRedux extends Component {
         for(let i=0; i<arrCheck.length; i++) {
             if(!this.state[arrCheck[i]]) {
                 isValid = false;
-                alert('Missing parameter: ' + arrCheck[i]);
+                toast.warning('Missing parameter: ' + arrCheck[i]);
+
                 break;
             }
         }
@@ -129,8 +147,8 @@ class UserRedux extends Component {
                 <div className='title'>User redux</div>
                 <div className="user-redux-body" >
                     <div className='container'>
-                        <div className='row'>
-                            <div className='col-12 mt-2 mb-4'>-- <FormattedMessage id = "user-manage.create-title"/> --</div>
+                        <div className='row create-row'>
+                            <div className='col-12 mb-4 create-title'>-- <FormattedMessage id = "user-manage.create-title"/> --</div>
                             <div className='col-3'>
                                 <label>Email:</label>
                                 <input 
@@ -254,7 +272,7 @@ class UserRedux extends Component {
                                     </label>
                                 </div>
                             </div>
-                            <div className='col-12 mt-4'>
+                            <div className='col-12 my-4'>
                                 <button 
                                     className='btn btn-primary'
                                     onClick={()=>this.handleSaveUser()}
@@ -263,6 +281,9 @@ class UserRedux extends Component {
                         </div>
                     </div>
                 </div>
+
+                <TableUser/>
+
                 {this.state.isOpen === true &&
                     <Lightbox
                         mainSrc={this.state.previewImgUrl}
@@ -281,6 +302,7 @@ const mapStateToProps = state => {
         genderRedux: state.admin.genders,
         roleRedux: state.admin.roles,
         positionRedux: state.admin.positions,
+        listUser: state.admin.users
     };
 };
 
@@ -290,6 +312,8 @@ const mapDispatchToProps = dispatch => {
         getRoleStart: () => dispatch(actions.fetchRoleStart()),
         getPositionStart: () => dispatch(actions.fetchPositionStart()),
         createNewUser: (data) => dispatch(actions.createNewUser(data)),
+        fetchUserRedux: () => dispatch(actions.fetchAllUserStart()),
+
         // processLogout: () => dispatch(actions.processLogout()),
         // changeLanguageAppRedux: (language) => dispatch(actions.changeLanguageApp(language))
     };

@@ -107,6 +107,7 @@
         "position" : "Position",
         "avatar": "Avatar",
         "save-btn": "Save",
-        "upload": "Upload image"
+        "upload": "Upload image",
+        "table-title": "User list"
     } 
 }

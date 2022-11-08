@@ -107,6 +107,7 @@
         "position" : "Chức vụ",
         "avatar": "Ảnh đại diện",
         "save-btn": "Lưu",
-        "upload": "Tải ảnh"
+        "upload": "Tải ảnh",
+        "table-title": "Danh sách người dùng"
     } 
 }

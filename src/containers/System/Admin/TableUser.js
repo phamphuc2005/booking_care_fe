@@ -1,0 +1,97 @@
+import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import './TableUser.scss';
+import * as actions from '../../../store/actions';
+
+class TableUser extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            userRedux: []
+        }
+    }
+
+    componentDidMount() {
+        this.props.fetchUserRedux();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.listUser !== this.props.listUser) {
+            this.setState ({
+                userRedux: this.props.listUser
+            })
+        }
+    }
+
+    handleDeleteUser = (user) => {
+        this.props.deleteUserRedux(user.id);
+    } 
+
+    render() {
+        let arrUsers = this.state.userRedux;
+        return (
+            <div className='container mb-5'>
+                <div className='row'>
+                    <div className='list-user col-12'>
+                        <div className='col-12 mt-4 mb-4'>-- <FormattedMessage id = "user-manage.table-title"/> --</div>
+                        <table id="table-user">
+                            <tbody>
+                                <tr>
+                                    <th>Email</th>
+                                    <th><FormattedMessage id = "usermanage.firstname"/></th>
+                                    <th><FormattedMessage id = "usermanage.lastname"/></th>
+                                    <th><FormattedMessage id = "usermanage.address"/></th>
+                                    <th><FormattedMessage id = "usermanage.phone"/></th>
+                                    <th><FormattedMessage id = "usermanage.action"/></th>
+                                </tr>
+                                
+                                {arrUsers && arrUsers.length>0 && 
+                                    arrUsers.map((item, index) => {
+                                        return(
+                                            <tr key={index}>
+                                                <td>{item.email}</td>
+                                                <td>{item.firstName}</td>
+                                                <td>{item.lastName}</td>
+                                                <td>{item.address}</td>
+                                                <td>{item.phonenumber}</td>
+                                                <td className='text-center'>
+                                                    <button className='btn-edit' >
+                                                        <i className="fas fa-pencil-alt"></i>
+                                                    </button>
+                                                    <button 
+                                                        className='btn-delete'
+                                                        onClick={()=>this.handleDeleteUser(item)} 
+                                                    >
+                                                        <i className="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+
+                            </tbody>                 
+                        </table>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        listUser: state.admin.users,
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchUserRedux: () => dispatch(actions.fetchAllUserStart()),
+        deleteUserRedux: (id) => dispatch(actions.deleteUser(id))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TableUser);
