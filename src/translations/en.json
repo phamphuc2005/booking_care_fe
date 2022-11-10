@@ -111,5 +111,11 @@
         "save-btn": "Save",
         "upload": "Upload image",
         "table-title": "User list"
+    },
+    "doctor-manage": {
+        "title": "Create more doctor information",
+        "save-btn": "Save",
+        "choose-title": "Choose doctor",
+        "introduction-title": "Introduction information"
     } 
 }

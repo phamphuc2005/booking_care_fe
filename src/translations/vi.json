@@ -111,5 +111,11 @@
         "save-btn": "Lưu",
         "upload": "Tải ảnh",
         "table-title": "Danh sách người dùng"
-    } 
+    }, 
+    "doctor-manage": {
+        "title": "Thêm thông tin bác sĩ",
+        "save-btn": "Lưu",
+        "choose-title": "Chọn bác sĩ",
+        "introduction-title": "Thông tin giới thiệu"
+    }
 }

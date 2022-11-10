@@ -1,0 +1,22 @@
+.more-info {
+    display: flex;
+    gap: 12px;
+
+    .content-left {
+        width: 25%;
+    }
+    
+    .content-right {
+        width: 75%;
+    }
+
+    label {
+        margin-left: 2px;
+        font-weight: 600;
+        color: #0071ba;
+    }
+}
+
+.markdown-editor {
+    background-color: #eee;
+}
