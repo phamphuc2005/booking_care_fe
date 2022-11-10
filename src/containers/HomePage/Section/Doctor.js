@@ -29,7 +29,7 @@ class Doctor extends Component {
     render() {
         let arrDoctors = this.state.arrDoctors;
         let {language} = this.props;
-        arrDoctors = arrDoctors.concat(arrDoctors)
+        // arrDoctors = arrDoctors.concat(arrDoctors)
         return (
             <div className='section-share section-doctor'>
                 <div className='section-container'>
