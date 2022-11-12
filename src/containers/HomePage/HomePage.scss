@@ -150,8 +150,9 @@
 
     .section-customize {
         padding: 5px;
-
+        
         .customize-border {
+            cursor: pointer;
             border: 1px solid #d7d7d7;
             background-color: white;
             padding: 10px;

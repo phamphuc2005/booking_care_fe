@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
 import * as actions from '../../../store/actions';
 import {LANGUAGES} from '../../../utils';
+import { withRouter } from 'react-router';
 
 class Doctor extends Component {
 
@@ -24,6 +25,13 @@ class Doctor extends Component {
 
     componentDidMount() {
         this.props.loadTopDoctor();
+    }
+
+    handleViewDetailDoctor = (doctor) => {
+        console.log(doctor);
+        if(this.props.history) {
+            this.props.history.push(`/detail-doctor/${doctor.id}`)
+        }
     }
 
     render() {
@@ -48,7 +56,7 @@ class Doctor extends Component {
                                 let nameVi = `${item.positionData.valueVi}, ${item.firstName} ${item.lastName}`;
                                 let nameEn = `${item.positionData.valueEn}, ${item.lastName} ${item.firstName}`;
                                 return (
-                                    <div className='section-customize section-doctor' key={index}>
+                                    <div className='section-customize section-doctor' key={index} onClick={()=> this.handleViewDetailDoctor(item)}>
                                         <div className='customize-border'>
                                             <div className='outer-bg'>
                                                 <div 
@@ -88,4 +96,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Doctor);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Doctor));
