@@ -4,11 +4,24 @@ import './HomeHeader.scss';
 import { FormattedMessage } from 'react-intl';
 import {LANGUAGES} from '../../utils/constant';
 import { changeLanguageApp } from '../../store/actions/appActions';
+import { withRouter } from 'react-router';
 
 class HomeHeader extends Component {
 
     changeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language)
+    }
+    
+    returnHome = () => {
+        if(this.props.history) {
+            this.props.history.push(`/home`)
+        }
+    }
+
+    returnLogin = () => {
+        if(this.props.history) {
+            this.props.history.push(`/login`)
+        }
     }
 
     render() {
@@ -19,7 +32,7 @@ class HomeHeader extends Component {
                     <div className='home-header-content'>
                         <div className='left-content'>
                             <i className="fas fa-bars"></i>
-                            <div className='header-logo'></div>
+                            <div className='header-logo' onClick={()=>this.returnHome()}></div>
                         </div>
                         <div className='center-content'>
                             <div className='child-content'>
@@ -47,10 +60,10 @@ class HomeHeader extends Component {
                             <div><i className="fas fa-globe languages"></i></div>
                             <div className={language === LANGUAGES.VI ? 'language-vi active' : 'language-vi'}><span onClick={()=>this.changeLanguage(LANGUAGES.VI)}>VN</span></div>
                             <div className={language === LANGUAGES.EN ? 'language-en active' : 'language-en'}><span onClick={()=>this.changeLanguage(LANGUAGES.EN)}>EN</span></div>
-                            <a target='_blank' href='http://localhost:3000/login' className='login-btn'>
+                            <span className='login-btn' onClick={()=>this.returnLogin()}>
                                 <i className="fas fa-sign-in-alt"></i>
                                 <FormattedMessage id = "homeheader.login"/>
-                            </a>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -126,4 +139,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));
