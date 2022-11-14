@@ -122,5 +122,11 @@
         "save-btn": "Save",
         "choose-title": "Choose doctor",
         "introduction-title": "Introduction information"
+    },
+    "schedule-manage": {
+        "title": "Medical examination plan",
+        "choose-title": "Choose doctor",
+        "choose-day": "Choose date",
+        "save-btn": "Save"
     } 
 }

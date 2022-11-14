@@ -122,5 +122,11 @@
         "save-btn": "Lưu",
         "choose-title": "Chọn bác sĩ",
         "introduction-title": "Thông tin giới thiệu"
+    },
+    "schedule-manage": {
+        "title": "Kế hoạch khám bệnh",
+        "choose-title": "Chọn bác sĩ",
+        "choose-day": "Chọn ngày",
+        "save-btn": "Lưu"
     }
 }

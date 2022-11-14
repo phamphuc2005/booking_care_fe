@@ -688,11 +688,12 @@ span.flatpickr-weekday {
     }
 
     &.today {
-      border-color: $date-picker-today-border;
+      background: $date-picker-today-border;
+      color: white;
 
       &:hover, &:focus {
         border-color: $date-picker-today-border;
-        background: $date-picker-today-bg;
+        background: $date-picker-day-hover-bg;
         color: $date-picker-today-fg;
       }
     }

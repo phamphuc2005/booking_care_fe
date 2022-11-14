@@ -117,7 +117,6 @@ class DoctorManage extends Component {
                         <div className='content-left form-group'>
                             <label><FormattedMessage id = "doctor-manage.choose-title"/>:</label>
                             <Select
-                                // className='form-control'
                                 value={this.state.selectedDoctor}
                                 onChange={this.handleChangeSelect}
                                 options={this.state.listDoctors}
