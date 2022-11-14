@@ -66,6 +66,11 @@
             "crud-specialty": "Quản lý chuyên khoa",
             "handbook-manage": "Cẩm nang",
             "crud-handbook": "Quản lý cẩm nang"
+        },
+        "doctor": {
+            "doctor-manage": "Quản lý",
+            "user-manage": "Quản lý thông tin cá nhân",
+            "schedule-manage": "Quản lý kế hoạch khám bệnh"
         }
     },
     "usermanage": {

@@ -66,6 +66,11 @@
             "crud-specialty": "Specialty manage",
             "handbook-manage": "Handbook",
             "crud-handbook": "Handbook manage"
+        },
+        "doctor": {
+            "doctor-manage": "Management",
+            "user-manage": "Manage personal information",
+            "schedule-manage": "Manage doctor's schedule"
         }
     },
     "usermanage": {
