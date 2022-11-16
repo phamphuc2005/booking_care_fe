@@ -1,5 +1,5 @@
 .detail-doctor-container {
-    height: 1000px;
+    min-height: 1000px;
     // padding: 0 150px;
     // border: 1px solid black;
     
@@ -39,6 +39,21 @@
     }
 
     .schedule-doctor {
+        // border: 1px solid black;
+        height: 150px;
+        // padding: 0 150px;
+        margin: 0 150px;
+        display: flex;
+
+        .content-left {
+        border: 1px solid black;
+        width: 50%;
+        }
+
+        .content-right {
+        border: 1px solid black;
+        width: 50%;
+        }
 
     }
 

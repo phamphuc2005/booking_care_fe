@@ -5,6 +5,7 @@ import HomeFooter from '../../HomePage/HomeFooter';
 import './DetailDoctor.scss';
 import {getDetailDoctor} from '../../../services/userService';
 import {LANGUAGES} from '../../../utils';
+import DoctorSchedule from './DoctorSchedule';
 
 class DetailDoctor extends Component {
     constructor(props) {
@@ -65,15 +66,27 @@ class DetailDoctor extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className='schedule-doctor'></div>
+
+                    <div className='schedule-doctor'>
+                        <div className='content-left'>
+                            <DoctorSchedule
+                                doctorID={detailDoctor && detailDoctor.id ? detailDoctor.id : -1}
+                            />
+                        </div>
+                        <div className='content-right'></div>
+                    </div>
+
                     <div className='detail-info-doctor'>
                         {detailDoctor && detailDoctor.Markdown && detailDoctor.Markdown.contentHTML &&
                             <div dangerouslySetInnerHTML={{__html: detailDoctor.Markdown.contentHTML}}></div>
                         }
                     </div>
+
                     <div className='comment-doctor'></div>
                 </div>
-                <HomeFooter/>
+                <div>
+                    <HomeFooter/>
+                </div>
             </React.Fragment>
         );
     }
