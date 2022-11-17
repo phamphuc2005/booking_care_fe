@@ -128,5 +128,13 @@
         "choose-title": "Choose doctor",
         "choose-day": "Choose date",
         "save-btn": "Save"
-    } 
+    },
+    "patient": {
+        "doctor-detail": {
+            "text-calendar": "Examination schedule",
+            "text-notice": "No appointment scheduled for this day, please choose another date !",
+            "choose": "Choose ",
+            "free": " and book (Scheduling fee: 0 VND)"
+        } 
+    }
 }

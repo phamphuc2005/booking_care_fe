@@ -128,5 +128,13 @@
         "choose-title": "Chọn bác sĩ",
         "choose-day": "Chọn ngày",
         "save-btn": "Lưu"
+    },
+    "patient": {
+        "doctor-detail": {
+            "text-calendar": "Lịch khám",
+            "text-notice": "Không có lịch khám trong ngày này, vui lòng chọn ngày khác !",
+            "choose": "Chọn ",
+            "free": " và đặt (Phí đặt lịch: 0 VND)"
+        }
     }
 }

@@ -130,12 +130,19 @@ class ScheduleManage extends Component {
             date: formatDate
 
         })
-        console.log('haha',res,result)
+        if(res && res.errCode === 0) {
+            toast.success("Create a plan for success!");
+        } else {
+            toast.error("Create a plan for failed!");
+            console.log('error:', res)
+        }
     }
 
     render() {
         let {time} = this.state;
         let {language} = this.props;
+        let yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+
         console.log(time)
         return (
             <div className='schedule-manage-container'>
@@ -158,7 +165,7 @@ class ScheduleManage extends Component {
                                 className='form-control'
                                 onChange={this.handleChangeDate}
                                 value={this.state.currentDate}
-                                minDate={new Date()}
+                                minDate={yesterday}
                             />
                         </div>
                         <div className='col-12 form-group hour-container'>
