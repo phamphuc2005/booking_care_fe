@@ -121,7 +121,13 @@
         "title": "Chi tiết về bác sĩ",
         "save-btn": "Lưu",
         "choose-title": "Chọn bác sĩ",
-        "introduction-title": "Thông tin giới thiệu"
+        "introduction-title": "Thông tin giới thiệu",
+        "choose-price": "Chọn chi phí",
+        "choose-payment": "Chọn phương thức thanh toán",
+        "choose-province": "Chọn tỉnh thành",
+        "clinic-name": "Tên phòng khám",
+        "clinic-address": "Địa chỉ phòng khám",
+        "note": "Chú ý"
     },
     "schedule-manage": {
         "title": "Kế hoạch khám bệnh",

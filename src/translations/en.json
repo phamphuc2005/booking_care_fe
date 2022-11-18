@@ -121,7 +121,13 @@
         "title": "Doctor's details",
         "save-btn": "Save",
         "choose-title": "Choose doctor",
-        "introduction-title": "Introduction information"
+        "introduction-title": "Introduction information",
+        "choose-price": "Choose cost",
+        "choose-payment": "Choose payment",
+        "choose-province": "Choose province",
+        "clinic-name": "Clinic name",
+        "clinic-address": "Clinic address",
+        "note": "Note"
     },
     "schedule-manage": {
         "title": "Medical examination plan",

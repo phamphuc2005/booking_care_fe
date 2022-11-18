@@ -157,6 +157,7 @@ class ScheduleManage extends Component {
                                 value={this.state.selectedDoctor}
                                 onChange={this.handleChangeSelect}
                                 options={this.state.listDoctors}
+                                placeholder={<FormattedMessage id = "schedule-manage.choose-title"/>}
                             />
                         </div>
                         <div className='col-2 form-group'>
