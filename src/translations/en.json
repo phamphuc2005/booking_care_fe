@@ -141,6 +141,12 @@
             "text-notice": "No appointment scheduled for this day, please choose another date !",
             "choose": "Choose ",
             "free": " and book (Scheduling fee: 0 VND)"
+        },
+        "doctor-more-info": {
+            "address": "Examination address",
+            "price": "Examination price",
+            "show": "See details",
+            "hide": "Collapse"
         } 
     }
 }

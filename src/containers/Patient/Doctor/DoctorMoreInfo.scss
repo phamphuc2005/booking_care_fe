@@ -1,0 +1,64 @@
+.doctor-more-info-container {
+    margin-left: 20px;
+
+    .content-up {
+        padding-bottom: 5px;
+        border-bottom: 0.5px solid #f1f1f1;
+
+        .up-title {
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .name-clinic {
+            color: #337ab9;
+            font-weight: 600;
+            padding: 5px 0;
+        }
+
+        .address-clinic {}
+    }
+
+    .content-down {
+        padding-top: 5px;
+        border-top: 0.5px solid #f1f1f1;
+
+        .down-title {
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+
+        }
+
+        .price {
+            border: 1px solid #ddd;
+            border-bottom: 0.5px solid #eee;
+            background-color: #f8f8f8;
+            padding: 10px 10px;
+                
+            .price-title {
+                // display: flex;
+
+                .right {
+                    float: right;
+                    padding-right: 10px;
+                }
+            }
+        }
+
+        .payment {
+            border: 1px solid #ddd;
+            border-top: 0.5px solid #eee;
+            background-color: #f8f8f8;
+            padding: 10px 10px;
+            margin-bottom: 5px;
+        }
+
+        .show-hide {
+            cursor: pointer;
+            color: #45c3d2;
+        }
+    }
+}

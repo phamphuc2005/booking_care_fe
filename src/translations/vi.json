@@ -141,6 +141,12 @@
             "text-notice": "Không có lịch khám trong ngày này, vui lòng chọn ngày khác !",
             "choose": "Chọn ",
             "free": " và đặt (Phí đặt lịch: 0 VND)"
+        },
+        "doctor-more-info": {
+            "address": "Địa chỉ khám",
+            "price": "Giá khám",
+            "show": "Xem chi tiết",
+            "hide": "Thu gọn"
         }
     }
 }
