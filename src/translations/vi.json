@@ -145,6 +145,8 @@
         "doctor-more-info": {
             "address": "Địa chỉ khám",
             "price": "Giá khám",
+            "note": "Lưu ý:  ",
+            "payment": "Người bệnh có thể thanh toán chi phí bằng hình thức (tiền mặt / quẹt thẻ): ",
             "show": "Xem chi tiết",
             "hide": "Thu gọn"
         }

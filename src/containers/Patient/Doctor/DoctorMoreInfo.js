@@ -7,14 +7,16 @@ import {getDetailDoctor} from '../../../services/userService';
 import {LANGUAGES} from '../../../utils';
 import  moment from 'moment';
 import localization from 'moment/locale/vi';
-import {getDoctorScheduleByDate} from '../../../services/userService';
+import {getMoreDoctorInfo} from '../../../services/userService';
 import { FormattedMessage } from 'react-intl';
+import NumberFormat from 'react-number-format';
 
 class DoctorMoreInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isShow: false
+            isShow: false,
+            moreInfo: {}
         }
     }
 
@@ -30,13 +32,14 @@ class DoctorMoreInfo extends Component {
         //         allDates: allDates
         //     })
         // }
-        // if(this.props.doctorID !== prevProps.doctorID) {
-        //     let allDates = this.getArrDates(this.props.language);
-        //     let res = await getDoctorScheduleByDate(this.props.doctorID, allDates[0].value);
-        //     this.setState({
-        //         allTimes: res.data ? res.data : []
-        //     })
-        // }
+        if(this.props.doctorID !== prevProps.doctorID) {
+            let res = await getMoreDoctorInfo(this.props.doctorID);
+            if(res && res.errCode === 0) {
+                this.setState({
+                    moreInfo: res.data
+                })
+            }
+        }
     }
 
     showMoreInfo = (status) => {
@@ -47,18 +50,38 @@ class DoctorMoreInfo extends Component {
 
 
     render() {
-        let {isShow} = this.state;
+        let {isShow, moreInfo} = this.state;
+        let {language} = this.props;
         return (
             <div className='doctor-more-info-container'>
                 <div className='content-up'>
                     <div className='up-title'><FormattedMessage id = "patient.doctor-more-info.address"/></div>
-                    <div className='name-clinic'>Phòng khám Chuyên khoa Da Liễu</div>
-                    <div className='address-clinic'>207 Phố Huế - Hai Bà Trưng - Hà Nội</div>
+                    <div className='name-clinic'>{moreInfo && moreInfo.nameClinic ? moreInfo.nameClinic : ''}</div>
+                    <div className='address-clinic'>{moreInfo && moreInfo.addressClinic ? moreInfo.addressClinic : ''}</div>
                 </div>
                 <div className='content-down'>
+                    
                     {isShow === false && 
                         <div>
-                            <div className='down-title'><FormattedMessage id = "patient.doctor-more-info.price"/>: 300.000 VND</div>
+                            <div className='down-title'><FormattedMessage id = "patient.doctor-more-info.price"/>: {
+                                    moreInfo && moreInfo.priceData && language === LANGUAGES.VI &&
+                                    <NumberFormat
+                                        className='fee' 
+                                        value={moreInfo.priceData.valueVi} 
+                                        displayType={'text'} 
+                                        thousandSeparator={true} 
+                                        suffix={' VND'}/>
+                                }
+                                {
+                                    moreInfo && moreInfo.priceData && language === LANGUAGES.EN &&
+                                    <NumberFormat
+                                        className='fee' 
+                                        value={moreInfo.priceData.valueEn} 
+                                        displayType={'text'} 
+                                        thousandSeparator={true} 
+                                        suffix={' $'}/>
+                                }
+                            </div>
                             <span className='show-hide' onClick={()=>this.showMoreInfo(true)}><FormattedMessage id = "patient.doctor-more-info.show"/></span>
                         </div>
                     }
@@ -68,11 +91,38 @@ class DoctorMoreInfo extends Component {
                             <div className='price'>
                                 <div className='price-title'>
                                     <span className='left'><FormattedMessage id = "patient.doctor-more-info.price"/>:</span>
-                                    <span className='right'> 3000.000VND</span>
+                                    <span className='right'> 
+                                        {
+                                            moreInfo && moreInfo.priceData && language === LANGUAGES.VI &&
+                                            <NumberFormat
+                                                value={moreInfo.priceData.valueVi} 
+                                                displayType={'text'} 
+                                                thousandSeparator={true} 
+                                                suffix={' VND'}/>
+                                        }
+                                        {
+                                            moreInfo && moreInfo.priceData && language === LANGUAGES.EN &&
+                                            <NumberFormat
+                                                value={moreInfo.priceData.valueEn} 
+                                                displayType={'text'} 
+                                                thousandSeparator={true} 
+                                                suffix={' $'}/>
+                                        }
+                                    </span>
                                 </div>
-                                <div className='note'>Được ưu tiên khám trước khi đật khám qua BookingCare. Giá khám cho người nước ngoài là 30 USD</div>
+                                <div className='note'>
+                                    <FormattedMessage id = "patient.doctor-more-info.note"/>
+                                    {moreInfo && moreInfo.note ? moreInfo.note : ''}
+                                </div>
                             </div>
-                            <div className='payment'>Người bệnh có thể thanh toán chi phí bằng hình thức tiền mặt và quẹt thẻ</div>
+                            <div className='payment'><FormattedMessage id = "patient.doctor-more-info.payment"/>
+                                {
+                                    moreInfo && moreInfo.paymentData && language === LANGUAGES.VI ? moreInfo.paymentData.valueVi : ''
+                                }
+                                {
+                                    moreInfo && moreInfo.paymentData && language === LANGUAGES.EN ? moreInfo.paymentData.valueEn : ''
+                                }
+                            </div>
                             <span className='show-hide' onClick={()=>this.showMoreInfo(false)}><FormattedMessage id = "patient.doctor-more-info.hide"/></span>
                         </div>
                     }

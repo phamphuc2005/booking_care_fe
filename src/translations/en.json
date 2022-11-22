@@ -145,6 +145,8 @@
         "doctor-more-info": {
             "address": "Examination address",
             "price": "Examination price",
+            "note": "Note:  ",
+            "payment": "The patient can pay the cost in the form (cash / credit card): ",
             "show": "See details",
             "hide": "Collapse"
         } 
