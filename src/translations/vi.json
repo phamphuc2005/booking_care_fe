@@ -149,6 +149,18 @@
             "payment": "Người bệnh có thể thanh toán chi phí bằng hình thức (tiền mặt / quẹt thẻ): ",
             "show": "Xem chi tiết",
             "hide": "Thu gọn"
+        },
+        "booking-modal": {
+            "title": "Thông tin đặt lịch khám bệnh",
+            "price": "Giá khám",
+            "name": "Họ và tên",
+            "phone": "Số điện thoại",
+            "address": "Địa chỉ",
+            "who": "Đặt cho",
+            "gender": "Giới tính",
+            "reason": "Lí do khám",
+            "confirm-btn": "Xác nhận",
+            "cancel-btn": "Hủy"
         }
     }
 }

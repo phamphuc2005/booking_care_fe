@@ -29,7 +29,9 @@
 
 .modal {
   .modal-dialog {
+    min-width: 800px;
     .modal-content {
+      border: none;
       .modal-header {
         padding: 0 10px;
         height: 35px;

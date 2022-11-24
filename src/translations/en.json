@@ -149,6 +149,18 @@
             "payment": "The patient can pay the cost in the form (cash / credit card): ",
             "show": "See details",
             "hide": "Collapse"
+        },
+        "booking-modal": {
+            "title": "Medical appointment booking information",
+            "price": "Examination price",
+            "name": "Name",
+            "phone": "Phonenumber",
+            "address": "Address",
+            "who": "Book for",
+            "gender": "Gender",
+            "reason": "Reason for examination",
+            "confirm-btn": "Confirm",
+            "cancel-btn": "Cancel"
         } 
     }
 }
