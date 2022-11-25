@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import {LANGUAGES} from '../../../../utils';
 import { FormattedMessage } from 'react-intl';
 import './BookingModal.scss';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup } from 'reactstrap';
+import { Modal } from 'reactstrap';
+import ProfileDoctor from '../ProfileDoctor';
+import _ from 'lodash';
 
 class BookingModal extends Component {
     constructor(props) {
@@ -29,6 +31,11 @@ class BookingModal extends Component {
 
     render() {
         let {isOpenModal, closeBookingModal, dataTime} = this.props;
+        // let doctorId = '';
+        // if(dataTime && !_.isEmpty(dataTime)) {
+        //     doctorId = dataTime.doctorId
+        // }
+        let doctorId = dataTime && !_.isEmpty(dataTime) ? dataTime.doctorId : '';
         return (
             <Modal isOpen={isOpenModal} className={'booking-modal-container'}>
                 <div className='booking-modal-content'>
@@ -43,11 +50,20 @@ class BookingModal extends Component {
                     </div>
                     <div className='body'>
                         {/* {JSON.stringify(dataTime)} */}
-                        <div className='doctor-info'></div>
-                        <div className='price'><FormattedMessage id = "patient.booking-modal.price"/>: 200.000</div>
+                        <div className='doctor-info'>
+                            <ProfileDoctor doctorId={doctorId}/>
+                        </div>
                         <div className='row'>
                             <div className='col-6 form-group'>
+                                <label><FormattedMessage id = "patient.booking-modal.who"/>:</label>
+                                <input className='form-control'></input>
+                            </div>
+                            <div className='col-6 form-group'>
                                 <label><FormattedMessage id = "patient.booking-modal.name"/>:</label>
+                                <input className='form-control'></input>
+                            </div>
+                            <div className='col-6 form-group'>
+                                <label><FormattedMessage id = "patient.booking-modal.gender"/>:</label>
                                 <input className='form-control'></input>
                             </div>
                             <div className='col-6 form-group'>
@@ -64,14 +80,6 @@ class BookingModal extends Component {
                             </div>
                             <div className='col-12 form-group'>
                                 <label><FormattedMessage id = "patient.booking-modal.reason"/>:</label>
-                                <input className='form-control'></input>
-                            </div>
-                            <div className='col-6 form-group'>
-                                <label><FormattedMessage id = "patient.booking-modal.who"/>:</label>
-                                <input className='form-control'></input>
-                            </div>
-                            <div className='col-6 form-group'>
-                                <label><FormattedMessage id = "patient.booking-modal.gender"/>:</label>
                                 <input className='form-control'></input>
                             </div>
                         </div>
