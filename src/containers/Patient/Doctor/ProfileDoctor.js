@@ -7,6 +7,8 @@ import { FormattedMessage } from 'react-intl';
 import './ProfileDoctor.scss';
 import {getProfileDoctor} from '../../../services/userService';
 import NumberFormat from 'react-number-format';
+import _ from 'lodash';
+import moment from 'moment/moment';
 
 
 class ProfileDoctor extends Component {
@@ -47,9 +49,30 @@ class ProfileDoctor extends Component {
         }
     }
 
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    renderBookingTime = (dataTime) => {
+        let {language} = this.props;
+        if(dataTime && !_.isEmpty(dataTime)) {
+            let time = language === LANGUAGES.VI ? dataTime.timeTypeData.valueVi : dataTime.timeTypeData.valueEn
+            let date = language === LANGUAGES.VI ? 
+                this.capitalizeFirstLetter(moment.unix(+dataTime.date / 1000).format('dddd , DD/MM/YYYY')) : 
+                moment.unix(+dataTime.date / 1000).locale('en').format('dddd , MM/DD/YYYY')
+            return (
+                <>
+                    <div><FormattedMessage id = "patient.booking-modal.time"/>: {time} , {date}</div>
+                    <div><FormattedMessage id = "patient.booking-modal.free"/></div>
+                </>
+            )
+        }
+        return <></>
+    }
+
     render() {
         let {profileData} = this.state;
-        let {language} = this.props;
+        let {language, isShowDescription, dataTime} = this.props;
         let nameVi = '', nameEn = '';
         if(profileData && profileData.positionData){
             nameVi = `${profileData.positionData.valueVi}, ${profileData.firstName} ${profileData.lastName}`;
@@ -68,10 +91,14 @@ class ProfileDoctor extends Component {
                             {language === LANGUAGES.VI ? nameVi :nameEn}
                         </div>
                         <div className='down'>
-                            {profileData && profileData.Markdown && profileData.Markdown.description &&
-                                <span>
-                                    {profileData.Markdown.description}
-                                </span>
+                            {isShowDescription === true ?
+                                <>
+                                    {profileData && profileData.Markdown && profileData.Markdown.description &&
+                                        <span>
+                                            {profileData.Markdown.description}
+                                        </span>
+                                    }
+                                </> : this.renderBookingTime(dataTime)
                             }
                         </div>
                     </div>

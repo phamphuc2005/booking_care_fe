@@ -152,12 +152,15 @@
         },
         "booking-modal": {
             "title": "Thông tin đặt lịch khám bệnh",
+            "time": "Thời gian",
+            "free": "Miễn phí đặt lịch !",
             "price": "Giá khám",
             "name": "Họ và tên",
             "phone": "Số điện thoại",
             "address": "Địa chỉ",
-            "who": "Đặt cho",
+            "birthday": "Ngày sinh",
             "gender": "Giới tính",
+            "choose-gender": "Chọn giới tính",
             "reason": "Lí do khám",
             "confirm-btn": "Xác nhận",
             "cancel-btn": "Hủy"

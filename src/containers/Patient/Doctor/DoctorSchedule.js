@@ -34,7 +34,7 @@ class DoctorSchedule extends Component {
 
     capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
-      }
+    }
 
     getArrDates =  (language) => {
         let allDates = []
@@ -55,7 +55,7 @@ class DoctorSchedule extends Component {
                     let today = `Today - ${labelEnToday}`;
                     object.label = today;
                 } else {
-                    object.label = moment(new Date()).add(i, 'days').locale('en').format('ddd - DD/MM');
+                    object.label = moment(new Date()).add(i, 'days').locale('en').format('dddd - DD/MM');
                 }
             }
 
