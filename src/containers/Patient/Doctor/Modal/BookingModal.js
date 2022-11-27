@@ -10,7 +10,8 @@ import DatePicker from '../../../../components/Input/DatePicker';
 import * as actions from '../../../../store/actions';
 import Select from 'react-select';
 import {postPatientBooking} from '../../../../services/userService';
-import {toast} from 'react-toastify'
+import {toast} from 'react-toastify';
+import moment from 'moment/moment';
 
 class BookingModal extends Component {
     constructor(props) {
@@ -89,6 +90,8 @@ class BookingModal extends Component {
 
     handleConfirmBooking = async () => {
         let date = new Date(this.state.birthday).getTime();
+        let timeString = this.buildBookingTime(this.props.dataTime);
+        let doctorName = this.buildDoctorName(this.props.dataTime);
         let res = await postPatientBooking({
             fullName: this.state.fullName,
             phoneNumber: this.state.phoneNumber,
@@ -99,7 +102,10 @@ class BookingModal extends Component {
             address: this.state.address,
             reason: this.state.reason,
             doctorId: this.state.doctorID,
-            timeType: this.state.timeType
+            timeType: this.state.timeType,
+            language:this.props.language,
+            timeString: timeString,
+            doctorName: doctorName
         })
         if(res && res.errCode === 0) {
             toast.success("Successful appointment booking!");
@@ -107,6 +113,35 @@ class BookingModal extends Component {
         } else {
             toast.error("Failed to book an appointment!");
         }
+    }
+
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    buildBookingTime = (dataTime) => {
+        let {language} = this.props;
+        if(dataTime && !_.isEmpty(dataTime)) {
+            let time = language === LANGUAGES.VI ? dataTime.timeTypeData.valueVi : dataTime.timeTypeData.valueEn
+            let date = language === LANGUAGES.VI ? 
+                this.capitalizeFirstLetter(moment.unix(+dataTime.date / 1000).format('dddd , DD/MM/YYYY')) : 
+                moment.unix(+dataTime.date / 1000).locale('en').format('dddd , MM/DD/YYYY');
+            
+            return `${time} , ${date}`
+        }
+        return ''
+    }
+
+    buildDoctorName = (dataTime) => {
+        let {language} = this.props;
+        if(dataTime && !_.isEmpty(dataTime)) {
+            let name = language === LANGUAGES.VI ?
+            `${dataTime.doctorData.firstName} ${dataTime.doctorData.lastName}` : 
+            `${dataTime.doctorData.lastName} ${dataTime.doctorData.firstName}`;
+            
+            return name;
+        }
+        return ''
     }
 
     render() {
