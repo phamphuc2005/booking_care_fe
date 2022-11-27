@@ -164,6 +164,10 @@
             "reason": "Reason for examination",
             "confirm-btn": "Confirm",
             "cancel-btn": "Cancel"
+        },
+        "verify": {
+            "success": "Appointment confirmed successfully!",
+            "failed": "Appointment confirmed or non-existent!"
         } 
     }
 }

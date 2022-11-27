@@ -164,6 +164,10 @@
             "reason": "Lí do khám",
             "confirm-btn": "Xác nhận",
             "cancel-btn": "Hủy"
+        },
+        "verify": {
+            "success": "Xác nhận lịch hẹn thành công!",
+            "failed": "Lịch hẹn đã được xác nhận hoặc không tồn tại!"
         }
     }
 }
