@@ -2,10 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
+import { getAllSpecialty } from '../../../services/userService';
 
 class Specialty extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dataSpecialty: []
+        }
+    }
+
+    async componentDidMount() {
+        let res = await getAllSpecialty();
+        if(res && res.errCode === 0) {
+            this.setState({
+                dataSpecialty: res.data ? res.data : []
+            })
+        }
+    }
 
     render() {
+        let {dataSpecialty} = this.state;
         return (
             <div className='section-share section-specialty'>
                 <div className='section-container'>
@@ -15,42 +32,21 @@ class Specialty extends Component {
                     </div>
                     <div className='section-body'>
                         <Slider {...this.props.settings}>
-                            <div className='section-customize'>
-                            <div className='outer-bg'>
-                                <div className='background-img img-specialty'></div>
-                            </div>
-                                <div className='position text-center'>Cơ xương khớp 1</div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='outer-bg'>
-                                    <div className='background-img img-specialty'></div>
-                                </div>
-                                <div className='position text-center'>Cơ xương khớp 2</div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='outer-bg'>
-                                    <div className='background-img img-specialty'></div>
-                                </div>
-                                <div className='position text-center'>Cơ xương khớp 3</div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='outer-bg'>
-                                    <div className='background-img img-specialty'></div>
-                                </div>
-                                <div className='position text-center'>Cơ xương khớp 4</div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='outer-bg'>
-                                    <div className='background-img img-specialty'></div>
-                                </div>
-                                <div className='position text-center'>Cơ xương khớp 5</div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='outer-bg'>
-                                    <div className='background-img img-specialty'></div>
-                                </div>
-                                <div className='position text-center'>Cơ xương khớp 6</div>
-                            </div>
+                            {dataSpecialty && dataSpecialty.length>0 && 
+                            dataSpecialty.map((item, index)=>{
+                                return (
+                                    <div className='section-customize' key={index}>
+                                        <div className='outer-bg'>
+                                            <div 
+                                                className='background-img img-specialty'
+                                                style={{backgroundImage: `url(${item.image})`}}
+                                            >
+                                            </div>
+                                        </div>
+                                        <div className='position text-center'>{item.name}</div>
+                                    </div>
+                                )
+                            })}
                         </Slider>
                     </div>
                 </div>

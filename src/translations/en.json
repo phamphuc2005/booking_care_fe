@@ -135,6 +135,12 @@
         "choose-day": "Choose date",
         "save-btn": "Save"
     },
+    "specialty-manage": {
+        "title": "Specialty manage",
+        "name": "Specialty's name",
+        "image": "Specialty's image",
+        "save-btn": "Save"
+    },
     "patient": {
         "doctor-detail": {
             "text-calendar": "Examination schedule",

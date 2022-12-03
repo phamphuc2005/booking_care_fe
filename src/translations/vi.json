@@ -135,6 +135,12 @@
         "choose-day": "Chọn ngày",
         "save-btn": "Lưu"
     },
+    "specialty-manage": {
+        "title": "Quản lý chuyên khoa",
+        "name": "Tên chuyên khoa",
+        "image": "Ảnh chuyên khoa",
+        "save-btn": "Lưu"
+    },
     "patient": {
         "doctor-detail": {
             "text-calendar": "Lịch khám",
