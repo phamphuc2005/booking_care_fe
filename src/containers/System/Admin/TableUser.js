@@ -100,11 +100,6 @@ class TableUser extends Component {
                         </table>
                     </div>
                 </div>
-                <div className='row markdown-editor mt-5'>
-                        <div className='col-12 my-4'>
-                            <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
-                        </div>
-                    </div>
             </div>
         )
     }

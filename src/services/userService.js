@@ -78,6 +78,17 @@ const getAllSpecialty = () => {
     return axios.get('/api/get-all-specialty');
 }
 
+const editSpecialty = (inputData) => {
+    return axios.put('/api/edit-specialty',inputData);
+}
+
+const deleteSpecialty = (inputId) => {
+    return axios.delete('/api/delete-specialty',{
+        data: { id: inputId }
+    })
+
+}
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -96,5 +107,7 @@ export {
     postPatientBooking,
     postVerifyBooking,
     createSpecialty,
-    getAllSpecialty
+    getAllSpecialty,
+    editSpecialty,
+    deleteSpecialty
 }

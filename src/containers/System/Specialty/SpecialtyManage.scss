@@ -2,10 +2,126 @@
   
     .add-specialty {
         background-color: #eee;
+
+        .add-title {
+            background-color: #04AA6D;
+            color: white;
+            padding: 10px;
+        }
         
         label {
             color: #0071ba;
             font-weight: 600;
         }
     }
+
+    .list-specialty {
+        background-color: #eee;
+
+        .table-title {
+            background-color: #04AA6D;
+            color: white;
+            padding: 10px;
+        }
+
+        #table-specialty {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+          }
+          
+          #table-specialty td, #table-specialty th {
+            border: 1px solid #ddd;
+            padding: 8px;
+          }
+          
+          #table-specialty tr{background-color: white;}
+          
+          // #table-specialty tr:hover {background-color: #ddd;}
+          
+          #table-specialty th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #0071ba;
+            color: white;
+          }
+
+          .background-img {
+                width: 90px;
+                height: 60px;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: cover;
+          }
+          .edit {
+            
+              .edit-btn {
+                border: none;
+                outline: none;
+                background-color: transparent;
+                color: #666;
+                font-size: large;
+
+                :hover {
+                    background-color: transparent;
+                    color: gold;
+                }
+              }
+          }
+        
+        
+          .delete-btn {
+            border: none;
+            outline: none;
+            background-color: transparent;
+            color: #666;
+            font-size: large;
+
+            :hover {
+                background-color: transparent;
+                color: red;
+            }
+          }
+    }
 }
+
+.modal-specialty-container {
+    .modal-header {
+      button {
+        color: white;
+        background-color: transparent;
+        border: 1px solid white;
+        font-size: 30px;
+        padding: 0 6px;
+        margin-top: 2px;
+        margin-right: -8px;
+      }
+    }
+
+    .modal-specialty-body {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+
+      .input-container {
+        display: flex;
+        flex-direction: column;
+        width: 48.4%;
+        position: relative;
+
+        &.max-width-input {
+          width: 99%;
+        }
+  
+        input, select {
+          border-radius: 4px;
+          height: 30px;
+          outline: none;
+          border: 1px solid gray;
+          padding: 0 10px;
+        }
+      }
+    }
+  }

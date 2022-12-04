@@ -137,9 +137,24 @@
     },
     "specialty-manage": {
         "title": "Specialty manage",
+        "add-title": "Add speciality",
         "name": "Specialty's name",
         "image": "Specialty's image",
-        "save-btn": "Save"
+        "save-btn": "Save",
+        "list-title": "List of specialties",
+        "picture": "Image",
+        "edit": "Edit",
+        "delete": "Delete"
+    },
+    "specialty-modal": {
+        "edit-title": "Edit specialty",
+        "delete-title": "Delete specialty",
+        "name": "Specialty's name",
+        "image": "Specialty's image",
+        "save-btn": "Save",
+        "delete-btn": "Delete",
+        "cancel-btn": "Cancel",
+        "delete-content": "Are you sure you want to delete?"
     },
     "patient": {
         "doctor-detail": {

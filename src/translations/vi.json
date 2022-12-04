@@ -137,9 +137,24 @@
     },
     "specialty-manage": {
         "title": "Quản lý chuyên khoa",
+        "add-title": "Thêm chuyên khoa",
         "name": "Tên chuyên khoa",
         "image": "Ảnh chuyên khoa",
-        "save-btn": "Lưu"
+        "save-btn": "Lưu",
+        "list-title": "Danh sách chuyên khoa",
+        "picture": "Ảnh",
+        "edit": "Chỉnh sửa",
+        "delete": "Xóa"
+    },
+    "specialty-modal": {
+        "edit-title": "Chỉnh sửa chuyên khoa",
+        "delete-title": "Xóa chuyên khoa",
+        "name": "Tên chuyên khoa",
+        "image": "Ảnh chuyên khoa",
+        "save-btn": "Lưu",
+        "delete-btn": "Xóa",
+        "cancel-btn": "Hủy",
+        "delete-content": "Bạn có chắc chắn muốn xóa không?"
     },
     "patient": {
         "doctor-detail": {
