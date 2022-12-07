@@ -127,7 +127,9 @@
         "choose-province": "Choose province",
         "clinic-name": "Clinic name",
         "clinic-address": "Clinic address",
-        "note": "Note"
+        "note": "Note",
+        "choose-specialty": "Choose speciality",
+        "choose-clinic": "Choose clinic"
     },
     "schedule-manage": {
         "title": "Medical examination plan",

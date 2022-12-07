@@ -127,7 +127,9 @@
         "choose-province": "Chọn tỉnh thành",
         "clinic-name": "Tên phòng khám",
         "clinic-address": "Địa chỉ phòng khám",
-        "note": "Chú ý"
+        "note": "Chú ý",
+        "choose-specialty": "Chọn chuyên khoa",
+        "choose-clinic": "Chọn phòng khám"
     },
     "schedule-manage": {
         "title": "Kế hoạch khám bệnh",
