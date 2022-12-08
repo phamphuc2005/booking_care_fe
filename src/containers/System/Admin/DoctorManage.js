@@ -225,7 +225,12 @@ class DoctorManage extends Component {
                 priceId: '',
                 provinceId: '',
                 specialtyId: '',
-                clinicId: ''
+                clinicId: '',
+                selectedPayment: '',
+                selectedPrice: '',
+                selectedProvince: '',
+                selectedSpecialty:'',
+                selectedClinic: '' 
             })
         }
         console.log(`Option selected:`, res)

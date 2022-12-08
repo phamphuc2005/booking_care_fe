@@ -9,7 +9,7 @@ import {getProfileDoctor} from '../../../services/userService';
 import NumberFormat from 'react-number-format';
 import _ from 'lodash';
 import moment from 'moment/moment';
-
+import { Link } from 'react-router-dom';
 
 class ProfileDoctor extends Component {
     constructor(props) {
@@ -21,6 +21,12 @@ class ProfileDoctor extends Component {
 
     async componentDidMount() {
         let data = await this.getDoctorInfo(this.props.doctorId);
+        if(this.props.doctorId) {
+            let res = await getProfileDoctor(this.props.doctorId);
+            this.setState({
+                profileData: res.data ? res.data : []
+            })
+        }
         this.setState({
             profileData: data
         })
@@ -46,6 +52,10 @@ class ProfileDoctor extends Component {
         // }
         if(this.props.doctorId !== prevProps.doctorId) {
             // this.getDoctorInfo(this.props.doctorId);
+            let res = await getProfileDoctor(this.props.doctorId);
+            this.setState({
+                profileData: res.data ? res.data : []
+            })
         }
     }
 
@@ -72,7 +82,7 @@ class ProfileDoctor extends Component {
 
     render() {
         let {profileData} = this.state;
-        let {language, isShowDescription, dataTime} = this.props;
+        let {language, isShowDescription, dataTime, isShowLink, isShowPrice, doctorId} = this.props;
         let nameVi = '', nameEn = '';
         if(profileData && profileData.positionData){
             nameVi = `${profileData.positionData.valueVi}, ${profileData.firstName} ${profileData.lastName}`;
@@ -103,29 +113,34 @@ class ProfileDoctor extends Component {
                         </div>
                     </div>
                 </div>
-                        <div className='content-down'>
-                            <FormattedMessage id = "patient.booking-modal.price"/>: {
-                                profileData && profileData.Doctor_Info && language === LANGUAGES.VI ?
-                                <NumberFormat
-                                    className='price'
-                                    value={profileData.Doctor_Info.priceData.valueVi} 
-                                    displayType={'text'} 
-                                    thousandSeparator={true} 
-                                    suffix={' VND'}
-                                /> : ''
-                            }
-                            {
-                                profileData && profileData.Doctor_Info && language === LANGUAGES.EN ?
-                                <NumberFormat
-                                    className='price'
-                                    value={profileData.Doctor_Info.priceData.valueEn} 
-                                    displayType={'text'} 
-                                    thousandSeparator={true} 
-                                    suffix={' $'}
-                                /> : ''
-                            }
-                        </div>
+                {isShowLink === true && <div className='more'>
+                    <Link to={`/detail-doctor/${doctorId}`}><FormattedMessage id = "patient.booking-modal.more"/></Link>
+                </div>}
+                {isShowPrice === true &&
+                    <div className='content-down'>
+                        <FormattedMessage id = "patient.booking-modal.price"/>: {
+                            profileData && profileData.Doctor_Info && language === LANGUAGES.VI ?
+                            <NumberFormat
+                                className='price'
+                                value={profileData.Doctor_Info.priceData.valueVi} 
+                                displayType={'text'} 
+                                thousandSeparator={true} 
+                                suffix={' VND'}
+                            /> : ''
+                        }
+                        {
+                            profileData && profileData.Doctor_Info && language === LANGUAGES.EN ?
+                            <NumberFormat
+                                className='price'
+                                value={profileData.Doctor_Info.priceData.valueEn} 
+                                displayType={'text'} 
+                                thousandSeparator={true} 
+                                suffix={' $'}
+                            /> : ''
+                        }
                     </div>
+                }
+            </div>
         );
     }
 }

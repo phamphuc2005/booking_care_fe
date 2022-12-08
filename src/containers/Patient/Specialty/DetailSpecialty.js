@@ -8,17 +8,60 @@ import './DetailSpecialty.scss';
 import DoctorSchedule from '../Doctor/DoctorSchedule';
 import DoctorMoreInfo from '../Doctor/DoctorMoreInfo';
 import ProfileDoctor from '../Doctor/ProfileDoctor';
+import { getDetailSpecialtyById, getAllCodeService } from '../../../services/userService';
+import _ from 'lodash';
 
 class DetailSpecialty extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            arrDoctorId: [39, 41]
+            arrDoctorId: [],
+            dataDetailSpecialty: {},
+            listProvince: []
         }
     }
 
     async componentDidMount() {
+        if(this.props.match && this.props.match.params && this.props.match.params.id){
+            let id = this.props.match.params.id;
+            // this.setState({
+                
+            // })
+            let res = await getDetailSpecialtyById({
+                id: id,
+                location: 'ALL'
+            });
 
+            let resProvince = await getAllCodeService('PROVINCE')
+
+            if(res && res.errCode === 0 && resProvince && resProvince.errCode === 0){
+                let data = res.data;
+                let arrDoctorId = []
+                if(data && !_.isEmpty(res.data)) {
+                    let arr = data.doctorSpecialty;
+                    if(arr && arr.length>0) {
+                        arr.map(item => {
+                            arrDoctorId.push(item.doctorId)
+                        })
+                    }
+                }
+                let dataProvince = resProvince.data;
+                if(dataProvince && dataProvince.length>0) {
+                    dataProvince.unshift({
+                        createdAt: null,
+                        keyMap: "ALL",
+                        type: "PROVINCE",
+                        valueVi: "Toàn quốc",
+                        valueEn: "ALL"
+                    })
+                }
+                this.setState({
+                    dataDetailSpecialty: res.data,
+                    arrDoctorId: arrDoctorId,
+                    listProvince: dataProvince ? dataProvince : []
+                })
+            }
+        }
     }
 
     
@@ -31,13 +74,60 @@ class DetailSpecialty extends Component {
         // }
     }
 
+    handeOnChangeSelect = async (event) => {
+        if(this.props.match && this.props.match.params && this.props.match.params.id){
+            let id = this.props.match.params.id;
+            let location = event.target.value;
+
+            let res = await getDetailSpecialtyById({
+                id: id,
+                location: location
+            });
+
+            if(res && res.errCode === 0 ){
+                let data = res.data;
+                let arrDoctorID = [];
+                if(data && !_.isEmpty(res.data)) {
+                    let arr = data.doctorSpecialty;
+                    if(arr && arr.length>0) {
+                        arr.map(item => {
+                            arrDoctorID.push(item.doctorId)
+                        })
+                    }
+                }
+                this.setState({
+                    dataDetailSpecialty: res.data,
+                    arrDoctorId: arrDoctorID,
+                })
+            }
+        }
+    }
+
     render() {
-        let {arrDoctorId} = this.state;
+        let {arrDoctorId, dataDetailSpecialty, listProvince} = this.state;
+        let {language} = this.props;
         return (
             <React.Fragment>
                 <HomeHeader isShowBanner={false}/>
-                <div className='description-specialty'>
-                    
+                <div className='description-specialty' style={{backgroundImage: `url(${dataDetailSpecialty.image})`}}>
+                    {dataDetailSpecialty && !_.isEmpty(dataDetailSpecialty) &&
+                        <div className='description' dangerouslySetInnerHTML={{__html: dataDetailSpecialty.descriptionHTML}}
+                        
+                    ></div>
+                    }
+                </div>
+                <div className='search-doctor-by-location'>
+                    <select onChange={(event)=>this.handeOnChangeSelect(event)}>
+                        {listProvince && listProvince.length>0 &&
+                        listProvince.map((item, index) => {
+                            return(
+                                <option key={index} value={item.keyMap}>
+                                    {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                                </option>
+                            )
+                        })
+                        }
+                    </select>
                 </div>
                 <div className='list-doctor'>
                     {arrDoctorId && arrDoctorId.length>0 &&
@@ -48,9 +138,10 @@ class DetailSpecialty extends Component {
                                     <ProfileDoctor
                                         doctorId={item}
                                         isShowDescription={true}
+                                        isShowLink={true}
+                                        isShowPrice={false}
                                         // dataTime={dataTime}
                                     >
-                                        
                                     </ProfileDoctor>
                                 </div>
                                 <div className='content_right'>

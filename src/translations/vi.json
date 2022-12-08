@@ -186,7 +186,8 @@
             "choose-gender": "Chọn giới tính",
             "reason": "Lí do khám",
             "confirm-btn": "Xác nhận",
-            "cancel-btn": "Hủy"
+            "cancel-btn": "Hủy",
+            "more": "Xem thêm"
         },
         "verify": {
             "success": "Xác nhận lịch hẹn thành công!",

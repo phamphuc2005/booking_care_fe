@@ -86,7 +86,10 @@ const deleteSpecialty = (inputId) => {
     return axios.delete('/api/delete-specialty',{
         data: { id: inputId }
     })
+}
 
+const getDetailSpecialtyById = (data) => {
+    return axios.get(`/api/get-detail-specialty-by-id?id=${data.id}&location=${data.location}`)
 }
 
 export {
@@ -109,5 +112,6 @@ export {
     createSpecialty,
     getAllSpecialty,
     editSpecialty,
-    deleteSpecialty
+    deleteSpecialty,
+    getDetailSpecialtyById
 }

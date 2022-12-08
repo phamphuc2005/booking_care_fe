@@ -186,7 +186,8 @@
             "choose-gender": "Choose gender",
             "reason": "Reason for examination",
             "confirm-btn": "Confirm",
-            "cancel-btn": "Cancel"
+            "cancel-btn": "Cancel",
+            "more": "See more"
         },
         "verify": {
             "success": "Appointment confirmed successfully!",
