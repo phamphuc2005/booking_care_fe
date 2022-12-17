@@ -1,0 +1,88 @@
+.list-specialties {
+    min-height: 650px;
+    background-color: #eeeeee;
+
+    .list-header {
+        background-color: white;
+        height: 50px;
+        font-size: 20px;
+        font-weight: 600;
+        padding: 10px 100px;
+        box-shadow: 0px 5px 10px 0px gray;
+        position: fixed;
+        top: 60px;
+        width: 100%;
+        color: #0071ba;
+        display: flex;
+
+        .back-btn {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            margin-right: 5px;
+            margin-top: -4.5px;
+            cursor: pointer;
+
+            i {
+                margin-left: 11px;
+                margin-top: 9px;
+            }
+        }
+
+        .back-btn:hover {
+            background-color: #eee;
+            color: black;
+        }
+
+        .next-btn {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            margin-left: 5px;
+            margin-top: -4.5px;
+            cursor: pointer;
+
+            i {
+                margin-left: 11px;
+                margin-top: 9px;
+            }
+        }
+
+        .next-btn:hover {
+            background-color: #eee;
+            color: black;
+        }
+
+    }
+
+    .list-container {
+        padding: 10px 100px;
+        margin-top: 50px;
+
+        .list-detail {
+            background-color: white;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            height: 100px;
+            padding: 10px 20px;
+            display: flex;
+            cursor: pointer;
+
+            .content-left {
+                height: 80px;
+                width: 120px;
+                background-size: cover;
+            }
+
+            .content-right {
+                min-width: 30%;
+                margin-left: 30px;
+                padding: 5px 0;
+
+                .name {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}

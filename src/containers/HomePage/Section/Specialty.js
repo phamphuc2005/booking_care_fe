@@ -29,6 +29,12 @@ class Specialty extends Component {
         }
     }
 
+    handleListSpecialty = () => {
+        if(this.props.history) {
+            this.props.history.push(`/list-specialty`)
+        }
+    }
+
     render() {
         let {dataSpecialty} = this.state;
         return (
@@ -36,7 +42,7 @@ class Specialty extends Component {
                 <div className='section-container'>
                     <div className='section-header'>
                         <span className='title-section'><FormattedMessage id = "section.specialty"/></span>
-                        <button className='btn-section'><FormattedMessage id ="section.more-btn"/></button>
+                        <button className='btn-section' onClick={()=> this.handleListSpecialty()}><FormattedMessage id ="section.more-btn"/></button>
                     </div>
                     <div className='section-body'>
                         <Slider {...this.props.settings}>

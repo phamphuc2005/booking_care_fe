@@ -34,6 +34,12 @@ class Doctor extends Component {
         }
     }
 
+    handleListDoctor = () => {
+        if(this.props.history) {
+            this.props.history.push(`/list-doctor`)
+        }
+    }
+
     render() {
         let arrDoctors = this.state.arrDoctors;
         let {language} = this.props;
@@ -43,7 +49,7 @@ class Doctor extends Component {
                 <div className='section-container'>
                     <div className='section-header'>
                         <span className='title-section'><FormattedMessage id = "section.doctor"/></span>
-                        <button className='btn-section'><FormattedMessage id = "section.search-btn"/></button>
+                        <button className='btn-section' onClick={()=>this.handleListDoctor()}><FormattedMessage id = "section.more-btn"/></button>
                     </div>
                     <div className='section-body'>
                         <Slider {...this.props.settings}>
