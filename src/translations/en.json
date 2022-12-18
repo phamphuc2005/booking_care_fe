@@ -35,6 +35,7 @@
         "specialty": "Popular specialty",
         "list-specialty": "List of specialties",
         "medicalfacility": "Outstanding medical facility",
+        "list-clinic": "List of clinics",
         "doctor": "Featured doctor of the past week",
         "list-doctor": "List of doctors",
         "handbook": "Handbook",
@@ -217,6 +218,9 @@
         "verify": {
             "success": "Appointment confirmed successfully!",
             "failed": "Appointment confirmed or non-existent!"
+        },
+        "clinic": {
+            "doctor-list-title": "List of doctors"
         } 
     }
 }

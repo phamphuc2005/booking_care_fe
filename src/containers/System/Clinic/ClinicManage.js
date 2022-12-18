@@ -49,7 +49,7 @@ class ClinicManage extends Component {
         //         allDates: allDates
         //     })
         // }
-        this.componentDidMount();
+        // this.componentDidMount();
     }
 
     handleOnChangeInput = (event, id) => {
@@ -89,6 +89,7 @@ class ClinicManage extends Component {
                 descriptionMarkdown: '',
             })
             toast.success("Create clinic for success!");
+            this.componentDidMount();
         } else {
             toast.error(res.errMessage)
             console.log('Error:', res)
@@ -117,7 +118,7 @@ class ClinicManage extends Component {
                     isOpenEdit: false,
                 })
                 toast.success("Update clinic for success!");
-                await getAllClinic();
+                this.componentDidMount();
             } else {
                 toast.warn(res.errMessage);
             }
@@ -148,7 +149,7 @@ class ClinicManage extends Component {
                     isOpenDelete: false,
                 })
                 toast.success("Delete clinic for success!");
-                await getAllClinic();
+                this.componentDidMount();
             } else {
                 toast.warn(res.errMessage)
             }

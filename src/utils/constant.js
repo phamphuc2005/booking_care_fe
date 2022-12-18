@@ -11,6 +11,7 @@ export const path = {
     DETAIL_SPECIALTY: '/detail-specialty/:id',
     LIST_SPECIALTY: '/list-specialty',
     DETAIL_CLINIC: '/detail-clinic/:id',
+    LIST_CLINIC: '/list-clinic',
 
 };
 

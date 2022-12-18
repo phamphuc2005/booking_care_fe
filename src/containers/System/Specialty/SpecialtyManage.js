@@ -48,7 +48,7 @@ class SpecialtyManage extends Component {
         //         allDates: allDates
         //     })
         // }
-        this.componentDidMount();
+        // this.componentDidMount();
     }
 
     handleOnChangeInput = (event, id) => {
@@ -87,6 +87,7 @@ class SpecialtyManage extends Component {
                 descriptionMarkdown: '',
             })
             toast.success("Create specialty for success!");
+            this.componentDidMount();
         } else {
             toast.error(res.errMessage)
             console.log('Error:', res)
@@ -115,7 +116,7 @@ class SpecialtyManage extends Component {
                     isOpenEdit: false,
                 })
                 toast.success("Update specialty for success!");
-                await getAllSpecialty();
+                this.componentDidMount();
             } else {
                 toast.warn(res.errMessage);
             }
@@ -146,7 +147,7 @@ class SpecialtyManage extends Component {
                     isOpenDelete: false,
                 })
                 toast.success("Delete specialty for success!");
-                await getAllSpecialty();
+                this.componentDidMount();
             } else {
                 toast.warn(res.errMessage)
             }

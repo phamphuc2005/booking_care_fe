@@ -35,6 +35,7 @@
         "specialty": "Chuyên khoa phổ biến",
         "list-specialty": "Danh sách chuyên khoa",
         "medicalfacility": "Cơ sở y tế nổi bật",
+        "list-clinic": "Danh sách cơ sở y tế",
         "doctor": "Bác sĩ nổi bật tuần qua",
         "list-doctor": "Danh sách bác sĩ",
         "handbook": "Cẩm nang",
@@ -217,6 +218,9 @@
         "verify": {
             "success": "Xác nhận lịch hẹn thành công!",
             "failed": "Lịch hẹn đã được xác nhận hoặc không tồn tại!"
+        },
+        "clinic": {
+            "doctor-list-title": "Danh sách bác sĩ"
         }
     }
 }

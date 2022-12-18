@@ -80,6 +80,7 @@ class DetailClinic extends Component {
                     }
                 </div>
                 <div className='list-doctor'>
+                    <div className='list-doctor-title'><FormattedMessage id = "patient.clinic.doctor-list-title"/></div>
                     {arrDoctorId && arrDoctorId.length>0 &&
                     arrDoctorId.map((item, index)=> {
                         return(

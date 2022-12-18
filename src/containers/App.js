@@ -25,6 +25,7 @@ import CustomScrollbars from '../components/CustomScrollbars';
 import ListDoctor from './Patient/Doctor/ListDoctor';
 import ListSpecialty from './Patient/Specialty/ListSpecialty';
 import DetailClinic from './Patient/Clinic/DetailClinic';
+import ListClinic from './Patient/Clinic/ListClinic';
 
 class App extends Component {
 
@@ -67,7 +68,7 @@ class App extends Component {
                                     <Route path={path.DETAIL_SPECIALTY} component={DetailSpecialty}/> 
                                     <Route path={path.LIST_SPECIALTY} component={ListSpecialty}/> 
                                     <Route path={path.DETAIL_CLINIC} component={DetailClinic}/> 
-
+                                    <Route path={path.LIST_CLINIC} component={ListClinic}/> 
                                 </Switch>
                             </CustomScrollbars>
                         </div>
