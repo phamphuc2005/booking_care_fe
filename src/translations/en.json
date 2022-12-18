@@ -71,9 +71,10 @@
             "crud-handbook": "Handbook manage"
         },
         "doctor": {
-            "doctor-manage": "Management",
+            "doctor-manage": "Management - For doctor",
             "user-manage": "Manage personal information",
-            "schedule-manage": "Manage doctor's schedule"
+            "schedule-manage": "Manage doctor's schedule",
+            "appointment-manage": "Manage appointment schedule"
         }
     },
     "usermanage": {
@@ -183,6 +184,9 @@
         "delete-btn": "Delete",
         "cancel-btn": "Cancel",
         "delete-content": "Are you sure you want to delete?"
+    },
+    "doctor": {
+        "appointment-manage-title": " Medical appointment"
     },
     "patient": {
         "doctor-detail": {

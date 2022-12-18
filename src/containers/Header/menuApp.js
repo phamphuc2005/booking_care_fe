@@ -58,11 +58,12 @@ export const doctorMenu = [
         menus: [
             {
                 name: 'menu.doctor.user-manage', link: '/system/doctor-manage'
-
             },
             {
                 name: 'menu.doctor.schedule-manage', link: '/doctor/schedule-manage'
-
+            },
+            {
+                name: 'menu.doctor.appointment-manage', link: '/doctor/appointment-manage'
             },
         ] 
     }

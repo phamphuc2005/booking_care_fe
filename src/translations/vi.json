@@ -71,9 +71,10 @@
             "crud-handbook": "Quản lý cẩm nang"
         },
         "doctor": {
-            "doctor-manage": "Quản lý",
+            "doctor-manage": "Quản lý - Dành cho bác sĩ ",
             "user-manage": "Quản lý thông tin cá nhân",
-            "schedule-manage": "Quản lý kế hoạch khám bệnh"
+            "schedule-manage": "Quản lý kế hoạch khám bệnh",
+            "appointment-manage": "Quản lý lịch hẹn khám bệnh"
         }
     },
     "usermanage": {
@@ -183,6 +184,9 @@
         "delete-btn": "Xóa",
         "cancel-btn": "Hủy",
         "delete-content": "Bạn có chắc chắn muốn xóa không?"
+    },
+    "doctor": {
+        "appointment-manage-title": " Lịch hẹn khám bệnh"
     },
     "patient": {
         "doctor-detail": {
