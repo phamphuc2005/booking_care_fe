@@ -1,3 +1,7 @@
+.container {
+  max-width: 1300px !important;
+
+}
 .appointment-manage-container {
 
     .background {
@@ -35,6 +39,16 @@
                 text-align: center;
                 background-color: #0071ba;
                 color: white;
+              }
+
+              #table-appointment .confirm-btn {
+                color: white;
+              }
+
+              #table-appointment .no-data {
+                margin-left: 100px;
+                width: 106px;
+                margin-top: 20px;
               }
         }
     }

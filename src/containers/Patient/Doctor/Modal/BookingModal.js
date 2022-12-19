@@ -95,7 +95,8 @@ class BookingModal extends Component {
         let res = await postPatientBooking({
             fullName: this.state.fullName,
             phoneNumber: this.state.phoneNumber,
-            date: date,
+            date: this.props.dataTime.date,
+            birthday: date,
             selectGender: this.state.selectGender.value,
             genders: this.state.genders,
             email: this.state.email,

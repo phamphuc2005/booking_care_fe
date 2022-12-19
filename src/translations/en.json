@@ -186,7 +186,23 @@
         "delete-content": "Are you sure you want to delete?"
     },
     "doctor": {
-        "appointment-manage-title": " Medical appointment"
+        "appointment-manage": {
+            "title": "Medical appointment",
+            "choose-date": "Choose time",
+            "table-title": "List of appointments",
+            "number": "Number",
+            "time": "Time",
+            "name": "Fullname",
+            "gender": "Gender",
+            "phone":"Phonenumber",
+            "address":"Address",
+            "confirm": "Confirm",
+            "invoice": "Invoice",
+            "sent": "Sent",
+            "no-data": "No data",
+            "modal-title": "Confirmation of medical examination",
+            "cancel": "Cancel"
+        } 
     },
     "patient": {
         "doctor-detail": {

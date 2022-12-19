@@ -186,7 +186,23 @@
         "delete-content": "Bạn có chắc chắn muốn xóa không?"
     },
     "doctor": {
-        "appointment-manage-title": " Lịch hẹn khám bệnh"
+        "appointment-manage": {
+            "title": "Lịch hẹn khám bệnh",
+            "choose-date": "Chọn thời gian",
+            "table-title": "Danh sách lịch hẹn",
+            "number": "STT",
+            "time": "Thời gian",
+            "name": "Họ tên",
+            "gender": "Giới tính",
+            "phone":"Số điện thoại",
+            "address":"Địa chỉ",
+            "confirm": "Xác nhận",
+            "invoice": "Hóa đơn",
+            "sent": "Gửi",
+            "no-data": "Không có dữ liệu",
+            "modal-title": "Xác nhận khám bệnh",
+            "cancel": "Hủy"
+        } 
     },
     "patient": {
         "doctor-detail": {
