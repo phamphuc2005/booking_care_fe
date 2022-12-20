@@ -17,19 +17,23 @@ class ConfirmModal extends Component {
     constructor(props){
         super(props);
         this.state = {
-
+            email: '',
+            fileBase64: ''
         }
     }
 
     componentDidMount() {
-        let specialty = this.props.currentSpecialty;
-        if (specialty && !_.isEmpty(specialty)) {
+        if(this.props.dataModal) {
             this.setState({
-                id : specialty.id,
-                name: specialty.name,
-                imageBase64: specialty.imageBase64,
-                descriptionHTML: specialty.descriptionHTML,
-                descriptionMarkdown: specialty.descriptionMarkdown,
+                email: this.props.dataModal.email
+            })
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.dataModal !== this.props.dataModal){
+            this.setState({
+                email: this.props.dataModal.email
             })
         }
     }
@@ -38,6 +42,26 @@ class ConfirmModal extends Component {
         this.props.toggleFromParent();
     };
 
+    handleOnChangeEmail = (event) => {
+        this.setState({
+            email: event.target.value
+        })
+    }
+
+    handleOnChangeFile = async (event) => {
+        let data = event.target.files;
+        let file = data[0];
+        if(file) {
+            let base64 = await CommonUtils.getBase64(file);
+            this.setState({
+                fileBase64: base64
+            })
+        }
+    }
+
+    handleSendConfirm = () => {
+        this.props.sendConfirm(this.state)
+    }
 
     render() {
         let {isOpenModal, dataModal, sendConfirm} = this.props;
@@ -54,18 +78,22 @@ class ConfirmModal extends Component {
                     <div className='row'>
                         <div className='form-group col-6'>
                                 <label>Email:</label>
-                                <input className='form-control' type='email' value={dataModal.email}></input>
+                                <input className='form-control' type='email' value={this.state.email}
+                                    onChange={(event)=>this.handleOnChangeEmail(event)}
+                                ></input>
                         </div>
                         <div className='form-group col-6'>
                                 <label>Hoa don:</label>
-                                <input className='form-control-file' type='file'></input>
+                                <input className='form-control-file' type='file'
+                                    onChange={(event)=>this.handleOnChangeFile(event)}
+                                ></input>
                         </div>
                     </div>
                 </ModalBody>
                 <ModalFooter>
                     <Button 
                         color="primary px-3" 
-                        onClick={sendConfirm}
+                        onClick={()=>this.handleSendConfirm()}
                     ><FormattedMessage id = "doctor.appointment-manage.confirm"/></Button>{' '}
                     <Button color="secondary px-3" onClick={()=>{this.toggle()}}><FormattedMessage id = "doctor.appointment-manage.cancel"/></Button>
                 </ModalFooter>

@@ -11,8 +11,9 @@ import DatePicker from '../../../components/Input/DatePicker';
 import moment from 'moment';
 import {toast} from 'react-toastify'
 import _ from 'lodash';
-import {getListAppointmentForDoctor} from '../../../services/userService';
+import {getListAppointmentForDoctor, postSendConfirm} from '../../../services/userService';
 import ConfirmModal from './ConfirmModal';
+import LoadingOverlay from 'react-loading-overlay';
 
 class AppointmentManage extends Component {
     constructor(props) {
@@ -21,19 +22,19 @@ class AppointmentManage extends Component {
             currentDate: moment(new Date()).startOf('day').valueOf(),
             dataAppointment: [],
             isOpenModal: false,
-            dataModal: {}
+            dataModal: {},
+            isLoading: false
         }
     }    
 
     async componentDidMount() {
+        this.getDataAppointment()
+    }
+
+    getDataAppointment = async() => {
         let {user} = this.props;
         let {currentDate} = this.state;
         let formattedDate = new Date(currentDate).getTime();
-
-        this.getDataAppointment(user, formattedDate)
-    }
-
-    getDataAppointment = async(user, formattedDate) => {
         let res = await getListAppointmentForDoctor({
             doctorId: user.id,
             date: formattedDate
@@ -57,12 +58,8 @@ class AppointmentManage extends Component {
     handleChangeDate = (date) => {
         this.setState({
             currentDate: date[0]
-        }, () => {
-            let {user} = this.props;
-            let {currentDate} = this.state;
-            let formattedDate = new Date(currentDate).getTime();
-
-            this.getDataAppointment(user, formattedDate)
+        }, async () => {
+            await this.getDataAppointment()
         })
     }
 
@@ -70,7 +67,9 @@ class AppointmentManage extends Component {
         let data = {
             doctorId: item.doctorId,
             patientId: item.patientId,
-            email: item.patientData.email
+            email: item.patientData.email,
+            timeType: item.timeType,
+            patientName: item.patientData.firstName
         }
         this.setState({
             isOpenModal: true,
@@ -84,8 +83,34 @@ class AppointmentManage extends Component {
         })
     }
 
-    sendConfirm = () => {
-        alert('click me')
+    sendConfirm = async (dataFromModal) => {
+        let {dataModal} = this.state;
+        this.setState({
+            isLoading: true
+        })
+        let res = await postSendConfirm({
+            email: dataFromModal.email,
+            fileBase64: dataFromModal.fileBase64,
+            doctorId: dataModal.doctorId,
+            patientId: dataModal.patientId,
+            timeType: dataModal.timeType,
+            language: this.props.language,
+            patientName: dataModal.patientName
+        })
+        if(res && res.errCode === 0) {
+            this.setState({
+                isLoading: false
+            })
+            toast.success('Confirm successful!');
+            this.toggleModal();
+            await this.getDataAppointment();
+        } else {
+            this.setState({
+                isLoading: false
+            })
+            toast.error('Confirm failed!');
+            console.log("Error:", res.errMessage)
+        }
     }
 
     render() {
@@ -94,7 +119,12 @@ class AppointmentManage extends Component {
         console.log(this.state)
         return (
             <>
-                <div className='appointment-manage-container'>
+                <LoadingOverlay
+                    active={this.state.isLoading}
+                    spinner
+                    text='Loading...'
+                    >
+                    <div className='appointment-manage-container'>
                     <div className='title appointment-manage-title'>
                         <FormattedMessage id = "doctor.appointment-manage.title"/>
                     </div>
@@ -144,7 +174,9 @@ class AppointmentManage extends Component {
                                                     </tr>
                                                 )
                                             }) : 
-                                            <div className='no-data'><FormattedMessage id = "doctor.appointment-manage.no-data"/></div>
+                                            <tr className='no-data'>
+                                                <td colSpan={7}><FormattedMessage id = "doctor.appointment-manage.no-data"/></td>
+                                            </tr>
                                         }
 
                                     </tbody>                 
@@ -159,6 +191,7 @@ class AppointmentManage extends Component {
                     toggleFromParent = {this.toggleModal}
                     sendConfirm={this.sendConfirm}
                 />
+                </LoadingOverlay>
             </>
         );
     }

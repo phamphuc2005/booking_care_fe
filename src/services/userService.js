@@ -118,6 +118,10 @@ const getListAppointmentForDoctor = (data) => {
     return axios.get(`/api/get-list-appointment?doctorId=${data.doctorId}&date=${data.date}`)
 }
 
+const postSendConfirm= (data) => {
+    return axios.post('/api/send-confirm', data);
+}
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -145,5 +149,6 @@ export {
     editClinic,
     deleteClinic,
     getDetailClinicById,
-    getListAppointmentForDoctor
+    getListAppointmentForDoctor,
+    postSendConfirm
 }

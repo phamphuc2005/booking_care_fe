@@ -2,6 +2,15 @@
   max-width: 1300px !important;
 
 }
+
+div._loading_overlay_wrapper {
+  position: unset;
+
+  ._loading_overlay_overlay {
+    z-index: 1000000000000;
+  }
+}
+
 .appointment-manage-container {
 
     .background {
@@ -46,9 +55,7 @@
               }
 
               #table-appointment .no-data {
-                margin-left: 100px;
-                width: 106px;
-                margin-top: 20px;
+                text-align: center;
               }
         }
     }
