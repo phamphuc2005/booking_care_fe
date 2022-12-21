@@ -65,6 +65,9 @@ export const doctorMenu = [
             {
                 name: 'menu.doctor.appointment-manage', link: '/doctor/appointment-manage'
             },
+            {
+                name: 'menu.doctor.patient-manage', link: '/doctor/patient-manage'
+            },
         ] 
     }
 ];

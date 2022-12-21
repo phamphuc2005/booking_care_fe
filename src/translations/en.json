@@ -74,7 +74,8 @@
             "doctor-manage": "Management - For doctor",
             "user-manage": "Manage personal information",
             "schedule-manage": "Manage doctor's schedule",
-            "appointment-manage": "Manage appointment schedule"
+            "appointment-manage": "Manage appointment schedule",
+            "patient-manage":"Manage patient"
         }
     },
     "usermanage": {
@@ -202,7 +203,22 @@
             "no-data": "No data",
             "modal-title": "Confirmation of medical examination",
             "cancel": "Cancel"
-        } 
+        },
+        "patient-manage": {
+            "title": "Patient management",
+            "choose-date": "Choose time",
+            "table-title": "List of patients",
+            "patientId": "Patient ID",
+            "appointmentId": "Examination ID",
+            "name": "Fullname",
+            "time": "Examination time",
+            "gender": "Gender",
+            "phone":"Phonenumber",
+            "address":"Address",
+            "no-data": "No data",
+            "modal-title": "Patient details",
+            "cancel": "Cancel"
+        }  
     },
     "patient": {
         "doctor-detail": {

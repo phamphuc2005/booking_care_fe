@@ -83,7 +83,7 @@ class ConfirmModal extends Component {
                                 ></input>
                         </div>
                         <div className='form-group col-6'>
-                                <label>Hoa don:</label>
+                                <label><FormattedMessage id = "doctor.appointment-manage.invoice"/>:</label>
                                 <input className='form-control-file' type='file'
                                     onChange={(event)=>this.handleOnChangeFile(event)}
                                 ></input>

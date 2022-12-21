@@ -74,7 +74,8 @@
             "doctor-manage": "Quản lý - Dành cho bác sĩ ",
             "user-manage": "Quản lý thông tin cá nhân",
             "schedule-manage": "Quản lý kế hoạch khám bệnh",
-            "appointment-manage": "Quản lý lịch hẹn khám bệnh"
+            "appointment-manage": "Quản lý lịch hẹn khám bệnh",
+            "patient-manage": "Quản lý bệnh nhân"
         }
     },
     "usermanage": {
@@ -201,6 +202,21 @@
             "sent": "Gửi",
             "no-data": "Không có dữ liệu",
             "modal-title": "Xác nhận khám bệnh",
+            "cancel": "Hủy"
+        },
+        "patient-manage": {
+            "title": "Quản lý bệnh nhân",
+            "choose-date": "Chọn thời gian",
+            "table-title": "Danh sách bệnh nhân",
+            "patientId": "Mã số bệnh nhân",
+            "appointmentId": "Mã lịch khám",
+            "name": "Họ tên",
+            "time": "Thời gian khám",
+            "gender": "Giới tính",
+            "phone":"Số điện thoại",
+            "address":"Địa chỉ",
+            "no-data": "Không có dữ liệu",
+            "modal-title": "Thông tin chi tiết của bệnh nhân",
             "cancel": "Hủy"
         } 
     },

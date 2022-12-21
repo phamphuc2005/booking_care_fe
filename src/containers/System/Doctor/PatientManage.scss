@@ -1,0 +1,72 @@
+.container {
+    max-width: 1300px !important;
+  
+  }
+  
+  div._loading_overlay_wrapper {
+    position: unset;
+  
+    ._loading_overlay_overlay {
+      z-index: 1000000000000;
+    }
+  }
+  
+  .patient-manage-container {
+  
+      .background {
+          background-color: #eee;
+          padding: 20px 0;
+          border-radius: 4px;
+  
+          .table-title {
+              background-color: #04AA6D;
+              color: white;
+              padding: 10px;
+              margin-top: 10px;
+          }
+  
+          .table-list {
+              #table-patient {
+                  font-family: Arial, Helvetica, sans-serif;
+                  border-collapse: collapse;
+                  width: 100%;
+                  margin-bottom: 20px;
+                }
+
+                .patient-row {
+                    cursor: pointer;
+
+                    :hover {}
+                }
+                
+                #table-patient td, #table-patient th {
+                  border: 1px solid #ddd;
+                  padding: 8px;
+                }
+                
+                #table-patient tr{background-color: white;}
+
+                #table-patient tr:hover {
+                    background-color: whitesmoke;
+                }
+                
+                // #table-patient tr:hover {background-color: #ddd;}
+                
+                #table-patient th {
+                  padding-top: 12px;
+                  padding-bottom: 12px;
+                  text-align: center;
+                  background-color: #0071ba;
+                  color: white;
+                }
+  
+                #table-patient .confirm-btn {
+                  color: white;
+                }
+  
+                #table-patient .no-data {
+                  text-align: center;
+                }
+          }
+      }
+  }
