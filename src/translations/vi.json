@@ -124,7 +124,10 @@
     }, 
     "doctor-manage": {
         "title": "Chi tiết về bác sĩ",
+        "doctor-title": "Thông tin cá nhân",
+        "more-btn": "Hiện chi tiết",
         "save-btn": "Lưu",
+        "full-name": "Họ và tên",
         "choose-title": "Chọn bác sĩ",
         "introduction-title": "Thông tin giới thiệu",
         "choose-price": "Chọn chi phí",

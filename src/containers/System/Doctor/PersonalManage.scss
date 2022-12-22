@@ -1,0 +1,52 @@
+.more-info {
+    display: flex;
+    gap: 12px;
+
+    button:hover {
+        background-color: gold;
+        color: white;
+    }
+
+    .detail-button {
+        height: 40px;
+        min-width: 100px;
+        background-color: white;
+        border: 1px solid orange;
+        color: orange;
+        border-radius: 5px;
+    }
+
+    .content-left {
+        width: 25%;
+    }
+    
+    .content-right {
+        width: 75%;
+    }
+
+    label {
+        margin-left: 2px;
+        font-weight: 600;
+        color: #0071ba;
+    }
+}
+
+.detail-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .price, .payment, .province, .name, .address, .note, .specialty, .clinic {
+        width: 32.7%;
+    }
+
+    label {
+        margin-left: 2px;
+        font-weight: 600;
+        color: #0071ba;
+    }
+}
+
+.markdown-editor {
+    background-color: #eee;
+}

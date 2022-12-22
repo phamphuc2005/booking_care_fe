@@ -124,7 +124,10 @@
     },
     "doctor-manage": {
         "title": "Doctor's details",
+        "doctor-title": "Personal information",
         "save-btn": "Save",
+        "more-btn": "Show details",
+        "full-name": "Full name",
         "choose-title": "Choose doctor",
         "introduction-title": "Introduction information",
         "choose-price": "Choose cost",

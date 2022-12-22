@@ -1,0 +1,36 @@
+.schedule-manage-container {
+
+    .background {
+        background-color: #eee;
+        padding: 20px 0;
+        border-radius: 4px;
+    }
+
+    .form-control {
+        height: calc(1.5em + 0.75rem + 7px) !important;
+    }
+
+    .hour-container {
+        // border: 1px solid black;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin: 20px 0 40px 0;
+
+        .btn-hour {
+            border: 2px solid gold;
+            background-color: white;
+            cursor: pointer;
+            // width: 153px;
+            padding: 10px 21px;
+            
+            &:hover {
+                background-color: gold;
+            }
+
+            &.active {
+                background-color: gold;
+            }
+        }
+    }
+}

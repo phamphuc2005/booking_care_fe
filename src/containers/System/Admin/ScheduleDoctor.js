@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Header from '../../../containers/Header/Header';
 import { FormattedMessage } from 'react-intl';
-import './ScheduleManage.scss';
+import './ScheduleDoctor.scss';
 import Select from 'react-select';
 import * as actions from '../../../store/actions';
 import {LANGUAGES, dateFormat} from '../../../utils';
@@ -13,10 +13,12 @@ import {toast} from 'react-toastify'
 import _ from 'lodash';
 import {saveDoctorSchedule} from '../../../services/userService'
 
-class ScheduleManage extends Component {
+class ScheduleDoctor extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            listDoctors: [],
+            selectedDoctor: {},
             currentDate: '',
             time: []
         }
@@ -44,6 +46,18 @@ class ScheduleManage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.allDoctors !== this.props.allDoctors){
+            let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
+            this.setState({
+                listDoctors: dataSelect
+            })
+        }
+        if(prevProps.language !== this.props.language){
+            let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
+            this.setState({
+                listDoctors: dataSelect
+            })
+        }
         if(prevProps.allTime !== this.props.allTime){
             let data = this.props.allTime;
             if(data && data.length>0) {
@@ -54,6 +68,11 @@ class ScheduleManage extends Component {
             })
         }
     }
+
+    handleChangeSelect = async (selectedDoctor) => {
+        this.setState({ selectedDoctor });
+        
+    };
 
     handleChangeDate = (date) => {
         this.setState({
@@ -77,9 +96,12 @@ class ScheduleManage extends Component {
     }
 
     handleSaveTime = async () => {
-        let { currentDate, time} = this.state;
-        let {userInfo} = this.props;
+        let {selectedDoctor, currentDate, time} = this.state;
         let result = []
+        if(selectedDoctor && _.isEmpty(selectedDoctor)) {
+            toast.warning("Invalid doctor!");
+            return;
+        }
         if(!currentDate) {
             toast.warning("Invalid date!");
             return;
@@ -92,7 +114,7 @@ class ScheduleManage extends Component {
             if(selectedTime && selectedTime.length>0) {
                 selectedTime.map(timess => {
                     let object = {};
-                    object.doctorId = userInfo.id;
+                    object.doctorId = selectedDoctor.value;
                     object.date = formatDate;
                     object.timeType = timess.keyMap;
                     result.push(object);
@@ -104,7 +126,7 @@ class ScheduleManage extends Component {
         }
         let res = await saveDoctorSchedule({
             arrSchedule: result,
-            doctorId: userInfo.id,
+            doctorId: selectedDoctor.value,
             date: formatDate
 
         })
@@ -118,8 +140,9 @@ class ScheduleManage extends Component {
 
     render() {
         let {time} = this.state;
-        let {language, userInfo} = this.props;
+        let {language} = this.props;
         let yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+
         console.log(time)
         return (
             <div className='schedule-manage-container'>
@@ -128,7 +151,16 @@ class ScheduleManage extends Component {
                 </div>
                 <div className='container'>
                     <div className='row background'>
-                        <div className='col-3 form-group'>
+                        <div className='col-2 form-group'>
+                            <label><FormattedMessage id = "schedule-manage.choose-title"/>:</label>
+                            <Select
+                                value={this.state.selectedDoctor}
+                                onChange={this.handleChangeSelect}
+                                options={this.state.listDoctors}
+                                placeholder={<FormattedMessage id = "schedule-manage.choose-title"/>}
+                            />
+                        </div>
+                        <div className='col-2 form-group'>
                             <label><FormattedMessage id = "schedule-manage.choose-day"/>:</label>
                             <DatePicker
                                 className='form-control'
@@ -172,8 +204,7 @@ const mapStateToProps = state => {
         isLoggedIn: state.user.isLoggedIn,
         allDoctors: state.admin.allDoctors,
         language: state.app.language,
-        allTime: state.admin.allTime,
-        userInfo: state.user.userInfo,
+        allTime: state.admin.allTime
     };
 };
 
@@ -184,4 +215,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ScheduleManage);
+export default connect(mapStateToProps, mapDispatchToProps)(ScheduleDoctor);
