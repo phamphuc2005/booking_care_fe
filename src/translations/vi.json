@@ -137,7 +137,14 @@
         "clinic-address": "Địa chỉ cơ sở y tế",
         "note": "Chú ý",
         "choose-specialty": "Chọn chuyên khoa",
-        "choose-clinic": "Chọn cơ sở y tế"
+        "choose-clinic": "Chọn cơ sở y tế",
+
+        "firstname": "Họ",
+        "lastname": "Tên",
+        "phone":"Số điện thoại",
+        "gender":"Giới tính",
+        "position": "Chức vụ",
+        "edit": "Chỉnh sửa"
     },
     "schedule-manage": {
         "title": "Kế hoạch khám bệnh",

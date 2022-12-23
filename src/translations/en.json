@@ -137,7 +137,14 @@
         "clinic-address": "Clinic address",
         "note": "Note",
         "choose-specialty": "Choose speciality",
-        "choose-clinic": "Choose clinic"
+        "choose-clinic": "Choose clinic",
+
+        "firstname": "Firstname",
+        "lastname": "Lastname",
+        "phone":"Phonenumber",
+        "gender":"Gender",
+        "position": "Position",
+        "edit": "Edit"
     },
     "schedule-manage": {
         "title": "Medical examination plan",

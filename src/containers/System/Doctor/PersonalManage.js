@@ -7,9 +7,11 @@ import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import Select from 'react-select';
-import {CRUD_ACTIONS, LANGUAGES} from '../../../utils';
-import {getDetailDoctor} from '../../../services/userService'
+import {CommonUtils, CRUD_ACTIONS, LANGUAGES} from '../../../utils';
+import {getDetailDoctor, editUserService} from '../../../services/userService'
 import { Button } from 'reactstrap';
+import { editUser } from '../../../store/actions';
+import { toast } from 'react-toastify';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -39,13 +41,49 @@ class PersonalManage extends Component {
             addressClinic: '',
             note: '',
             specialtyId: '',
-            clinicId: ''
+            clinicId: '',
+
+            image: '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            positionId: '',
+            gender: '',
+            doctorGender: '',
+            doctorPosition: '',
+
+            genderArr: [],
+            positionArr: [],
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        this.props.getGenderStart();
+        this.props.getPositionStart();
+
         this.props.fetchAllDoctors();
         this.props.getRequiredDoctorInfo();
+        let doctor = await getDetailDoctor(this.props.userInfo.id);
+        let arrGenders = this.props.genderRedux;
+        let arrPositions = this.props.positionRedux;
+        if(doctor && doctor.errCode === 0 && doctor.data) {
+            this.setState({
+                id: this.props.userInfo.id,
+                firstName: doctor.data.firstName,
+                lastName: doctor.data.lastName,
+                email: doctor.data.email,
+                phone: doctor.data.phonenumber,
+                gender: arrGenders && arrGenders.length>0 ? arrGenders[0].keyMap : '',
+                positionId: arrPositions && arrPositions.length>0 ? arrPositions[0].keyMap : '',
+                image: doctor.data.image,
+                doctorGender: doctor.data.genderData,
+                doctorPosition: doctor.data.positionData,
+                roleId: "R1",
+                avatar: ''
+            })
+        }
+        console.log('doctor', doctor, this.state);
     }
 
     buildDataInputSelect = (inputData, type) => {
@@ -143,6 +181,21 @@ class PersonalManage extends Component {
                 listClinic: dataSelectClinic
             })
         } 
+
+        if(prevProps.genderRedux !== this.props.genderRedux) {
+            let arrGenders = this.props.genderRedux;
+            this.setState ({
+                genderArr: arrGenders,
+                gender: arrGenders && arrGenders.length>0 ? arrGenders[0].keyMap : ''
+            })
+        }
+        if(prevProps.positionRedux !== this.props.positionRedux) {
+            let arrPositions = this.props.positionRedux;
+            this.setState ({
+                positionArr: arrPositions,
+                positionId: arrPositions && arrPositions.length>0 ? arrPositions[0].keyMap : ''
+            })
+        }
     }
 
     handleEditorChange = ({ html, text }) => {
@@ -267,13 +320,153 @@ class PersonalManage extends Component {
         })
     }
 
+    onChangeInput = (event, id) => {
+        let copyState = {...this.state};
+        copyState[id] = event.target.value;
+        this.setState({
+            ...copyState
+        })
+        console.log('change', this.state);
+    }
+
+    handleOnChangeImg = async (event) => {
+        let data = event.target.files;
+        let file = data[0];
+        if(file) {
+            let base64 = await CommonUtils.getBase64(file);
+            this.setState({
+                avatar: base64,
+                image: base64
+            })
+        }
+    }
+
+    handleEditDoctor = async () => {
+        try {
+            let res = await editUserService(this.state)
+            console.log('sent', this.state);
+            if(res && res.errCode === 0) {
+                // this.setState({
+                //     isOpenEdit: false,
+                // })
+                toast.success("Update info for success!");
+                this.componentDidMount();
+            } else {
+                toast.warn(res.errMessage);
+            }
+        } catch (error) {
+            toast.error("Update info for failed!");
+            console.log(error)
+        }
+    }
+
     render() {
         let {haveData, listSpecialty} = this.state;
-        let {userInfo} = this.props;
+        let {userInfo, language} = this.props;
+        let genders = this.state.genderArr;
+        let positions = this.state.positionArr;
         console.log('hello', this.state)
         return (
             <div className='container doctor-container'>
                 <div className='title mb-4'><FormattedMessage id = "doctor-manage.doctor-title"/></div>
+
+                <div className='row my-4 doctor-details'>
+                    <div className='col-2'>
+                        <input className=' my-4 avatar' type='file'
+                            style={{backgroundImage: `url(${this.state.image})`}}
+                            onChange={(event)=>{this.handleOnChangeImg(event, "image")}}    
+                        >
+                        </input>
+                        {/* <input className='col-10 file' type='file'
+                            onChange={(event)=>{this.handleOnChangeImg(event, "image")}}
+                        ></input> */}
+
+                    </div>
+                    <div className='row col-10'>
+                        <div className='col-4 mt-4 more-info'>
+                            <div className='form-group'>
+                                <label><FormattedMessage id = "doctor-manage.firstname"/>:</label>
+                                <input className='form-control'
+                                    value={this.state.firstName}
+                                    onChange={(event)=>{this.onChangeInput(event, "firstName")}}
+                                />
+                            </div>
+                        </div>
+                        <div className='col-4 mt-4 more-info'>
+                            <div className='form-group'>
+                                <label><FormattedMessage id = "doctor-manage.lastname"/>:</label>
+                                <input className='form-control'
+                                    value={this.state.lastName}
+                                    onChange={(event)=>{this.onChangeInput(event, "lastName")}}
+                                />
+                            </div>
+                        </div>
+                        <div className='col-4 mt-4 more-info'>
+                            <div className='form-group'>
+                                <label>email:</label>
+                                <input className='form-control'
+                                    value={this.state.email}
+                                />
+                            </div>
+                        </div>
+                        <div className='col-4 mt-4 more-info'>
+                            <div className='form-group'>
+                                <label><FormattedMessage id = "doctor-manage.phone"/>:</label>
+                                <input className='form-control'
+                                    value={this.state.phone}
+                                    onChange={(event)=>{this.onChangeInput(event, "phone")}}
+                                />
+                            </div>
+                        </div>
+                        <div className='col-4 mt-4 more-info'>
+                            <div className='form-group'>
+                                <label><FormattedMessage id = "doctor-manage.gender"/>:</label>
+                                <select 
+                                    className='form-control gender'
+                                    onChange={(event)=>{this.onChangeInput(event, "gender")}}
+                                    // value={this.state.gender}
+                                >
+                                    <option selected disabled hidden>{language === LANGUAGES.VI ? this.state.doctorGender.valueVi : this.state.doctorGender.valueEn}</option>
+                                    {genders && genders.length>0 && genders.map((item, index) => {
+                                        return (
+                                            <option selected={false} key={index} value={item.keyMap}>
+                                                {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                                            </option>
+                                        )
+                                    })}
+                                </select>
+                            </div>
+                        </div>
+                        <div className='col-4 mt-4 more-info'>
+                            <div className='form-group'>
+                                <label><FormattedMessage id = "doctor-manage.position"/>:</label>
+                                <select 
+                                    className='form-control positions'
+                                    onChange={(event)=>{this.onChangeInput(event, "positionId")}}
+                                    // value={this.state.position}
+                                >
+                                    <option selected disabled hidden>{language === LANGUAGES.VI ? this.state.doctorPosition.valueVi : this.state.doctorPosition.valueEn}</option>
+                                    {positions && positions.length>0 && positions.map((item, index) => {
+                                        return (
+                                            <option selected={false} key={index} value={item.keyMap}>
+                                                {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                                            </option>
+                                        )
+                                    })}
+                                </select> 
+                            </div>
+                        </div>
+                    </div>
+                    <div className='col-12 mt-2 mb-4'>
+                        <button 
+                            className='btn btn-warning edit-btn text-light'
+                            onClick={() => this.handleEditDoctor()}
+                        >
+                            <FormattedMessage id = "doctor-manage.edit"/> 
+                        </button>
+                    </div>
+                </div>
+
                 <div className='row markdown-editor my-4'>
                     <div className='col-12 mt-4 more-info'>
                         <div className='form-group'>
@@ -287,13 +480,13 @@ class PersonalManage extends Component {
                     </div>
 
                     <div className='col-12 mt-2 more-info'>
-                        <div className='content-left form-group fullname'>
+                        {/* <div className='content-left form-group fullname'>
                             <label><FormattedMessage id = "doctor-manage.full-name"/>:</label>
                             <input className='form-control'
-                                onChange={(event)=>this.handleOnChangeText(event, 'nameClinic')}
+                                onChange={(event)=>this.handleOnChangeText(event, 'name')}
                                 value={`${userInfo.firstName} ${userInfo.lastName}`}
                             />
-                        </div>
+                        </div> */}
                         <div className='content-right form-group'>
                             <label><FormattedMessage id = "doctor-manage.introduction-title"/>:</label>
                             <textarea 
@@ -405,6 +598,8 @@ const mapStateToProps = state => {
         language: state.app.language,
         allRequiredDoctorInfo: state.admin.allRequiredDoctorInfo,
         userInfo: state.user.userInfo,
+        genderRedux: state.admin.genders,
+        positionRedux: state.admin.positions,
     };
 };
 
@@ -413,7 +608,9 @@ const mapDispatchToProps = dispatch => {
         // fetchUserRedux: () => dispatch(actions.fetchAllUserStart()),
         fetchAllDoctors: () => dispatch(actions.fetchAllDoctors()),
         getRequiredDoctorInfo: () => dispatch(actions.getRequiredDoctorInfo()),
-        saveDetailDoctor: (data) => dispatch(actions.saveDetailDoctor(data))
+        saveDetailDoctor: (data) => dispatch(actions.saveDetailDoctor(data)),
+        getGenderStart: () => dispatch(actions.fetchGenderStart()),
+        getPositionStart: () => dispatch(actions.fetchPositionStart()),
     };
 };
 

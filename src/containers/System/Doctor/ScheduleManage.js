@@ -12,6 +12,7 @@ import moment from 'moment';
 import {toast} from 'react-toastify'
 import _ from 'lodash';
 import {saveDoctorSchedule} from '../../../services/userService'
+import ListSchedule from './ListSchedule';
 
 class ScheduleManage extends Component {
     constructor(props) {
@@ -110,6 +111,7 @@ class ScheduleManage extends Component {
         })
         if(res && res.errCode === 0) {
             toast.success("Create a plan for success!");
+            window.location.reload();
         } else {
             toast.error("Create a plan for failed!");
             console.log('error:', res)
@@ -161,6 +163,11 @@ class ScheduleManage extends Component {
                             </button>
                         </div>
                     </div>
+                </div>
+                <div className='container mt-4 background list-schedule'>
+                    <ListSchedule
+                        doctorID={this.props.userInfo.id}
+                    />
                 </div>
             </div>
         );

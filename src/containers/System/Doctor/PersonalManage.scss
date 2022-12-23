@@ -1,3 +1,33 @@
+.doctor-details {
+    background-color: #eee;
+    display: flex;
+
+    .avatar {
+        height: 160px;
+        width: 160px;
+        background-size: cover;
+        color: transparent;
+    }
+
+    input {
+        background-color: white !important;
+        width: 190%;
+    }
+
+    .gender {
+        width: 440%;
+    }
+
+    .positions {
+        width: 280%;
+    }
+
+    .edit-btn {
+        float: right;
+        margin-right: 10px;
+    }
+}
+
 .more-info {
     display: flex;
     gap: 12px;
@@ -21,7 +51,7 @@
     }
     
     .content-right {
-        width: 75%;
+        width: 100%;
     }
 
     label {
@@ -50,3 +80,42 @@
 .markdown-editor {
     background-color: #eee;
 }
+
+.modal-clinic-container {
+    .modal-header {
+      button {
+        color: white;
+        background-color: transparent;
+        border: 1px solid white;
+        font-size: 30px;
+        padding: 0 6px;
+        margin-top: 2px;
+        margin-right: -8px;
+      }
+    }
+
+    .modal-clinic-body {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+
+      .input-container {
+        display: flex;
+        flex-direction: column;
+        width: 48.4%;
+        position: relative;
+
+        &.max-width-input {
+          width: 99%;
+        }
+  
+        input, select {
+          border-radius: 4px;
+          height: 30px;
+          outline: none;
+          border: 1px solid gray;
+          padding: 0 10px;
+        }
+      }
+    }
+  }

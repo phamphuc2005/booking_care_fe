@@ -50,6 +50,12 @@ const saveDoctorSchedule = (data) => {
     return axios.post('/api/save-schedule-doctor', data);
 }
 
+const deleteSchedule = (inputId) => {
+    return axios.delete('/api/delete-schedule',{
+        data: { id: inputId }
+    })
+}
+
 const getDoctorScheduleByDate = (doctorId, date) => {
     return axios.get(`/api/get-doctor-schedule-by-date?doctorId=${doctorId}&date=${date}`);
 }
@@ -155,5 +161,6 @@ export {
     getDetailClinicById,
     getListAppointmentForDoctor,
     postSendConfirm,
-    getListPatientForDoctor
+    getListPatientForDoctor,
+    deleteSchedule
 }
