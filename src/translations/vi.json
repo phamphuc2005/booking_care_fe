@@ -150,7 +150,10 @@
         "title": "Kế hoạch khám bệnh",
         "choose-title": "Chọn bác sĩ",
         "choose-day": "Chọn ngày",
-        "save-btn": "Lưu"
+        "save-btn": "Lưu",
+        "list-schedule": "Danh sách lịch khám",
+        "delete-schedule": "Xóa lịch khám",
+        "text-notice": "Không có lịch khám trong ngày này !"
     },
     "specialty-manage": {
         "title": "Quản lý chuyên khoa",

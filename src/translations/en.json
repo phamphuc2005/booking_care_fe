@@ -150,7 +150,10 @@
         "title": "Medical examination plan",
         "choose-title": "Choose doctor",
         "choose-day": "Choose date",
-        "save-btn": "Save"
+        "save-btn": "Save",
+        "list-schedule": "List of schedules",
+        "delete-schedule": "Delete schedule",
+        "text-notice": "No appointment scheduled for this day !"
     },
     "specialty-manage": {
         "title": "Specialty manage",

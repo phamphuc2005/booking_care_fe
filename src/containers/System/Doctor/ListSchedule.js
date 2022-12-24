@@ -10,6 +10,7 @@ import localization from 'moment/locale/vi';
 import {getDoctorScheduleByDate, deleteSchedule} from '../../../services/userService';
 import { FormattedMessage } from 'react-intl';
 import { toast } from 'react-toastify';
+import { Dropdown } from 'react-bootstrap';
 
 class ListSchedule extends Component {
     constructor(props) {
@@ -144,6 +145,12 @@ class ListSchedule extends Component {
         return (
             <>
                 <div className='doctor-schedule-container'>
+                    <div className='text-calendar'>
+                        <span>
+                            <i className="far fa-calendar-alt"></i>
+                                <FormattedMessage id = "schedule-manage.list-schedule"/>
+                        </span>
+                    </div>
                     <div className='all-date'>
                         <select onChange={(event)=>this.handleOnChangeSelect(event)}>
                             {allDates && allDates.length > 0 &&
@@ -160,31 +167,37 @@ class ListSchedule extends Component {
                         </select>
                     </div>
                     <div className='all-hour'>
-                        <div className='text-calendar'>
-                            <span>
-                                <i className="far fa-calendar-alt"></i>
-                                    <FormattedMessage id = "patient.doctor-detail.text-calendar"/>
-                            </span>
-                        </div>
                         <div className='time-container'>
                             {allTimes && allTimes.length>0 ?
                                 <>
                                     {allTimes.map((item, index) => {
                                         let timeDisplay = language === LANGUAGES.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn;
                                         return(
-                                            <button 
-                                                key={index}
-                                                onClick={()=>this.handleDeleteTime(item)}
-                                            >
-                                                {timeDisplay}
-                                            </button>
+                                            // <button 
+                                            //     key={index}
+                                            //     onClick={()=>this.handleDeleteTime(item)}
+                                            // >
+                                            //     {timeDisplay}
+                                            // </button>
+                                            <Dropdown className='schedule-btn'>
+                                                <Dropdown.Toggle  id="dropdown-basic" key={index}>
+                                                    {timeDisplay}
+                                                </Dropdown.Toggle>
+                                                <Dropdown.Menu>
+                                                    <Dropdown.Item className='delete-btn' href="" onClick={()=>this.handleDeleteTime(item)}>
+                                                        <i className='fas fa-trash-alt'></i>
+                                                        <FormattedMessage id = "schedule-manage.delete-schedule"/>
+                                                    </Dropdown.Item>
+                                                </Dropdown.Menu>
+                                            </Dropdown>
                                         )
                                     })}
                                 </> :
-                                <div className='text-notice'><FormattedMessage id = "patient.doctor-detail.text-notice"/></div>     
+                                <div className='text-notice'><FormattedMessage id = "schedule-manage.text-notice"/></div>     
                             }
                         </div>
                     </div>
+                    
                 </div>
 
             </>

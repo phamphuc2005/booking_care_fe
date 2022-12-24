@@ -12,6 +12,7 @@ import moment from 'moment';
 import {toast} from 'react-toastify'
 import _ from 'lodash';
 import {saveDoctorSchedule} from '../../../services/userService'
+import ListSchedule from '../Doctor/ListSchedule';
 
 class ScheduleDoctor extends Component {
     constructor(props) {
@@ -143,7 +144,7 @@ class ScheduleDoctor extends Component {
         let {language} = this.props;
         let yesterday = new Date(new Date().setDate(new Date().getDate()-1));
 
-        console.log(time)
+        console.log(time, this.state.selectedDoctor)
         return (
             <div className='schedule-manage-container'>
                 <div className='title schedule-manage-title'>
@@ -193,6 +194,11 @@ class ScheduleDoctor extends Component {
                             </button>
                         </div>
                     </div>
+                </div>
+                <div className='container mt-4 background list-schedule'>
+                    <ListSchedule
+                        doctorID={this.state.selectedDoctor.value}
+                    />
                 </div>
             </div>
         );
