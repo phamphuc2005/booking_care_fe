@@ -19,7 +19,12 @@
         "support": "Support",
         "welcome": "Welcome",
         "login": "Login",
-        "logout": "Log out"
+        "logout": "Log out",
+        "home": "Home",
+        "list-doctor": "List of doctors",
+        "list-clinic": "List of clinics",
+        "list-specialty": "List of specialties",
+        "manage": "Manage"
     },
     "banner": {
         "title1": "MEDICAL PLATFORM",
@@ -76,6 +81,12 @@
             "schedule-manage": "Manage doctor's schedule",
             "appointment-manage": "Manage appointment schedule",
             "patient-manage":"Manage patient"
+        },
+        "patient": {
+            "patient-manage": "Management - For patient",
+            "user-manage": "Manage personal information",
+            "appointment-manage": "Manage appointment schedule",
+            "history-manage": "Manage medical history"
         }
     },
     "usermanage": {

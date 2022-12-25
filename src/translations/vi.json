@@ -19,7 +19,12 @@
         "support": "Hỗ trợ",
         "welcome": "Xin chào",
         "login": "Đăng nhập",
-        "logout": "Đăng xuất"
+        "logout": "Đăng xuất",
+        "home": "Trang chủ",
+        "list-doctor": "Danh sách bác sĩ",
+        "list-clinic": "Danh sách cơ sở y tế",
+        "list-specialty": "Danh sách chuyên khoa",
+        "manage": "Quản lý"
     },
     "banner": {
         "title1": "NỀN TẢNG Y TẾ",
@@ -76,6 +81,12 @@
             "schedule-manage": "Quản lý kế hoạch khám bệnh",
             "appointment-manage": "Quản lý lịch hẹn khám bệnh",
             "patient-manage": "Quản lý bệnh nhân"
+        },
+        "patient": {
+            "patient-manage": "Quản lý - Dành cho bệnh nhân ",
+            "user-manage": "Quản lý thông tin cá nhân",
+            "appointment-manage": "Quản lý lịch hẹn khám bệnh",
+            "history-manage": "Quản lý lịch sử khám bệnh"
         }
     },
     "usermanage": {

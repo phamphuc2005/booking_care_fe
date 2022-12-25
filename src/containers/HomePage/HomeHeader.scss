@@ -18,17 +18,50 @@
             // border: 1px solid black;
             align-items: center;
             color: white;
+            margin-left: -5px;
+            margin-right: 10px;
 
             .header-logo {
-                background: url(../../assets/images/LOGO.png) center center no-repeat;
-                height: 100%;
-                width: 70%;
+                background-image: url(../../assets/images/logo_.png);
+                background-size: 100% 120%;
+                background-repeat: no-repeat;
+                background-position: center;
+                height: 58px;
+                min-width: 200px;
                 cursor: pointer;
+                margin-left: 5px;
+                border: 2px solid orange;
+                // border-radius: 30px;
             }
 
             i {
                 font-size: 28px;
                 cursor: pointer;
+                margin-right: 10px;
+            }
+
+            .dropdown {
+                ::after {
+                    display: none;
+                }
+
+                .icon {
+                    background-color: transparent;
+                    border: none;
+                }
+
+                .menu {
+                    margin-left: -20px;
+                    box-shadow: 0px 5px 5px 0px gray;
+                    
+                    i {
+                        font-size: 18px;
+                        margin-right: 10px;
+                        color: #49bce2;
+                        min-width: 20px;
+                    }
+
+                }
             }
         }
         .center-content {
@@ -126,6 +159,46 @@
                 &:hover {
                     border: 1px solid gold;
                     color: gold;
+                }
+            }
+
+            .welcome {
+                margin-left: 50px;
+                display: flex; 
+
+                .image {
+                    ::after {
+                        display: none;
+                    }
+                }
+
+                .avatar {
+                    border-radius: 50%;
+                    border: 1px solid white;
+                    height: 40px;
+                    width: 40px;
+                    background-image: url('../../assets/images/1355316.png');
+                    background-size: cover;
+                    
+                    
+                }
+
+                .menu {
+                    margin-right: -30px !important;
+                    // border: 2px solid #49bce2;
+                    box-shadow: 0px 5px 5px 0px gray;
+
+                    .item {
+                        
+                        i {
+                            color: #49bce2;
+                            font-size: 18px;
+                        }
+                    }
+                }
+
+                i {
+                    margin-right: 10px;
                 }
             }
         }

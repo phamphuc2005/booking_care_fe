@@ -71,3 +71,23 @@ export const doctorMenu = [
         ] 
     }
 ];
+
+export const patientMenu = [
+    {
+        name: 'menu.patient.patient-manage',
+        menus: [
+            {
+                name: 'menu.patient.user-manage', link: '/patient/patient-manage'
+            },
+            // {
+            //     name: 'menu.patient.schedule-manage', link: '/patient/schedule-manage'
+            // },
+            {
+                name: 'menu.patient.appointment-manage', link: '/patient/appointment-manage'
+            },
+            {
+                name: 'menu.patient.history-manage', link: '/patient/history-manage'
+            },
+        ] 
+    }
+];

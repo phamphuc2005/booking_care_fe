@@ -9,6 +9,25 @@
     height: 40px;
     position: relative;
 
+    .header-tabs-container {
+        display: flex;
+
+        .home {
+            border-left: 1px solid white;
+            border-right: 1px solid white;
+
+            i {
+                color: white;
+                font-size: 18px;
+                margin-top: 4px;
+            }
+
+            &:hover {
+                background-color: darken($colormain, 5);
+            }
+        }
+    }
+
     .header-end {
         cursor: pointer;
 
@@ -48,7 +67,8 @@
             height: 40px;
             padding: 0 10px;
             border-left: 1px solid white;
-            border-radius: 0;
+            border-right: 1px solid white;
+            // border-radius: 0;
             &:hover {
                 background-color: darken($colormain, 5);
             }
