@@ -87,7 +87,7 @@ class HomeHeader extends Component {
                             </Dropdown>
                             <div className='header-logo' onClick={()=>this.returnHome()}></div>
                         </div>
-                        <div className='center-content'>
+                        {/* <div className='center-content'>
                             <div className='child-content'>
                                 <div><b><FormattedMessage id="homeheader.speciality"/></b></div>
                                 <div className='subs-title'><FormattedMessage id="homeheader.searchdoctor"/></div>
@@ -104,7 +104,7 @@ class HomeHeader extends Component {
                                 <div><b><FormattedMessage id="homeheader.checkpackage"/></b></div>
                                     <div className='subs-title'><FormattedMessage id="homeheader.generalexamination"/></div>
                                 </div>
-                        </div>
+                        </div> */}
                         <div className='right-content'>
                             <div className='support'>
                                 <i className="fas fa-question-circle"></i>
@@ -136,10 +136,16 @@ class HomeHeader extends Component {
                                         </Dropdown>
                                 </span>
                                 </> :
-                                <span className='login-btn' onClick={()=>this.returnLogin()}>
-                                    <i className="fas fa-sign-in-alt"></i>
-                                    <FormattedMessage id = "homeheader.login"/>
-                                </span>
+                                <>
+                                    <span className='login-btn' onClick={()=>this.returnLogin()}>
+                                        <i className="fas fa-sign-in-alt"></i>
+                                        <FormattedMessage id = "homeheader.login"/>
+                                    </span>
+                                    <span className='register-btn' >
+                                        <i className="fas fa-angle-double-right"></i>
+                                        <FormattedMessage id = "homeheader.register"/>
+                                    </span>
+                                </>
                             }
                         </div>
                     </div>

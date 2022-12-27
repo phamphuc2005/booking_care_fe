@@ -20,6 +20,7 @@
         "welcome": "Xin chào",
         "login": "Đăng nhập",
         "logout": "Đăng xuất",
+        "register": "Đăng ký",
         "home": "Trang chủ",
         "list-doctor": "Danh sách bác sĩ",
         "list-clinic": "Danh sách cơ sở y tế",
@@ -209,6 +210,15 @@
         "delete-btn": "Xóa",
         "cancel-btn": "Hủy",
         "delete-content": "Bạn có chắc chắn muốn xóa không?"
+    },
+    "patient-manage": {
+        "title": "Thông tin cá nhân",
+        "firstname": "Họ",
+        "lastname": "Tên",
+        "phone":"Số điện thoại",
+        "gender":"Giới tính",
+        "address": "Địa chỉ",
+        "edit": "Chỉnh sửa"
     },
     "doctor": {
         "appointment-manage": {

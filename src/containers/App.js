@@ -15,6 +15,7 @@ import System from '../routes/System';
 import HomePage from './HomePage/HomePage';
 import DetailDoctor from './Patient/Doctor/DetailDoctor';
 import Doctor from '../routes/Doctor';
+import Patient from '../routes/Patient';
 import VerifyMail from './Patient/VerifyMail';
 import DetailSpecialty from './Patient/Specialty/DetailSpecialty';
 
@@ -61,6 +62,7 @@ class App extends Component {
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.DOCTOR} component={userIsAuthenticated(Doctor)} />
+                                    <Route path={path.PATIENT} component={userIsAuthenticated(Patient)} />
                                     <Route path={path.HOMEPAGE} exact component={(HomePage)} />
                                     <Route path={path.DETAIL_DOCTOR} component={DetailDoctor}/> 
                                     <Route path={path.LIST_DOCTOR} component={ListDoctor}/> 

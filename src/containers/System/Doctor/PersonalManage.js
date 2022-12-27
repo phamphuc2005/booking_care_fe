@@ -47,7 +47,7 @@ class PersonalManage extends Component {
             firstName: '',
             lastName: '',
             email: '',
-            phone: '',
+            phonenumber: '',
             positionId: '',
             gender: '',
             doctorGender: '',
@@ -73,7 +73,7 @@ class PersonalManage extends Component {
                 firstName: doctor.data.firstName,
                 lastName: doctor.data.lastName,
                 email: doctor.data.email,
-                phone: doctor.data.phonenumber,
+                phonenumber: doctor.data.phonenumber,
                 gender: arrGenders && arrGenders.length>0 ? arrGenders[0].keyMap : '',
                 positionId: arrPositions && arrPositions.length>0 ? arrPositions[0].keyMap : '',
                 image: doctor.data.image,
@@ -403,7 +403,7 @@ class PersonalManage extends Component {
                         </div>
                         <div className='col-4 mt-4 more-info'>
                             <div className='form-group'>
-                                <label>email:</label>
+                                <label>Email:</label>
                                 <input className='form-control'
                                     value={this.state.email}
                                 />
@@ -413,8 +413,8 @@ class PersonalManage extends Component {
                             <div className='form-group'>
                                 <label><FormattedMessage id = "doctor-manage.phone"/>:</label>
                                 <input className='form-control'
-                                    value={this.state.phone}
-                                    onChange={(event)=>{this.onChangeInput(event, "phone")}}
+                                    value={this.state.phonenumber}
+                                    onChange={(event)=>{this.onChangeInput(event, "phonenumber")}}
                                 />
                             </div>
                         </div>

@@ -20,6 +20,7 @@
         "welcome": "Welcome",
         "login": "Login",
         "logout": "Log out",
+        "register": "Register",
         "home": "Home",
         "list-doctor": "List of doctors",
         "list-clinic": "List of clinics",
@@ -209,6 +210,15 @@
         "delete-btn": "Delete",
         "cancel-btn": "Cancel",
         "delete-content": "Are you sure you want to delete?"
+    },
+    "patient-manage": {
+        "title": "Personal information",
+        "firstname": "Firstname",
+        "lastname": "Lastname",
+        "phone":"Phonenumber",
+        "gender":"Gender",
+        "address": "Address",
+        "edit": "Edit"
     },
     "doctor": {
         "appointment-manage": {
