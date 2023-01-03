@@ -218,7 +218,17 @@
         "phone":"Phonenumber",
         "gender":"Gender",
         "address": "Address",
-        "edit": "Edit"
+        "edit": "Edit",
+
+        "schedule-title": "Schedule of medical appointments",
+        "history-title": "History of medical appointments",
+        "date": "Date",
+        "hour": "Hour",
+        "doctor": "Doctor",
+        "clinic": "Clinic",
+        "status": "Status",
+        "not-examine": "Not examine",
+        "examined": "Examined"
     },
     "doctor": {
         "appointment-manage": {

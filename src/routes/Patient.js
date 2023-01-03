@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Header from '../containers/Header/Header';
+import AppointmentSchedule from '../containers/System/Patient/AppointmentSchedule';
+import History from '../containers/System/Patient/History';
 import PersonalInfo from '../containers/System/Patient/PersonalInfo';
 
 class Patient extends Component {
@@ -16,6 +18,8 @@ class Patient extends Component {
                             {/* <Route path="/system/user-manage" component={UserManage} />
                             <Route path="/system/user-redux" component={UserRedux} /> */}
                             <Route path="/patient/patient-manage" component={PersonalInfo} />
+                            <Route path="/patient/appointment-manage" component={AppointmentSchedule} />
+                            <Route path="/patient/history-manage" component={History} />
                             <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                         </Switch>
                     </div>

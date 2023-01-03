@@ -218,7 +218,17 @@
         "phone":"Số điện thoại",
         "gender":"Giới tính",
         "address": "Địa chỉ",
-        "edit": "Chỉnh sửa"
+        "edit": "Chỉnh sửa",
+
+        "schedule-title": "Lịch hẹn khám bệnh",
+        "history-title": "Lịch sử khám bệnh",
+        "date": "Ngày",
+        "hour": "Giờ",
+        "doctor": "Bác sĩ",
+        "clinic": "Cơ sở y tế",
+        "status": "Trạng thái",
+        "not-examine": "Chưa khám",
+        "examined": "Đã khám"
     },
     "doctor": {
         "appointment-manage": {

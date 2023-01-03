@@ -132,6 +132,14 @@ const getListPatientForDoctor = (data) => {
     return axios.get(`/api/get-list-patient?doctorId=${data.doctorId}&date=${data.date}`)
 }
 
+const getListScheduleForPatient = (data) => {
+    return axios.get(`/api/get-list-schedule?id=${data.patientId}`)
+}
+
+const getHistory = (data) => {
+    return axios.get(`/api/get-history?id=${data.patientId}`)
+}
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -162,5 +170,7 @@ export {
     getListAppointmentForDoctor,
     postSendConfirm,
     getListPatientForDoctor,
-    deleteSchedule
+    deleteSchedule,
+    getListScheduleForPatient,
+    getHistory
 }
