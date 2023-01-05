@@ -10,6 +10,7 @@ import localization from 'moment/locale/vi';
 import {getDoctorScheduleByDate} from '../../../services/userService';
 import { FormattedMessage } from 'react-intl';
 import BookingModal from './Modal/BookingModal';
+import { toast } from 'react-toastify';
 
 class DoctorSchedule extends Component {
     constructor(props) {
@@ -106,11 +107,19 @@ class DoctorSchedule extends Component {
     }
 
     handleClickTime = (time) => {
-        this.setState({
-            isOpenModalBooking: true,
-            dataModal: time
-        })
-        console.log(time)
+        if(this.props.isLoggedIn === true) {
+            if(this.props.userInfo.roleId === 'R2') {
+                this.setState({
+                    isOpenModalBooking: true,
+                    dataModal: time
+                })
+                console.log(time)
+            } else {
+            toast.warn('You are not allowed to schedule medical appointments !')
+            }
+        } else {
+            toast.warn('You need to log in to the system to be able to make an appointment !')
+        }
     }
 
     closeBookingModal = () => {
@@ -122,6 +131,7 @@ class DoctorSchedule extends Component {
     render() {
         let {allDates, allTimes, isOpenModalBooking, dataModal} = this.state;
         let {language} = this.props;
+        console.log('userInfo',this.props.userInfo, this.state);
         return (
             <>
                 <div className='doctor-schedule-container'>
@@ -182,6 +192,8 @@ class DoctorSchedule extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
+        isLoggedIn: state.user.isLoggedIn,
+        userInfo: state.user.userInfo,
     };
 };
 

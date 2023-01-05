@@ -54,7 +54,7 @@ class AppointmentSchedule extends Component {
         // console.log(this.state, this.props.user)
         return (
             <>
-                <div className='patient-manage-container'>
+                <div className='patient-appointment-container'>
                     <div className='title patient-manage-title'>
                         <FormattedMessage id = "patient-manage.schedule-title"/>
                     </div>
