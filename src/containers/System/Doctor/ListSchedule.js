@@ -19,7 +19,7 @@ class ListSchedule extends Component {
             allDates: [],
             allTimes: [],
             isOpenModalBooking: false,
-            dataModal: {}
+            dataModal: {},
         }
     }
 
@@ -30,7 +30,7 @@ class ListSchedule extends Component {
         if(this.props.doctorID) {
             let res = await getDoctorScheduleByDate(this.props.doctorID, allDates[0].value);
             this.setState({
-                allTimes: res.data ? res.data : []
+                allTimes: res.data ? res.data : [],
             })
         }
 
@@ -50,24 +50,24 @@ class ListSchedule extends Component {
             let object = {};
             if(language === LANGUAGES.VI) {
                 if(i === 0) {
-                    let labelViToday = moment(new Date()).format('DD/MM');
-                    let today = `Hôm nay - ${labelViToday}`;
-                    object.label = today;
+                    let labelViTomorrow = moment(new Date(new Date().setDate(new Date().getDate()+1))).format('DD/MM');
+                    let tomorrow = `Ngày mai - ${labelViTomorrow}`;
+                    object.label = tomorrow;
                 } else {
-                    let labelVi = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
+                    let labelVi = moment(new Date()).add(i+1, 'days').format('dddd - DD/MM');
                     object.label = this.capitalizeFirstLetter(labelVi)
                 }
             } else {
                 if(i === 0) {
-                    let labelEnToday = moment(new Date()).format('DD/MM');
-                    let today = `Today - ${labelEnToday}`;
-                    object.label = today;
+                    let labelEnTomorrow = moment(new Date()).format('DD/MM');
+                    let tomorrow = `Tomorrow - ${labelEnTomorrow}`;
+                    object.label = tomorrow;
                 } else {
-                    object.label = moment(new Date()).add(i, 'days').locale('en').format('dddd - DD/MM');
+                    object.label = moment(new Date()).add(i+1, 'days').locale('en').format('dddd - DD/MM');
                 }
             }
 
-            object.value = moment(new Date()).add(i, 'days').startOf('day').valueOf();
+            object.value = moment(new Date()).add(i+1, 'days').startOf('day').valueOf();
 
             allDates.push(object);
         }
@@ -121,27 +121,31 @@ class ListSchedule extends Component {
     }
 
     handleDeleteTime = async (item) => {
-        try {
-            let res = await deleteSchedule(item.id);
-            if(res && res.errCode === 0) {
-                // this.setState({
-                //     isOpenDelete: false,
-                // })
-                toast.success("Delete schedule for success!");
-                this.componentDidMount();
-            } else {
-                toast.warn(res.errMessage)
+        if(item.currentNumber !== 0) {
+            toast.warn('Đã có bệnh nhân đặt lịch. Không xóa được lịch khám !')
+        } else {
+            try {
+                let res = await deleteSchedule(item.id);
+                if(res && res.errCode === 0) {
+                    // this.setState({
+                    //     isOpenDelete: false,
+                    // })
+                    toast.success("Delete schedule for success!");
+                    this.componentDidMount();
+                } else {
+                    toast.warn(res.errMessage)
+                }
+            } catch (error) {
+                toast.error("Delete schedule for failed!");
+                console.log('Error:', error)
             }
-        } catch (error) {
-            toast.error("Delete schedule for failed!");
-            console.log('Error:', error)
         }
     }
 
     render() {
         let {allDates, allTimes, isOpenModalBooking, dataModal} = this.state;
         let {language} = this.props;
-        console.log(allTimes);
+        console.log(allTimes, allDates);
         return (
             <>
                 <div className='doctor-schedule-container'>
@@ -167,34 +171,45 @@ class ListSchedule extends Component {
                         </select>
                     </div>
                     <div className='all-hour'>
-                        <div className='time-container'>
-                            {allTimes && allTimes.length>0 ?
-                                <>
-                                    {allTimes.map((item, index) => {
-                                        let timeDisplay = language === LANGUAGES.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn;
-                                        return(
-                                            // <button 
-                                            //     key={index}
-                                            //     onClick={()=>this.handleDeleteTime(item)}
-                                            // >
-                                            //     {timeDisplay}
-                                            // </button>
-                                            <Dropdown className='schedule-btn'>
-                                                <Dropdown.Toggle  id="dropdown-basic" key={index}>
-                                                    {timeDisplay}
-                                                </Dropdown.Toggle>
-                                                <Dropdown.Menu>
-                                                    <Dropdown.Item className='delete-btn' href="" onClick={()=>this.handleDeleteTime(item)}>
-                                                        <i className='fas fa-trash-alt'></i>
-                                                        <FormattedMessage id = "schedule-manage.delete-schedule"/>
-                                                    </Dropdown.Item>
-                                                </Dropdown.Menu>
-                                            </Dropdown>
-                                        )
-                                    })}
-                                </> :
-                                <div className='text-notice'><FormattedMessage id = "schedule-manage.text-notice"/></div>     
-                            }
+                        <div className='time-container table-list'>
+                            <table id="table-schedule" className='col-12'>
+                                <tbody>
+                                    <tr>
+                                        <th style={{width: '25%'}}><FormattedMessage id = "schedule-manage.time"/></th>
+                                        <th style={{width: '25%'}}><FormattedMessage id = "schedule-manage.current"/></th>
+                                        <th style={{width: '25%'}}><FormattedMessage id = "schedule-manage.max"/></th>
+                                        <th style={{width: '25%'}}><FormattedMessage id = "schedule-manage.delete-schedule"/></th>
+                                    </tr>
+                                    {allTimes && allTimes.length>0 ?
+                                        <>
+                                            {allTimes.map((item, index) => {
+                                                let timeDisplay = language === LANGUAGES.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn;
+                                                return(
+                                                    // <button 
+                                                    //     key={index}
+                                                    //     onClick={()=>this.handleDeleteTime(item)}
+                                                    // >
+                                                    //     {timeDisplay}
+                                                    // </button>
+                                                    <tr
+                                                    className='schedule-row'
+                                                    key={index} style={{textAlign: 'center'}}
+                                                    >
+                                                        <td>{timeDisplay}</td>
+                                                        <td>{item.currentNumber}</td>
+                                                        <td>{item.maxNumber}</td>
+                                                        <td><i className='fas fa-trash-alt' onClick={()=>this.handleDeleteTime(item)}></i></td>
+                                                    </tr>
+                                                )
+                                            })}
+                                        </> :
+                                        <tr className='no-data'>
+                                            <td colSpan={4}><FormattedMessage id = "schedule-manage.text-notice"/></td>
+                                        </tr>    
+                                    }
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     

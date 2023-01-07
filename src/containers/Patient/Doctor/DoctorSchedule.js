@@ -50,24 +50,24 @@ class DoctorSchedule extends Component {
             let object = {};
             if(language === LANGUAGES.VI) {
                 if(i === 0) {
-                    let labelViToday = moment(new Date()).format('DD/MM');
-                    let today = `Hôm nay - ${labelViToday}`;
-                    object.label = today;
+                    let labelViTomorrow = moment(new Date(new Date().setDate(new Date().getDate()+1))).format('DD/MM');
+                    let tomorrow = `Ngày mai - ${labelViTomorrow}`;
+                    object.label = tomorrow;
                 } else {
-                    let labelVi = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
+                    let labelVi = moment(new Date()).add(i+1, 'days').format('dddd - DD/MM');
                     object.label = this.capitalizeFirstLetter(labelVi)
                 }
             } else {
                 if(i === 0) {
-                    let labelEnToday = moment(new Date()).format('DD/MM');
-                    let today = `Today - ${labelEnToday}`;
-                    object.label = today;
+                    let labelEnTomorrow = moment(new Date()).format('DD/MM');
+                    let tomorrow = `Tomorrow - ${labelEnTomorrow}`;
+                    object.label = tomorrow;
                 } else {
-                    object.label = moment(new Date()).add(i, 'days').locale('en').format('dddd - DD/MM');
+                    object.label = moment(new Date()).add(i+1, 'days').locale('en').format('dddd - DD/MM');
                 }
             }
 
-            object.value = moment(new Date()).add(i, 'days').startOf('day').valueOf();
+            object.value = moment(new Date()).add(i+1, 'days').startOf('day').valueOf();
 
             allDates.push(object);
         }
@@ -113,7 +113,7 @@ class DoctorSchedule extends Component {
                     isOpenModalBooking: true,
                     dataModal: time
                 })
-                console.log(time)
+                console.log('time',time)
             } else {
             toast.warn('You are not allowed to schedule medical appointments !')
             }

@@ -162,8 +162,12 @@
         "title": "Kế hoạch khám bệnh",
         "choose-title": "Chọn bác sĩ",
         "choose-day": "Chọn ngày",
+        "max": "Số lượng tối đa",
         "save-btn": "Lưu",
         "list-schedule": "Danh sách lịch khám",
+        "time":"Thời gian",
+        "current": "Đã đặt lịch",
+        "max": "Số lượng tối đa",
         "delete-schedule": "Xóa lịch khám",
         "text-notice": "Không có lịch khám trong ngày này !"
     },
@@ -284,6 +288,7 @@
             "time": "Thời gian",
             "free": "Miễn phí đặt lịch !",
             "price": "Giá khám",
+            "registered": "Số lượng đã đặt",
             "name": "Họ và tên",
             "phone": "Số điện thoại",
             "address": "Địa chỉ",
@@ -291,6 +296,7 @@
             "gender": "Giới tính",
             "choose-gender": "Chọn giới tính",
             "reason": "Lí do khám",
+            "notice": "Để thay đổi thông tin xin vui lòng vào trang quản lý thông tin cá nhân để sửa đổi !",
             "confirm-btn": "Xác nhận",
             "cancel-btn": "Hủy",
             "more": "Xem thêm"

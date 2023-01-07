@@ -1,5 +1,6 @@
 .doctor-schedule-container {
     margin-left: 10px;
+    margin-right: 10px;
 
     .text-calendar {
         margin-bottom: 10px;
@@ -36,13 +37,13 @@
 
 
         .time-container {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            // display: flex;
+            // gap: 10px;
+            // flex-wrap: wrap;
 
-            #dropdown-basic {
-                color: black;
-            }
+            // #dropdown-basic {
+            //     color: black;
+            // }
 
             .delete-btn {
                 color: red;
@@ -52,32 +53,86 @@
                 }
             }
 
-            button {
-                // border: 1px solid #fff8ae;
-                border: none;
-                border-radius: 3px;
-                padding: 5px 5px;
-                outline: none;
-                background-color: #fff8ae;
-                width: 142px;
+            // button {
+            //     // border: 1px solid #fff8ae;
+            //     border: none;
+            //     border-radius: 3px;
+            //     padding: 5px 5px;
+            //     outline: none;
+            //     background-color: #fff8ae;
+            //     width: 142px;
+
+            //     &:hover {
+            //         // border: 1px solid #45c3d2;
+            //         background-color: #45c3d2;
+            //         color: white;
+            //     }
+            // }
+
+            // .text-note {
+            //     margin-top: 10px;
+            //     font-size: 13px;
+            //     width: 500px;
+            // }
+
+            // .text-notice {
+            //     color: red;
+            //     font-style: italic;
+            // }
+        }
+    }
+
+    .table-list {
+        #table-schedule {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+          }
+
+          .schedule-row {
+            //   cursor: pointer;
+
+            i {
+                cursor: pointer;
 
                 &:hover {
-                    // border: 1px solid #45c3d2;
-                    background-color: #45c3d2;
-                    color: white;
+                    color: red;
                 }
             }
+          }
+          
+          #table-schedule td, #table-schedule th {
+            border: 1px solid #ddd;
+            padding: 8px;
+          }
+          
+          #table-schedule tr{background-color: white;}
 
-            .text-note {
-                margin-top: 10px;
-                font-size: 13px;
-                width: 500px;
-            }
+        //   #table-schedule tr:hover {
+        //       background-color: whitesmoke;
+        //   }
+          
+          // #table-schedule tr:hover {background-color: #ddd;}
+          
+          #table-schedule th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #0071ba;
+            color: white;
+          }
 
-            .text-notice {
-                color: red;
-                font-style: italic;
-            }
-        }
+          #table-schedule .confirm-btn {
+            color: white;
+          }
+
+          #table-schedule .no-data {
+            text-align: center;
+          }
+
+          .no-data {
+            color: red;
+          }
     }
 }

@@ -26,7 +26,9 @@ class BookingModal extends Component {
             address: '',
             reason: '',
             doctorID: '',
-            timeType: ''
+            timeType: '',
+            currentNumber: '',
+            maxNumber: ''
         }
     }
 
@@ -64,7 +66,9 @@ class BookingModal extends Component {
             let timeType = this.props.dataTime.timeType;
             this.setState({
                 doctorID: doctorId,
-                timeType: timeType
+                timeType: timeType,
+                currentNumber: this.props.dataTime.currentNumber,
+                maxNumber: this.props.dataTime.maxNumber
             })
         }
     }
@@ -89,38 +93,42 @@ class BookingModal extends Component {
     // }
 
     handleConfirmBooking = async () => {
-        let date = new Date(this.state.birthday).getTime();
-        let timeString = this.buildBookingTime(this.props.dataTime);
-        let doctorName = this.buildDoctorName(this.props.dataTime);
-        let fullName = `${this.props.userInfo && this.props.userInfo.firstName ? this.props.userInfo.firstName : ''} ${this.props.userInfo && this.props.userInfo.lastName ? this.props.userInfo.lastName : ''}`
-        let phoneNumber = this.props.userInfo && this.props.userInfo.phonenumber ? this.props.userInfo.phonenumber : ''
-        let selectGender = this.props.userInfo && this.props.userInfo.gender ? this.props.userInfo.gender : ''
-        let genders = this.props.userInfo && this.props.userInfo.genderData ? (this.props.language===LANGUAGES.VI?this.props.userInfo.genderData.valueVi:this.props.userInfo.genderData.valueEn) : ''
-        let email = this.props.userInfo && this.props.userInfo.email ? this.props.userInfo.email : ''
-        let address = this.props.userInfo && this.props.userInfo.address ? this.props.userInfo.address : ''
-        let res = await postPatientBooking({
-            fullName: fullName,
-            phoneNumber: phoneNumber,
-            date: this.props.dataTime.date,
-            birthday: date,
-            selectGender: selectGender,
-            genders: genders,
-            email: email,
-            address: address,
-            reason: this.state.reason,
-            doctorId: this.state.doctorID,
-            timeType: this.state.timeType,
-            language:this.props.language,
-            timeString: timeString,
-            doctorName: doctorName
-        })
-        if(res && res.errCode === 0) {
-            toast.success("Successful appointment booking!");
-            this.props.closeBookingModal();
+        if(this.props.dataTime.currentNumber === this.props.dataTime.maxNumber) {
+            toast.warn('Số lượng lượt đặt lịch đã hết, xin vui lòng chọn thời gian khác !')
         } else {
-            toast.error("Failed to book an appointment!");
-            console.log(res.errCode);
-        }
+            let date = new Date(this.state.birthday).getTime();
+            let timeString = this.buildBookingTime(this.props.dataTime);
+            let doctorName = this.buildDoctorName(this.props.dataTime);
+            let fullName = `${this.props.userInfo && this.props.userInfo.firstName ? this.props.userInfo.firstName : ''} ${this.props.userInfo && this.props.userInfo.lastName ? this.props.userInfo.lastName : ''}`
+            let phoneNumber = this.props.userInfo && this.props.userInfo.phonenumber ? this.props.userInfo.phonenumber : ''
+            let selectGender = this.props.userInfo && this.props.userInfo.gender ? this.props.userInfo.gender : ''
+            let genders = this.props.userInfo && this.props.userInfo.genderData ? (this.props.language===LANGUAGES.VI?this.props.userInfo.genderData.valueVi:this.props.userInfo.genderData.valueEn) : ''
+            let email = this.props.userInfo && this.props.userInfo.email ? this.props.userInfo.email : ''
+            let address = this.props.userInfo && this.props.userInfo.address ? this.props.userInfo.address : ''
+            let res = await postPatientBooking({
+                fullName: fullName,
+                phoneNumber: phoneNumber,
+                date: this.props.dataTime.date,
+                birthday: date,
+                selectGender: selectGender,
+                genders: genders,
+                email: email,
+                address: address,
+                reason: this.state.reason,
+                doctorId: this.state.doctorID,
+                timeType: this.state.timeType,
+                language:this.props.language,
+                timeString: timeString,
+                doctorName: doctorName
+            })
+            if(res && res.errCode === 0) {
+                toast.success("Successful appointment booking!");
+                this.props.closeBookingModal();
+            } else {
+                toast.error("Failed to book an appointment!");
+                console.log(res.errCode);
+            }
+        }   
     }
 
     capitalizeFirstLetter(string) {
@@ -155,7 +163,7 @@ class BookingModal extends Component {
     render() {
         let {isOpenModal, closeBookingModal, dataTime, language} = this.props;
         let doctorId = dataTime && !_.isEmpty(dataTime) ? dataTime.doctorId : '';
-        console.log(this.state);
+        console.log('state',this.state);
         return (
             <Modal isOpen={isOpenModal} className={'booking-modal-container'}>
                 <div className='booking-modal-content'>
@@ -180,11 +188,15 @@ class BookingModal extends Component {
                                 isShowPrice={true}
                             />
                         </div>
-
+                        <div className='registered'>
+                            <div className='title'><FormattedMessage id = "patient.booking-modal.registered"/>:</div>
+                            <div className='content'>{this.props.dataTime.currentNumber} / {this.props.dataTime.maxNumber}</div>           
+                        </div>
                         <div className='row'>
                             <div className='col-6 form-group'>
                                 <label><FormattedMessage id = "patient.booking-modal.name"/>:</label>
                                 <input 
+                                    disabled
                                     className='form-control'
                                     value={`${this.props.userInfo && this.props.userInfo.firstName ? this.props.userInfo.firstName : ''} ${this.props.userInfo && this.props.userInfo.lastName ? this.props.userInfo.lastName : ''}`}
                                     // value={this.state.fullName}
@@ -194,6 +206,7 @@ class BookingModal extends Component {
                             <div className='col-6 form-group'>
                                 <label><FormattedMessage id = "patient.booking-modal.phone"/>:</label>
                                 <input 
+                                    disabled
                                     className='form-control'
                                     value={this.props.userInfo && this.props.userInfo.phonenumber ? this.props.userInfo.phonenumber : ''}
                                     // value={this.state.phoneNumber}
@@ -220,6 +233,7 @@ class BookingModal extends Component {
                             <div className='col-6 form-group'>
                             <label><FormattedMessage id = "patient.booking-modal.gender"/>:</label>
                                 <input 
+                                    disabled
                                     className='form-control'
                                     value={this.props.userInfo && this.props.userInfo.genderData ? (this.props.language===LANGUAGES.VI?this.props.userInfo.genderData.valueVi:this.props.userInfo.genderData.valueEn) : ''}
                                     // value={this.state.phoneNumber}
@@ -229,6 +243,7 @@ class BookingModal extends Component {
                             <div className='col-6 form-group'>
                                 <label>Email:</label>
                                 <input 
+                                    disabled
                                     className='form-control'
                                     value={this.props.userInfo && this.props.userInfo.email ? this.props.userInfo.email : ''}
                                     // value={this.state.email}
@@ -238,6 +253,7 @@ class BookingModal extends Component {
                             <div className='col-6 form-group'>
                                 <label><FormattedMessage id = "patient.booking-modal.address"/>:</label>
                                 <input 
+                                    disabled
                                     className='form-control'
                                     value={this.props.userInfo && this.props.userInfo.address ? this.props.userInfo.address : ''}
                                     // value={this.state.address}
@@ -252,6 +268,7 @@ class BookingModal extends Component {
                                     onChange={(event)=>this.handleOnChangeInput(event, 'reason')}
                                 ></input>
                             </div>
+                            <div className='col-12 notice'><FormattedMessage id = "patient.booking-modal.notice"/></div>
                         </div>
                     </div>
                     <div className='footer'>

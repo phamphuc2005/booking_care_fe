@@ -21,7 +21,8 @@ class ScheduleDoctor extends Component {
             listDoctors: [],
             selectedDoctor: {},
             currentDate: '',
-            time: []
+            time: [],
+            maxNumber: ''
         }
     }    
 
@@ -96,6 +97,14 @@ class ScheduleDoctor extends Component {
         }
     }
 
+    handleOnChangeInput = (event, id) => {
+        let copyState = {...this.state};
+        copyState[id] = event.target.value;
+        this.setState({
+            ...copyState
+        })
+    }
+
     handleSaveTime = async () => {
         let {selectedDoctor, currentDate, time} = this.state;
         let result = []
@@ -128,8 +137,8 @@ class ScheduleDoctor extends Component {
         let res = await saveDoctorSchedule({
             arrSchedule: result,
             doctorId: selectedDoctor.value,
-            date: formatDate
-
+            date: formatDate,
+            maxNumber: this.state.maxNumber
         })
         if(res && res.errCode === 0) {
             toast.success("Create a plan for success!");
@@ -142,7 +151,7 @@ class ScheduleDoctor extends Component {
     render() {
         let {time} = this.state;
         let {language} = this.props;
-        let yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+        let today = new Date(new Date().setDate(new Date().getDate()));
 
         console.log(time, this.state.selectedDoctor)
         return (
@@ -167,8 +176,21 @@ class ScheduleDoctor extends Component {
                                 className='form-control'
                                 onChange={this.handleChangeDate}
                                 value={this.state.currentDate}
-                                minDate={yesterday}
+                                minDate={today}
                             />
+                        </div>
+                        <div className='col-3 form-group'>
+                            <label><FormattedMessage id = "schedule-manage.max"/>:</label>
+                            <select 
+                                className='form-control'
+                                name="maxNumber" 
+                                onChange={(event)=>{this.handleOnChangeInput(event, "maxNumber")}}
+                                value={this.state.maxNumber}>
+                                <option value="">-- Choose option --</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">5</option>
+                            </select>
                         </div>
                         <div className='col-12 form-group hour-container'>
                             {time && time.length>0 &&
