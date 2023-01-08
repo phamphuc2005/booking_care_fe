@@ -68,7 +68,7 @@
             "doctor-manage": "Quản lý bác sĩ",
             "patient-manage": "Quản lý bệnh nhân",
             "crud-user": "CRUD người dùng",
-            "crud-redux": "CRUD Redux",
+            "crud-redux": "Quản lý người dùng",
             "clinic-manage": "Cơ sở y tế",
             "crud-clinic": "Quản lý cơ sở y tế",
             "specialty-manage": "Chuyên khoa",
@@ -231,8 +231,15 @@
         "doctor": "Bác sĩ",
         "clinic": "Cơ sở y tế",
         "status": "Trạng thái",
+        "action": "Thao tác",
+        "cancel": "Hủy lịch khám",
         "not-examine": "Chưa khám",
-        "examined": "Đã khám"
+        "examined": "Đã khám",
+
+        "modal-cancel-title": "Hủy bỏ lịch khám",
+        "modal-cancel-content": "Bạn có chắc chắn muốn hủy không?",
+        "yes": "Có",
+        "no": "Không"
     },
     "doctor": {
         "appointment-manage": {

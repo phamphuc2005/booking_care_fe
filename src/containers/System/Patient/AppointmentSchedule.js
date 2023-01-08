@@ -9,13 +9,17 @@ import {LANGUAGES, dateFormat} from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
 import moment from 'moment';
 import _ from 'lodash';
-import {getListScheduleForPatient} from '../../../services/userService';
+import {getListScheduleForPatient, cancelAppointment} from '../../../services/userService';
+import { toast } from 'react-toastify';
+import ModalCancelAppointment from './ModalCancelAppointment';
 
 class AppointmentSchedule extends Component {
     constructor(props) {
         super(props);
         this.state = {
             dataSchedule: [],
+            appointmentCancel: {},
+            isOpenCancel: false,
         }
     }    
 
@@ -48,12 +52,69 @@ class AppointmentSchedule extends Component {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    // handleCancelAppointment = async (appointment) => {
+    //     try {
+    //         let res = await cancelAppointment({
+    //             id: appointment.id,
+    //         })
+    //         if(res && res.errCode === 0) {
+    //             toast.success('Hủy đăng ký thành công !');
+    //             this.componentDidMount();
+    //         } else {
+    //             toast.error('Hủy đăng ký không thành công !')
+    //         }
+    //     } catch (error) {
+    //         toast.error("Hủy đăng ký không thành công !");
+    //         console.log(error)
+    //     }
+    // }
+
+    toggleCancelModal = () => {
+        this.setState({
+            isOpenCancel: !this.state.isOpenCancel,
+        })
+    }
+
+    handleCancelAppointment = (appointment) => {
+        this.setState({
+            isOpenCancel: true,
+            appointmentCancel: appointment
+        })
+    }
+
+    doCancelAppointment = async (appointment) => {
+        try {
+            let res = await cancelAppointment({id: appointment.id});
+            if(res && res.errCode === 0) {
+                this.setState({
+                    isOpenCancel: false,
+                })
+                toast.success("Hủy đăng ký thành công !");
+                this.componentDidMount();
+            } else {
+                toast.warn(res.errMessage)
+            }
+        } catch (error) {
+            toast.error("Hủy đăng ký không thành công !");
+            console.log('Error:', error)
+        }
+    }
+
     render() {
         let {dataSchedule} = this.state;
         let {language} = this.props;
         // console.log(this.state, this.props.user)
         return (
             <>
+                {
+                    this.state.isOpenCancel &&
+                    <ModalCancelAppointment
+                        isOpen = {this.state.isOpenCancel}
+                        toggleFromParent = {this.toggleCancelModal}
+                        currentAppointment = {this.state.appointmentCancel}
+                        cancelAppointmentModal = {this.doCancelAppointment} 
+                    />
+                }
                 <div className='patient-appointment-container'>
                     <div className='title patient-manage-title'>
                         <FormattedMessage id = "patient-manage.schedule-title"/>
@@ -69,7 +130,7 @@ class AppointmentSchedule extends Component {
                                             <th style={{width: '15%'}}><FormattedMessage id = "patient-manage.hour"/></th>
                                             <th style={{width: '20%'}}><FormattedMessage id = "patient-manage.doctor"/></th>
                                             <th style={{width: '30%'}}><FormattedMessage id = "patient-manage.clinic"/></th>
-                                            <th style={{width: '15%'}}><FormattedMessage id = "patient-manage.status"/></th>
+                                            <th style={{width: '15%'}}><FormattedMessage id = "patient-manage.action"/></th>
                                         </tr>
                                         {dataSchedule && dataSchedule.length>0 ? 
                                             dataSchedule.map((item, index) => {
@@ -89,7 +150,12 @@ class AppointmentSchedule extends Component {
                                                         <td>{`${item.doctorData2.firstName} ${item.doctorData2.lastName}`}</td>
                                                         <td>{item.doctorData2.Doctor_Info.nameClinic}</td>
                                                         <td>
-                                                            <div className='status'><FormattedMessage id = "patient-manage.not-examine"/></div>
+                                                            <div 
+                                                                className='btn btn-warning action'
+                                                                onClick={()=>this.handleCancelAppointment(item)}
+                                                            >
+                                                                <FormattedMessage id = "patient-manage.cancel"/>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 )

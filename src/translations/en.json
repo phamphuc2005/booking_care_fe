@@ -68,7 +68,7 @@
             "doctor-manage": "Doctor manage",
             "patient-manage": "Patient manage",
             "crud-user": "CRUD user",
-            "crud-redux": "CRUD Redux",
+            "crud-redux": "User manage",
             "clinic-manage": "Clinic",
             "crud-clinic": "Clinic manage",
             "specialty-manage": "Specialty",
@@ -231,8 +231,15 @@
         "doctor": "Doctor",
         "clinic": "Clinic",
         "status": "Status",
+        "action": "Action",
+        "cancel": "Cancel appointment",
         "not-examine": "Not examine",
-        "examined": "Examined"
+        "examined": "Examined",
+
+        "modal-cancel-title": "Cancel appointment",
+        "modal-cancel-content": "Are you sure you want to cancel appointment?",
+        "yes": "Yes",
+        "no": "No"
     },
     "doctor": {
         "appointment-manage": {

@@ -8,19 +8,19 @@ export const adminMenu = [
             {
                 name: 'menu.admin.crud-redux', link: '/system/user-redux'
             },
-            {
-                name: 'menu.admin.admin-manage', link: '/system/user-admin',
+            // {
+                // name: 'menu.admin.admin-manage', link: '/system/user-admin',
                 // subMenus: [
                 //     { name: 'menu.system.system-administrator.user-manage',  },
                 //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
                 // ]
-            },
+            // },
             {
                 name: 'menu.admin.doctor-manage', link: '/system/doctor-manage'
             },
-            {
-                name: 'menu.admin.patient-manage', link: '/system/user-patient'
-            },
+            // {
+            //     name: 'menu.admin.patient-manage', link: '/system/user-patient'
+            // },
             { //quản lý kế hoạch khám bệnh
                 name: 'menu.doctor.schedule-manage', link: '/system/schedule-manage'
             }

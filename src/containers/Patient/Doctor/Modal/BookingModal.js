@@ -119,13 +119,14 @@ class BookingModal extends Component {
                 timeType: this.state.timeType,
                 language:this.props.language,
                 timeString: timeString,
-                doctorName: doctorName
+                doctorName: doctorName,
+                patientId: this.props.userInfo.id
             })
             if(res && res.errCode === 0) {
                 toast.success("Successful appointment booking!");
                 this.props.closeBookingModal();
             } else {
-                toast.error("Failed to book an appointment!");
+                toast.error(res.errMessage);
                 console.log(res.errCode);
             }
         }   

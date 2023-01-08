@@ -140,6 +140,10 @@ const getHistory = (data) => {
     return axios.get(`/api/get-history?id=${data.patientId}`)
 }
 
+const cancelAppointment = (inputData) => {
+    return axios.put('/api/cancel-appointment',inputData);
+}
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -172,5 +176,6 @@ export {
     getListPatientForDoctor,
     deleteSchedule,
     getListScheduleForPatient,
-    getHistory
+    getHistory,
+    cancelAppointment
 }
