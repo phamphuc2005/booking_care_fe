@@ -7,8 +7,8 @@ import { changeLanguageApp } from '../../store/actions/appActions';
 import * as actions from "../../store/actions";
 import { withRouter } from 'react-router';
 import { Dropdown } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-  import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+//   import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 class HomeHeader extends Component {
 

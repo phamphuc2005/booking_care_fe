@@ -11,9 +11,10 @@ import DatePicker from '../../../components/Input/DatePicker';
 import moment from 'moment';
 import {toast} from 'react-toastify'
 import _ from 'lodash';
-import {getListAppointmentForDoctor, postSendConfirm} from '../../../services/userService';
+import {getListAppointmentForDoctor, postSendConfirm, confirmCancel} from '../../../services/userService';
 import ConfirmModal from './ConfirmModal';
 import LoadingOverlay from 'react-loading-overlay';
+import ModalConfirmCancel from './ModalConfirmCancel';
 
 class AppointmentManage extends Component {
     constructor(props) {
@@ -23,7 +24,9 @@ class AppointmentManage extends Component {
             dataAppointment: [],
             isOpenModal: false,
             dataModal: {},
-            isLoading: false
+            isLoading: false,
+            appointmentCancel: {},
+            isOpenCancel: false,
         }
     }    
 
@@ -113,6 +116,41 @@ class AppointmentManage extends Component {
         }
     }
 
+    // handleConfirmCancel = (appointment) => {
+    //     alert('hello')
+    // }
+
+    toggleCancelModal = () => {
+        this.setState({
+            isOpenCancel: !this.state.isOpenCancel,
+        })
+    }
+
+    handleConfirmCancel = (appointment) => {
+        this.setState({
+            isOpenCancel: true,
+            appointmentCancel: appointment
+        })
+    }
+
+    doConfirmCancel = async (appointment) => {
+        try {
+            let res = await confirmCancel({id: appointment.id});
+            if(res && res.errCode === 0) {
+                this.setState({
+                    isOpenCancel: false,
+                })
+                toast.success("Hủy lịch khám thành công !");
+                this.componentDidMount();
+            } else {
+                toast.warn(res.errMessage)
+            }
+        } catch (error) {
+            toast.error("Hủy lịch khám không thành công !");
+            console.log('Error:', error)
+        }
+    }
+
     render() {
         let {dataAppointment, isOpenModal, dataModal} = this.state;
         let {language} = this.props;
@@ -145,11 +183,12 @@ class AppointmentManage extends Component {
                                         <tr>
                                             <th style={{width: '5%'}}><FormattedMessage id = "doctor.appointment-manage.number"/></th>
                                             <th style={{width: '15%'}}><FormattedMessage id = "doctor.appointment-manage.time"/></th>
-                                            <th style={{width: '20%'}}><FormattedMessage id = "doctor.appointment-manage.name"/></th>
+                                            <th style={{width: '15%'}}><FormattedMessage id = "doctor.appointment-manage.name"/></th>
                                             <th style={{width: '15%'}}><FormattedMessage id = "doctor.appointment-manage.gender"/></th>
                                             <th style={{width: '15%'}}><FormattedMessage id = "doctor.appointment-manage.phone"/></th>
-                                            <th style={{width: '20%'}}><FormattedMessage id = "doctor.appointment-manage.address"/></th>
+                                            <th style={{width: '15%'}}><FormattedMessage id = "doctor.appointment-manage.address"/></th>
                                             <th style={{width: '10%'}}><FormattedMessage id = "doctor.appointment-manage.confirm"/></th>
+                                            <th style={{width: '10%'}}><FormattedMessage id = "doctor.appointment-manage.cancel"/></th>
                                         </tr>
                                         {dataAppointment && dataAppointment.length>0 ? 
                                             dataAppointment.map((item, index) => {
@@ -171,11 +210,19 @@ class AppointmentManage extends Component {
                                                                 <FormattedMessage id = "doctor.appointment-manage.confirm"/>
                                                             </button>
                                                         </td>
+                                                        <td className='cancel text-center'>
+                                                            <button 
+                                                                className='btn btn-secondary cancel-btn' 
+                                                                onClick={()=>this.handleConfirmCancel(item)}
+                                                            >
+                                                                <FormattedMessage id = "doctor.appointment-manage.cancel"/>
+                                                            </button>
+                                                        </td>
                                                     </tr>
                                                 )
                                             }) : 
                                             <tr className='no-data'>
-                                                <td colSpan={7}><FormattedMessage id = "doctor.appointment-manage.no-data"/></td>
+                                                <td colSpan={8}><FormattedMessage id = "doctor.appointment-manage.no-data"/></td>
                                             </tr>
                                         }
 
@@ -191,6 +238,15 @@ class AppointmentManage extends Component {
                     toggleFromParent = {this.toggleModal}
                     sendConfirm={this.sendConfirm}
                 />
+                {
+                    this.state.isOpenCancel &&
+                    <ModalConfirmCancel
+                        isOpen = {this.state.isOpenCancel}
+                        toggleFromParent = {this.toggleCancelModal}
+                        currentAppointment = {this.state.appointmentCancel}
+                        confirmCancelModal = {this.doConfirmCancel} 
+                    />
+                }
                 </LoadingOverlay>
             </>
         );

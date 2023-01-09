@@ -310,7 +310,8 @@
         },
         "verify": {
             "success": "Xác nhận lịch hẹn thành công!",
-            "failed": "Lịch hẹn đã được xác nhận hoặc không tồn tại!"
+            "failed": "Lịch hẹn đã được xác nhận hoặc không tồn tại!",
+            "warn": "Số lượng lượt đặt lịch đã đầy, mong bạn thông cảm!"
         },
         "clinic": {
             "doctor-list-title": "Danh sách bác sĩ"

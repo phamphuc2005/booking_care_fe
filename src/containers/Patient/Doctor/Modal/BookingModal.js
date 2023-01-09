@@ -124,6 +124,7 @@ class BookingModal extends Component {
             })
             if(res && res.errCode === 0) {
                 toast.success("Successful appointment booking!");
+                toast.info("Please check your email to confirm booking information!");
                 this.props.closeBookingModal();
             } else {
                 toast.error(res.errMessage);

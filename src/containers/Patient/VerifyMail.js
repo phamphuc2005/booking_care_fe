@@ -12,7 +12,8 @@ class VerifyMail extends Component {
         super(props);
         this.state = {
             statusVerify: false,
-            errCode: 0
+            errCode: 0,
+            errMessage: ''
         }
     }
 
@@ -33,7 +34,8 @@ class VerifyMail extends Component {
             } else {
                 this.setState({
                     statusVerify: true,
-                    errCode: res && res.errCode ? res.errCode : -1
+                    errCode: res && res.errCode ? res.errCode : -1,
+                    errMessage: res && res.errMessage ? res.errMessage : ''
                 })
             }
         }
@@ -50,7 +52,7 @@ class VerifyMail extends Component {
     }
 
     render() {
-        let {statusVerify, errCode} = this.state;
+        let {statusVerify, errCode, errMessage} = this.state;
         return (
             <>
                 <HomeHeader/>
@@ -60,7 +62,12 @@ class VerifyMail extends Component {
                         <div>
                             {errCode === 0 ?
                                 <div className='success'><FormattedMessage id = "patient.verify.success"/></div> :
-                                <div className='failed'><FormattedMessage id = "patient.verify.failed"/></div>
+                                <div>
+                                    {errCode === 2 ?
+                                        <div className='failed'><FormattedMessage id = "patient.verify.failed"/></div>:
+                                        <div className='warn'>{errMessage}</div> 
+                                    }
+                                </div>
                             }
                         </div>
                     }

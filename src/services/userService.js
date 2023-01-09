@@ -144,6 +144,10 @@ const cancelAppointment = (inputData) => {
     return axios.put('/api/cancel-appointment',inputData);
 }
 
+const confirmCancel = (inputData) => {
+    return axios.put('/api/confirm-cancel',inputData);
+}
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -177,5 +181,6 @@ export {
     deleteSchedule,
     getListScheduleForPatient,
     getHistory,
-    cancelAppointment
+    cancelAppointment,
+    confirmCancel
 }

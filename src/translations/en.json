@@ -310,7 +310,8 @@
         },
         "verify": {
             "success": "Appointment confirmed successfully!",
-            "failed": "Appointment confirmed or non-existent!"
+            "failed": "Appointment confirmed or non-existent!",
+            "warn": "The number of bookings is full, thank you for your understanding!"
         },
         "clinic": {
             "doctor-list-title": "List of doctors"
