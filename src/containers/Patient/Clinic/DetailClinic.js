@@ -10,6 +10,7 @@ import DoctorMoreInfo from '../Doctor/DoctorMoreInfo';
 import ProfileDoctor from '../Doctor/ProfileDoctor';
 import { getDetailClinicById, getAllCodeService } from '../../../services/userService';
 import _ from 'lodash';
+import LoadingOverlay from 'react-loading-overlay';
 
 class DetailClinic extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class DetailClinic extends Component {
         this.state = {
             arrDoctorId: [],
             dataDetailClinic: {},
+            isLoading: false
         }
     }
 
@@ -57,12 +59,25 @@ class DetailClinic extends Component {
         // }
     }
 
+    setLoading = (setLoading) => {
+        this.setState({
+            ...this.state,
+            isLoading: setLoading
+        })
+        // console.log('load',this.state);
+    }
+
     render() {
         let {arrDoctorId, dataDetailClinic} = this.state;
         let {language} = this.props;
         return (
             <React.Fragment>
-                <HomeHeader isShowBanner={false}/>
+                <LoadingOverlay
+                    active={this.state.isLoading}
+                    spinner
+                    text='Loading...'
+                >
+                    <HomeHeader isShowBanner={false}/>
                 <div className='clinic-img' style={{backgroundImage: `url(${dataDetailClinic.image})`}}></div>
                 {dataDetailClinic && !_.isEmpty(dataDetailClinic) &&
                     <div className='clinic-info'>
@@ -99,7 +114,7 @@ class DetailClinic extends Component {
                                     <div className='doctor-schedule'>
                                         <DoctorSchedule
                                             doctorID={item}
-                                            
+                                            setLoadingData={this.setLoading}
                                         />
                                     </div>
                                     <div className='doctor-info'>
@@ -116,6 +131,8 @@ class DetailClinic extends Component {
                 <div>
                     <HomeFooter/>
                 </div>
+                </LoadingOverlay>
+                
             </React.Fragment>
         );
     }

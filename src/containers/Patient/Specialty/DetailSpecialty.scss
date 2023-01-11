@@ -1,3 +1,12 @@
+div._loading_overlay_wrapper {
+    position: unset;
+  
+    ._loading_overlay_overlay {
+      z-index: 1000000000000;
+      position: fixed;
+    }
+  }
+  
 .description-specialty {
     padding: 20px 100px;
     background-repeat: no-repeat;

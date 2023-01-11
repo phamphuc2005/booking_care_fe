@@ -7,13 +7,15 @@ import {getDetailDoctor} from '../../../services/userService';
 import {LANGUAGES} from '../../../utils';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorMoreInfo from './DoctorMoreInfo'
+import LoadingOverlay from 'react-loading-overlay';
 
 class DetailDoctor extends Component {
     constructor(props) {
         super(props);
         this.state = {
             detailDoctor: {},
-            currentDoctorId: -1
+            currentDoctorId: -1,
+            isLoading: false
         }
     }
 
@@ -40,6 +42,14 @@ class DetailDoctor extends Component {
         // }
     }
 
+    setLoading = (setLoading) => {
+        this.setState({
+            ...this.state,
+            isLoading: setLoading
+        })
+        console.log('load',this.state);
+    }
+
     render() {
         console.log(this.state)
         let {language} = this.props;
@@ -51,7 +61,12 @@ class DetailDoctor extends Component {
         }
         return (
             <React.Fragment>
-                <HomeHeader isShowBanner={false}/>
+                <LoadingOverlay
+                    active={this.state.isLoading}
+                    spinner
+                    text='Loading...'
+                >
+                    <HomeHeader isShowBanner={false}/>
                 <div className='detail-doctor-container'>
                     <div className='intro-doctor'>
                         <div 
@@ -76,6 +91,7 @@ class DetailDoctor extends Component {
                         <div className='content-left'>
                             <DoctorSchedule
                                 doctorID={this.state.currentDoctorId}
+                                setLoadingData={this.setLoading}
                             />
                         </div>
                         <div className='content-right'>
@@ -96,6 +112,8 @@ class DetailDoctor extends Component {
                 <div>
                     <HomeFooter/>
                 </div>
+                </LoadingOverlay>
+                
             </React.Fragment>
         );
     }

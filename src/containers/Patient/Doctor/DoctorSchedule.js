@@ -128,10 +128,13 @@ class DoctorSchedule extends Component {
         })
     }
 
+
+
     render() {
         let {allDates, allTimes, isOpenModalBooking, dataModal} = this.state;
         let {language} = this.props;
-        console.log('userInfo',this.props.userInfo, this.state);
+        // console.log('userInfo',this.props.userInfo, this.state);
+        // console.log(this.props.setLoadingData);
         return (
             <>
                 <div className='doctor-schedule-container'>
@@ -183,6 +186,7 @@ class DoctorSchedule extends Component {
                     isOpenModal={isOpenModalBooking}
                     closeBookingModal={this.closeBookingModal}
                     dataTime={dataModal}
+                    setLoadingData = {this.props.setLoadingData}
                 />
             </>
         );

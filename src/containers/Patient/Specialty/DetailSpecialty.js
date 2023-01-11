@@ -10,6 +10,7 @@ import DoctorMoreInfo from '../Doctor/DoctorMoreInfo';
 import ProfileDoctor from '../Doctor/ProfileDoctor';
 import { getDetailSpecialtyById, getAllCodeService } from '../../../services/userService';
 import _ from 'lodash';
+import LoadingOverlay from 'react-loading-overlay';
 
 class DetailSpecialty extends Component {
     constructor(props) {
@@ -17,7 +18,8 @@ class DetailSpecialty extends Component {
         this.state = {
             arrDoctorId: [],
             dataDetailSpecialty: {},
-            listProvince: []
+            listProvince: [],
+            isLoading: false
         }
     }
 
@@ -103,12 +105,25 @@ class DetailSpecialty extends Component {
         }
     }
 
+    setLoading = (setLoading) => {
+        this.setState({
+            ...this.state,
+            isLoading: setLoading
+        })
+        // console.log('load',this.state);
+    }
+
     render() {
         let {arrDoctorId, dataDetailSpecialty, listProvince} = this.state;
         let {language} = this.props;
         return (
             <React.Fragment>
-                <HomeHeader isShowBanner={false}/>
+                <LoadingOverlay
+                    active={this.state.isLoading}
+                    spinner
+                    text='Loading...'
+                >
+                    <HomeHeader isShowBanner={false}/>
                 <div className='description-specialty' style={{backgroundImage: `url(${dataDetailSpecialty.image})`}}>
                     {dataDetailSpecialty && !_.isEmpty(dataDetailSpecialty) &&
                         <div className='description' dangerouslySetInnerHTML={{__html: dataDetailSpecialty.descriptionHTML}}
@@ -148,7 +163,7 @@ class DetailSpecialty extends Component {
                                     <div className='doctor-schedule'>
                                         <DoctorSchedule
                                             doctorID={item}
-                                            
+                                            setLoadingData={this.setLoading} 
                                         />
                                     </div>
                                     <div className='doctor-info'>
@@ -165,6 +180,8 @@ class DetailSpecialty extends Component {
                 <div>
                     <HomeFooter/>
                 </div>
+                </LoadingOverlay>
+                
             </React.Fragment>
         );
     }

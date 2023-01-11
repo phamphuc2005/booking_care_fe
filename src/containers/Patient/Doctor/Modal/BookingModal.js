@@ -28,7 +28,7 @@ class BookingModal extends Component {
             doctorID: '',
             timeType: '',
             currentNumber: '',
-            maxNumber: ''
+            maxNumber: '',
         }
     }
 
@@ -82,11 +82,11 @@ class BookingModal extends Component {
         })
     }
 
-    handleChangeBirthday = (date) => {
-        this.setState({
-            birthday: date[0]
-        })
-    }
+    // handleChangeBirthday = (date) => {
+    //     this.setState({
+    //         birthday: date[0]
+    //     })
+    // }
 
     // handleChangeGender = (selectOption) => {
     //     this.setState({selectGender: selectOption})
@@ -105,11 +105,12 @@ class BookingModal extends Component {
             let genders = this.props.userInfo && this.props.userInfo.genderData ? (this.props.language===LANGUAGES.VI?this.props.userInfo.genderData.valueVi:this.props.userInfo.genderData.valueEn) : ''
             let email = this.props.userInfo && this.props.userInfo.email ? this.props.userInfo.email : ''
             let address = this.props.userInfo && this.props.userInfo.address ? this.props.userInfo.address : ''
+            this.props.setLoadingData(true)
             let res = await postPatientBooking({
                 fullName: fullName,
                 phoneNumber: phoneNumber,
                 date: this.props.dataTime.date,
-                birthday: date,
+                // birthday: date,
                 selectGender: selectGender,
                 genders: genders,
                 email: email,
@@ -124,10 +125,13 @@ class BookingModal extends Component {
             })
             if(res && res.errCode === 0) {
                 toast.success("Successful appointment booking!");
-                toast.info("Please check your email to confirm booking information!");
+                setTimeout(function(){toast.info("Please check your email to confirm booking information!",{autoClose:false})}.bind(this), 3500);
+                
                 this.props.closeBookingModal();
+                this.props.setLoadingData(false)
             } else {
                 toast.error(res.errMessage);
+                this.props.setLoadingData(false)
                 console.log(res.errCode);
             }
         }   
@@ -215,14 +219,14 @@ class BookingModal extends Component {
                                     // onChange={(event)=>this.handleOnChangeInput(event, 'phoneNumber')}
                                 ></input>
                             </div>
-                            <div className='col-6 form-group'>
+                            {/* <div className='col-6 form-group'>
                                 <label><FormattedMessage id = "patient.booking-modal.birthday"/>:</label>
                                 <DatePicker
                                     className='form-control'
                                     onChange={this.handleChangeBirthday}
                                     value={this.state.birthday}
                             />
-                            </div>
+                            </div> */}
                             {/* <div className='col-6 form-group'>
                                 <label><FormattedMessage id = "patient.booking-modal.gender"/>:</label>
                                 <Select
@@ -252,7 +256,7 @@ class BookingModal extends Component {
                                     // onChange={(event)=>this.handleOnChangeInput(event, 'email')}
                                 ></input>
                             </div>
-                            <div className='col-6 form-group'>
+                            <div className='col-12 form-group'>
                                 <label><FormattedMessage id = "patient.booking-modal.address"/>:</label>
                                 <input 
                                     disabled
