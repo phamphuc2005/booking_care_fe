@@ -28,6 +28,12 @@ class HomeHeader extends Component {
         }
     }
 
+    returnRegister = () => {
+        if(this.props.history) {
+            this.props.history.push(`/register`)
+        }
+    }
+
     returnUserManage = () => {
         if(this.props.history) {
             this.props.history.push(`/system/user-manage`)
@@ -141,7 +147,7 @@ class HomeHeader extends Component {
                                         <i className="fas fa-sign-in-alt"></i>
                                         <FormattedMessage id = "homeheader.login"/>
                                     </span>
-                                    <span className='register-btn' >
+                                    <span className='register-btn' onClick={()=>this.returnRegister()}>
                                         <i className="fas fa-angle-double-right"></i>
                                         <FormattedMessage id = "homeheader.register"/>
                                     </span>

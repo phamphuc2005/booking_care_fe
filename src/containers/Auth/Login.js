@@ -69,6 +69,12 @@ class Login extends Component {
             this.handleLogin();
         }
     }
+
+    returnRegister = () => {
+        if(this.props.history) {
+            this.props.history.push(`/register`)
+        }
+    }
     
     render() {
         return (
@@ -111,6 +117,10 @@ class Login extends Component {
                         </div>
                         <div className='col-12 forgot-pass'>
                             <span><FormattedMessage id = "login.forgot"/>?</span>
+                        </div>
+                        <div className='col-12 if-register'>
+                            <span className='register-title'><FormattedMessage id = "login.register-link"/></span>
+                            <span className='register-link' onClick={()=>this.returnRegister()}><FormattedMessage id = "login.register"/></span>
                         </div>
                         <div className='col-12 text-center mt-4'>
                             <span className='text-other-login'><FormattedMessage id = "login.otherlogin"/>:</span>

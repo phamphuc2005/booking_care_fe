@@ -4,6 +4,10 @@ const handleLoginApi = (userEmail, userPassword) => {
     return axios.post('/api/login', {email: userEmail, password: userPassword});
 }
 
+const handleRegister = (data) => {
+    return axios.post('/api/register',data)
+}
+
 const getAllUsers = (inputId) => {
     return axios.get(`/api/get-all-users?id=${inputId}`);
 }
@@ -150,6 +154,7 @@ const confirmCancel = (inputData) => {
 
 export {
     handleLoginApi,
+    handleRegister,
     getAllUsers,
     createNewUserService,
     deleteUserService,

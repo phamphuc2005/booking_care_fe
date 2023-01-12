@@ -1,4 +1,4 @@
-.login-background {
+.register-background {
     // background: linear-gradient(135deg, rgba(253,187,45,1) 0%, rgba(34,193,195,1) 100%);
     background: url('../../assets/images/login-background.png') center center no-repeat fixed;
     background-size: cover;
@@ -14,9 +14,9 @@
         left: 0;
         right: 0;
         font-family: cursive;
-    }
+    }   
 
-    .login-container {
+    .register-container {
         position: absolute;
         width: 500px;
         height: 600px;
@@ -29,10 +29,10 @@
         left: 0;
         right: 0;
 
-        .login-content {
+        .register-content {
             padding: 30px;
 
-            .text-login {
+            .text-register {
                 text-align: center;
                 font-size: 24px;
                 font-weight: 600;
@@ -42,7 +42,7 @@
                 font-family: cursive;
             }
 
-            .login-input {
+            .register-input {
                 margin: 10px 0;
                 color: white;
 
@@ -61,9 +61,9 @@
                 }
             }
 
-            .login-btn {
+            .register-btn {
                 width: 100%;
-                margin: 40px 0;
+                margin: 30px 0;
                 height: 36px;
                 background: linear-gradient(90deg, rgba(253,187,45,1) 0%, rgba(34,193,195,1) 100%);
                 border-radius: 20px;
@@ -73,26 +73,20 @@
                 font-size: 16px;
             }
 
-            .login-btn:hover {
+            .register-btn:hover {
                 opacity: 0.8;
             }
 
-            .forgot-pass {
-                font-size: 12px;
-                color: white;
-            }
-
-            .if-register {
-                margin-top: 20px;
+            .if-login {
                 color: white;
                 text-align: center;
 
-                .register-title {
+                .login-title {
                     font-size: 14px;
                 }
 
-                .register-link {
-                    color: #007bff;
+                .login-link {
+                    color: blue;
                     text-decoration: underline;
                     cursor: pointer;
                     margin-left: 5px;

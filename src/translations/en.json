@@ -5,7 +5,18 @@
         "password": "Password",
         "btn": "Login",
         "forgot": "Forgot your password",
-        "otherlogin": "Or login with"
+        "otherlogin": "Or login with",
+        "register-link": "If you do not already have an account:",
+        "register": "Register"
+    },
+    "register": {
+        "title": "Register",
+        "firstname": "Firstname",
+        "lastname": "Lastname",
+        "password": "Password",
+        "repeat": "Repeart password",
+        "login-link": "If you already have an account:",
+        "login": "Login"
     },
     "homeheader": {
         "speciality": "Specialist",

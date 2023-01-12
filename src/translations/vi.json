@@ -5,7 +5,18 @@
         "password": "Mật khẩu",
         "btn": "Đăng nhập",
         "forgot": "Quên mật khẩu",
-        "otherlogin": "Hoặc đăng nhập bằng"
+        "otherlogin": "Hoặc đăng nhập bằng",
+        "register-link": "Nếu bạn chưa có tài khoản:",
+        "register": "Đăng ký"
+    },
+    "register": {
+        "title": "Đăng ký",
+        "firstname": "Họ",
+        "lastname": "Tên",
+        "password": "Mật khẩu",
+        "repeat": "Nhập lại mật khẩu",
+        "login-link": "Nếu bạn đã có tài khoản:",
+        "login": "Đăng nhập"
     },
     "homeheader": {
         "speciality": "Chuyên khoa",

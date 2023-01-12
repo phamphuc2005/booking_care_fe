@@ -75,7 +75,7 @@ class PatientManage extends Component {
             email: item.patientData.email,
             timeTypeVi: item.timeTypeData2.valueVi,
             timeTypeEn: item.timeTypeData2.valueEn,
-            patientName: item.patientData.firstName,
+            patientName: `${item.patientData.firstName} ${item.patientData.lastName}`,
             genderVi: item.patientData.genderData.valueVi,
             genderEn: item.patientData.genderData.valueEn,
             phonenumber: item.patientData.phonenumber,
@@ -128,7 +128,7 @@ class PatientManage extends Component {
                                                         onClick={()=>this.handlePatientModal(item)}
                                                     >
                                                         <td >{item.patientId}</td>
-                                                        <td>{item.patientData.firstName}</td>
+                                                        <td>{`${item.patientData.firstName} ${item.patientData.lastName}`}</td>
                                                         <td>{time}</td>
                                                     </tr>
                                                 )
