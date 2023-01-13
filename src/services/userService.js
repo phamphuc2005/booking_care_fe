@@ -8,6 +8,10 @@ const handleRegister = (data) => {
     return axios.post('/api/register',data)
 }
 
+const handleConfirmRegister = (data) => {
+    return axios.post('/api/confirm-register',data)
+}
+
 const getAllUsers = (inputId) => {
     return axios.get(`/api/get-all-users?id=${inputId}`);
 }
@@ -187,5 +191,6 @@ export {
     getListScheduleForPatient,
     getHistory,
     cancelAppointment,
-    confirmCancel
+    confirmCancel,
+    handleConfirmRegister
 }

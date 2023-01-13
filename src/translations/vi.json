@@ -16,7 +16,11 @@
         "password": "Mật khẩu",
         "repeat": "Nhập lại mật khẩu",
         "login-link": "Nếu bạn đã có tài khoản:",
-        "login": "Đăng nhập"
+        "login": "Đăng nhập",
+        "modal-content": "Vui lòng truy cập email của bạn để xem mã số xác nhận !",
+        "modal-label": "Mã số xác nhận",
+        "confirm": "Xác nhận",
+        "cancel": "Hủy"
     },
     "homeheader": {
         "speciality": "Chuyên khoa",

@@ -4,9 +4,10 @@ import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import './Register.scss';
 import { FormattedMessage } from 'react-intl';
-import {handleLoginApi, handleRegister} from '../../services/userService'
+import {handleLoginApi, handleRegister, handleConfirmRegister} from '../../services/userService'
 import e from 'cors';
 import { toast } from 'react-toastify';
+import ConfirmRegisterModal from './ConfirmRegisterModal';
 
 class Register extends Component {
     constructor(props) {
@@ -20,7 +21,10 @@ class Register extends Component {
             isShowPassword: false,
             isShowRe_pass: false,
             errMessage: '',
-            username: ''
+            username: '',
+            random_number: '',
+            isOpenModal: false,
+            dataModal: {},
         }
     }
     handleOnChangeFirstname = (event) => {
@@ -49,6 +53,49 @@ class Register extends Component {
             repeat_pass: event.target.value
         })
     }
+
+    handleFromModal = async (dataFromModal) => {
+        this.setState({
+            random_number: dataFromModal
+        })
+        setTimeout(async function(){
+            let check = await handleConfirmRegister(this.state);
+            if(check && check.errCode !==0) {
+                this.setState({
+                    errMessage: check.message
+                })
+                toast.error(check.errMessage)
+            } 
+            if(check && check.errCode ===0) {
+                toast.success('You have successfully registered your account !')
+                this.setState({
+                    isOpenModal: false
+                })
+
+                let login = await handleLoginApi(this.state.username, this.state.password);
+                if(login && login.errCode !==0) {
+                    this.setState({
+                        errMessage: login.message
+                    })
+                }
+                if(login && login.errCode ===0) {
+                    this.props.userLoginSuccess(login.user)
+                    console.log('login success!')
+                    if(this.props.history) {
+                        setTimeout(function(){this.props.history.push(`/home`)}.bind(this), 3500);
+                    }
+                }
+            }
+        }.bind(this), 5000);
+        
+    }
+
+    toggleModal = () => {
+        this.setState({
+            isOpenModal: !this.state.isOpenModal,
+        })
+        
+    }
     
     handleRegister = async () => {
         // console.log('username:' + this.state.username)
@@ -66,21 +113,9 @@ class Register extends Component {
                     toast.error(data.errMessage)
                 }
                 if(data && data.errCode ===0) {
-                    toast.success('You have successfully registered your account !')
-
-                    let login = await handleLoginApi(this.state.username, this.state.password);
-                    if(login && login.errCode !==0) {
-                        this.setState({
-                            errMessage: login.message
-                        })
-                    }
-                    if(login && login.errCode ===0) {
-                        this.props.userLoginSuccess(login.user)
-                        console.log('login success!')
-                        if(this.props.history) {
-                            setTimeout(function(){this.props.history.push(`/home`)}.bind(this), 3500);
-                        }
-                    }
+                    this.setState({
+                        isOpenModal: true,
+                    })
                 }
     
             } catch (error) {
@@ -125,94 +160,103 @@ class Register extends Component {
     }
     
     render() {
+        let {isOpenModal, dataModal} = this.state;
         return (
-            <div className="register-background">
-                <div className='text-title'>BOOKING CARE</div>
-                <div className="register-container">
-                    <div className="register-content row">
-                        <div className="col-12 text-register"><FormattedMessage id = "register.title"/></div>
-                        <div className="col-6 form-group register-input">
-                            <label><FormattedMessage id = "register.firstname"/>:</label>
-                            <input 
-                                type="text" 
-                                className='form-control' 
-                                placeholder='Enter your firstname'
-                                value={this.state.firstName}
-                                onChange = {(event) => this.handleOnChangeFirstname(event)}
-                            />
-                        </div>
-                        <div className="col-6 form-group register-input">
-                            <label><FormattedMessage id = "register.lastname"/>:</label>
-                            <input 
-                                type="text" 
-                                className='form-control' 
-                                placeholder='Enter your lastname'
-                                value={this.state.lastName}
-                                onChange = {(event) => this.handleOnChangeLastname(event)}
-                            />
-                        </div>
-                        <div className="col-12 form-group register-input">
-                            <label>Email:</label>
-                            <input 
-                                type="text" 
-                                className='form-control' 
-                                placeholder='Enter your email'
-                                value={this.state.email}
-                                onChange = {(event) => this.handleOnChangeEmail(event)}
-                            />
-                        </div>
-                        <div className="col-12 form-group register-input">
-                            <label><FormattedMessage id = "register.password"/>:</label>
-                            <div className='custom-input-pass' >
+            <>
+                <div className="register-background">
+                    <div className='text-title'>BOOKING CARE</div>
+                    <div className="register-container">
+                        <div className="register-content row">
+                            <div className="col-12 text-register"><FormattedMessage id = "register.title"/></div>
+                            <div className="col-6 form-group register-input">
+                                <label><FormattedMessage id = "register.firstname"/>:</label>
                                 <input 
-                                    type={this.state.isShowPassword ? 'text' : 'password'}
+                                    type="text" 
                                     className='form-control' 
-                                    placeholder='Enter your password'
-                                    value={this.state.password}
-                                    onChange = {(event) => this.handleOnChangePassword(event)}
+                                    placeholder='Enter your firstname'
+                                    value={this.state.firstName}
+                                    onChange = {(event) => this.handleOnChangeFirstname(event)}
                                 />
-                                <span onClick={() => {this.handleShowHidePass()}}>
-                                    <i className={this.state.isShowPassword ? 'fas fa-eye' : 'fas fa-eye-slash'}></i>
-                                </span>
                             </div>
-                        </div>
-                        <div className="col-12 form-group register-input">
-                            <label><FormattedMessage id = "register.repeat"/>:</label>
-                            <div className='custom-input-pass' >
+                            <div className="col-6 form-group register-input">
+                                <label><FormattedMessage id = "register.lastname"/>:</label>
                                 <input 
-                                    type={this.state.isShowRe_pass ? 'text' : 'password'}
+                                    type="text" 
                                     className='form-control' 
-                                    placeholder='Enter your repeat password'
-                                    value={this.state.repeat_pass}
-                                    onChange = {(event) => this.handleOnChangeRepeat(event)}
-                                    onKeyDown = {(event) => this.handleKeyDown(event)}
+                                    placeholder='Enter your lastname'
+                                    value={this.state.lastName}
+                                    onChange = {(event) => this.handleOnChangeLastname(event)}
                                 />
-                                <span onClick={() => {this.handleShowRe_pass()}}>
-                                    <i className={this.state.isShowRe_pass ? 'fas fa-eye' : 'fas fa-eye-slash'}></i>
-                                </span>
                             </div>
-                        </div>
-                        <div className='col-12' style={{color: 'red'}}>
-                            {this.state.errMessage}
-                        </div>
-                        <div className='col-12'>
-                            <button className='register-btn' onClick={()=>{this.handleRegister()}}><FormattedMessage id = "register.title"/></button>
-                        </div>
-                        <div className='col-12 if-login'>
-                            <span className='login-title'><FormattedMessage id = "register.login-link"/></span>
-                            <span className='login-link' onClick={()=>this.returnLogin()}><FormattedMessage id = "register.login"/></span>
-                        </div>
-                        {/* <div className='col-12 text-center mt-4'>
-                            <span className='text-other-login'><FormattedMessage id = "login.otherlogin"/>:</span>
-                        </div>
-                        <div className='col-12 social-login'>
-                            <i className="fab fa-google-plus-g google"></i>
-                            <i className="fab fa-facebook-f facebook"></i>
-                        </div> */}
+                            <div className="col-12 form-group register-input">
+                                <label>Email:</label>
+                                <input 
+                                    type="text" 
+                                    className='form-control' 
+                                    placeholder='Enter your email'
+                                    value={this.state.email}
+                                    onChange = {(event) => this.handleOnChangeEmail(event)}
+                                />
+                            </div>
+                            <div className="col-12 form-group register-input">
+                                <label><FormattedMessage id = "register.password"/>:</label>
+                                <div className='custom-input-pass' >
+                                    <input 
+                                        type={this.state.isShowPassword ? 'text' : 'password'}
+                                        className='form-control' 
+                                        placeholder='Enter your password'
+                                        value={this.state.password}
+                                        onChange = {(event) => this.handleOnChangePassword(event)}
+                                    />
+                                    <span onClick={() => {this.handleShowHidePass()}}>
+                                        <i className={this.state.isShowPassword ? 'fas fa-eye' : 'fas fa-eye-slash'}></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="col-12 form-group register-input">
+                                <label><FormattedMessage id = "register.repeat"/>:</label>
+                                <div className='custom-input-pass' >
+                                    <input 
+                                        type={this.state.isShowRe_pass ? 'text' : 'password'}
+                                        className='form-control' 
+                                        placeholder='Enter your repeat password'
+                                        value={this.state.repeat_pass}
+                                        onChange = {(event) => this.handleOnChangeRepeat(event)}
+                                        onKeyDown = {(event) => this.handleKeyDown(event)}
+                                    />
+                                    <span onClick={() => {this.handleShowRe_pass()}}>
+                                        <i className={this.state.isShowRe_pass ? 'fas fa-eye' : 'fas fa-eye-slash'}></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className='col-12' style={{color: 'red'}}>
+                                {this.state.errMessage}
+                            </div>
+                            <div className='col-12'>
+                                <button className='register-btn' onClick={()=>{this.handleRegister()}}><FormattedMessage id = "register.title"/></button>
+                            </div>
+                            <div className='col-12 if-login'>
+                                <span className='login-title'><FormattedMessage id = "register.login-link"/></span>
+                                <span className='login-link' onClick={()=>this.returnLogin()}><FormattedMessage id = "register.login"/></span>
+                            </div>
+                            {/* <div className='col-12 text-center mt-4'>
+                                <span className='text-other-login'><FormattedMessage id = "login.otherlogin"/>:</span>
+                            </div>
+                            <div className='col-12 social-login'>
+                                <i className="fab fa-google-plus-g google"></i>
+                                <i className="fab fa-facebook-f facebook"></i>
+                            </div> */}
 
+                        </div>
                     </div>
                 </div>
-            </div>
+                <ConfirmRegisterModal
+                    isOpenModal={isOpenModal}
+                    dataModal={dataModal}
+                    toggleFromParent = {this.toggleModal}
+                    sendConfirm={this.handleFromModal}
+                />
+            </>
         )
     }
 }

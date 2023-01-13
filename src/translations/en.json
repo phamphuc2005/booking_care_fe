@@ -16,7 +16,11 @@
         "password": "Password",
         "repeat": "Repeart password",
         "login-link": "If you already have an account:",
-        "login": "Login"
+        "login": "Login",
+        "modal-content": "Please check your email to see the confirmation code !",
+        "modal-label": "Verification code",
+        "confirm": "Confirm",
+        "cancel": "Cancel"
     },
     "homeheader": {
         "speciality": "Specialist",
