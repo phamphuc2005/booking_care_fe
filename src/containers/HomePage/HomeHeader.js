@@ -7,10 +7,92 @@ import { changeLanguageApp } from '../../store/actions/appActions';
 import * as actions from "../../store/actions";
 import { withRouter } from 'react-router';
 import { Dropdown } from 'react-bootstrap';
+import Select from 'react-select';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //   import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 class HomeHeader extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            selectedFilter: 1,
+            listDoctors: [],
+            listSpecialty: [],
+            listClinic: [],
+            selectedDoctor: '',
+            selectedSpecialty: '',
+            selectedClinic: '',
+        }
+    }
+
+    componentDidMount() {
+        this.props.fetchAllDoctors();
+        this.props.getRequiredDoctorInfo();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.allDoctors !== this.props.allDoctors){
+            let dataSelect = this.buildDataInputSelect(this.props.allDoctors, 'USERS');
+            this.setState({
+                listDoctors: dataSelect
+            })
+        }
+        if(prevProps.language !== this.props.language){
+            let dataSelect = this.buildDataInputSelect(this.props.allDoctors, 'USERS');
+            let {resSpecialty, resClinic} = this.props.allRequiredDoctorInfo
+            let dataSelectSpecialty = this.buildDataInputSelect(resSpecialty, 'SPECIALTY');
+            let dataSelectClinic = this.buildDataInputSelect(resClinic, 'CLINIC');
+            
+            this.setState({
+                listDoctors: dataSelect,
+                listSpecialty: dataSelectSpecialty,
+                listClinic: dataSelectClinic
+            })
+        }
+        if(prevProps.allRequiredDoctorInfo !== this.props.allRequiredDoctorInfo){
+            let { resSpecialty, resClinic} = this.props.allRequiredDoctorInfo
+            let dataSelectSpecialty = this.buildDataInputSelect(resSpecialty, 'SPECIALTY');
+            let dataSelectClinic = this.buildDataInputSelect(resClinic, 'CLINIC');
+            this.setState({
+                listSpecialty: dataSelectSpecialty,
+                listClinic: dataSelectClinic
+            })
+        } 
+    }
+
+    buildDataInputSelect = (inputData, type) => {
+        let result = [];
+        let {language} = this.props;
+        if(inputData && inputData.length>0) {
+            if(type === 'USERS') {
+                inputData.map((item, index) => {
+                    let object = {};
+                    let labelVi = `${item.firstName} ${item.lastName}`;
+                    let labelEn = `${item.lastName} ${item.firstName}`;
+                    object.label = language === LANGUAGES.VI ? labelVi : labelEn
+                    object.value = item.id;
+                    result.push(object);
+                })
+            }
+            if(type === 'SPECIALTY') {
+                inputData.map((item, index) => {
+                    let object = {};
+                    object.label = item.name;
+                    object.value = item.id;
+                    result.push(object);
+                })
+            }
+            if(type === 'CLINIC') {
+                inputData.map((item, index) => {
+                    let object = {};
+                    object.label = item.name;
+                    object.value = item.id;
+                    result.push(object);
+                })
+            }
+        }
+        return result;
+    }
 
     changeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language)
@@ -58,11 +140,49 @@ class HomeHeader extends Component {
         }
     }
 
+    handleFilter = (event) => {
+        this.setState({
+            selectedFilter: event
+        })
+        // alert(this.state.selectedFilter)
+    }
+
+    handleChangeSelect = (name) => {
+        if(this.state.selectedFilter === 1) {
+            this.setState({selectedDoctor: name})
+        } else if(this.state.selectedFilter === 2) {
+            this.setState({selectedSpecialty: name})
+        } else {
+            this.setState({selectedClinic: name})
+        }
+    }
+
+    handleSearch = () => {
+        if(this.props.history) {
+            if(this.state.selectedFilter === 1 && this.state.selectedDoctor.value) {
+                this.props.history.push(`/detail-doctor/${this.state.selectedDoctor.value}`)
+            } 
+            if(this.state.selectedFilter === 2 && this.state.selectedSpecialty.value) {
+                this.props.history.push(`/detail-specialty/${this.state.selectedSpecialty.value}`)
+            } 
+            if(this.state.selectedFilter === 3 && this.state.selectedClinic.value) {
+                this.props.history.push(`/detail-clinic/${this.state.selectedClinic.value}`)
+            }
+        }
+    }
+
+    handleKeyDown = (event) => {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            setTimeout(function(){this.handleSearch()}.bind(this), 1000);
+        }
+    }
+
     render() {
         let language = this.props.language;
         let isLoggedIn = this.props.isLoggedIn;
         let userInfo = this.props.userInfo;
         let processLogout = this.props.processLogout;
+        let {selectedFilter} = this.state;
         return (
             <React.Fragment>
                 <div className='home-header-container'>
@@ -81,13 +201,13 @@ class HomeHeader extends Component {
                                         <i className='fas fa-user-md'></i>
                                         <FormattedMessage id="homeheader.list-doctor"/>
                                     </Dropdown.Item>
-                                    <Dropdown.Item className='item' href="" onClick={()=>this.handleListClinic()}>
-                                        <i className='fas fa-hospital-alt'></i>
-                                        <FormattedMessage id="homeheader.list-clinic"/>
-                                    </Dropdown.Item>
                                     <Dropdown.Item className='item' href="" onClick={()=>this.handleListSpecialty()}>
                                         <i className="fas fa-first-aid"></i>
                                         <FormattedMessage id="homeheader.list-specialty"/>
+                                    </Dropdown.Item>
+                                    <Dropdown.Item className='item' href="" onClick={()=>this.handleListClinic()}>
+                                        <i className='fas fa-hospital-alt'></i>
+                                        <FormattedMessage id="homeheader.list-clinic"/>
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
@@ -162,8 +282,34 @@ class HomeHeader extends Component {
                             <div className='title1'><FormattedMessage id="banner.title1"/></div>
                             <div className='title2'><FormattedMessage id="banner.title2"/></div>
                             <div className='search'>
-                                <i className="fas fa-search"></i>
-                                <input type='text' placeholder='Tìm bác sĩ'/>
+                                <div className='search-btn' onClick={()=>this.handleSearch()}>
+                                    <i className="fas fa-search"></i>
+                                </div>
+                                <Select 
+                                    className="inputSelect"
+                                    type='text' 
+                                    placeholder={selectedFilter === 1 ? <FormattedMessage id="homeheader.search-doctor"/> : (selectedFilter === 2 ? <FormattedMessage id="homeheader.search-specialty"/> : <FormattedMessage id="homeheader.search-clinic"/>)}
+                                    value={selectedFilter === 1 ? this.state.selectedDoctor : (selectedFilter === 2 ? this.state.selectedSpecialty : this.state.selectedClinic)}
+                                    onChange={this.handleChangeSelect}
+                                    options={selectedFilter === 1 ? this.state.listDoctors : (selectedFilter === 2 ? this.state.listSpecialty : this.state.listClinic)}
+                                    onKeyDown = {(event) => this.handleKeyDown(event)}
+                                />
+                                <Dropdown className='filter'>
+                                    <Dropdown.Toggle className='icon'  id="dropdown-basic" >
+                                        <i className="fas fa-sliders-h"></i>
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu className='menu'>
+                                        <Dropdown.Item className='item' href="" onClick={()=>this.handleFilter(1)}>
+                                            <FormattedMessage id="homeheader.filter-doctor"/>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item className='item' href="" onClick={()=>this.handleFilter(2)}>
+                                            <FormattedMessage id="homeheader.filter-specialty"/>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item className='item' href="" onClick={()=>this.handleFilter(3)}>
+                                            <FormattedMessage id="homeheader.filter-clinic"/>
+                                        </Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </div>
                         </div>
                         <div className='banner-down'>
@@ -219,6 +365,8 @@ const mapStateToProps = state => {
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
         userInfo: state.user.userInfo,
+        allDoctors: state.admin.allDoctors,
+        allRequiredDoctorInfo: state.admin.allRequiredDoctorInfo
     };
 };
 
@@ -226,6 +374,8 @@ const mapDispatchToProps = dispatch => {
     return {
         changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
         processLogout: () => dispatch(actions.processLogout()),
+        fetchAllDoctors: () => dispatch(actions.fetchAllDoctors()),
+        getRequiredDoctorInfo: () => dispatch(actions.getRequiredDoctorInfo()),
     };
 };
 

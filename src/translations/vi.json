@@ -40,6 +40,12 @@
         "list-doctor": "Danh sách bác sĩ",
         "list-clinic": "Danh sách cơ sở y tế",
         "list-specialty": "Danh sách chuyên khoa",
+        "filter-doctor": "Tìm theo bác sĩ",
+        "filter-specialty": "Tìm theo chuyên khoa",
+        "filter-clinic": "Tìm theo cơ sở y tế",
+        "search-doctor": "Tìm kiếm bác sĩ",
+        "search-specialty": "Tìm kiếm chuyên khoa",
+        "search-clinic": "Tìm kiếm cơ sở y tế",
         "manage": "Quản lý"
     },
     "banner": {

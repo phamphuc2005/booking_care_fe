@@ -40,6 +40,12 @@
         "list-doctor": "List of doctors",
         "list-clinic": "List of clinics",
         "list-specialty": "List of specialties",
+        "filter-doctor": "Search by doctor",
+        "filter-specialty": "Search by specialty",
+        "filter-clinic": "Search by clinic",
+        "search-doctor": "Search doctor",
+        "search-specialty": "Search specialty",
+        "search-clinic": "Search clinic",
         "manage": "Manage"
     },
     "banner": {
