@@ -8,6 +8,8 @@ import {LANGUAGES} from '../../../utils';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorMoreInfo from './DoctorMoreInfo'
 import LoadingOverlay from 'react-loading-overlay';
+import Comment from '../SocialPlugin/Comment';
+import LikeShare from '../SocialPlugin/Like&Share';
 
 class DetailDoctor extends Component {
     constructor(props) {
@@ -59,6 +61,7 @@ class DetailDoctor extends Component {
             nameVi = `${detailDoctor.positionData.valueVi}, ${detailDoctor.firstName} ${detailDoctor.lastName}`;
             nameEn = `${detailDoctor.positionData.valueEn}, ${detailDoctor.lastName} ${detailDoctor.firstName}`;
         }
+        let currentURL = window.location.href;
         return (
             <React.Fragment>
                 <LoadingOverlay
@@ -80,7 +83,7 @@ class DetailDoctor extends Component {
                             <div className='down'>
                                 {detailDoctor && detailDoctor.Markdown && detailDoctor.Markdown.description &&
                                     <span>
-                                        {detailDoctor.Markdown.description}
+                                        {detailDoctor.Markdown.description} a a a a a a a a a a a a a a a a a a a a
                                     </span>
                                 }
                             </div>
@@ -107,7 +110,15 @@ class DetailDoctor extends Component {
                         }
                     </div>
 
-                    <div className='comment-doctor'></div>
+                    <div className='comment-doctor'>
+                        <div className='like_share'>
+                            <LikeShare/>
+                        </div>
+                        <Comment
+                            dataHref={currentURL}
+                            width={"100%"}
+                        />
+                    </div>
                 </div>
                 <div>
                     <HomeFooter/>

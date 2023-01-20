@@ -20,7 +20,10 @@ div._loading_overlay_wrapper {
         .content-left {
             width: 10%;
             // border: 1px solid black;
-            background: center center no-repeat;
+            // background: center center no-repeat;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
             height: 120px;
             width: 120px;
             border-radius: 50%;
@@ -42,6 +45,8 @@ div._loading_overlay_wrapper {
 
             .down {
                 padding-top: 5px;
+
+                
             }
         }
 
@@ -81,7 +86,11 @@ div._loading_overlay_wrapper {
     }
 
     .comment-doctor {
+        padding: 10px 150px;
 
+        .like_share {
+            margin: 10px 5px 20px;
+        }
     }
 
 }
