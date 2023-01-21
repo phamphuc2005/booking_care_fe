@@ -86,9 +86,10 @@
         "admin": {
             "user-manage": "Người dùng",
             "admin-manage": "Quản lý admin",
-            "doctor-manage": "Quản lý bác sĩ",
+            "doctor-manage": "Bác sĩ",
             "patient-manage": "Quản lý bệnh nhân",
             "crud-user": "CRUD người dùng",
+            "crud-doctor": "Quản lý bác sĩ",
             "crud-redux": "Quản lý người dùng",
             "clinic-manage": "Cơ sở y tế",
             "crud-clinic": "Quản lý cơ sở y tế",
@@ -118,7 +119,9 @@
         "lastname": "Tên",
         "address": "Địa chỉ",
         "phone": "Số điện thoại",
-        "action": "Thao tác"
+        "action": "Thao tác",
+        "title1": "Chào mừng bạn đến với:",
+        "title2": "Trang quản lý dành cho người dùng"
     },
     "user-modal": {
         "create-title": "Thêm mới người dùng",

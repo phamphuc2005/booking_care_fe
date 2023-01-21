@@ -101,3 +101,27 @@
       }
     }
   }
+
+  .home-page {
+    height: 88vh;
+  }
+
+  .home-page-body {
+    text-align: center;
+    margin-top: 100px;
+    font-size: 48px;
+    font-weight: 600;
+    font-family: cursive;
+    color: #0071ba;
+
+    i {
+      font-size: 100px;
+      margin: 20px 0;
+      color: gold;
+    }
+
+    .title2 {
+      color: #ff2f00;
+    }
+  }
+  

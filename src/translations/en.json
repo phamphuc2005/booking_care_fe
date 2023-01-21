@@ -86,9 +86,10 @@
         "admin": {
             "user-manage": "User",
             "admin-manage": "Admin manage",
-            "doctor-manage": "Doctor manage",
+            "doctor-manage": "Doctor",
             "patient-manage": "Patient manage",
             "crud-user": "CRUD user",
+            "crud-doctor": "Doctor manage",
             "crud-redux": "User manage",
             "clinic-manage": "Clinic",
             "crud-clinic": "Clinic manage",
@@ -118,7 +119,9 @@
         "lastname": "Lastname",
         "address": "Address",
         "phone": "Phonenumber",
-        "action": "Actions"
+        "action": "Actions",
+        "title1": "Welcome to:",
+        "title2": "Management page for user"
     },
     "user-modal": {
         "create-title": "Create new user",

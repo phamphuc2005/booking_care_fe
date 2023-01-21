@@ -2,9 +2,9 @@ export const adminMenu = [
     { //quản lý người dùng
         name: 'menu.admin.user-manage',
         menus: [
-            {
-                name: 'menu.admin.crud-user', link: '/system/user-manage'
-            },
+            // {
+            //     name: 'menu.admin.crud-user', link: '/system/user-manage'
+            // },
             {
                 name: 'menu.admin.crud-redux', link: '/system/user-redux'
             },
@@ -15,8 +15,14 @@ export const adminMenu = [
                 //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
                 // ]
             // },
+            
+        ]
+    },
+    { //quản lý phỏng khám
+        name: 'menu.admin.doctor-manage',
+        menus: [
             {
-                name: 'menu.admin.doctor-manage', link: '/system/doctor-manage'
+                name: 'menu.admin.crud-doctor', link: '/system/doctor-manage'
             },
             // {
             //     name: 'menu.admin.patient-manage', link: '/system/user-patient'
@@ -42,14 +48,14 @@ export const adminMenu = [
             }
         ]
     },
-    { //quản lý cẩm nang
-        name: 'menu.admin.handbook-manage',
-        menus: [
-            {
-                name: 'menu.admin.crud-handbook', link: '/system/handbook-manage'
-            }
-        ]
-    },
+    // { //quản lý cẩm nang
+    //     name: 'menu.admin.handbook-manage',
+    //     menus: [
+    //         {
+    //             name: 'menu.admin.crud-handbook', link: '/system/handbook-manage'
+    //         }
+    //     ]
+    // },
 ];
 
 export const doctorMenu = [
