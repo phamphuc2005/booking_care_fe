@@ -8,6 +8,9 @@ import ModalEditUser from './ModalEditUser';
 import ModalDeleteUser from './ModalDeleteUser';
 import {emitter} from '../../utils/emitter';
 import HomeFooter from '../HomePage/HomeFooter';
+import { Link } from 'react-router-dom';
+import * as actions from "../../store/actions";
+
 class UserManage extends Component {
 
     constructor(props) {
@@ -124,6 +127,8 @@ class UserManage extends Component {
 
     render() {
         let arrUsers = this.state.arrUsers;
+        let user = this.props.userInfo;
+        let processLogout = this.props.processLogout;
         return (
             // <div className="users-container">
             //     <ModalUser
@@ -199,9 +204,103 @@ class UserManage extends Component {
                 <div className='container home-page'>
                     <div className='row'>
                         <div className='col-12 home-page-body'>
-                            <div className='title1'><FormattedMessage id = "usermanage.title1"/></div>   
-                            <i className="fas fa-user-cog"></i>
-                            <div className='title2'><FormattedMessage id = "usermanage.title2"/></div>   
+                            {/* <div className='title1'><FormattedMessage id = "usermanage.title1"/></div>    */}
+                            {user.roleId === 'R0' ? 
+                            <>
+                                <div className='title2'><FormattedMessage id = "usermanage.title2"/>Admin</div>   
+                                ---------- <i className="fas fa-user-cog icon"></i> ----------
+                                <div>
+                                    <Link to={'/home'} className='home-btn col-6'>
+                                        <i className="fas fa-home"></i>
+                                        <div className='content-btn'><FormattedMessage id = "homeheader.home"/></div>
+                                    </Link>
+                                    <Link to={'/system/user-redux'} className='home-btn col-6'>
+                                        <i className="fas fa-user"></i>
+                                        <div className='content-btn'><FormattedMessage id = "menu.admin.crud-redux"/></div>
+                                    </Link>
+                                    <Link to={'/system/doctor-manage'} className='home-btn col-6'>
+                                        <i className="fas fa-user-md"></i>
+                                        <div className='content-btn'><FormattedMessage id = "menu.admin.crud-doctor"/></div>
+                                    </Link>
+                                    <Link to={'/system/schedule-manage'} className='home-btn col-6'>
+                                        <i className="fas fa-calendar-alt"></i>
+                                        <div className='content-btn'><FormattedMessage id = "menu.doctor.schedule-manage"/></div>
+                                    </Link>
+                                    <Link to={'/system/clinic-manage'} className='home-btn col-6'>
+                                        <i className="fas fa-hospital-alt"></i>
+                                        <div className='content-btn'><FormattedMessage id = "menu.admin.crud-clinic"/></div>
+                                    </Link>
+                                    <Link to={'/system/specialty-manage'} className='home-btn col-6'>
+                                        <i className="fas fa-first-aid"></i>
+                                        <div className='content-btn'><FormattedMessage id = "menu.admin.crud-specialty"/></div>
+                                    </Link>
+                                    <div className='home-btn col-6' onClick={processLogout}>
+                                        <i className="fas fa-sign-out-alt"></i>
+                                        <div className='content-btn'><FormattedMessage id="homeheader.logout"/></div>
+                                    </div>
+                                </div>
+                            </> :
+                            <>
+                            {user.roleId === 'R1' ?
+                                <>
+                                    <div className='title2'><FormattedMessage id = "usermanage.title2"/><FormattedMessage id = "menu.admin.doctor-manage"/></div>   
+                                ---------- <i className="fas fa-user-cog icon"></i> ----------
+                                <div>
+                                    <Link to={'/home'} className='home-btn col-6'>
+                                        <i className="fas fa-home"></i>
+                                        <div className='content-btn'><FormattedMessage id = "homeheader.home"/></div>
+                                    </Link>
+                                    <Link to={'/doctor/doctor-manage'} className='home-btn col-6'>
+                                        <i className="fas fa-user"></i>
+                                        <div className='content-btn'><FormattedMessage id = "menu.doctor.user-manage"/></div>
+                                    </Link>
+                                    <Link to={'/doctor/schedule-manage'} className='home-btn col-6'>
+                                        <i className="fas fa-calendar-alt"></i>
+                                        <div className='content-btn'><FormattedMessage id = "menu.doctor.schedule-manage"/></div>
+                                    </Link>
+                                    <Link to={'/doctor/appointment-manage'} className='home-btn col-6'>
+                                        <i className="fas fa-clipboard-list"></i>
+                                        <div className='content-btn'><FormattedMessage id = "menu.doctor.appointment-manage"/></div>
+                                    </Link>
+                                    <Link to={'/doctor/patient-manage'} className='home-btn col-6'>
+                                        <i className="fas fa-male"></i>
+                                        <div className='content-btn'><FormattedMessage id = "menu.doctor.patient-manage"/></div>
+                                    </Link>
+                                    <div className='home-btn col-6' onClick={processLogout}>
+                                        <i className="fas fa-sign-out-alt"></i>
+                                        <div className='content-btn'><FormattedMessage id="homeheader.logout"/></div>
+                                    </div>
+                                </div>
+                                </> :
+                                <>
+                                        <div className='title2'><FormattedMessage id = "usermanage.title2"/><FormattedMessage id = "menu.patient.patient"/></div>   
+                                ---------- <i className="fas fa-user-cog icon"></i> ----------
+                                <div>
+                                    <Link to={'/home'} className='home-btn col-6'>
+                                        <i className="fas fa-home"></i>
+                                        <div className='content-btn'><FormattedMessage id = "homeheader.home"/></div>
+                                    </Link>
+                                    <Link to={'/patient/patient-manage'} className='home-btn col-6'>
+                                        <i className="fas fa-user"></i>
+                                        <div className='content-btn'><FormattedMessage id = "menu.patient.user-manage"/></div>
+                                    </Link>
+                                    <Link to={'/patient/appointment-manage'} className='home-btn col-6'>
+                                        <i className="fas fa-calendar-alt"></i>
+                                        <div className='content-btn'><FormattedMessage id = "menu.patient.appointment-manage"/></div>
+                                    </Link>
+                                    <Link to={'/patient/history-manage'} className='home-btn col-6'>
+                                        <i className="fas fa-clipboard-list"></i>
+                                        <div className='content-btn'><FormattedMessage id = "menu.patient.history-manage"/></div>
+                                    </Link>
+                                    <div className='home-btn col-6' onClick={processLogout}>
+                                        <i className="fas fa-sign-out-alt"></i>
+                                        <div className='content-btn'><FormattedMessage id="homeheader.logout"/></div>
+                                    </div>
+                                </div>
+                                </>
+                            }
+                            </>
+                            }
                         </div>
                         
                     </div>
@@ -214,11 +313,14 @@ class UserManage extends Component {
 
 const mapStateToProps = state => {
     return {
+        userInfo: state.user.userInfo,
+        language: state.app.language,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        processLogout: () => dispatch(actions.processLogout()),
     };
 };
 

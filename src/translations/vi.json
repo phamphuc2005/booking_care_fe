@@ -106,6 +106,7 @@
             "patient-manage": "Quản lý bệnh nhân"
         },
         "patient": {
+            "patient": "Bệnh nhân",
             "patient-manage": "Quản lý - Dành cho bệnh nhân ",
             "user-manage": "Quản lý thông tin cá nhân",
             "appointment-manage": "Quản lý lịch hẹn khám bệnh",
@@ -121,7 +122,7 @@
         "phone": "Số điện thoại",
         "action": "Thao tác",
         "title1": "Chào mừng bạn đến với:",
-        "title2": "Trang quản lý dành cho người dùng"
+        "title2": "Trang quản lý dành cho "
     },
     "user-modal": {
         "create-title": "Thêm mới người dùng",

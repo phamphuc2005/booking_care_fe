@@ -108,20 +108,49 @@
 
   .home-page-body {
     text-align: center;
-    margin-top: 100px;
-    font-size: 48px;
+    margin-top: 30px;
+    font-size: 44px;
     font-weight: 600;
     font-family: cursive;
-    color: #0071ba;
+    color: gold;
 
-    i {
-      font-size: 100px;
-      margin: 20px 0;
-      color: gold;
+    .icon {
+      font-size: 50px;
+      margin: 10px 0 30px;
     }
 
     .title2 {
-      color: #ff2f00;
+      color: #0071ba !important;
+    }
+
+    .home-btn {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      border: 2px solid violet;
+      margin: 10px auto;
+      border-radius: 20px;
+      cursor: pointer;
+      padding: 10px;
+      font-size: 20px;
+      color: red;
+      text-decoration: none;
+
+      i {
+        font-size: 30px;
+        margin-top: 1px;
+        color: greenyellow;
+      }
+
+      .content-btn {
+        border-left: 2px solid violet;
+        padding-left: 20px;
+      }
+
+      &:hover {
+        background-color: #eee;
+        opacity: 0.8;
+      }
     }
   }
   

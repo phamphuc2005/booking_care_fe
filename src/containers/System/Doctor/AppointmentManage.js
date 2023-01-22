@@ -27,6 +27,8 @@ class AppointmentManage extends Component {
             isLoading: false,
             appointmentCancel: {},
             isOpenCancel: false,
+            date: '',
+            today: moment(new Date()).startOf('day').valueOf()
         }
     }    
 
@@ -67,17 +69,26 @@ class AppointmentManage extends Component {
     }
 
     handleConfirm = (item) => {
-        let data = {
-            doctorId: item.doctorId,
-            patientId: item.patientId,
-            email: item.patientData.email,
-            timeType: item.timeType,
-            patientName: item.patientData.firstName
-        }
         this.setState({
-            isOpenModal: true,
-            dataModal:data
+            date: item.date
         })
+        setTimeout(function(){
+            if(this.state.today < +this.state.date) {
+                toast.warn('Chưa đến lịch khám! Chưa thể xác nhận!')
+            } else {
+                let data = {
+                    doctorId: item.doctorId,
+                    patientId: item.patientId,
+                    email: item.patientData.email,
+                    timeType: item.timeType,
+                    patientName: item.patientData.firstName
+                }
+                this.setState({
+                    isOpenModal: true,
+                    dataModal:data,
+                })
+            }
+        }.bind(this), 1000);
     }
 
     toggleModal = () => {
@@ -128,9 +139,18 @@ class AppointmentManage extends Component {
 
     handleConfirmCancel = (appointment) => {
         this.setState({
-            isOpenCancel: true,
-            appointmentCancel: appointment
+            date: appointment.date
         })
+        setTimeout(function(){
+            if(this.state.today < +this.state.date) {
+                toast.warn('Chưa đến lịch khám! Chưa thể hủy!')
+            } else {
+                this.setState({
+                    isOpenCancel: true,
+                    appointmentCancel: appointment
+                })
+            }
+        }.bind(this), 1000);
     }
 
     doConfirmCancel = async (appointment) => {
@@ -154,7 +174,7 @@ class AppointmentManage extends Component {
     render() {
         let {dataAppointment, isOpenModal, dataModal} = this.state;
         let {language} = this.props;
-        console.log(this.state)
+        // console.log(+this.state.date, this.state.today)
         return (
             <>
                 <LoadingOverlay

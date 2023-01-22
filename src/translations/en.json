@@ -106,6 +106,7 @@
             "patient-manage":"Manage patient"
         },
         "patient": {
+            "patient": "Patient",
             "patient-manage": "Management - For patient",
             "user-manage": "Manage personal information",
             "appointment-manage": "Manage appointment schedule",
@@ -121,7 +122,7 @@
         "phone": "Phonenumber",
         "action": "Actions",
         "title1": "Welcome to:",
-        "title2": "Management page for user"
+        "title2": "Management page for "
     },
     "user-modal": {
         "create-title": "Create new user",
