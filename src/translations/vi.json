@@ -341,5 +341,18 @@
         "clinic": {
             "doctor-list-title": "Danh sách bác sĩ"
         }
+    },
+    "comment": {
+        "title": "Đánh giá và Phản hồi",
+        "comment": "Viết đánh giá và phản hồi ...",
+        "post": "Đăng",
+        "note": "Đăng nhập để đánh giá và bình luận !",
+        "me": "Tôi",
+        "edit": "Chỉnh sửa",
+        "delete": "Xóa",
+        "edit-title": "Chỉnh sửa đánh giá và phản hồi",
+        "delete-title": "Xóa đánh giá và phản hồi",
+        "delete-content": "Bạn có chắc chắn muốn xóa không?",
+        "cancel-btn": "Hủy"
     }
 }

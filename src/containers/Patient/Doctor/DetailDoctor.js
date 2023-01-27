@@ -10,6 +10,7 @@ import DoctorMoreInfo from './DoctorMoreInfo'
 import LoadingOverlay from 'react-loading-overlay';
 import Comment from '../SocialPlugin/Comment';
 import LikeShare from '../SocialPlugin/Like&Share';
+import { FormattedMessage } from 'react-intl';
 
 class DetailDoctor extends Component {
     constructor(props) {
@@ -111,12 +112,14 @@ class DetailDoctor extends Component {
                     </div>
 
                     <div className='comment-doctor'>
+                        <div className='comment-title'><FormattedMessage id = "comment.title"/></div>
                         <div className='like_share'>
                             <LikeShare/>
                         </div>
                         <Comment
-                            dataHref={currentURL}
-                            width={"100%"}
+                            // dataHref={currentURL}
+                            // width={"100%"}
+                            doctorID={this.props.match.params.id}
                         />
                     </div>
                 </div>

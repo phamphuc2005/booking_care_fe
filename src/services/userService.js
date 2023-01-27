@@ -156,6 +156,24 @@ const confirmCancel = (inputData) => {
     return axios.put('/api/confirm-cancel',inputData);
 }
 
+const createComment = (data) => {
+    return axios.post('/api/create-comment', data);
+}
+
+const getAllComment = (data) => {
+    return axios.get(`/api/get-all-comment?id=${data.id}`);
+}
+
+const editComment = (inputData) => {
+    return axios.put('/api/edit-comment',inputData);
+}
+
+const deleteComment = (inputId) => {
+    return axios.delete('/api/delete-comment',{
+        data: { id: inputId }
+    })
+}
+
 export {
     handleLoginApi,
     handleRegister,
@@ -192,5 +210,9 @@ export {
     getHistory,
     cancelAppointment,
     confirmCancel,
-    handleConfirmRegister
+    handleConfirmRegister,
+    createComment,
+    getAllComment,
+    editComment,
+    deleteComment
 }

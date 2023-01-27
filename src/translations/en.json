@@ -341,5 +341,18 @@
         "clinic": {
             "doctor-list-title": "List of doctors"
         } 
+    },
+    "comment": {
+        "title": "Review and Feedback",
+        "comment": "Write a review and feedback ...",
+        "post": "Post",
+        "note": "Sign in to review and comment !",
+        "me": "Me",
+        "edit": "Edit",
+        "delete": "Delete",
+        "edit-title": "Edit review and feedback",
+        "delete-title": "Delete review and feedback",
+        "delete-content": "Are you sure you want to delete?",
+        "cancel-btn": "Cancel"
     }
 }
