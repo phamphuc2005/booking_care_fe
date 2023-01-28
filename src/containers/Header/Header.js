@@ -57,7 +57,17 @@ class Header extends Component {
 
                 <div className='header-end'>
                     <span className='welcome'>
-                        <FormattedMessage id="homeheader.welcome"/>, {userInfo && userInfo.firstName ? userInfo.firstName : ''} {userInfo && userInfo.lastName ? userInfo.lastName : ''} !
+                        {this.props.userInfo && this.props.userInfo.image ?
+                            <div className='user-avatar'
+                                style={{backgroundImage: `url(${new Buffer(this.props.userInfo.image, 'base64').toString('binary')})`}}
+                            ></div> :
+                            <div className='user-avatar'
+                                style={{backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwnmqNl25_iCHNWRwqjgYDZlZtgh2LPB1NZJxkS5IMAkh5m5xxRNV_--WHa_cVbUR0wKg&usqp=CAU)`}}
+                            ></div>
+                        }
+                        <div className='username'>
+                            {userInfo && userInfo.firstName ? userInfo.firstName : ''} {userInfo && userInfo.lastName ? userInfo.lastName : ''}
+                        </div>
                     </span>
                     <i className="fas fa-globe languages"></i>
                     <span 

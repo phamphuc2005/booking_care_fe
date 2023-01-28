@@ -243,9 +243,17 @@ class HomeHeader extends Component {
                                 <>
                                 <span className='welcome'>
                                         <Dropdown className='image'>
-                                            <Dropdown.Toggle className='avatar'  id="dropdown-basic" ></Dropdown.Toggle>
+                                            {/* <Dropdown.Toggle className='avatar'  id="dropdown-basic" ></Dropdown.Toggle> */}
+                                            {this.props.userInfo && this.props.userInfo.image ?
+                                                <Dropdown.Toggle className='avatar' id="dropdown-basic"
+                                                    style={{backgroundImage: `url(${new Buffer(this.props.userInfo.image, 'base64').toString('binary')})`}}
+                                                ></Dropdown.Toggle> :
+                                                <Dropdown.Toggle className='avatar' id="dropdown-basic"
+                                                    style={{backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwnmqNl25_iCHNWRwqjgYDZlZtgh2LPB1NZJxkS5IMAkh5m5xxRNV_--WHa_cVbUR0wKg&usqp=CAU)`}}
+                                                ></Dropdown.Toggle>
+                                            }
                                             <Dropdown.Menu className='menu'>
-                                                <Dropdown.Item className='item' href="" disabled>
+                                                <Dropdown.Item className='item item-1' href="" disabled>
                                                     <i className='fas fa-user'></i>
                                                     {userInfo && userInfo.firstName ? userInfo.firstName : ''} {userInfo && userInfo.lastName ? userInfo.lastName : ''}
                                                 </Dropdown.Item>

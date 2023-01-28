@@ -161,7 +161,7 @@ const createComment = (data) => {
 }
 
 const getAllComment = (data) => {
-    return axios.get(`/api/get-all-comment?id=${data.id}`);
+    return axios.get(`/api/get-all-comment?id=${data.id}&order=${data.order}`);
 }
 
 const editComment = (inputData) => {

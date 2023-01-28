@@ -201,20 +201,22 @@
 
                 .avatar {
                     border-radius: 50%;
-                    // border: 1px solid white;
+                    border: 1px solid white;
                     height: 50px;
                     width: 50px;
-                    background-image: url('../../assets/images/1355316.png');
+                    // background-image: url('../../assets/images/1355316.png');
                     background-size: cover;
-                    
-                    
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-color: white;
                 }
 
                 .menu {
                     margin-right: -15px !important;
-                    margin-top: 5px;
+                    margin-top: 3px;
                     // border: 2px solid #49bce2;
                     box-shadow: 0px 5px 5px 0px gray;
+                    min-width: 160px;
 
                     .item {
                         
@@ -222,6 +224,11 @@
                             color: #49bce2;
                             font-size: 18px;
                         }
+                    }
+
+                    .item-1 {
+                        color: #007bff;
+                        text-transform: uppercase;
                     }
                 }
 

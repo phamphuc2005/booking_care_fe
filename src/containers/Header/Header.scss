@@ -6,7 +6,7 @@
     justify-content: space-between;
     background-color: $colormain;
     color: $common-text-color;
-    height: 40px;
+    height: 60px;
     position: relative;
 
     .header-tabs-container {
@@ -19,29 +19,55 @@
             i {
                 color: white;
                 font-size: 18px;
-                margin-top: 4px;
+                margin-top: 14px;
             }
 
             &:hover {
                 background-color: darken($colormain, 5);
             }
         }
+
+        .navigator-menu {
+            // padding: 10px 0;
+        }
     }
 
     .header-end {
         cursor: pointer;
+        display: flex;
 
         .welcome {
             margin-right: 20px;
+            display: flex;
+            cursor: auto;
+
+            .user-avatar {
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+                border: 1px solid #ddd;
+                margin-right: 5px;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                margin-top: 5px;
+            }
+
+            .username {
+                margin-top: 18px;
+            }
         }
 
         .languages {
             cursor: auto;
             color: greenyellow;
             margin-right: 5px;
+            margin-top: 18px;
+            font-size: 20px;
         }
 
         .language-vi {
+            margin-top: 18px;
 
             &.active {
                 color: darkmagenta;
@@ -51,6 +77,7 @@
         .language-en {
             margin-right: 20px;
             margin-left: 5px;
+            margin-top: 18px;
 
             &.active {
                 color: darkmagenta;
@@ -64,8 +91,8 @@
         .btn-logout {
             color: $common-text-color;
             line-height: 40px;
-            height: 40px;
-            padding: 0 10px;
+            height: 60px;
+            padding:  10px;
             border-left: 1px solid white;
             border-right: 1px solid white;
             // border-radius: 0;

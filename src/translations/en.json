@@ -346,13 +346,15 @@
         "title": "Review and Feedback",
         "comment": "Write a review and feedback ...",
         "post": "Post",
-        "note": "Sign in to review and comment !",
+        "note": "Sign in to review and feedback !",
         "me": "Me",
         "edit": "Edit",
         "delete": "Delete",
         "edit-title": "Edit review and feedback",
         "delete-title": "Delete review and feedback",
         "delete-content": "Are you sure you want to delete?",
-        "cancel-btn": "Cancel"
+        "cancel-btn": "Cancel",
+        "old": "Oldest",
+        "new": "Newest"
     }
 }

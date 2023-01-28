@@ -35,7 +35,7 @@ class ModalDeleteComment extends Component {
             <Modal 
                 isOpen={this.props.isOpen}
                 toggle={()=>{this.toggle()}}
-                className={'modal-clinic-container modal-dialog-centered'}
+                className={'modal-comment-container modal-dialog-centered'}
                 size="lg"
             >
                 <ModalHeader toggle={()=>{this.toggle()}}><FormattedMessage id = "comment.delete-title"/></ModalHeader>

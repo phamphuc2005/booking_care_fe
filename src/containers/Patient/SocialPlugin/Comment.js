@@ -25,6 +25,7 @@ class Comment extends Component {
             isOpenEdit: false,
             commentDelete: {},
             isOpenDelete: false,
+            order: 'ASC'
         }
     }
 
@@ -57,7 +58,10 @@ class Comment extends Component {
     async componentDidMount() {
         // this.initFacebookSDK();
         if(this.props.doctorID) {
-            let comments = await getAllComment({id: this.props.doctorID});
+            let comments = await getAllComment({
+                id: this.props.doctorID,
+                order: this.state.order
+            });
                 if(comments && comments.errCode === 0) {
                 this.setState({
                     arrComments: comments.data
@@ -87,6 +91,8 @@ class Comment extends Component {
             let res = await createComment(this.state);
             if(res && res.errCode === 0) {
                 this.componentDidMount();
+            } else if (res && res.errCode === 2) {
+                toast.warn(res.errMessage)
             } else {
                 toast.error(res.errMessage)
                 console.log('Error:', res)
@@ -165,6 +171,17 @@ class Comment extends Component {
         }
     }
 
+    handleOnChangeInput = (event, id) => {
+        let copyState = {...this.state};
+        copyState[id] = event.target.value;
+        this.setState({
+            ...copyState
+        })
+        setTimeout(async function(){
+            this.componentDidMount();
+        }.bind(this), 100);
+    }
+
     render() {
         let {dataHref, width, numPost, language} = this.props;
         let isLoggedIn = this.props.isLoggedIn;
@@ -197,13 +214,24 @@ class Comment extends Component {
                     />
                 }
                  <div>
+                    <div className='comment-header'>
+                        <div className='number-title'>{arrComments.length} <FormattedMessage id = "comment.title"/></div>
+                        <select
+                            className='form-control'
+                            name="order" 
+                            onChange={(event)=>{this.handleOnChangeInput(event, "order")}}
+                            value={this.state.order}>
+                            <option value="ASC">Cũ nhất</option>
+                            <option value="DESC">Mới nhất</option>
+                        </select>
+                    </div>
                     <div className='comment-up'>
                         {this.props.userInfo && this.props.userInfo.image ?
                             <div className='user-avatar'
                                 style={{backgroundImage: `url(${new Buffer(this.props.userInfo.image, 'base64').toString('binary')})`}}
                             ></div> :
                             <div className='user-avatar'
-                                style={{backgroundImage: `url(https://st.depositphotos.com/2934765/53192/v/600/depositphotos_531920820-stock-illustration-photo-available-vector-icon-default.jpg)`}}
+                                style={{backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwnmqNl25_iCHNWRwqjgYDZlZtgh2LPB1NZJxkS5IMAkh5m5xxRNV_--WHa_cVbUR0wKg&usqp=CAU)`}}
                             ></div>
                         }
                         <div className='user-comment'>
@@ -238,7 +266,7 @@ class Comment extends Component {
                                         style={{backgroundImage: `url(${new Buffer(item.userData.image, 'base64').toString('binary')})`}}
                                     ></div> :
                                     <div className='comment-avatar'
-                                        style={{backgroundImage: `url(https://st.depositphotos.com/2934765/53192/v/600/depositphotos_531920820-stock-illustration-photo-available-vector-icon-default.jpg)`}}
+                                        style={{backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwnmqNl25_iCHNWRwqjgYDZlZtgh2LPB1NZJxkS5IMAkh5m5xxRNV_--WHa_cVbUR0wKg&usqp=CAU)`}}
                                     ></div>
                                 }
                                 <div className='comment-content'>

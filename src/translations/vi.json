@@ -346,13 +346,15 @@
         "title": "Đánh giá và Phản hồi",
         "comment": "Viết đánh giá và phản hồi ...",
         "post": "Đăng",
-        "note": "Đăng nhập để đánh giá và bình luận !",
+        "note": "Đăng nhập để đánh giá và phản hồi !",
         "me": "Tôi",
         "edit": "Chỉnh sửa",
         "delete": "Xóa",
         "edit-title": "Chỉnh sửa đánh giá và phản hồi",
         "delete-title": "Xóa đánh giá và phản hồi",
         "delete-content": "Bạn có chắc chắn muốn xóa không?",
-        "cancel-btn": "Hủy"
+        "cancel-btn": "Hủy",
+        "old": "Cũ nhất",
+        "new": "Mới nhất"
     }
 }
