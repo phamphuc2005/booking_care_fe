@@ -34,6 +34,10 @@ const editUserService = (inputData) => {
     return axios.put('/api/edit-user',inputData);
 }
 
+const getUserInfo = (data) => {
+    return axios.get(`/api/get-user-info?id=${data.id}`);
+}
+
 const getAllCodeService = (inputType) => {
     return axios.get(`/api/allcode?type=${inputType}`);
 }
@@ -214,5 +218,6 @@ export {
     createComment,
     getAllComment,
     editComment,
-    deleteComment
+    deleteComment,
+    getUserInfo
 }

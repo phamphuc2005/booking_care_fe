@@ -9,7 +9,7 @@ import _ from 'lodash';
 import DatePicker from '../../../../components/Input/DatePicker';
 import * as actions from '../../../../store/actions';
 import Select from 'react-select';
-import {postPatientBooking} from '../../../../services/userService';
+import {getUserInfo, postPatientBooking} from '../../../../services/userService';
 import {toast} from 'react-toastify';
 import moment from 'moment/moment';
 
@@ -29,11 +29,34 @@ class BookingModal extends Component {
             timeType: '',
             currentNumber: '',
             maxNumber: '',
+
+            firstName: '',
+            lastName: '',
+            genderVi: '',
+            genderEn: ''
         }
     }
 
     async componentDidMount() {
-        this.props.getGender();
+        await this.props.getGender();
+        await this.getUser();
+    }
+
+    getUser = async () => {
+        let response = await getUserInfo({id: this.props.userInfo.id});
+        if(response && response.errCode === 0) {
+            console.log(response);
+            this.setState({
+                firstName: response.data.firstName,
+                lastName: response.data.lastName,
+                phoneNumber: response.data.phonenumber,
+                email: response.data.email,
+                address: response.data.address,
+                selectGender: response.data.gender,
+                genderVi: response.data.genderData.valueVi,
+                genderEn: response.data.genderData.valueEn
+            })
+        }
     }
 
     buildDataGender = (data) => {
@@ -99,22 +122,18 @@ class BookingModal extends Component {
             let date = new Date(this.state.birthday).getTime();
             let timeString = this.buildBookingTime(this.props.dataTime);
             let doctorName = this.buildDoctorName(this.props.dataTime);
-            let fullName = `${this.props.userInfo && this.props.userInfo.firstName ? this.props.userInfo.firstName : ''} ${this.props.userInfo && this.props.userInfo.lastName ? this.props.userInfo.lastName : ''}`
-            let phoneNumber = this.props.userInfo && this.props.userInfo.phonenumber ? this.props.userInfo.phonenumber : ''
-            let selectGender = this.props.userInfo && this.props.userInfo.gender ? this.props.userInfo.gender : ''
-            let genders = this.props.userInfo && this.props.userInfo.genderData ? (this.props.language===LANGUAGES.VI?this.props.userInfo.genderData.valueVi:this.props.userInfo.genderData.valueEn) : ''
-            let email = this.props.userInfo && this.props.userInfo.email ? this.props.userInfo.email : ''
-            let address = this.props.userInfo && this.props.userInfo.address ? this.props.userInfo.address : ''
+            let fullName = `${this.state.firstName} ${this.state.lastName}`
+            let genders = this.props.language===LANGUAGES.VI?this.state.genderVi:this.state.genderEn
             this.props.setLoadingData(true)
             let res = await postPatientBooking({
                 fullName: fullName,
-                phoneNumber: phoneNumber,
+                phoneNumber: this.state.phoneNumber,
                 date: this.props.dataTime.date,
                 // birthday: date,
-                selectGender: selectGender,
+                selectGender: this.state.selectGender,
                 genders: genders,
-                email: email,
-                address: address,
+                email: this.state.email,
+                address: this.state.address,
                 reason: this.state.reason,
                 doctorId: this.state.doctorID,
                 timeType: this.state.timeType,
@@ -204,7 +223,7 @@ class BookingModal extends Component {
                                 <input 
                                     disabled
                                     className='form-control'
-                                    value={`${this.props.userInfo && this.props.userInfo.firstName ? this.props.userInfo.firstName : ''} ${this.props.userInfo && this.props.userInfo.lastName ? this.props.userInfo.lastName : ''}`}
+                                    value={`${this.state.firstName} ${this.state.lastName}`}
                                     // value={this.state.fullName}
                                     // onChange={(event)=>this.handleOnChangeInput(event, 'fullName')}
                                 ></input>
@@ -214,7 +233,7 @@ class BookingModal extends Component {
                                 <input 
                                     disabled
                                     className='form-control'
-                                    value={this.props.userInfo && this.props.userInfo.phonenumber ? this.props.userInfo.phonenumber : ''}
+                                    value={this.state.phoneNumber}
                                     // value={this.state.phoneNumber}
                                     // onChange={(event)=>this.handleOnChangeInput(event, 'phoneNumber')}
                                 ></input>
@@ -241,7 +260,7 @@ class BookingModal extends Component {
                                 <input 
                                     disabled
                                     className='form-control'
-                                    value={this.props.userInfo && this.props.userInfo.genderData ? (this.props.language===LANGUAGES.VI?this.props.userInfo.genderData.valueVi:this.props.userInfo.genderData.valueEn) : ''}
+                                    value={this.props.language===LANGUAGES.VI?this.state.genderVi:this.state.genderEn}
                                     // value={this.state.phoneNumber}
                                     // onChange={(event)=>this.handleOnChangeInput(event, 'phoneNumber')}
                                 ></input>
@@ -251,7 +270,7 @@ class BookingModal extends Component {
                                 <input 
                                     disabled
                                     className='form-control'
-                                    value={this.props.userInfo && this.props.userInfo.email ? this.props.userInfo.email : ''}
+                                    value={this.state.email}
                                     // value={this.state.email}
                                     // onChange={(event)=>this.handleOnChangeInput(event, 'email')}
                                 ></input>
@@ -261,7 +280,7 @@ class BookingModal extends Component {
                                 <input 
                                     disabled
                                     className='form-control'
-                                    value={this.props.userInfo && this.props.userInfo.address ? this.props.userInfo.address : ''}
+                                    value={this.state.address}
                                     // value={this.state.address}
                                     // onChange={(event)=>this.handleOnChangeInput(event, 'address')}
                                 ></input>

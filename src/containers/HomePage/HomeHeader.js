@@ -8,6 +8,7 @@ import * as actions from "../../store/actions";
 import { withRouter } from 'react-router';
 import { Dropdown } from 'react-bootstrap';
 import Select from 'react-select';
+import { getUserInfo } from '../../services/userService';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //   import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
@@ -22,12 +23,27 @@ class HomeHeader extends Component {
             selectedDoctor: '',
             selectedSpecialty: '',
             selectedClinic: '',
+            image: '',
+            firstName: '',
+            lastName: ''
         }
     }
 
-    componentDidMount() {
-        this.props.fetchAllDoctors();
-        this.props.getRequiredDoctorInfo();
+    async componentDidMount() {
+        await this.props.fetchAllDoctors();
+        await this.props.getRequiredDoctorInfo();
+        await this.getUser();
+    }
+
+    getUser = async () => {
+        let response = await getUserInfo({id: this.props.userInfo.id});
+        if(response && response.errCode === 0) {
+            this.setState ({
+                image: response.data.image,
+                firstName: response.data.firstName,
+                lastName: response.data.lastName
+            })
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -180,7 +196,6 @@ class HomeHeader extends Component {
     render() {
         let language = this.props.language;
         let isLoggedIn = this.props.isLoggedIn;
-        let userInfo = this.props.userInfo;
         let processLogout = this.props.processLogout;
         let {selectedFilter} = this.state;
         return (
@@ -244,9 +259,9 @@ class HomeHeader extends Component {
                                 <span className='welcome'>
                                         <Dropdown className='image'>
                                             {/* <Dropdown.Toggle className='avatar'  id="dropdown-basic" ></Dropdown.Toggle> */}
-                                            {this.props.userInfo && this.props.userInfo.image ?
+                                            {this.state.image ?
                                                 <Dropdown.Toggle className='avatar' id="dropdown-basic"
-                                                    style={{backgroundImage: `url(${new Buffer(this.props.userInfo.image, 'base64').toString('binary')})`}}
+                                                    style={{backgroundImage: `url(${new Buffer(this.state.image, 'base64').toString('binary')})`}}
                                                 ></Dropdown.Toggle> :
                                                 <Dropdown.Toggle className='avatar' id="dropdown-basic"
                                                     style={{backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwnmqNl25_iCHNWRwqjgYDZlZtgh2LPB1NZJxkS5IMAkh5m5xxRNV_--WHa_cVbUR0wKg&usqp=CAU)`}}
@@ -255,7 +270,7 @@ class HomeHeader extends Component {
                                             <Dropdown.Menu className='menu'>
                                                 <Dropdown.Item className='item item-1' href="" disabled>
                                                     <i className='fas fa-user'></i>
-                                                    {userInfo && userInfo.firstName ? userInfo.firstName : ''} {userInfo && userInfo.lastName ? userInfo.lastName : ''}
+                                                    {this.state.firstName ? this.state.firstName : ''} {this.state.lastName ? this.state.lastName : ''}
                                                 </Dropdown.Item>
                                                 <Dropdown.Divider />
                                                 <Dropdown.Item className='item' href="" onClick={()=>this.returnUserManage()}>

@@ -127,7 +127,8 @@ class PersonalInfo extends Component {
     render() {
         let {userInfo, language} = this.props;
         let genders = this.state.genderArr;
-        console.log('hello', this.state)
+        console.log('hello', this.state);
+        console.log('userinfo',this.props.userInfo);
         return (
             <div className='container patient-container'>
                 <div className='title mb-4'><FormattedMessage id = "patient-manage.title"/></div>

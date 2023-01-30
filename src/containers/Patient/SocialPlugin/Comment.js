@@ -4,7 +4,7 @@ import HomeHeader from '../../HomePage/HomeHeader';
 import HomeFooter from '../../HomePage/HomeFooter';
 import {LANGUAGES} from '../../../utils';
 import './Comment.scss';
-import {createComment, getAllComment, editComment, deleteComment} from '../../../services/userService';
+import {createComment, getAllComment, editComment, deleteComment, getUserInfo} from '../../../services/userService';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import ModalEditComment from './ModalEditComment';
@@ -25,7 +25,8 @@ class Comment extends Component {
             isOpenEdit: false,
             commentDelete: {},
             isOpenDelete: false,
-            order: 'ASC'
+            order: 'ASC',
+            image: ''
         }
     }
 
@@ -68,10 +69,20 @@ class Comment extends Component {
                 })
             }
         }
+        await this.getUser();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
 
+    }
+
+    getUser = async () => {
+        let response = await getUserInfo({id: this.props.userInfo.id});
+        if(response && response.errCode === 0) {
+            this.setState({
+                image: response.data.image
+            })
+        }
     }
 
     handleOnChangeText = (event) => {
@@ -226,9 +237,9 @@ class Comment extends Component {
                         </select>
                     </div>
                     <div className='comment-up'>
-                        {this.props.userInfo && this.props.userInfo.image ?
+                        {this.state.image ?
                             <div className='user-avatar'
-                                style={{backgroundImage: `url(${new Buffer(this.props.userInfo.image, 'base64').toString('binary')})`}}
+                                style={{backgroundImage: `url(${new Buffer(this.state.image, 'base64').toString('binary')})`}}
                             ></div> :
                             <div className='user-avatar'
                                 style={{backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwnmqNl25_iCHNWRwqjgYDZlZtgh2LPB1NZJxkS5IMAkh5m5xxRNV_--WHa_cVbUR0wKg&usqp=CAU)`}}

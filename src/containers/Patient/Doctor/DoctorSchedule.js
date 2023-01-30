@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import HomeHeader from '../../HomePage/HomeHeader';
 import HomeFooter from '../../HomePage/HomeFooter';
 import './DoctorSchedule.scss';
-import {getDetailDoctor} from '../../../services/userService';
+import {getDetailDoctor, getUserInfo} from '../../../services/userService';
 import {LANGUAGES} from '../../../utils';
 import  moment from 'moment';
 import localization from 'moment/locale/vi';
@@ -19,7 +19,8 @@ class DoctorSchedule extends Component {
             allDates: [],
             allTimes: [],
             isOpenModalBooking: false,
-            dataModal: {}
+            dataModal: {},
+            roleId: ''
         }
     }
 
@@ -38,6 +39,17 @@ class DoctorSchedule extends Component {
             allDates: allDates,
         })
 
+        await this.getUser();
+
+    }
+
+    getUser = async () => {
+        let response = await getUserInfo({id: this.props.userInfo.id});
+        if(response && response.errCode === 0) {
+            this.setState({
+                roleId: response.data.roleId
+            })
+        }
     }
 
     capitalizeFirstLetter(string) {
@@ -108,7 +120,7 @@ class DoctorSchedule extends Component {
 
     handleClickTime = (time) => {
         if(this.props.isLoggedIn === true) {
-            if(this.props.userInfo.roleId === 'R2') {
+            if(this.state.roleId === 'R2') {
                 this.setState({
                     isOpenModalBooking: true,
                     dataModal: time
@@ -133,7 +145,6 @@ class DoctorSchedule extends Component {
     render() {
         let {allDates, allTimes, isOpenModalBooking, dataModal} = this.state;
         let {language} = this.props;
-        // console.log('userInfo',this.props.userInfo, this.state);
         // console.log(this.props.setLoadingData);
         return (
             <>

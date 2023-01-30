@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss';
-import {getAllUsers, createNewUserService, deleteUserService, editUserService} from '../../services/userService';
+import {getAllUsers, createNewUserService, deleteUserService, editUserService, getUserInfo} from '../../services/userService';
 import ModalUser from './ModalUser';
 import ModalEditUser from './ModalEditUser';
 import ModalDeleteUser from './ModalDeleteUser';
@@ -21,12 +21,14 @@ class UserManage extends Component {
             isOpenEdit: false,
             isOpenDelete: false,
             userEdit: {},
-            userDelete: {}
+            userDelete: {},
+            roleId: ''
         }
     }
 
     async componentDidMount() {
         await this.getAllUsersFromReact();
+        await this.getUser();
     }
 
     getAllUsersFromReact = async () => {
@@ -34,6 +36,15 @@ class UserManage extends Component {
         if(response && response.errCode === 0) {
             this.setState({
                 arrUsers: response.users
+            })
+        }
+    }
+
+    getUser = async () => {
+        let response = await getUserInfo({id: this.props.userInfo.id});
+        if(response && response.errCode === 0) {
+            this.setState({
+                roleId: response.data.roleId
             })
         }
     }
@@ -127,7 +138,6 @@ class UserManage extends Component {
 
     render() {
         let arrUsers = this.state.arrUsers;
-        let user = this.props.userInfo;
         let processLogout = this.props.processLogout;
         return (
             // <div className="users-container">
@@ -205,7 +215,7 @@ class UserManage extends Component {
                     <div className='row'>
                         <div className='col-12 home-page-body'>
                             {/* <div className='title1'><FormattedMessage id = "usermanage.title1"/></div>    */}
-                            {user.roleId === 'R0' ? 
+                            {this.state.roleId === 'R0' ? 
                             <>
                                 <div className='title2'><FormattedMessage id = "usermanage.title2"/>Admin</div>   
                                 ---------- <i className="fas fa-user-cog icon"></i> ----------
@@ -241,7 +251,7 @@ class UserManage extends Component {
                                 </div>
                             </> :
                             <>
-                            {user.roleId === 'R1' ?
+                            {this.state.roleId === 'R1' ?
                                 <>
                                     <div className='title2'><FormattedMessage id = "usermanage.title2"/><FormattedMessage id = "menu.admin.doctor-manage"/></div>   
                                 ---------- <i className="fas fa-user-cog icon"></i> ----------

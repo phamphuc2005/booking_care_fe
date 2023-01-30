@@ -9,12 +9,14 @@ import { LANGUAGES, USER_ROLE } from '../../utils/constant';
 import { FormattedMessage } from 'react-intl';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
+import { getUserInfo } from '../../services/userService';
 
 class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            menuApp: []
+            menuApp: [],
+            image: ''
         }
     }
 
@@ -22,7 +24,7 @@ class Header extends Component {
         this.props.changeLanguageAppRedux(language);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         let {userInfo} = this.props;
         let menu = [];
         if(userInfo && !_.isEmpty(userInfo)) {
@@ -40,6 +42,16 @@ class Header extends Component {
         this.setState({
             menuApp: menu
         })
+        await this.getUser();
+    }
+
+    getUser = async () => {
+        let response = await getUserInfo({id: this.props.userInfo.id});
+        if(response && response.errCode === 0) {
+            this.setState({
+                image: response.data.image
+            })
+        }
     }
 
     render() {
@@ -57,9 +69,9 @@ class Header extends Component {
 
                 <div className='header-end'>
                     <span className='welcome'>
-                        {this.props.userInfo && this.props.userInfo.image ?
+                        {this.state.image ?
                             <div className='user-avatar'
-                                style={{backgroundImage: `url(${new Buffer(this.props.userInfo.image, 'base64').toString('binary')})`}}
+                                style={{backgroundImage: `url(${new Buffer(this.state.image, 'base64').toString('binary')})`}}
                             ></div> :
                             <div className='user-avatar'
                                 style={{backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwnmqNl25_iCHNWRwqjgYDZlZtgh2LPB1NZJxkS5IMAkh5m5xxRNV_--WHa_cVbUR0wKg&usqp=CAU)`}}
