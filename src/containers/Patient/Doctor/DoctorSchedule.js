@@ -44,11 +44,13 @@ class DoctorSchedule extends Component {
     }
 
     getUser = async () => {
-        let response = await getUserInfo({id: this.props.userInfo.id});
-        if(response && response.errCode === 0) {
-            this.setState({
-                roleId: response.data.roleId
-            })
+        if(this.props.isLoggedIn === true) {
+            let response = await getUserInfo({id: this.props.userInfo.id});
+            if(response && response.errCode === 0) {
+                this.setState({
+                    roleId: response.data.roleId
+                })
+            }
         }
     }
 

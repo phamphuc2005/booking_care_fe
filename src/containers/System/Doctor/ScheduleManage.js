@@ -131,6 +131,8 @@ class ScheduleManage extends Component {
         let {time} = this.state;
         let {language, userInfo} = this.props;
         let today = new Date(new Date().setDate(new Date().getDate()));
+        let choose = language === LANGUAGES.VI ? 'Chọn' : 'Choose option';
+
         console.log(time)
         return (
             <div className='schedule-manage-container'>
@@ -155,7 +157,7 @@ class ScheduleManage extends Component {
                                 name="maxNumber" 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "maxNumber")}}
                                 value={this.state.maxNumber}>
-                                <option value="">-- Choose option --</option>
+                                <option value="">-- {choose} --</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">5</option>

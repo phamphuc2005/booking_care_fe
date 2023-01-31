@@ -8,6 +8,7 @@ import {handleLoginApi, handleRegister, handleConfirmRegister} from '../../servi
 import e from 'cors';
 import { toast } from 'react-toastify';
 import ConfirmRegisterModal from './ConfirmRegisterModal';
+import { LANGUAGES } from '../../utils';
 
 class Register extends Component {
     constructor(props) {
@@ -161,10 +162,17 @@ class Register extends Component {
     
     render() {
         let {isOpenModal, dataModal} = this.state;
+        let {language} = this.props;
+        let first = language === LANGUAGES.VI ? 'Nhập họ ...' : 'Enter your firstname ...';
+        let last = language === LANGUAGES.VI ? 'Nhập tên ...' : 'Enter your lastname ...';
+        let email = language === LANGUAGES.VI ? 'Nhập email ...' : 'Enter your email ...';
+        let pass = language === LANGUAGES.VI ? 'Nhập mật khẩu ...' : 'Enter your password ...';
+        let repass = language === LANGUAGES.VI ? 'Nhập lại mật khẩu ...' : 'Enter your repeat password ...';
+
         return (
             <>
                 <div className="register-background">
-                    <div className='text-title'>BOOKING CARE</div>
+                    <div className='text-title'>BOOKING HEALTH</div>
                     <div className="register-container">
                         <div className="register-content row">
                             <div className="col-12 text-register"><FormattedMessage id = "register.title"/></div>
@@ -173,7 +181,7 @@ class Register extends Component {
                                 <input 
                                     type="text" 
                                     className='form-control' 
-                                    placeholder='Enter your firstname'
+                                    placeholder={first}
                                     value={this.state.firstName}
                                     onChange = {(event) => this.handleOnChangeFirstname(event)}
                                 />
@@ -183,7 +191,7 @@ class Register extends Component {
                                 <input 
                                     type="text" 
                                     className='form-control' 
-                                    placeholder='Enter your lastname'
+                                    placeholder={last}
                                     value={this.state.lastName}
                                     onChange = {(event) => this.handleOnChangeLastname(event)}
                                 />
@@ -193,7 +201,7 @@ class Register extends Component {
                                 <input 
                                     type="text" 
                                     className='form-control' 
-                                    placeholder='Enter your email'
+                                    placeholder={email}
                                     value={this.state.email}
                                     onChange = {(event) => this.handleOnChangeEmail(event)}
                                 />
@@ -204,7 +212,7 @@ class Register extends Component {
                                     <input 
                                         type={this.state.isShowPassword ? 'text' : 'password'}
                                         className='form-control' 
-                                        placeholder='Enter your password'
+                                        placeholder={pass}
                                         value={this.state.password}
                                         onChange = {(event) => this.handleOnChangePassword(event)}
                                     />
@@ -219,7 +227,7 @@ class Register extends Component {
                                     <input 
                                         type={this.state.isShowRe_pass ? 'text' : 'password'}
                                         className='form-control' 
-                                        placeholder='Enter your repeat password'
+                                        placeholder={repass}
                                         value={this.state.repeat_pass}
                                         onChange = {(event) => this.handleOnChangeRepeat(event)}
                                         onKeyDown = {(event) => this.handleKeyDown(event)}

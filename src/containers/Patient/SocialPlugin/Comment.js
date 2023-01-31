@@ -77,11 +77,13 @@ class Comment extends Component {
     }
 
     getUser = async () => {
-        let response = await getUserInfo({id: this.props.userInfo.id});
-        if(response && response.errCode === 0) {
-            this.setState({
-                image: response.data.image
-            })
+        if(this.props.isLoggedIn === true) {
+            let response = await getUserInfo({id: this.props.userInfo.id});
+            if(response && response.errCode === 0) {
+                this.setState({
+                    image: response.data.image
+                })
+            }
         }
     }
 
@@ -198,6 +200,9 @@ class Comment extends Component {
         let isLoggedIn = this.props.isLoggedIn;
         let {arrComments} = this.state;
         console.log(this.state);
+        let write = language === LANGUAGES.VI ? 'Viết bình luận ...' : 'Write comment ...'
+        let old = language === LANGUAGES.VI ? 'Cũ nhất' : 'Oldest';
+        let news = language === LANGUAGES.VI ? 'Mới nhất' : 'Newest';
         
         return (
             <React.Fragment>
@@ -232,28 +237,32 @@ class Comment extends Component {
                             name="order" 
                             onChange={(event)=>{this.handleOnChangeInput(event, "order")}}
                             value={this.state.order}>
-                            <option value="ASC">Cũ nhất</option>
-                            <option value="DESC">Mới nhất</option>
+                            <option value="ASC">{old}</option>
+                            <option value="DESC">{news}</option>
                         </select>
                     </div>
                     <div className='comment-up'>
-                        {this.state.image ?
-                            <div className='user-avatar'
-                                style={{backgroundImage: `url(${new Buffer(this.state.image, 'base64').toString('binary')})`}}
-                            ></div> :
-                            <div className='user-avatar'
-                                style={{backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwnmqNl25_iCHNWRwqjgYDZlZtgh2LPB1NZJxkS5IMAkh5m5xxRNV_--WHa_cVbUR0wKg&usqp=CAU)`}}
-                            ></div>
+                        {isLoggedIn ? 
+                            <>
+                                {this.state.image ?
+                                    <div className='user-avatar'
+                                        style={{backgroundImage: `url(${new Buffer(this.state.image, 'base64').toString('binary')})`}}
+                                    ></div> : 
+                                    <div className='user-avatar'
+                                        style={{backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwnmqNl25_iCHNWRwqjgYDZlZtgh2LPB1NZJxkS5IMAkh5m5xxRNV_--WHa_cVbUR0wKg&usqp=CAU)`}}
+                                    ></div>
+                                }
+                            </> : ''
                         }
                         <div className='user-comment'>
                             {isLoggedIn ?
                                 <textarea className='input-comment'
-                                    placeholder='Write comment ...'
+                                    placeholder = {write}
                                     onChange={(event)=>this.handleOnChangeText(event)}
                                     value={this.state.content}
                                 ></textarea> : 
                                 <textarea disabled className='input-comment'
-                                    placeholder='Write comment ...'
+                                    placeholder={write}
                                     onChange={(event)=>this.handleOnChangeText(event)}
                                     value={this.state.content}
                                 ></textarea>

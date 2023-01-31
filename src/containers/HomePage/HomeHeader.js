@@ -36,13 +36,15 @@ class HomeHeader extends Component {
     }
 
     getUser = async () => {
-        let response = await getUserInfo({id: this.props.userInfo.id});
-        if(response && response.errCode === 0) {
-            this.setState ({
-                image: response.data.image,
-                firstName: response.data.firstName,
-                lastName: response.data.lastName
-            })
+        if (this.props.isLoggedIn === true) {
+            let response = await getUserInfo({id: this.props.userInfo.id});
+            if(response && response.errCode === 0) {
+                this.setState ({
+                    image: response.data.image,
+                    firstName: response.data.firstName,
+                    lastName: response.data.lastName
+                })
+            }
         }
     }
 

@@ -113,9 +113,9 @@ class DetailDoctor extends Component {
 
                     <div className='comment-doctor'>
                         <div className='comment-title'><FormattedMessage id = "comment.title"/></div>
-                        <div className='like_share'>
+                        {/* <div className='like_share'>
                             <LikeShare/>
-                        </div>
+                        </div> */}
                         <Comment
                             // dataHref={currentURL}
                             // width={"100%"}

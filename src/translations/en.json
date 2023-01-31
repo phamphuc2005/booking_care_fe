@@ -67,6 +67,7 @@
         "list-doctor": "List of doctors",
         "handbook": "Handbook",
         "about": "Overview of Hanoi University of Science and Technology",
+        "about-content": "Hanoi University of Science and Technology (English name Hanoi University of Science and Technology - abbreviated HUST) was established under Decree No. 147/ND dated March 6, 1956 signed by Minister of Education Nguyen Van Huyen. This is the first technical university of our country with the task of training industrial engineers for the construction of socialism in the North and the struggle for the liberation of the South; is a multi-disciplinary and multi-field, multi-disciplinary and multi-field scientific and technological training and research center; closely combine training with scientific research in order to create high-quality human resources and foster scientific and technological talents; oriented to develop into a research university on a par with prestigious universities in the region and the world.",
         "about-link": "Introduction document of Hanoi University of Science and Technology.", 
         "more-btn": "See more",
         "search-btn": "Search"
@@ -328,7 +329,7 @@
             "gender": "Gender",
             "choose-gender": "Choose gender",
             "reason": "Reason for examination",
-            "notice": "To change information, please go to the personal information management page to edit !",
+            "notice": "To change more information, please go to the personal information management page to edit !",
             "confirm-btn": "Confirm",
             "cancel-btn": "Cancel",
             "more": "See more"

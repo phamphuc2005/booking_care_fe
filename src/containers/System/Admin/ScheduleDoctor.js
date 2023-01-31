@@ -152,6 +152,7 @@ class ScheduleDoctor extends Component {
         let {time} = this.state;
         let {language} = this.props;
         let today = new Date(new Date().setDate(new Date().getDate()));
+        let choose = language === LANGUAGES.VI ? 'Chọn' : 'Choose option'
 
         console.log(time, this.state.selectedDoctor)
         return (
@@ -186,7 +187,7 @@ class ScheduleDoctor extends Component {
                                 name="maxNumber" 
                                 onChange={(event)=>{this.handleOnChangeInput(event, "maxNumber")}}
                                 value={this.state.maxNumber}>
-                                <option value="">-- Choose option --</option>
+                                <option value="">-- {choose} --</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">5</option>

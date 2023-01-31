@@ -6,6 +6,7 @@ import './Login.scss';
 import { FormattedMessage } from 'react-intl';
 import {handleLoginApi} from '../../services/userService'
 import e from 'cors';
+import {LANGUAGES} from '../../utils';
 
 class Login extends Component {
     constructor(props) {
@@ -77,9 +78,13 @@ class Login extends Component {
     }
     
     render() {
+        let {language} = this.props;
+        let usernames = language === LANGUAGES.VI ? 'Nhập tên đăng nhập ...' : 'Enter your username ...';
+        let pass = language === LANGUAGES.VI ? 'Nhập mật khẩu ...' : 'Enter your password ...';
+
         return (
             <div className="login-background">
-                <div className='text-title'>BOOKING CARE</div>
+                <div className='text-title'>BOOKING HEALTH</div>
                 <div className="login-container">
                     <div className="login-content row">
                         <div className="col-12 text-login"><FormattedMessage id = "login.title"/></div>
@@ -88,7 +93,7 @@ class Login extends Component {
                             <input 
                                 type="text" 
                                 className='form-control' 
-                                placeholder='Enter your username'
+                                placeholder={usernames}
                                 value={this.state.username}
                                 onChange = {(event) => this.handleOnChangeUsername(event)}
                             />
@@ -99,7 +104,7 @@ class Login extends Component {
                                 <input 
                                     type={this.state.isShowPassword ? 'text' : 'password'}
                                     className='form-control' 
-                                    placeholder='Enter your password'
+                                    placeholder={pass}
                                     value={this.state.password}
                                     onChange = {(event) => this.handleOnChangePassword(event)}
                                     onKeyDown = {(event) => this.handleKeyDown(event)}
@@ -139,7 +144,7 @@ class Login extends Component {
 
 const mapStateToProps = state => {
     return {
-        language: state.app.language
+        language: state.app.language,
     };
 };
 

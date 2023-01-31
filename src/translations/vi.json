@@ -67,6 +67,7 @@
         "list-doctor": "Danh sách bác sĩ",
         "handbook": "Cẩm nang",
         "about": "Tổng quan về Đại học Bách Khoa Hà Nội",
+        "about-content": "Trường Đại học Bách khoa Hà Nội (tên tiếng Anh Hanoi University of Science and Technology – viết tắt HUST) được thành lập theo Nghị định số 147/NĐ ngày 6-3-1956 do Bộ trưởng Bộ Giáo dục Nguyễn Văn Huyên ký. Đây là trường đại học kỹ thuật đầu tiên của nước ta có nhiệm vụ đào tạo kỹ sư công nghiệp cho công cuộc xây dựng CNXH ở miền Bắc và đấu tranh giải phóng miền Nam; là trung tâm đào tạo, nghiên cứu khoa học và công nghệ đa ngành, đa lĩnh vực; kết hợp chặt chẽ giữa đào tạo với nghiên cứu khoa học nhằm tạo nguồn nhân lực chất lượng cao và bồi dưỡng nhân tài khoa học, công nghệ; định hướng phát triển thành đại học nghiên cứu ngang tầm với các đại học có uy tín trong khu vực và trên thế giới.",
         "about-link": "Tài liệu giới thiệu Trường ĐHBK Hà Nội.",
         "more-btn": "Xem thêm",
         "search-btn": "Tìm kiếm"
@@ -328,7 +329,7 @@
             "gender": "Giới tính",
             "choose-gender": "Chọn giới tính",
             "reason": "Lí do khám",
-            "notice": "Để thay đổi thông tin xin vui lòng vào trang quản lý thông tin cá nhân để sửa đổi !",
+            "notice": "Để thay đổi thêm thông tin, quý khách hãy vào trang quản lý thông tin cá nhân để sửa đổi !",
             "confirm-btn": "Xác nhận",
             "cancel-btn": "Hủy",
             "more": "Xem thêm"

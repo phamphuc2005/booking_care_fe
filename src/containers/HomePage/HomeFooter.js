@@ -7,7 +7,7 @@ class HomeFooter extends Component {
     render() {
         return (
             <div className='home-footer'>
-                <p>&copy; 2022 Booking Care - Phạm Minh Phúc.</p>             
+                <p>&copy; 2022 Booking Health - Phạm Minh Phúc.</p>             
             </div>
         );
     }
