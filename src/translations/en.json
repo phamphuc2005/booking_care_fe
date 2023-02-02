@@ -224,6 +224,7 @@
         "name": "Clinic's name",
         "image": "Clinic's image",
         "address": "Address",
+        "description": "Description",
         "save-btn": "Save",
         "list-title": "List of clinics",
         "picture": "Image",

@@ -16,8 +16,10 @@ class DetailClinic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            arrDoctorId: [],
-            dataDetailClinic: {},
+            arrDoctorId_vi: [],
+            arrDoctorId_en: [],
+            dataDetailClinic_vi: {},
+            dataDetailClinic_en: {},
             isLoading: false
         }
     }
@@ -31,19 +33,31 @@ class DetailClinic extends Component {
             });
 
             if(res && res.errCode === 0 ){
-                let data = res.data;
-                let arrDoctorId = []
-                if(data && !_.isEmpty(res.data)) {
-                    let arr = data.doctorClinic;
+                let data_vi = res.data_vi;
+                let data_en = res.data_en;
+                let arrDoctorId_vi = []
+                let arrDoctorId_en = []
+                if(data_vi && !_.isEmpty(res.data_vi)) {
+                    let arr = data_vi.doctorClinic;
                     if(arr && arr.length>0) {
                         arr.map(item => {
-                            arrDoctorId.push(item.doctorId)
+                            arrDoctorId_vi.push(item.doctorId)
+                        })
+                    }
+                }
+                if(data_en && !_.isEmpty(res.data_en)) {
+                    let arr = data_vi.doctorClinic;
+                    if(arr && arr.length>0) {
+                        arr.map(item => {
+                            arrDoctorId_en.push(item.doctorId)
                         })
                     }
                 }
                 this.setState({
-                    dataDetailClinic: res.data,
-                    arrDoctorId: arrDoctorId,
+                    dataDetailClinic_vi: res.data_vi,
+                    dataDetailClinic_en: res.data_en,
+                    arrDoctorId_vi: arrDoctorId_vi,
+                    arrDoctorId_en: arrDoctorId_en,
                 })
             }
         }
@@ -68,7 +82,7 @@ class DetailClinic extends Component {
     }
 
     render() {
-        let {arrDoctorId, dataDetailClinic} = this.state;
+        let {arrDoctorId_vi, dataDetailClinic_vi, dataDetailClinic_en} = this.state;
         let {language} = this.props;
         return (
             <React.Fragment>
@@ -78,56 +92,114 @@ class DetailClinic extends Component {
                     text='Loading...'
                 >
                     <HomeHeader isShowBanner={false}/>
-                <div className='clinic-img' style={{backgroundImage: `url(${dataDetailClinic.image})`}}></div>
-                {dataDetailClinic && !_.isEmpty(dataDetailClinic) &&
-                    <div className='clinic-info'>
-                        <div className='name'>{dataDetailClinic.name}</div>
-                        <div className='address'>
-                            <i className="fas fa-map-marker-alt"></i>
-                            {dataDetailClinic.address}
-                        </div>
-                    </div>
-                }
-                <div className='description-specialty' >
-                    {dataDetailClinic && !_.isEmpty(dataDetailClinic) &&
-                        <div className='description' dangerouslySetInnerHTML={{__html: dataDetailClinic.descriptionHTML}}          
-                    ></div>
-                    }
-                </div>
-                <div className='list-doctor'>
-                    <div className='list-doctor-title'><FormattedMessage id = "patient.clinic.doctor-list-title"/></div>
-                    {arrDoctorId && arrDoctorId.length>0 &&
-                    arrDoctorId.map((item, index)=> {
-                        return(
-                            <div className='detail-doctor' key={index}>
-                                <div className='content_left'>
-                                    <ProfileDoctor
-                                        doctorId={item}
-                                        isShowDescription={true}
-                                        isShowLink={true}
-                                        isShowPrice={false}
-                                        // dataTime={dataTime}
-                                    >
-                                    </ProfileDoctor>
-                                </div>
-                                <div className='content_right'>
-                                    <div className='doctor-schedule'>
-                                        <DoctorSchedule
-                                            doctorID={item}
-                                            setLoadingData={this.setLoading}
-                                        />
-                                    </div>
-                                    <div className='doctor-info'>
-                                        <DoctorMoreInfo
-                                            doctorID={item}
-                                        />
-                                    </div>
+                {language === LANGUAGES.VI ?
+                    <>
+                        <div className='clinic-img' style={{backgroundImage: `url(${dataDetailClinic_vi.image})`}}></div>
+                        {dataDetailClinic_vi && !_.isEmpty(dataDetailClinic_vi) &&
+                            <div className='clinic-info'>
+                                <div className='name'>{dataDetailClinic_vi.name}</div>
+                                <div className='address'>
+                                    <i className="fas fa-map-marker-alt"></i>
+                                    {dataDetailClinic_vi.address}
                                 </div>
                             </div>
-                            
-                        )
-                    })}
-                </div>
+                        }
+                        <div className='description-specialty' >
+                            {dataDetailClinic_vi && !_.isEmpty(dataDetailClinic_vi) &&
+                                <div className='description' dangerouslySetInnerHTML={{__html: dataDetailClinic_vi.descriptionHTML}}          
+                            ></div>
+                            }
+                        </div>
+                        <div className='list-doctor'>
+                            <div className='list-doctor-title'><FormattedMessage id = "patient.clinic.doctor-list-title"/></div>
+                            {arrDoctorId_vi && arrDoctorId_vi.length>0 &&
+                            arrDoctorId_vi.map((item, index)=> {
+                                return(
+                                    <div className='detail-doctor' key={index}>
+                                        <div className='content_left'>
+                                            <ProfileDoctor
+                                                doctorId={item}
+                                                isShowDescription={true}
+                                                isShowLink={true}
+                                                isShowPrice={false}
+                                                // dataTime={dataTime}
+                                            >
+                                            </ProfileDoctor>
+                                        </div>
+                                        <div className='content_right'>
+                                            <div className='doctor-schedule'>
+                                                <DoctorSchedule
+                                                    doctorID={item}
+                                                    setLoadingData={this.setLoading}
+                                                />
+                                            </div>
+                                            <div className='doctor-info'>
+                                                <DoctorMoreInfo
+                                                    doctorID={item}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                )
+                            })}
+                        </div>
+                    </> : 
+                    <>
+                        <div className='clinic-img' style={{backgroundImage: `url(${dataDetailClinic_vi.image})`}}></div>
+                        {dataDetailClinic_en && !_.isEmpty(dataDetailClinic_en) &&
+                            <div className='clinic-info'>
+                                <div className='name'>{dataDetailClinic_en.name_en}</div>
+                                <div className='address'>
+                                    <i className="fas fa-map-marker-alt"></i>
+                                    {dataDetailClinic_en.address_en}
+                                </div>
+                            </div>
+                        }
+                        <div className='description-specialty' >
+                            {dataDetailClinic_en && !_.isEmpty(dataDetailClinic_en) &&
+                                <div className='description' dangerouslySetInnerHTML={{__html: dataDetailClinic_en.descriptionHTML_en}}          
+                            ></div>
+                            }
+                        </div>
+                        <div className='list-doctor'>
+                            <div className='list-doctor-title'><FormattedMessage id = "patient.clinic.doctor-list-title"/></div>
+                            {arrDoctorId_vi && arrDoctorId_vi.length>0 &&
+                            arrDoctorId_vi.map((item, index)=> {
+                                return(
+                                    <div className='detail-doctor' key={index}>
+                                        <div className='content_left'>
+                                            <ProfileDoctor
+                                                doctorId={item}
+                                                isShowDescription={true}
+                                                isShowLink={true}
+                                                isShowPrice={false}
+                                                // dataTime={dataTime}
+                                            >
+                                            </ProfileDoctor>
+                                        </div>
+                                        <div className='content_right'>
+                                            <div className='doctor-schedule'>
+                                                <DoctorSchedule
+                                                    doctorID={item}
+                                                    setLoadingData={this.setLoading}
+                                                />
+                                            </div>
+                                            <div className='doctor-info'>
+                                                <DoctorMoreInfo
+                                                    doctorID={item}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                )
+                            })}
+                        </div>
+                    </>
+                }
+                
+                
                 <div>
                     <HomeFooter/>
                 </div>

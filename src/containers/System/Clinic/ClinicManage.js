@@ -19,12 +19,17 @@ class ClinicManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            address: '',
+            name_vi: '',
+            address_vi: '',
             imageBase64: '',
-            descriptionHTML: '',
-            descriptionMarkdown: '',
-            dataClinic: [],
+            descriptionHTML_vi: '',
+            descriptionMarkdown_vi: '',
+            dataClinic_vi: [],
+            name_en: '',
+            address_en: '',
+            descriptionHTML_en: '',
+            descriptionMarkdown_en: '',
+            dataClinic_vi: [],
             clinicEdit: {},
             clinicDelete: {},
             isOpenEdit: false,
@@ -36,7 +41,9 @@ class ClinicManage extends Component {
         let res = await getAllClinic();
         if(res && res.errCode === 0) {
             this.setState({
-                dataClinic: res.data ? res.data : []
+                dataClinic_vi: res.data_vi ? res.data_vi : [],
+                dataClinic_en: res.data_en ? res.data_en : []
+
             })
         }
     }
@@ -71,10 +78,17 @@ class ClinicManage extends Component {
         }
     }
 
-    handleEditorChange = ({ html, text }) => {
+    handleEditorChange_vi = ({ html, text }) => {
         this.setState({
-            descriptionMarkdown: text,
-            descriptionHTML: html,
+            descriptionMarkdown_vi: text,
+            descriptionHTML_vi: html,
+        });
+    }
+
+    handleEditorChange_en = ({ html, text }) => {
+        this.setState({
+            descriptionMarkdown_en: text,
+            descriptionHTML_en: html,
         });
     }
 
@@ -82,11 +96,15 @@ class ClinicManage extends Component {
         let res = await createClinic(this.state);
         if(res && res.errCode === 0) {
             this.setState({
-                name: '',
-                address: '',
+                name_vi: '',
+                address_vi: '',
                 imageBase64: '',
-                descriptionHTML: '',
-                descriptionMarkdown: '',
+                descriptionHTML_vi: '',
+                descriptionMarkdown_vi: '',
+                name_en: '',
+                address_en: '',
+                descriptionHTML_en: '',
+                descriptionMarkdown_en: '',
             })
             toast.success("Create clinic for success!");
             this.componentDidMount();
@@ -143,7 +161,7 @@ class ClinicManage extends Component {
 
     doDeleteClinic = async (clinic) => {
         try {
-            let res = await deleteClinic(clinic.id);
+            let res = await deleteClinic(this.state.clinicDelete);
             if(res && res.errCode === 0) {
                 this.setState({
                     isOpenDelete: false,
@@ -160,7 +178,7 @@ class ClinicManage extends Component {
     }
 
     render() {
-        let {dataClinic} = this.state;
+        let {dataClinic_vi, dataClinic_en} = this.state;
         return (
             <div className='clinic-manage-container container'>
                 {
@@ -185,21 +203,39 @@ class ClinicManage extends Component {
                 <div className='row add-clinic'> 
                     <div className='add-title col-12 '>-- <FormattedMessage id="clinic-manage.add-title"/> --</div>
                     <div className='col-6 form-group mt-4'>
-                        <label><FormattedMessage id="clinic-manage.name"/>:</label>
+                        <label><FormattedMessage id="clinic-manage.name"/> (vi):</label>
                         <input 
                             className='form-control' 
                             type='text'
-                            value={this.state.name}
-                            onChange={(event)=>this.handleOnChangeInput(event, 'name')}
+                            value={this.state.name_vi}
+                            onChange={(event)=>this.handleOnChangeInput(event, 'name_vi')}
                         ></input>
                     </div>
                     <div className='col-6 form-group mt-4'>
-                        <label><FormattedMessage id="clinic-manage.address"/>:</label>
+                        <label><FormattedMessage id="clinic-manage.name"/> (en):</label>
                         <input 
                             className='form-control' 
                             type='text'
-                            value={this.state.address}
-                            onChange={(event)=>this.handleOnChangeInput(event, 'address')}
+                            value={this.state.name_en}
+                            onChange={(event)=>this.handleOnChangeInput(event, 'name_en')}
+                        ></input>
+                    </div>
+                    <div className='col-6 form-group mt-4'>
+                        <label><FormattedMessage id="clinic-manage.address"/> (vi):</label>
+                        <input 
+                            className='form-control' 
+                            type='text'
+                            value={this.state.address_vi}
+                            onChange={(event)=>this.handleOnChangeInput(event, 'address_vi')}
+                        ></input>
+                    </div>
+                    <div className='col-6 form-group mt-4'>
+                        <label><FormattedMessage id="clinic-manage.address"/> (en):</label>
+                        <input 
+                            className='form-control' 
+                            type='text'
+                            value={this.state.address_en}
+                            onChange={(event)=>this.handleOnChangeInput(event, 'address_en')}
                         ></input>
                     </div>
                     <div className='col-6 form-group mt-4'>
@@ -212,11 +248,21 @@ class ClinicManage extends Component {
                         ></input>
                     </div>
                     <div className='col-12'>
+                    <label><FormattedMessage id="clinic-manage.description"/> (vi):</label>
                         <MdEditor 
-                            style={{ height: '400px' }} 
+                            style={{ height: '200px' }} 
                             renderHTML={text => mdParser.render(text)} 
-                            onChange={this.handleEditorChange}
-                            value={this.state.descriptionMarkdown} 
+                            onChange={this.handleEditorChange_vi}
+                            value={this.state.descriptionMarkdown_vi} 
+                        />
+                    </div>
+                    <div className='col-12 mt-4'>
+                    <label><FormattedMessage id="clinic-manage.description"/> (en):</label>
+                        <MdEditor 
+                            style={{ height: '200px' }} 
+                            renderHTML={text => mdParser.render(text)} 
+                            onChange={this.handleEditorChange_en}
+                            value={this.state.descriptionMarkdown_en} 
                         />
                     </div>
                     <div className='col-12 my-4'>
@@ -230,49 +276,94 @@ class ClinicManage extends Component {
                     <div className='table-title col-12 mb-2'>-- <FormattedMessage id="clinic-manage.list-title"/> --</div>
                     <div className='col-12'>
                         <table id="table-clinic" className='col-12'>
-                            <tbody>
-                                <tr>
-                                    <th style={{width: '10%'}}><FormattedMessage id="clinic-manage.picture"/></th>
-                                    <th style={{width: '25%'}}><FormattedMessage id="clinic-manage.name"/></th>
-                                    <th style={{width: '55%'}}><FormattedMessage id="clinic-manage.address"/></th>
-                                    <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.edit"/></th>
-                                    <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.delete"/></th>
-                                </tr>
-                                {dataClinic && dataClinic.length>0 && 
-                                    dataClinic.map((item, index) => {
-                                        return(
-                                            <tr key={index}>
-                                                <td>
-                                                    <div 
-                                                        className='background-img img-clinic'
-                                                        style={{backgroundImage: `url(${item.image})`}}
-                                                    >
-                                                    </div>
-                                                </td>
-                                                <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name}</td>
-                                                <td style={{textAlign: 'center', fontWeight: '500'}}>{item.address}</td>
-                                                <td className='edit text-center'>
-                                                    <button 
-                                                        className='edit-btn' 
-                                                        onClick={()=>this.handleEditClinic(item)}
-                                                    >
-                                                        <i className="fas fa-pencil-alt"></i>
-                                                    </button>
-                                                </td>
-                                                <td className='delete text-center'>
-                                                    <button 
-                                                        className='delete-btn'
-                                                        onClick={()=>this.handleDeleteClinic(item)} 
-                                                    >
-                                                        <i className="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
-                                }
+                            {this.props.language === LANGUAGES.VI ?
+                                <tbody>
+                                    <tr>
+                                        <th style={{width: '10%'}}><FormattedMessage id="clinic-manage.picture"/></th>
+                                        <th style={{width: '25%'}}><FormattedMessage id="clinic-manage.name"/></th>
+                                        <th style={{width: '55%'}}><FormattedMessage id="clinic-manage.address"/></th>
+                                        <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.edit"/></th>
+                                        <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.delete"/></th>
+                                    </tr>
+                                    {dataClinic_vi && dataClinic_vi.length>0 && 
+                                        dataClinic_vi.map((item, index) => {
+                                            return(
+                                                <tr key={index}>
+                                                    <td>
+                                                        <div 
+                                                            className='background-img img-clinic'
+                                                            style={{backgroundImage: `url(${item.image})`}}
+                                                        >
+                                                        </div>
+                                                    </td>
+                                                    <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name}</td>
+                                                    <td style={{textAlign: 'center', fontWeight: '500'}}>{item.address}</td>
+                                                    <td className='edit text-center'>
+                                                        <button 
+                                                            className='edit-btn' 
+                                                            onClick={()=>this.handleEditClinic(item.id)}
+                                                        >
+                                                            <i className="fas fa-pencil-alt"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td className='delete text-center'>
+                                                        <button 
+                                                            className='delete-btn'
+                                                            onClick={()=>this.handleDeleteClinic(item.id)} 
+                                                        >
+                                                            <i className="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
 
-                            </tbody>                 
+                                </tbody> :            
+                                <tbody>
+                                    <tr>
+                                        <th style={{width: '10%'}}><FormattedMessage id="clinic-manage.picture"/></th>
+                                        <th style={{width: '25%'}}><FormattedMessage id="clinic-manage.name"/></th>
+                                        <th style={{width: '55%'}}><FormattedMessage id="clinic-manage.address"/></th>
+                                        <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.edit"/></th>
+                                        <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.delete"/></th>
+                                    </tr>
+                                    {dataClinic_en && dataClinic_en.length>0 && 
+                                        dataClinic_en.map((item, index) => {
+                                            return(
+                                                <tr key={index}>
+                                                    <td>
+                                                        <div 
+                                                            className='background-img img-clinic'
+                                                            style={{backgroundImage: `url(${item.image_en})`}}
+                                                        >
+                                                        </div>
+                                                    </td>
+                                                    <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name_en}</td>
+                                                    <td style={{textAlign: 'center', fontWeight: '500'}}>{item.address_en}</td>
+                                                    <td className='edit text-center'>
+                                                        <button 
+                                                            className='edit-btn' 
+                                                            onClick={()=>this.handleEditClinic(item.id_en)}
+                                                        >
+                                                            <i className="fas fa-pencil-alt"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td className='delete text-center'>
+                                                        <button 
+                                                            className='delete-btn'
+                                                            onClick={()=>this.handleDeleteClinic(item.id_en)} 
+                                                        >
+                                                            <i className="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+
+                                </tbody> 
+                            }
                         </table>
 
                     </div>

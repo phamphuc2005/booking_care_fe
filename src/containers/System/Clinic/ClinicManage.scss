@@ -49,11 +49,12 @@
           }
 
           .background-img {
-                width: 90px;
+                width: 100px;
                 height: 60px;
                 background-position: center center;
                 background-repeat: no-repeat;
                 background-size: cover;
+                margin: auto auto;
           }
           .edit {
             
@@ -121,7 +122,20 @@
           outline: none;
           border: 1px solid gray;
           padding: 0 10px;
+          
         }
+
+        .images {
+          height: 100px;
+          width: 150px;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          color: transparent;
+        }
+      }
+      label {
+        font-weight: 600;
       }
     }
   }

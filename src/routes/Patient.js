@@ -12,7 +12,7 @@ class Patient extends Component {
         return (
             <React.Fragment>
                 {isLoggedIn && <Header />}
-                <div className="system-container">
+                <div className="system-container" style={{ margin: '80px 0 0 0 ' }}>
                     <div className="system-list">
                         <Switch>
                             {/* <Route path="/system/user-manage" component={UserManage} />

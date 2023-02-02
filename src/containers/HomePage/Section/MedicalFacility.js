@@ -4,12 +4,14 @@ import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
 import { getAllClinic } from '../../../services/userService';
 import { withRouter } from 'react-router';
+import { LANGUAGES } from '../../../utils';
 
 class MedicalFacility extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataClinic: []
+            dataClinic_vi: [],
+            dataClinic_en: [],
         }
     }
 
@@ -17,7 +19,8 @@ class MedicalFacility extends Component {
         let res = await getAllClinic();
         if(res && res.errCode === 0) {
             this.setState({
-                dataClinic: res.data ? res.data : []
+                dataClinic_vi: res.data_vi ? res.data_vi : [],
+                dataClinic_en: res.data_en ? res.data_en : []
             })
         }
     }
@@ -36,7 +39,7 @@ class MedicalFacility extends Component {
     }
 
     render() {
-        let {dataClinic} = this.state;
+        let {dataClinic_vi, dataClinic_en} = this.state;
         return (
             <div className='section-share section-medicalfacility'>
                 <div className='section-container'>
@@ -45,23 +48,42 @@ class MedicalFacility extends Component {
                         <button className='btn-section' onClick={()=>this.handleListClinic()}><FormattedMessage id = "section.more-btn"/></button>
                     </div>
                     <div className='section-body'>
-                        <Slider {...this.props.settings}>
-                        {dataClinic && dataClinic.length>0 && 
-                            dataClinic.map((item, index)=>{
-                                return (
-                                    <div className='section-customize' key={index} onClick={()=> this.handleViewDetailClinic(item)}>
-                                        <div className='outer-bg'>
-                                            <div 
-                                                className='background-img img-specialty'
-                                                style={{backgroundImage: `url(${item.image})`}}
-                                            >
+                        {this.props.language === LANGUAGES.VI ? 
+                            <Slider {...this.props.settings}>
+                            {dataClinic_vi && dataClinic_vi.length>0 && 
+                                dataClinic_vi.map((item, index)=>{
+                                    return (
+                                        <div className='section-customize' key={index} onClick={()=> this.handleViewDetailClinic(item)}>
+                                            <div className='outer-bg'>
+                                                <div 
+                                                    className='background-img img-specialty'
+                                                    style={{backgroundImage: `url(${item.image})`}}
+                                                >
+                                                </div>
                                             </div>
+                                            <div className='position text-center'>{item.name}</div>
                                         </div>
-                                        <div className='position text-center'>{item.name}</div>
-                                    </div>
-                                )
-                            })}
-                        </Slider>
+                                    )
+                                })}
+                            </Slider> :
+                            <Slider {...this.props.settings}>
+                            {dataClinic_en && dataClinic_en.length>0 && 
+                                dataClinic_en.map((item, index)=>{
+                                    return (
+                                        <div className='section-customize' key={index} onClick={()=> this.handleViewDetailClinic(item)}>
+                                            <div className='outer-bg'>
+                                                <div 
+                                                    className='background-img img-specialty'
+                                                    style={{backgroundImage: `url(${item.image_en})`}}
+                                                >
+                                                </div>
+                                            </div>
+                                            <div className='position text-center'>{item.name_en}</div>
+                                        </div>
+                                    )
+                                })}
+                            </Slider>
+                        }
                     </div>
                 </div>
             </div>

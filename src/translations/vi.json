@@ -223,11 +223,12 @@
         "add-title": "Thêm cơ sở y tế",
         "name": "Tên cơ sở y tế",
         "image": "Ảnh cơ sở y tế",
+        "description": "Mô tả",
         "address":"Địa chỉ",
         "save-btn": "Lưu",
         "list-title": "Danh sách cơ sở y tế",
         "picture": "Ảnh",
-        "edit": "Chỉnh sửa",
+        "edit": "Sửa",
         "delete": "Xóa"
     },
     "clinic-modal": {

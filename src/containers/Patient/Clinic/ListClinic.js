@@ -12,15 +12,18 @@ class ListClinic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataClinic: []
+            dataClinic_vi: [],
+            dataClinic_en: []
         }
     }
 
     async componentDidMount() {
         let res = await getAllClinic();
+        console.log('res', res);
         if(res && res.errCode === 0) {
             this.setState({
-                dataClinic: res.data ? res.data : []
+                dataClinic_vi: res.data_vi ? res.data_vi : [],
+                dataClinic_en: res.data_en ? res.data_en : [],
             })
         }
     }
@@ -55,7 +58,8 @@ class ListClinic extends Component {
     }
 
     render() {
-        let {dataClinic} = this.state;
+        let {dataClinic_vi, dataClinic_en} = this.state;
+        console.log('clinic',this.state);
         return (
             <React.Fragment>
                 <HomeHeader isShowBanner={false}/>
@@ -69,23 +73,42 @@ class ListClinic extends Component {
                             <i className='fas fa-arrow-right'></i>
                         </div>
                     </div>
-                    <div className='list-container'>
-                    {dataClinic && dataClinic.length>0 && 
-                            dataClinic.map((item, index)=>{
-                                return (
-                                    <div className='list-detail' key={index} onClick={()=> this.handleViewDetailClinic(item)}>
-                                        <div 
-                                            className='content-left'
-                                            style={{backgroundImage: `url(${item.image})`}}    
-                                        ></div>
-                                        <div className='content-right'>
-                                            <div className='name'>{item.name}</div>
-                                            <div className='address'><i className="fas fa-map-marker-alt"></i>{item.address}</div>                             
+                    {this.props.language === LANGUAGES.VI ?
+                        <div className='list-container'>
+                        {dataClinic_vi && dataClinic_vi.length>0 && 
+                                dataClinic_vi.map((item, index)=>{
+                                    return (
+                                        <div className='list-detail' key={index} onClick={()=> this.handleViewDetailClinic(item)}>
+                                            <div 
+                                                className='content-left'
+                                                style={{backgroundImage: `url(${item.image})`}}    
+                                            ></div>
+                                            <div className='content-right'>
+                                                <div className='name'>{item.name}</div>
+                                                <div className='address'><i className="fas fa-map-marker-alt"></i>{item.address}</div>                             
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })}
-                    </div>
+                                    )
+                                })}
+                        </div> : 
+                        <div className='list-container'>
+                        {dataClinic_en && dataClinic_en.length>0 && 
+                                dataClinic_en.map((item, index)=>{
+                                    return (
+                                        <div className='list-detail' key={index} onClick={()=> this.handleViewDetailClinic(item)}>
+                                            <div 
+                                                className='content-left'
+                                                style={{backgroundImage: `url(${item.image_en})`}}    
+                                            ></div>
+                                            <div className='content-right'>
+                                                <div className='name'>{item.name_en}</div>
+                                                <div className='address'><i className="fas fa-map-marker-alt"></i>{item.address_en}</div>                             
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                        </div>    
+                    }
                 </div>
                 <div>
                     <HomeFooter/>
