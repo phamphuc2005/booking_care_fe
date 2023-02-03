@@ -101,20 +101,14 @@
       }
     }
 
-    .modal-clinic-body {
+    .modal-clinics-body {
       display: flex;
-      gap: 15px;
       flex-wrap: wrap;
 
       .input-container {
         display: flex;
         flex-direction: column;
-        width: 48.4%;
         position: relative;
-
-        &.max-width-input {
-          width: 99%;
-        }
   
         input, select {
           border-radius: 4px;
@@ -122,7 +116,6 @@
           outline: none;
           border: 1px solid gray;
           padding: 0 10px;
-          
         }
 
         .images {

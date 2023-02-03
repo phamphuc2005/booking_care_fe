@@ -16,7 +16,8 @@ class ListSpecialty extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataSpecialty: []
+            dataSpecialty_vi: [],
+            dataSpecialty_en: []
         }
     }
 
@@ -24,7 +25,8 @@ class ListSpecialty extends Component {
         let res = await getAllSpecialty();
         if(res && res.errCode === 0) {
             this.setState({
-                dataSpecialty: res.data ? res.data : []
+                dataSpecialty_vi: res.data_vi ? res.data_vi : [],
+                dataSpecialty_en: res.data_en ? res.data_en : []
             })
         }
     }
@@ -59,7 +61,7 @@ class ListSpecialty extends Component {
     }
 
     render() {
-        let {dataSpecialty} = this.state;
+        let {dataSpecialty_vi, dataSpecialty_en} = this.state;
         return (
             <React.Fragment>
                 <HomeHeader isShowBanner={false}/>
@@ -73,23 +75,42 @@ class ListSpecialty extends Component {
                             <i className='fas fa-arrow-right'></i>
                         </div>
                     </div>
-                    <div className='list-container'>
-                    {dataSpecialty && dataSpecialty.length>0 && 
-                            dataSpecialty.map((item, index)=>{
-                                return (
-                                    <div className='list-detail' key={index} onClick={()=> this.handleViewDetailSpecialty(item)}>
-                                        <div 
-                                            className='content-left'
-                                            style={{backgroundImage: `url(${item.image})`}}    
-                                        ></div>
-                                        <div className='content-right'>
-                                            <div className='name'>{item.name}</div>
-                                            
+                    {this.props.language === LANGUAGES.VI ?
+                        <div className='list-container'>
+                        {dataSpecialty_vi && dataSpecialty_vi.length>0 && 
+                                dataSpecialty_vi.map((item, index)=>{
+                                    return (
+                                        <div className='list-detail' key={index} onClick={()=> this.handleViewDetailSpecialty(item)}>
+                                            <div 
+                                                className='content-left'
+                                                style={{backgroundImage: `url(${item.image})`}}    
+                                            ></div>
+                                            <div className='content-right'>
+                                                <div className='name'>{item.name}</div>
+                                                
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })}
-                    </div>
+                                    )
+                                })}
+                        </div> :
+                        <div className='list-container'>
+                        {dataSpecialty_en && dataSpecialty_en.length>0 && 
+                                dataSpecialty_en.map((item, index)=>{
+                                    return (
+                                        <div className='list-detail' key={index} onClick={()=> this.handleViewDetailSpecialty(item)}>
+                                            <div 
+                                                className='content-left'
+                                                style={{backgroundImage: `url(${item.image})`}}    
+                                            ></div>
+                                            <div className='content-right'>
+                                                <div className='name'>{item.name}</div>
+                                                
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                        </div>
+                    }
                 </div>
                 <div>
                     <HomeFooter/>

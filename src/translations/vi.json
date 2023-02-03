@@ -202,6 +202,7 @@
         "add-title": "Thêm chuyên khoa",
         "name": "Tên chuyên khoa",
         "image": "Ảnh chuyên khoa",
+        "description": "Mô tả",
         "save-btn": "Lưu",
         "list-title": "Danh sách chuyên khoa",
         "picture": "Ảnh",

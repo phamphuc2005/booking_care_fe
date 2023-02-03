@@ -28,7 +28,7 @@ class MedicalFacility extends Component {
     handleViewDetailClinic = (clinic) => {
         console.log(clinic);
         if(this.props.history) {
-            this.props.history.push(`/detail-clinic/${clinic.id}`)
+            this.props.history.push(`/detail-clinic/${clinic}`)
         }
     }
 
@@ -53,7 +53,7 @@ class MedicalFacility extends Component {
                             {dataClinic_vi && dataClinic_vi.length>0 && 
                                 dataClinic_vi.map((item, index)=>{
                                     return (
-                                        <div className='section-customize' key={index} onClick={()=> this.handleViewDetailClinic(item)}>
+                                        <div className='section-customize' key={index} onClick={()=> this.handleViewDetailClinic(item.id)}>
                                             <div className='outer-bg'>
                                                 <div 
                                                     className='background-img img-specialty'
@@ -70,7 +70,7 @@ class MedicalFacility extends Component {
                             {dataClinic_en && dataClinic_en.length>0 && 
                                 dataClinic_en.map((item, index)=>{
                                     return (
-                                        <div className='section-customize' key={index} onClick={()=> this.handleViewDetailClinic(item)}>
+                                        <div className='section-customize' key={index} onClick={()=> this.handleViewDetailClinic(item.id_en)}>
                                             <div className='outer-bg'>
                                                 <div 
                                                     className='background-img img-specialty'

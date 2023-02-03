@@ -29,7 +29,7 @@ class ClinicManage extends Component {
             address_en: '',
             descriptionHTML_en: '',
             descriptionMarkdown_en: '',
-            dataClinic_vi: [],
+            dataClinic_en: [],
             clinicEdit: {},
             clinicDelete: {},
             isOpenEdit: false,

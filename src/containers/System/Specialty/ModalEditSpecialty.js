@@ -8,6 +8,7 @@ import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import { toast } from 'react-toastify';
+import { getAllSpecialty, getDetailSpecialtyById } from '../../../services/userService';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -16,23 +17,48 @@ class ModalEditSpecialty extends Component {
     constructor(props){
         super(props);
         this.state = {
-            name: '',
+            name_vi: '',
             imageBase64: '',
-            descriptionHTML: '',
-            descriptionMarkdown: '',
+            descriptionHTML_vi: '',
+            descriptionMarkdown_vi: '',
+            name_en: '',
+            descriptionHTML_en: '',
+            descriptionMarkdown_en: '',
         }
     }
 
-    componentDidMount() {
+    // componentDidMount() {
+    //     let specialty = this.props.currentSpecialty;
+    //     if (specialty && !_.isEmpty(specialty)) {
+    //         this.setState({
+    //             id : specialty.id,
+    //             name: specialty.name,
+    //             imageBase64: specialty.imageBase64,
+    //             descriptionHTML: specialty.descriptionHTML,
+    //             descriptionMarkdown: specialty.descriptionMarkdown,
+    //         })
+    //     }
+    // }
+
+    async componentDidMount() {
         let specialty = this.props.currentSpecialty;
-        if (specialty && !_.isEmpty(specialty)) {
-            this.setState({
-                id : specialty.id,
-                name: specialty.name,
-                imageBase64: specialty.imageBase64,
-                descriptionHTML: specialty.descriptionHTML,
-                descriptionMarkdown: specialty.descriptionMarkdown,
-            })
+        if (specialty) {
+            let res = await getDetailSpecialtyById({
+                id: specialty,
+            });
+
+            if(res && res.errCode === 0 ){
+                this.setState({
+                    id : specialty,
+                    imageBase64: res.data_vi.image,
+                    name_vi: res.data_vi.name,
+                    descriptionHTML_vi: res.data_vi.descriptionHTML,
+                    descriptionMarkdown_vi: res.data_vi.descriptionMarkdown,
+                    name_en: res.data_en.name,
+                    descriptionHTML_en: res.data_en.descriptionHTML,
+                    descriptionMarkdown_en: res.data_en.descriptionMarkdown,
+                })
+            }
         }
     }
 
@@ -59,16 +85,23 @@ class ModalEditSpecialty extends Component {
         }
     }
 
-    handleEditorChange = ({ html, text }) => {
+    handleEditorChange_vi = ({ html, text }) => {
         this.setState({
-            descriptionMarkdown: text,
-            descriptionHTML: html,
+            descriptionMarkdown_vi: text,
+            descriptionHTML_vi: html,
+        });
+    }
+    handleEditorChange_en = ({ html, text }) => {
+        this.setState({
+            descriptionMarkdown_en: text,
+            descriptionHTML_en: html,
         });
     }
 
     checkValidateInput = () => {
         let isValid = true;
-        let arrInput = ['name', 'imageBase64', 'descriptionHTML', 'descriptionMarkdown'];
+        let arrInput = ['name_vi', 'imageBase64', 'descriptionHTML_vi', 'descriptionMarkdown_vi',
+        'name_en', 'descriptionHTML_en', 'descriptionMarkdown_en'];
         for(let i=0; i<arrInput.length; i++) {
             if(!this.state[arrInput[i]]) {
                 isValid = false;
@@ -88,6 +121,7 @@ class ModalEditSpecialty extends Component {
     }
 
     render() {
+        console.log('---------',this.state);
         return (
             <Modal 
                 isOpen={this.props.isOpen}
@@ -98,29 +132,47 @@ class ModalEditSpecialty extends Component {
                 <ModalHeader toggle={()=>{this.toggle()}}><FormattedMessage id = "specialty-modal.edit-title"/></ModalHeader>
                 <ModalBody>
                     <div className='modal-specialty-body'>
-                        <div className='input-container'>
-                            <label><FormattedMessage id = "specialty-modal.name"/>:</label>
-                            <input 
-                                type='text' 
-                                onChange={(event)=>{this.handleOnChangeInput(event, "name")}}
-                                value={this.state.name}
-                            />
-                        </div>
-                        <div className='input-container'>
+                        <div className='input-container col-12'>
                             <label><FormattedMessage id = "specialty-modal.image"/>:</label>
                             <input 
-                                className='form-control-file'
+                                className='form-control-file images'
                                 type='file' 
                                 onChange={(event)=>{this.handleOnChangeImg(event, "imageBase64")}}
-                                value={this.state.image}
+                                style={{backgroundImage: `url(${this.state.imageBase64})`}}
                             />
                         </div>
-                        <div className='col-12'>
+                        <div className='input-container col-6 mt-3'>
+                            <label><FormattedMessage id = "specialty-modal.name"/> (vi):</label>
+                            <input 
+                                type='text' 
+                                onChange={(event)=>{this.handleOnChangeInput(event, "name_vi")}}
+                                value={this.state.name_vi}
+                            />
+                        </div>
+                        <div className='input-container col-6 mt-3'>
+                            <label><FormattedMessage id = "specialty-modal.name"/> (en):</label>
+                            <input 
+                                type='text' 
+                                onChange={(event)=>{this.handleOnChangeInput(event, "name_en")}}
+                                value={this.state.name_en}
+                            />
+                        </div>
+                        <div className='col-12 mt-3'>
+                            <label><FormattedMessage id="specialty-manage.description"/> (vi):</label>
                             <MdEditor 
-                                style={{ height: '300px' }} 
+                                style={{ height: '180px' }} 
                                 renderHTML={text => mdParser.render(text)} 
-                                onChange={this.handleEditorChange}
-                                value={this.state.descriptionMarkdown} 
+                                onChange={this.handleEditorChange_vi}
+                                value={this.state.descriptionMarkdown_vi} 
+                            />
+                        </div>
+                        <div className='col-12 mt-3'>
+                            <label><FormattedMessage id="specialty-manage.description"/> (en):</label>
+                            <MdEditor 
+                                style={{ height: '180px' }} 
+                                renderHTML={text => mdParser.render(text)} 
+                                onChange={this.handleEditorChange_en}
+                                value={this.state.descriptionMarkdown_en} 
                             />
                         </div>
                     </div>   

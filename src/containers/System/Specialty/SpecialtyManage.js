@@ -19,11 +19,15 @@ class SpecialtyManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
+            name_vi: '',
             imageBase64: '',
-            descriptionHTML: '',
-            descriptionMarkdown: '',
-            dataSpecialty: [],
+            descriptionHTML_vi: '',
+            descriptionMarkdown_vi: '',
+            dataSpecialty_vi: [],
+            name_en: '',
+            descriptionHTML_en: '',
+            descriptionMarkdown_en: '',
+            dataSpecialty_en: [],
             specialtyEdit: {},
             specialtyDelete: {},
             isOpenEdit: false,
@@ -35,7 +39,8 @@ class SpecialtyManage extends Component {
         let res = await getAllSpecialty();
         if(res && res.errCode === 0) {
             this.setState({
-                dataSpecialty: res.data ? res.data : []
+                dataSpecialty_vi: res.data_vi ? res.data_vi : [],
+                dataSpecialty_en: res.data_en ? res.data_en : []
             })
         }
     }
@@ -70,10 +75,16 @@ class SpecialtyManage extends Component {
         }
     }
 
-    handleEditorChange = ({ html, text }) => {
+    handleEditorChange_vi = ({ html, text }) => {
         this.setState({
-            descriptionMarkdown: text,
-            descriptionHTML: html,
+            descriptionMarkdown_vi: text,
+            descriptionHTML_vi: html,
+        });
+    }
+    handleEditorChange_en = ({ html, text }) => {
+        this.setState({
+            descriptionMarkdown_en: text,
+            descriptionHTML_en: html,
         });
     }
 
@@ -81,10 +92,13 @@ class SpecialtyManage extends Component {
         let res = await createSpecialty(this.state);
         if(res && res.errCode === 0) {
             this.setState({
-                name: '',
+                name_vi: '',
                 imageBase64: '',
-                descriptionHTML: '',
-                descriptionMarkdown: '',
+                descriptionHTML_vi: '',
+                descriptionMarkdown_vi: '',
+                name_en: '',
+                descriptionHTML_en: '',
+                descriptionMarkdown_en: '',
             })
             toast.success("Create specialty for success!");
             this.componentDidMount();
@@ -158,7 +172,7 @@ class SpecialtyManage extends Component {
     }
 
     render() {
-        let {dataSpecialty} = this.state;
+        let {dataSpecialty_vi, dataSpecialty_en} = this.state;
         return (
             <div className='specialty-manage-container container'>
                 {
@@ -183,12 +197,21 @@ class SpecialtyManage extends Component {
                 <div className='row add-specialty'> 
                     <div className='add-title col-12 '>-- <FormattedMessage id="specialty-manage.add-title"/> --</div>
                     <div className='col-6 form-group mt-4'>
-                        <label><FormattedMessage id="specialty-manage.name"/>:</label>
+                        <label><FormattedMessage id="specialty-manage.name"/> (vi):</label>
                         <input 
                             className='form-control' 
                             type='text'
-                            value={this.state.name}
-                            onChange={(event)=>this.handleOnChangeInput(event, 'name')}
+                            value={this.state.name_vi}
+                            onChange={(event)=>this.handleOnChangeInput(event, 'name_vi')}
+                        ></input>
+                    </div>
+                    <div className='col-6 form-group mt-4'>
+                        <label><FormattedMessage id="specialty-manage.name"/> (en):</label>
+                        <input 
+                            className='form-control' 
+                            type='text'
+                            value={this.state.name_en}
+                            onChange={(event)=>this.handleOnChangeInput(event, 'name_en')}
                         ></input>
                     </div>
                     <div className='col-6 form-group mt-4'>
@@ -200,12 +223,22 @@ class SpecialtyManage extends Component {
                             onChange={(event) => this.handleOnChangeImg(event)}
                         ></input>
                     </div>
-                    <div className='col-12'>
+                    <div className='col-12 mt-3'>
+                        <label><FormattedMessage id="specialty-manage.description"/> (vi):</label>
                         <MdEditor 
-                            style={{ height: '400px' }} 
+                            style={{ height: '200px' }} 
                             renderHTML={text => mdParser.render(text)} 
-                            onChange={this.handleEditorChange}
-                            value={this.state.descriptionMarkdown} 
+                            onChange={this.handleEditorChange_vi}
+                            value={this.state.descriptionMarkdown_vi} 
+                        />
+                    </div>
+                    <div className='col-12 mt-3'>
+                        <label><FormattedMessage id="specialty-manage.description"/> (en):</label>
+                        <MdEditor 
+                            style={{ height: '200px' }} 
+                            renderHTML={text => mdParser.render(text)} 
+                            onChange={this.handleEditorChange_en}
+                            value={this.state.descriptionMarkdown_en} 
                         />
                     </div>
                     <div className='col-12 my-4'>
@@ -219,47 +252,90 @@ class SpecialtyManage extends Component {
                     <div className='table-title col-12 mb-2'>-- <FormattedMessage id="specialty-manage.list-title"/> --</div>
                     <div className='col-12'>
                         <table id="table-specialty" className='col-12'>
-                            <tbody>
-                                <tr>
-                                    <th style={{width: '10%'}}><FormattedMessage id="specialty-manage.picture"/></th>
-                                    <th style={{width: '50%'}}><FormattedMessage id="specialty-manage.name"/></th>
-                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.edit"/></th>
-                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.delete"/></th>
-                                </tr>
-                                {dataSpecialty && dataSpecialty.length>0 && 
-                                    dataSpecialty.map((item, index) => {
-                                        return(
-                                            <tr key={index}>
-                                                <td>
-                                                    <div 
-                                                        className='background-img img-specialty'
-                                                        style={{backgroundImage: `url(${item.image})`}}
-                                                    >
-                                                    </div>
-                                                </td>
-                                                <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name}</td>
-                                                <td className='edit text-center'>
-                                                    <button 
-                                                        className='edit-btn' 
-                                                        onClick={()=>this.handleEditSpecialty(item)}
-                                                    >
-                                                        <i className="fas fa-pencil-alt"></i>
-                                                    </button>
-                                                </td>
-                                                <td className='delete text-center'>
-                                                    <button 
-                                                        className='delete-btn'
-                                                        onClick={()=>this.handleDeleteSpecialty(item)} 
-                                                    >
-                                                        <i className="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
-                                }
+                            {this.props.language === LANGUAGES.VI ?
+                                <tbody>
+                                    <tr>
+                                        <th style={{width: '10%'}}><FormattedMessage id="specialty-manage.picture"/></th>
+                                        <th style={{width: '50%'}}><FormattedMessage id="specialty-manage.name"/></th>
+                                        <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.edit"/></th>
+                                        <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.delete"/></th>
+                                    </tr>
+                                    {dataSpecialty_vi && dataSpecialty_vi.length>0 && 
+                                        dataSpecialty_vi.map((item, index) => {
+                                            return(
+                                                <tr key={index}>
+                                                    <td>
+                                                        <div 
+                                                            className='background-img img-specialty'
+                                                            style={{backgroundImage: `url(${item.image})`}}
+                                                        >
+                                                        </div>
+                                                    </td>
+                                                    <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name}</td>
+                                                    <td className='edit text-center'>
+                                                        <button 
+                                                            className='edit-btn' 
+                                                            onClick={()=>this.handleEditSpecialty(item.id)}
+                                                        >
+                                                            <i className="fas fa-pencil-alt"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td className='delete text-center'>
+                                                        <button 
+                                                            className='delete-btn'
+                                                            onClick={()=>this.handleDeleteSpecialty(item)} 
+                                                        >
+                                                            <i className="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
 
-                            </tbody>                 
+                                </tbody> :                 
+                                <tbody>
+                                    <tr>
+                                        <th style={{width: '10%'}}><FormattedMessage id="specialty-manage.picture"/></th>
+                                        <th style={{width: '50%'}}><FormattedMessage id="specialty-manage.name"/></th>
+                                        <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.edit"/></th>
+                                        <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.delete"/></th>
+                                    </tr>
+                                    {dataSpecialty_en && dataSpecialty_en.length>0 && 
+                                        dataSpecialty_en.map((item, index) => {
+                                            return(
+                                                <tr key={index}>
+                                                    <td>
+                                                        <div 
+                                                            className='background-img img-specialty'
+                                                            style={{backgroundImage: `url(${item.image})`}}
+                                                        >
+                                                        </div>
+                                                    </td>
+                                                    <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name}</td>
+                                                    <td className='edit text-center'>
+                                                        <button 
+                                                            className='edit-btn' 
+                                                            onClick={()=>this.handleEditSpecialty(item.id)}
+                                                        >
+                                                            <i className="fas fa-pencil-alt"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td className='delete text-center'>
+                                                        <button 
+                                                            className='delete-btn'
+                                                            onClick={()=>this.handleDeleteSpecialty(item)} 
+                                                        >
+                                                            <i className="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+
+                                </tbody>
+                            }
                         </table>
 
                     </div>

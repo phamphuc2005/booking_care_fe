@@ -36,18 +36,6 @@ class ModalEditClinic extends Component {
         let clinic = this.props.currentClinic;
         console.log('cl:', clinic);
         if (clinic) {
-            // this.setState({
-            //     id : this.props.currentClinic,
-            //     name_vi: clinic.name_vi,
-            //     address_vi: clinic.address_vi,
-            //     imageBase64: clinic.imageBase64,
-            //     descriptionHTML_vi: clinic.descriptionHTML_vi,
-            //     descriptionMarkdown_vi: clinic.descriptionMarkdown_vi,
-            //     name_en: clinic.name_en,
-            //     address_en: clinic.address_en,
-            //     descriptionHTML_en: clinic.descriptionHTML_en,
-            //     descriptionMarkdown_en: clinic.descriptionMarkdown_en,
-            // })
             let res = await getDetailClinicById({
                 id: clinic,
             });
@@ -55,8 +43,6 @@ class ModalEditClinic extends Component {
             if(res && res.errCode === 0 ){
                 this.setState({
                     id: clinic,
-                    // dataDetailClinic_vi: res.data_vi,
-                    // dataDetailClinic_en: res.data_en,
                     imageBase64: res.data_vi.image,
                     name_vi: res.data_vi.name,
                     address_vi: res.data_vi.address,
@@ -141,40 +127,8 @@ class ModalEditClinic extends Component {
             >
                 <ModalHeader toggle={()=>{this.toggle()}}><FormattedMessage id = "clinic-modal.edit-title"/></ModalHeader>
                 <ModalBody>
-                    <div className='modal-clinic-body'>
-                        <div className='input-container'>
-                            <label><FormattedMessage id = "clinic-modal.name"/> (vi):</label>
-                            <input 
-                                type='text' 
-                                onChange={(event)=>{this.handleOnChangeInput(event, "name_vi")}}
-                                value={this.state.name_vi}
-                            />
-                        </div>
-                        <div className='input-container'>
-                            <label><FormattedMessage id = "clinic-modal.name"/> (en):</label>
-                            <input 
-                                type='text' 
-                                onChange={(event)=>{this.handleOnChangeInput(event, "name_en")}}
-                                value={this.state.name_en}
-                            />
-                        </div>
-                        <div className='input-container'>
-                            <label><FormattedMessage id = "clinic-modal.address"/> (vi):</label>
-                            <input 
-                                type='text' 
-                                onChange={(event)=>{this.handleOnChangeInput(event, "address_vi")}}
-                                value={this.state.address_vi}
-                            />
-                        </div>
-                        <div className='input-container'>
-                            <label><FormattedMessage id = "clinic-modal.address"/> (en):</label>
-                            <input 
-                                type='text' 
-                                onChange={(event)=>{this.handleOnChangeInput(event, "address_en")}}
-                                value={this.state.address_en}
-                            />
-                        </div>
-                        <div className='input-container'>
+                    <div className='modal-clinics-body'>
+                        <div className='input-container col-12'>
                             <label><FormattedMessage id = "clinic-modal.image"/>:</label>
                             <input 
                                 className='form-control-file images'
@@ -183,7 +137,39 @@ class ModalEditClinic extends Component {
                                 style={{backgroundImage: `url(${this.state.imageBase64})`}}
                             />
                         </div>
-                        <div className='col-12'>
+                        <div className='input-container col-6 mt-3'>
+                            <label><FormattedMessage id = "clinic-modal.name"/> (vi):</label>
+                            <input 
+                                type='text' 
+                                onChange={(event)=>{this.handleOnChangeInput(event, "name_vi")}}
+                                value={this.state.name_vi}
+                            />
+                        </div>
+                        <div className='input-container col-6 mt-3'>
+                            <label><FormattedMessage id = "clinic-modal.name"/> (en):</label>
+                            <input 
+                                type='text' 
+                                onChange={(event)=>{this.handleOnChangeInput(event, "name_en")}}
+                                value={this.state.name_en}
+                            />
+                        </div>
+                        <div className='input-container col-6 mt-3'>
+                            <label><FormattedMessage id = "clinic-modal.address"/> (vi):</label>
+                            <input 
+                                type='text' 
+                                onChange={(event)=>{this.handleOnChangeInput(event, "address_vi")}}
+                                value={this.state.address_vi}
+                            />
+                        </div>
+                        <div className='input-container col-6 mt-3'>
+                            <label><FormattedMessage id = "clinic-modal.address"/> (en):</label>
+                            <input 
+                                type='text' 
+                                onChange={(event)=>{this.handleOnChangeInput(event, "address_en")}}
+                                value={this.state.address_en}
+                            />
+                        </div>
+                        <div className='col-12 mt-3'>
                             <label><FormattedMessage id="clinic-manage.description"/> (vi):</label>
                             <MdEditor 
                                 style={{ height: '150px' }} 
@@ -192,7 +178,7 @@ class ModalEditClinic extends Component {
                                 value={this.state.descriptionMarkdown_vi} 
                             />
                         </div>
-                        <div className='col-12'>
+                        <div className='col-12 mt-3'>
                             <label><FormattedMessage id="clinic-manage.description"/> (en):</label>
                             <MdEditor 
                                 style={{ height: '150px' }} 

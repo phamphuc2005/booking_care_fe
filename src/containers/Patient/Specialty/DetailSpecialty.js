@@ -16,8 +16,10 @@ class DetailSpecialty extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            arrDoctorId: [],
-            dataDetailSpecialty: {},
+            arrDoctorId_vi: [],
+            arrDoctorId_en: [],
+            dataDetailSpecialty_vi: {},
+            dataDetailSpecialty_en: {},
             listProvince: [],
             isLoading: false
         }
@@ -37,13 +39,23 @@ class DetailSpecialty extends Component {
             let resProvince = await getAllCodeService('PROVINCE')
 
             if(res && res.errCode === 0 && resProvince && resProvince.errCode === 0){
-                let data = res.data;
-                let arrDoctorId = []
-                if(data && !_.isEmpty(res.data)) {
-                    let arr = data.doctorSpecialty;
+                let data_vi = res.data_vi;
+                let data_en = res.data_en;
+                let arrDoctorId_vi = [];
+                let arrDoctorId_en = [];
+                if(data_vi && !_.isEmpty(res.data_vi)) {
+                    let arr = data_vi.doctorSpecialty;
                     if(arr && arr.length>0) {
                         arr.map(item => {
-                            arrDoctorId.push(item.doctorId)
+                            arrDoctorId_vi.push(item.doctorId)
+                        })
+                    }
+                }
+                if(data_en && !_.isEmpty(res.data_en)) {
+                    let arr = data_en.doctorSpecialty;
+                    if(arr && arr.length>0) {
+                        arr.map(item => {
+                            arrDoctorId_en.push(item.doctorId)
                         })
                     }
                 }
@@ -58,8 +70,10 @@ class DetailSpecialty extends Component {
                     })
                 }
                 this.setState({
-                    dataDetailSpecialty: res.data,
-                    arrDoctorId: arrDoctorId,
+                    dataDetailSpecialty_vi: res.data_vi,
+                    dataDetailSpecialty_en: res.data_en,
+                    arrDoctorId_vi: arrDoctorId_vi,
+                    arrDoctorId_en: arrDoctorId_en,
                     listProvince: dataProvince ? dataProvince : []
                 })
             }
@@ -87,19 +101,31 @@ class DetailSpecialty extends Component {
             });
 
             if(res && res.errCode === 0 ){
-                let data = res.data;
-                let arrDoctorID = [];
-                if(data && !_.isEmpty(res.data)) {
-                    let arr = data.doctorSpecialty;
+                let data_vi = res.data_vi;
+                let data_en = res.data_en;
+                let arrDoctorID_vi = [];
+                let arrDoctorID_en = [];
+                if(data_vi && !_.isEmpty(res.data_vi)) {
+                    let arr = data_vi.doctorSpecialty;
                     if(arr && arr.length>0) {
                         arr.map(item => {
-                            arrDoctorID.push(item.doctorId)
+                            arrDoctorID_vi.push(item.doctorId)
+                        })
+                    }
+                }
+                if(data_en && !_.isEmpty(res.data_en)) {
+                    let arr = data_en.doctorSpecialty;
+                    if(arr && arr.length>0) {
+                        arr.map(item => {
+                            arrDoctorID_en.push(item.doctorId)
                         })
                     }
                 }
                 this.setState({
-                    dataDetailSpecialty: res.data,
-                    arrDoctorId: arrDoctorID,
+                    dataDetailSpecialty_vi: res.data_vi,
+                    dataDetailSpecialty_en: res.data_en,
+                    arrDoctorId_vi: arrDoctorID_vi,
+                    arrDoctorId_en: arrDoctorID_en,
                 })
             }
         }
@@ -114,7 +140,7 @@ class DetailSpecialty extends Component {
     }
 
     render() {
-        let {arrDoctorId, dataDetailSpecialty, listProvince} = this.state;
+        let {arrDoctorId_vi, arrDoctorId_en, dataDetailSpecialty_vi, dataDetailSpecialty_en, listProvince} = this.state;
         let {language} = this.props;
         return (
             <React.Fragment>
@@ -123,60 +149,115 @@ class DetailSpecialty extends Component {
                     spinner
                     text='Loading...'
                 >
-                    <HomeHeader isShowBanner={false}/>
-                <div className='description-specialty' style={{backgroundImage: `url(${dataDetailSpecialty.image})`}}>
-                    {dataDetailSpecialty && !_.isEmpty(dataDetailSpecialty) &&
-                        <div className='description' dangerouslySetInnerHTML={{__html: dataDetailSpecialty.descriptionHTML}}
-                        
-                    ></div>
-                    }
-                </div>
-                <div className='search-doctor-by-location'>
-                    <select onChange={(event)=>this.handeOnChangeSelect(event)}>
-                        {listProvince && listProvince.length>0 &&
-                        listProvince.map((item, index) => {
-                            return(
-                                <option key={index} value={item.keyMap}>
-                                    {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
-                                </option>
-                            )
-                        })
-                        }
-                    </select>
-                </div>
-                <div className='list-doctor'>
-                    {arrDoctorId && arrDoctorId.length>0 &&
-                    arrDoctorId.map((item, index)=> {
-                        return(
-                            <div className='detail-doctor' key={index}>
-                                <div className='content_left'>
-                                    <ProfileDoctor
-                                        doctorId={item}
-                                        isShowDescription={true}
-                                        isShowLink={true}
-                                        isShowPrice={false}
-                                        // dataTime={dataTime}
-                                    >
-                                    </ProfileDoctor>
-                                </div>
-                                <div className='content_right'>
-                                    <div className='doctor-schedule'>
-                                        <DoctorSchedule
-                                            doctorID={item}
-                                            setLoadingData={this.setLoading} 
-                                        />
+                <HomeHeader isShowBanner={false}/>
+                {language === LANGUAGES.VI ?
+                    <>
+                        <div className='description-specialty' style={{backgroundImage: `url(${dataDetailSpecialty_vi.image})`}}>
+                            {dataDetailSpecialty_vi && !_.isEmpty(dataDetailSpecialty_vi) &&
+                                <div className='description' dangerouslySetInnerHTML={{__html: dataDetailSpecialty_vi.descriptionHTML}}></div>
+                            }
+                        </div>
+                        <div className='search-doctor-by-location'>
+                            <select onChange={(event)=>this.handeOnChangeSelect(event)}>
+                                {listProvince && listProvince.length>0 &&
+                                listProvince.map((item, index) => {
+                                    return(
+                                        <option key={index} value={item.keyMap}>
+                                            {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                                        </option>
+                                    )
+                                })
+                                }
+                            </select>
+                        </div>
+                        <div className='list-doctor'>
+                            {arrDoctorId_vi && arrDoctorId_vi.length>0 &&
+                            arrDoctorId_vi.map((item, index)=> {
+                                return(
+                                    <div className='detail-doctor' key={index}>
+                                        <div className='content_left'>
+                                            <ProfileDoctor
+                                                doctorId={item}
+                                                isShowDescription={true}
+                                                isShowLink={true}
+                                                isShowPrice={false}
+                                                // dataTime={dataTime}
+                                            >
+                                            </ProfileDoctor>
+                                        </div>
+                                        <div className='content_right'>
+                                            <div className='doctor-schedule'>
+                                                <DoctorSchedule
+                                                    doctorID={item}
+                                                    setLoadingData={this.setLoading} 
+                                                />
+                                            </div>
+                                            <div className='doctor-info'>
+                                                <DoctorMoreInfo
+                                                    doctorID={item}
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className='doctor-info'>
-                                        <DoctorMoreInfo
-                                            doctorID={item}
-                                        />
+                                    
+                                )
+                            })}
+                        </div>
+                    </> :
+                    <>
+                        <div className='description-specialty' style={{backgroundImage: `url(${dataDetailSpecialty_en.image})`}}>
+                            {dataDetailSpecialty_en && !_.isEmpty(dataDetailSpecialty_en) &&
+                                <div className='description' dangerouslySetInnerHTML={{__html: dataDetailSpecialty_en.descriptionHTML}}></div>
+                            }
+                        </div>
+                        <div className='search-doctor-by-location'>
+                            <select onChange={(event)=>this.handeOnChangeSelect(event)}>
+                                {listProvince && listProvince.length>0 &&
+                                listProvince.map((item, index) => {
+                                    return(
+                                        <option key={index} value={item.keyMap}>
+                                            {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                                        </option>
+                                    )
+                                })
+                                }
+                            </select>
+                        </div>
+                        <div className='list-doctor'>
+                            {arrDoctorId_en && arrDoctorId_en.length>0 &&
+                            arrDoctorId_en.map((item, index)=> {
+                                return(
+                                    <div className='detail-doctor' key={index}>
+                                        <div className='content_left'>
+                                            <ProfileDoctor
+                                                doctorId={item}
+                                                isShowDescription={true}
+                                                isShowLink={true}
+                                                isShowPrice={false}
+                                                // dataTime={dataTime}
+                                            >
+                                            </ProfileDoctor>
+                                        </div>
+                                        <div className='content_right'>
+                                            <div className='doctor-schedule'>
+                                                <DoctorSchedule
+                                                    doctorID={item}
+                                                    setLoadingData={this.setLoading} 
+                                                />
+                                            </div>
+                                            <div className='doctor-info'>
+                                                <DoctorMoreInfo
+                                                    doctorID={item}
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            
-                        )
-                    })}
-                </div>
+                                    
+                                )
+                            })}
+                        </div>
+                    </>
+                }
                 <div>
                     <HomeFooter/>
                 </div>
