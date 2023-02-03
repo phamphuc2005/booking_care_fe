@@ -1,6 +1,6 @@
-.more-info {
+.more-infos {
     display: flex;
-    gap: 12px;
+    // gap: 12px;
 
     .content-left {
         width: 25%;
@@ -17,20 +17,24 @@
     }
 }
 
-.detail-info {
+.detail-infos {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    // gap: 10px;
 
-    .price, .payment, .province, .name, .address, .note, .specialty, .clinic {
-        width: 32.7%;
-    }
+    // .price, .payment, .province, .name, .address, .note, .specialty, .clinic {
+    //     width: 32.7%;
+    // }
 
-    label {
-        margin-left: 2px;
-        font-weight: 600;
-        color: #0071ba;
-    }
+}
+label {
+    margin-left: 2px;
+    font-weight: 600;
+    color: #0071ba;
+}
+
+.markdown, .save-btn {
+    padding: 0 30px !important;
 }
 
 .markdown-editor {

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import HomeHeader from '../../HomePage/HomeHeader';
 import HomeFooter from '../../HomePage/HomeFooter';
 import './DoctorMoreInfo.scss';
-import {getDetailDoctor} from '../../../services/userService';
 import {LANGUAGES} from '../../../utils';
 import  moment from 'moment';
 import localization from 'moment/locale/vi';
@@ -59,11 +58,16 @@ class DoctorMoreInfo extends Component {
     render() {
         let {isShow, moreInfo} = this.state;
         let {language} = this.props;
+        console.log('more', this.state.moreInfo.Clinic);
         return (
             <div className='doctor-more-info-container'>
                 <div className='content-up'>
                     <div className='up-title'><FormattedMessage id = "patient.doctor-more-info.address"/></div>
-                    <div className='name-clinic'>{moreInfo && moreInfo.nameClinic ? moreInfo.nameClinic : ''}</div>
+                    <div className='name-clinic'>
+                        {language === LANGUAGES.VI ? 
+                        (moreInfo && moreInfo.Clinic && moreInfo.Clinic.name ? moreInfo.Clinic.name : '') :
+                        (moreInfo && moreInfo.Clinic_En && moreInfo.Clinic_En.name_en ? moreInfo.Clinic_En.name_en : '')}
+                    </div>
                     <div className='address-clinic'>{moreInfo && moreInfo.addressClinic ? moreInfo.addressClinic : ''}</div>
                 </div>
                 <div className='content-down'>

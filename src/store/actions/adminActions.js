@@ -316,8 +316,10 @@ export const getRequiredDoctorInfo = () => {
                         resPrice: resPrice.data,
                         resPayment: resPayment.data,
                         resProvince: resProvince.data,
-                        resSpecialty: resSpecialty.data,
-                        resClinic: resClinic.data
+                        resSpecialty_vi: resSpecialty.data_vi,
+                        resSpecialty_en: resSpecialty.data_en,
+                        resClinic_vi: resClinic.data_vi,
+                        resClinic_en: resClinic.data_en
                     }
                 dispatch(fetchRequiredDoctorInfoSuccess(data));
             } else {

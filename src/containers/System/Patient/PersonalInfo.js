@@ -135,76 +135,64 @@ class PersonalInfo extends Component {
 
                 <div className='row my-4 patient-details'>
                     <div className='col-2'>
-                        <input className=' my-4 avatar' type='file'
+                        <input className=' my-4 avatar ml-3' type='file'
                             style={{backgroundImage: `url(${this.state.image})`}}
                             onChange={(event)=>{this.handleOnChangeImg(event, "image")}}    
                         >
                         </input>
 
                     </div>
-                    <div className='row col-10'>
-                        <div className='col-4 mt-4 more-info'>
-                            <div className='form-group'>
-                                <label><FormattedMessage id = "patient-manage.firstname"/>:</label>
-                                <input className='form-control'
-                                    value={this.state.firstName}
-                                    onChange={(event)=>{this.onChangeInput(event, "firstName")}}
-                                />
-                            </div>
+                    <div className='row col-10 mt-4 more-info ml-2'>
+                        <div className='form-group col-4'>
+                            <label><FormattedMessage id = "patient-manage.firstname"/>:</label>
+                            <input className='form-control'
+                                value={this.state.firstName}
+                                onChange={(event)=>{this.onChangeInput(event, "firstName")}}
+                            />
                         </div>
-                        <div className='col-4 mt-4 more-info'>
-                            <div className='form-group'>
-                                <label><FormattedMessage id = "patient-manage.lastname"/>:</label>
-                                <input className='form-control'
-                                    value={this.state.lastName}
-                                    onChange={(event)=>{this.onChangeInput(event, "lastName")}}
-                                />
-                            </div>
+                        <div className='form-group col-4'>
+                            <label><FormattedMessage id = "patient-manage.lastname"/>:</label>
+                            <input className='form-control'
+                                value={this.state.lastName}
+                                onChange={(event)=>{this.onChangeInput(event, "lastName")}}
+                            />
                         </div>
-                        <div className='col-4 mt-4 more-info'>
-                            <div className='form-group'>
-                                <label>Email:</label>
-                                <input className='form-control'
-                                    value={this.state.email}
-                                />
-                            </div>
+                        <div className='form-group col-4'>
+                            <label>Email:</label>
+                            <input className='form-control'
+                                value={this.state.email}
+                            />
                         </div>
-                        <div className='col-4 mt-4 more-info'>
-                            <div className='form-group'>
-                                <label><FormattedMessage id = "patient-manage.phone"/>:</label>
-                                <input className='form-control'
-                                    value={this.state.phonenumber}
-                                    onChange={(event)=>{this.onChangeInput(event, "phonenumber")}}
-                                />
-                            </div>
+                        <div className='form-group col-4'>
+                            <label><FormattedMessage id = "patient-manage.phone"/>:</label>
+                            <input className='form-control'
+                                value={this.state.phonenumber}
+                                onChange={(event)=>{this.onChangeInput(event, "phonenumber")}}
+                            />
                         </div>
-                        <div className='col-4 mt-4 more-info'>
-                            <div className='form-group'>
-                                <label><FormattedMessage id = "patient-manage.address"/>:</label>
-                                <input className='form-control'
-                                    value={this.state.address}
-                                    onChange={(event)=>{this.onChangeInput(event, "address")}}
-                                />
-                            </div>
+                        <div className='form-group col-4'>
+                            <label><FormattedMessage id = "patient-manage.address"/>:</label>
+                            <input className='form-control'
+                                value={this.state.address}
+                                onChange={(event)=>{this.onChangeInput(event, "address")}}
+                            />
                         </div>
-                        <div className='col-4 mt-4 more-info'>
-                            <div className='form-group'>
-                                <label><FormattedMessage id = "patient-manage.gender"/>:</label>
-                                <select 
-                                    className='form-control gender'
-                                    onChange={(event)=>{this.onChangeInput(event, "gender")}}
-                                    // value={this.state.gender}
-                                >
-                                    <option selected disabled hidden>{language === LANGUAGES.VI ? this.state.patientGender.valueVi : this.state.patientGender.valueEn}</option>
-                                    {genders && genders.length>0 && genders.map((item, index) => {
-                                        return (
-                                            <option selected={false} key={index} value={item.keyMap}>
-                                                {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
-                                            </option>
-                                        )
-                                    })}
-                                </select>
-                            </div>
+                        <div className='form-group col-4'>
+                            <label><FormattedMessage id = "patient-manage.gender"/>:</label>
+                            <select 
+                                className='form-control gender'
+                                onChange={(event)=>{this.onChangeInput(event, "gender")}}
+                                // value={this.state.gender}
+                            >
+                                <option selected disabled hidden>{language === LANGUAGES.VI ? this.state.patientGender.valueVi : this.state.patientGender.valueEn}</option>
+                                {genders && genders.length>0 && genders.map((item, index) => {
+                                    return (
+                                        <option selected={false} key={index} value={item.keyMap}>
+                                            {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                                        </option>
+                                    )
+                                })}
+                            </select>
                         </div>
                     </div>
                     <div className='col-12 mt-2 mb-4'>

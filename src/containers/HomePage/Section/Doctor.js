@@ -72,9 +72,18 @@ class Doctor extends Component {
                                             </div>
                                             <div className='position text-center'>
                                                 <div>{language === LANGUAGES.VI ? nameVi :nameEn}</div>
-                                                <div>{item.Doctor_Info && item.Doctor_Info.Specialty && item.Doctor_Info.Specialty && item.Doctor_Info.Specialty.name ?
-                                                    item.Doctor_Info.Specialty.name : '...'
-                                                }</div>
+                                                {language === LANGUAGES.VI ?
+                                                    <div>
+                                                        {item.Doctor_Info  && item.Doctor_Info.Specialty && item.Doctor_Info.Specialty.name ?
+                                                        item.Doctor_Info.Specialty.name : '...'
+                                                        }
+                                                    </div> :
+                                                    <div>
+                                                        {item.Doctor_Info  && item.Doctor_Info.Specialty_En && item.Doctor_Info.Specialty_En.name ?
+                                                        item.Doctor_Info.Specialty_En.name : '...'
+                                                        }
+                                                </div>
+                                                }
                                             </div>
                                         </div>
                                     </div>

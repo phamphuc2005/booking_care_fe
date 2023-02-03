@@ -84,7 +84,7 @@ class DetailDoctor extends Component {
                             <div className='down'>
                                 {detailDoctor && detailDoctor.Markdown && detailDoctor.Markdown.description &&
                                     <span>
-                                        {detailDoctor.Markdown.description} a a a a a a a a a a a a a a a a a a a a
+                                        {detailDoctor.Markdown.description}
                                     </span>
                                 }
                             </div>

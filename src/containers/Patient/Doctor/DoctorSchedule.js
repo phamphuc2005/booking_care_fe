@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import HomeHeader from '../../HomePage/HomeHeader';
 import HomeFooter from '../../HomePage/HomeFooter';
 import './DoctorSchedule.scss';
-import {getDetailDoctor, getUserInfo} from '../../../services/userService';
+import { getUserInfo} from '../../../services/userService';
 import {LANGUAGES} from '../../../utils';
 import  moment from 'moment';
 import localization from 'moment/locale/vi';

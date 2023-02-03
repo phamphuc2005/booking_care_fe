@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import HomeHeader from '../../HomePage/HomeHeader';
 import HomeFooter from '../../HomePage/HomeFooter';
 import './ListSchedule.scss';
-import {getDetailDoctor} from '../../../services/userService';
 import {LANGUAGES} from '../../../utils';
 import  moment from 'moment';
 import localization from 'moment/locale/vi';
