@@ -87,9 +87,18 @@ class ListDoctor extends Component {
                                         ></div>
                                         <div className='content-right'>
                                             <div className='name'>{language === LANGUAGES.VI ? nameVi :nameEn}</div>
-                                            <div className='specialty'>{item.Doctor_Info && item.Doctor_Info.Specialty && item.Doctor_Info.Specialty && item.Doctor_Info.Specialty.name ?
-                                                    item.Doctor_Info.Specialty.name : '...'
-                                            }</div>
+                                            {language === LANGUAGES.VI ?
+                                                <div className='specialty'>
+                                                    {item.Doctor_Info && item.Doctor_Info.Specialty && item.Doctor_Info.Specialty && item.Doctor_Info.Specialty.name ?
+                                                        item.Doctor_Info.Specialty.name : '...'
+                                                    }
+                                                </div> :
+                                                <div className='specialty'>
+                                                    {item.Doctor_Info && item.Doctor_Info.Specialty_En && item.Doctor_Info.Specialty_En && item.Doctor_Info.Specialty_En.name ?
+                                                        item.Doctor_Info.Specialty_En.name : '...'
+                                                    }
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                 )

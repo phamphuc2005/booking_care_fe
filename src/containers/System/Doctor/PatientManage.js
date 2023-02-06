@@ -120,8 +120,9 @@ class PatientManage extends Component {
                                         {dataPatient && dataPatient.length>0 ? 
                                             dataPatient.map((item, index) => {
                                                 let time = language === LANGUAGES.VI ? item.timeTypeData2.valueVi : item.timeTypeData2.valueEn
-                                                let gender = language === LANGUAGES.VI ? item.patientData.genderData.valueVi : item.patientData.genderData.valueEn
+                                                // let gender = language === LANGUAGES.VI ? item.patientData.genderData.valueVi : item.patientData.genderData.valueEn
                                                 return(
+                                                    item.patientData != null ?
                                                     <tr
                                                         className='patient-row'
                                                         key={index} style={{textAlign: 'center'}}
@@ -130,7 +131,7 @@ class PatientManage extends Component {
                                                         <td >{item.patientId}</td>
                                                         <td>{`${item.patientData.firstName} ${item.patientData.lastName}`}</td>
                                                         <td>{time}</td>
-                                                    </tr>
+                                                    </tr> : <></>
                                                 )
                                             }) : 
                                             <tr className='no-data'>

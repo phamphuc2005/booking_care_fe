@@ -56,12 +56,13 @@ class Header extends Component {
 
     render() {
         const { processLogout, language, userInfo } = this.props;
-
+        let home_title = language === LANGUAGES.VI ? 'Trang chủ' : 'Home';
+        let log_out_title = language === LANGUAGES.VI ? 'Đăng xuất' : 'Log out';
         return (
             <div className="header-container">
                 {/* thanh navigator */}
                 <div className="header-tabs-container">
-                    <Link className="btn home" to={'/home'} title='Home'>
+                    <Link className="btn home" to={'/home'} title={home_title}>
                         <i className="fas fa-home"></i>
                     </Link>
                     <Navigator menus={this.state.menuApp} />
@@ -91,7 +92,7 @@ class Header extends Component {
                         onClick={() => this.handleChangeLanguage(LANGUAGES.EN)}
                     >EN</span>
                     {/* nút logout */}
-                    <div className="btn btn-logout" onClick={processLogout} title='Log out'>
+                    <div className="btn btn-logout" onClick={processLogout} title={log_out_title}>
                         <i className="fas fa-sign-out-alt"></i>
                     </div>
                 </div>

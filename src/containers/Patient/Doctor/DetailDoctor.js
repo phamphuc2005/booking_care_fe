@@ -54,7 +54,7 @@ class DetailDoctor extends Component {
     }
 
     render() {
-        console.log(this.state)
+        console.log('doctor',this.state.detailDoctor)
         let {language} = this.props;
         let {detailDoctor} = this.state;
         let nameVi = '', nameEn = '';
@@ -82,10 +82,17 @@ class DetailDoctor extends Component {
                                 {language === LANGUAGES.VI ? nameVi :nameEn}
                             </div>
                             <div className='down'>
-                                {detailDoctor && detailDoctor.Markdown && detailDoctor.Markdown.description &&
-                                    <span>
-                                        {detailDoctor.Markdown.description}
-                                    </span>
+                                {language === LANGUAGES.VI ?
+                                    <>
+                                        {detailDoctor && detailDoctor.Markdown && detailDoctor.Markdown.description &&                               
+                                            <span>{detailDoctor.Markdown.description}</span>                       
+                                        }
+                                    </> :
+                                    <>
+                                        {detailDoctor && detailDoctor.Markdown_En && detailDoctor.Markdown_En.description &&                               
+                                            <span>{detailDoctor.Markdown_En.description}</span>                       
+                                        }
+                                    </>
                                 }
                             </div>
                         </div>
@@ -106,9 +113,18 @@ class DetailDoctor extends Component {
                     </div>
 
                     <div className='detail-info-doctor'>
-                        {detailDoctor && detailDoctor.Markdown && detailDoctor.Markdown.contentHTML &&
-                            <div dangerouslySetInnerHTML={{__html: detailDoctor.Markdown.contentHTML}}></div>
-                        }
+                        {language === LANGUAGES.VI ?
+                                    <>
+                                        {detailDoctor && detailDoctor.Markdown && detailDoctor.Markdown.contentHTML &&
+                                            <div dangerouslySetInnerHTML={{__html: detailDoctor.Markdown.contentHTML}}></div>
+                                        }
+                                    </> :
+                                    <>
+                                        {detailDoctor && detailDoctor.Markdown_En && detailDoctor.Markdown_En.contentHTML &&
+                                            <div dangerouslySetInnerHTML={{__html: detailDoctor.Markdown_En.contentHTML}}></div>
+                                        }
+                                    </>
+                                }
                     </div>
 
                     <div className='comment-doctor'>

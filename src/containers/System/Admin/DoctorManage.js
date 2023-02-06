@@ -19,8 +19,11 @@ class DoctorManage extends Component {
         this.state = {
             contentMarkdown: '',
             contentHTML: '',
+            contentMarkdown_en: '',
+            contentHTML_en: '',
             selectedDoctor: '',
             description: '',
+            description_en: '',
             listDoctors: [],
             haveData: false,
 
@@ -177,12 +180,22 @@ class DoctorManage extends Component {
         });
     }
 
+    handleEditorChange_en = ({ html, text }) => {
+        this.setState({
+            contentMarkdown_en: text,
+            contentHTML_en: html,
+        });
+    }
+
     handleSaveContentMarkdown = () => {
         let {haveData} = this.state;
         this.props.saveDetailDoctor({
             contentHTML: this.state.contentHTML,
             contentMarkdown: this.state.contentMarkdown,
             description: this.state.description,
+            contentHTML_en: this.state.contentHTML_en,
+            contentMarkdown_en: this.state.contentMarkdown_en,
+            description_en: this.state.description_en,
             doctorId: this.state.selectedDoctor.value,
             action: haveData === true ? CRUD_ACTIONS.EDIT : CRUD_ACTIONS.CREATE,
 
@@ -203,8 +216,9 @@ class DoctorManage extends Component {
         this.setState({ selectedDoctor });
         let {listPrice, listPayment, listProvince, listSpecialty_vi, listSpecialty_en, listClinic_vi, listClinic_en} = this.state;
         let res = await getDetailDoctor(selectedDoctor.value);
-        if(res && res.errCode === 0 && res.data && res.data.Markdown) {
+        if(res && res.errCode === 0 && res.data && res.data.Markdown && res.data.Markdown_En) {
             let markdown = res.data.Markdown;
+            let markdown_en = res.data.Markdown_En;
             let addressClinic = '', nameClinic = '', note = '',
                 paymentId = '', priceId = '', provinceId = '',
                 selectedPrice = '', selectedPayment = '', selectedProvince = '',
@@ -251,6 +265,9 @@ class DoctorManage extends Component {
                 contentHTML: markdown.contentHTML,
                 contentMarkdown: markdown.contentMarkdown,
                 description: markdown.description,
+                contentHTML_en: markdown_en.contentHTML,
+                contentMarkdown_en: markdown_en.contentMarkdown,
+                description_en: markdown_en.description,
                 haveData: true,
                 addressClinic: addressClinic,
                 nameClinic: selectedClinic.label,
@@ -266,6 +283,9 @@ class DoctorManage extends Component {
                 contentHTML: '',
                 contentMarkdown: '',
                 description: '',
+                contentHTML_en: '',
+                contentMarkdown_en: '',
+                description_en: '',
                 haveData: false,
                 addressClinic: '',
                 nameClinic: '',
@@ -329,13 +349,22 @@ class DoctorManage extends Component {
                         </div>
                     </div>
                     <div className='col-12 mt-2 detail-infos'>
-                        <div className='form-group col-12'>
-                            <label><FormattedMessage id = "doctor-manage.introduction-title"/>:</label>
+                        <div className='form-group col-6'>
+                            <label><FormattedMessage id = "doctor-manage.introduction-title"/> (vi):</label>
                             <textarea 
                                 className='form-control' 
                                 // rows = "3"
                                 onChange={(event)=>this.handleOnChangeText(event, 'description')}
                                 value={this.state.description}
+                            ></textarea>
+                        </div>
+                        <div className='form-group col-6'>
+                            <label><FormattedMessage id = "doctor-manage.introduction-title"/> (en):</label>
+                            <textarea 
+                                className='form-control' 
+                                // rows = "3"
+                                onChange={(event)=>this.handleOnChangeText(event, 'description_en')}
+                                value={this.state.description_en}
                             ></textarea>
                         </div>
                         <div className=' form-group price col-4'>
@@ -404,12 +433,21 @@ class DoctorManage extends Component {
                         </div>
                     </div>
                     <div className='markdown col-12  mb-4'>
-                        <label className=''><FormattedMessage id = "doctor-manage.description"/>:</label>
+                        <label className=''><FormattedMessage id = "doctor-manage.description"/> (vi):</label>
                         <MdEditor 
-                            style={{ height: '250px' }} 
+                            style={{ height: '200px' }} 
                             renderHTML={text => mdParser.render(text)} 
                             onChange={this.handleEditorChange}
                             value={this.state.contentMarkdown} 
+                        />
+                    </div>
+                    <div className='markdown col-12  mb-4'>
+                        <label className=''><FormattedMessage id = "doctor-manage.description"/> (en):</label>
+                        <MdEditor 
+                            style={{ height: '200px' }} 
+                            renderHTML={text => mdParser.render(text)} 
+                            onChange={this.handleEditorChange_en}
+                            value={this.state.contentMarkdown_en} 
                         />
                     </div>
                     <div className='save-btn col-12 mb-4 px-4'>

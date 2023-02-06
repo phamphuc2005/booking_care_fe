@@ -174,6 +174,7 @@ class AppointmentManage extends Component {
     render() {
         let {dataAppointment, isOpenModal, dataModal} = this.state;
         let {language} = this.props;
+        console.log(dataAppointment);
         // console.log(+this.state.date, this.state.today)
         return (
             <>
@@ -213,13 +214,14 @@ class AppointmentManage extends Component {
                                         {dataAppointment && dataAppointment.length>0 ? 
                                             dataAppointment.map((item, index) => {
                                                 let time = language === LANGUAGES.VI ? item.timeTypeData2.valueVi : item.timeTypeData2.valueEn
-                                                let gender = language === LANGUAGES.VI ? item.patientData.genderData.valueVi : item.patientData.genderData.valueEn
+                                                // let gender = 
                                                 return(
-                                                    <tr key={index} style={{textAlign: 'center'}}>
+                                                    item.patientData != null ?
+                                                        <tr key={index} style={{textAlign: 'center'}}>
                                                         <td >{index + 1}</td>
                                                         <td>{time}</td>
                                                         <td>{item.patientData.firstName}</td>
-                                                        <td>{gender}</td>
+                                                        <td>{language === LANGUAGES.VI ? item.patientData.genderData.valueVi : item.patientData.genderData.valueEn}</td>
                                                         <td>{item.patientData.phonenumber}</td>
                                                         <td>{item.patientData.address}</td>
                                                         <td className='confirm text-center'>
@@ -238,7 +240,7 @@ class AppointmentManage extends Component {
                                                                 <FormattedMessage id = "doctor.appointment-manage.cancel"/>
                                                             </button>
                                                         </td>
-                                                    </tr>
+                                                    </tr> : <></>                                                                        
                                                 )
                                             }) : 
                                             <tr className='no-data'>

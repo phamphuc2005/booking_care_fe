@@ -26,15 +26,22 @@
     //     width: 32.7%;
     // }
 
+    label {
+        margin-left: 2px;
+        font-weight: 600;
+        color: #0071ba;
+    }
 }
-label {
-    margin-left: 2px;
-    font-weight: 600;
-    color: #0071ba;
-}
+
 
 .markdown, .save-btn {
     padding: 0 30px !important;
+
+    label {
+        margin-left: 2px;
+        font-weight: 600;
+        color: #0071ba;
+    }
 }
 
 .markdown-editor {

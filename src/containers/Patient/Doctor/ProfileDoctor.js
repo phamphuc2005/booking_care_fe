@@ -84,9 +84,19 @@ class ProfileDoctor extends Component {
         let {profileData} = this.state;
         let {language, isShowDescription, dataTime, isShowLink, isShowPrice, doctorId} = this.props;
         let nameVi = '', nameEn = '';
+        let description = ''
         if(profileData && profileData.positionData){
             nameVi = `${profileData.positionData.valueVi}, ${profileData.firstName} ${profileData.lastName}`;
             nameEn = `${profileData.positionData.valueEn}, ${profileData.lastName} ${profileData.firstName}`;
+        }
+        if(language === LANGUAGES.VI) {
+            if(profileData && profileData.Markdown && profileData.Markdown.description){
+                description = profileData.Markdown.description;
+            }
+        } else {
+            if(profileData && profileData.Markdown_En && profileData.Markdown_En.description){
+                description = profileData.Markdown_En.description;
+            }
         }
         console.log('profile', this.state)
         return (
@@ -103,11 +113,11 @@ class ProfileDoctor extends Component {
                         <div className='down'>
                             {isShowDescription === true ?
                                 <>
-                                    {profileData && profileData.Markdown && profileData.Markdown.description &&
+                                    
                                         <span>
-                                            {profileData.Markdown.description}
+                                            {description}
                                         </span>
-                                    }
+                                    
                                 </> : this.renderBookingTime(dataTime)
                             }
                         </div>
