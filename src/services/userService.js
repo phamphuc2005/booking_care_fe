@@ -22,12 +22,16 @@ const createNewUserService = (data) => {
 
 const deleteUserService = (userId) => {
     // return axios.delete('/api/delete-user',{id: userId})
-    return axios.delete('/api/delete-user',{
-        data: {
-            id: userId
-        }
+    return axios.put('/api/delete-user',{
+        data: { id: userId }
     })
 
+}
+
+const unDeleteUser = (inputId) => {
+    return axios.put('/api/unDelete-user',{
+        data: { id: inputId }
+    })
 }
 
 const editUserService = (inputData) => {
@@ -36,6 +40,10 @@ const editUserService = (inputData) => {
 
 const getUserInfo = (data) => {
     return axios.get(`/api/get-user-info?id=${data.id}`);
+}
+
+const getTrashUsers = () => {
+    return axios.get(`/api/get-trash-users`);
 }
 
 const getAllCodeService = (inputType) => {
@@ -219,5 +227,7 @@ export {
     getAllComment,
     editComment,
     deleteComment,
-    getUserInfo
+    getUserInfo,
+    getTrashUsers,
+    unDeleteUser
 }

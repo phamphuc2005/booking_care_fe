@@ -49,3 +49,45 @@
         cursor: pointer;
     }
 }
+
+.nav-item {
+    // border: 2px solid #007bff;
+    margin-right: 5px;
+    border-radius: 10px;
+
+    i {
+        margin-right: 5px;
+    }
+
+    .link-1 {
+        border: 1px solid gold;
+        color: gold;
+
+        &:hover {
+            background-color: gold;
+            color: white;
+        }
+    }
+
+    .link-2 {
+        border: 1px solid red;
+        color: red;
+
+        &:hover {
+            background-color: red;
+            color: white;
+        }
+    }
+    
+    .link-1.active {
+        background-color: gold !important;
+    }
+
+    .link-2.active {
+        background-color: red !important;
+    }
+}
+
+// .nav-list {
+//     margin: 20px 200px 0;
+// }

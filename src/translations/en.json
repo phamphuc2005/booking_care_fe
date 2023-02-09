@@ -129,7 +129,9 @@
         "create-title": "Create new user",
         "edit-title": "Edit user",
         "delete-title": "Delete user",
+        "restore-title": "Restore user",
         "delete-content": "Are you sure you want to delete?",
+        "undelete-content": "Are you sure you want to restore?",
         "password": "Password",
         "firstname": "Firstname",
         "lastname": "Lastname",
@@ -140,6 +142,7 @@
         "add-btn": "Add",
         "save-btn": "Save",
         "delete-btn": "Delete",
+        "restore-btn": "Restore",
         "cancel-btn": "Cancel",
         "option": "Choose option"
     },
@@ -158,7 +161,8 @@
         "create-btn": "Create",
         "save-btn": "Save",
         "upload": "Upload image",
-        "table-title": "User list"
+        "table-title": "User list",
+        "trash": "Trash"
     },
     "doctor-manage": {
         "title": "Doctor's details",

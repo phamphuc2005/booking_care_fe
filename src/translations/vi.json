@@ -129,7 +129,9 @@
         "create-title": "Thêm mới người dùng",
         "edit-title": "Chỉnh sửa người dùng",
         "delete-title": "Xóa người dùng",
+        "restore-title": "Khôi phục người dùng",
         "delete-content": "Bạn có chắc chắn muốn xóa không?",
+        "undelete-content": "Bạn có chắc chắn muốn khôi phục không?",
         "password": "Mật khẩu",
         "firstname": "Họ",
         "lastname": "Tên",
@@ -140,6 +142,7 @@
         "add-btn": "Thêm",
         "save-btn": "Lưu",
         "delete-btn": "Xóa",
+        "restore-btn": "Khôi phục",
         "cancel-btn": "Hủy",
         "option": "Lựa chọn"
     },
@@ -158,7 +161,8 @@
         "create-btn": "Thêm",
         "save-btn": "Lưu",
         "upload": "Tải ảnh",
-        "table-title": "Danh sách người dùng"
+        "table-title": "Danh sách người dùng",
+        "trash": "Thùng rác"
     }, 
     "doctor-manage": {
         "title": "Chi tiết về bác sĩ",

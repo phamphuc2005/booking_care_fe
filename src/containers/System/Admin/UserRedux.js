@@ -7,7 +7,9 @@ import './UserRedux.scss';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import TableUser from './TableUser';
-import { toast } from 'react-toastify'; 
+import TrashUser from './TrashUser';
+import { toast } from 'react-toastify';
+import 'bootstrap'; 
 
 class UserRedux extends Component {
     constructor(props) {
@@ -243,7 +245,7 @@ class UserRedux extends Component {
                                     value={lastName}
                                 />
                             </div>
-                            <div className='col-4'>
+                            <div className='col-4 mt-2'>
                                 <label><FormattedMessage id = "user-manage.phone"/>:</label>
                                 <input 
                                     className='form-control'
@@ -252,7 +254,7 @@ class UserRedux extends Component {
                                     value={phonenumber}
                                 />
                             </div>
-                            <div className='col-8'>
+                            <div className='col-8 mt-2'>
                                 <label><FormattedMessage id = "user-manage.address"/>:</label>
                                 <input 
                                     className='form-control'
@@ -261,7 +263,7 @@ class UserRedux extends Component {
                                     value={address}
                                 />
                             </div>
-                            <div className='col-3'>
+                            <div className='col-3 mt-2'>
                                 <label><FormattedMessage id = "user-manage.gender"/>:</label>
                                 <select 
                                     className='form-control'
@@ -277,7 +279,7 @@ class UserRedux extends Component {
                                     })}
                                 </select> 
                             </div>
-                            <div className='col-3'>
+                            <div className='col-3 mt-2'>
                                 <label><FormattedMessage id = "user-manage.role"/>:</label>
                                 <select 
                                     className='form-control'
@@ -293,7 +295,7 @@ class UserRedux extends Component {
                                     })}
                                 </select> 
                             </div>
-                            <div className='col-3'>
+                            <div className='col-3 mt-2'>
                                 <label><FormattedMessage id = "user-manage.position"/>:</label>
                                 <select 
                                     className='form-control'
@@ -309,7 +311,7 @@ class UserRedux extends Component {
                                     })}
                                 </select> 
                             </div>
-                            <div className='col-3'>
+                            <div className='col-3 mt-2'>
                                 <label><FormattedMessage id = "user-manage.avatar"/>:</label>
                                 <div className='img-container'>
                                     <input 
@@ -340,12 +342,41 @@ class UserRedux extends Component {
                             </div>
                         </div>
                     </div>
+                    
                 </div>
 
-                <TableUser
-                    handleEditUserRedux={this.handleEditUserRedux}
-                    action={this.state.action}
-                />
+                <div className='nav-list container px-0'>
+                    <ul class="nav nav-pills mt-4" id="pills-tab" role="tablist">
+                        <li class="nav-item nav-item-1">
+                            <a class="nav-link link-1 active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
+                                <i className="fas fa-list"></i>
+                                <FormattedMessage id = "user-manage.table-title"/>
+                            </a>
+                        </li>
+                        <li class="nav-item item-2">
+                            <a class="nav-link link-2" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                <i className="fas fa-trash-alt"></i> 
+                                <FormattedMessage id = "user-manage.trash"/>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <TableUser
+                                handleEditUserRedux={this.handleEditUserRedux}
+                                action={this.state.action}
+                            />
+                        </div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <TrashUser
+                                handleEditUserRedux={this.handleEditUserRedux}
+                                action={this.state.action}
+                            />
+                        </div>
+                    </div>
+                </div>
+                
+
 
                 {this.state.isOpen === true &&
                     <Lightbox

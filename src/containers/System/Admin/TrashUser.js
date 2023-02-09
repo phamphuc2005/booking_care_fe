@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import './TableUser.scss';
+import './TrashUser.scss';
 import * as actions from '../../../store/actions';
 
 import MarkdownIt from 'markdown-it';
@@ -9,6 +9,7 @@ import MdEditor from 'react-markdown-editor-lite';
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { getTrashUsers, unDeleteUser } from '../../../services/userService';
 import { toast } from 'react-toastify';
 
 // Register plugins if required
@@ -23,19 +24,27 @@ function handleEditorChange({ html, text }) {
 }
 
 
-class TableUser extends Component {
+class TrashUser extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             userRedux: [],
             isOpen: false,
-            deleteUserId: ''
+            unDeleteId: '',
+            dataTrash: []
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.props.fetchUserRedux();
+        let res = await getTrashUsers();
+        console.log('res', res);
+        if(res && res.errCode === 0) {
+            this.setState({
+                dataTrash: res.data ? res.data : [],
+            })
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -46,16 +55,12 @@ class TableUser extends Component {
         }
     }
 
-    handleDeleteUser = (user) => {
+    handleUnDeleteUser = (user) => {
         // this.props.deleteUserRedux(user.id);
-        if(user.roleId === "R0"){
-            toast.warn('Không thể xóa quản trị viên !')
-        } else {
-            this.setState({
-                isOpen: true,
-                deleteUserId: user
-            })
-        }
+        this.setState({
+            isOpen: true,
+            unDeleteId: user.id
+        })
     }
     
     handleEditUser = (user) => {
@@ -68,21 +73,37 @@ class TableUser extends Component {
         })
     }
 
-    handleDeleteUserModal = () => {
-        this.props.deleteUserRedux(this.state.deleteUserId.id);
-        this.setState({
-            isOpen: false,
-        })
+    handleDeleteUserModal = async () => {
+        // this.props.deleteUserRedux(this.state.unDeleteId);
+        // this.setState({
+        //     isOpen: false,
+        // })
+        try {
+            let res = await unDeleteUser(this.state.unDeleteId);
+            if(res && res.errCode === 0) {
+                this.setState({
+                    isOpen: false,
+                })
+                toast.success("Restore clinic for success!");
+                this.componentDidMount();
+            } else {
+                toast.warn(res.errMessage)
+            }
+        } catch (error) {
+            toast.error("Restore clinic for failed!");
+            console.log('Error:', error)
+        }
     }
 
     render() {
         let arrUsers = this.state.userRedux;
+        let arrTrash = this.state.dataTrash;
         return (
             <>
                 <div className='container mb-5'>
-                    <div className='row list-user'>
+                    <div className='row trash-user'>
                         {/* <div className='table-title col-12 mb-4'>-- <FormattedMessage id = "user-manage.table-title"/> --</div> */}
-                        <div className=' col-12 list-table'>
+                        <div className=' col-12 trash-table'>
                             <table id="table-user">
                                 <tbody>
                                     <tr>
@@ -94,8 +115,8 @@ class TableUser extends Component {
                                         <th><FormattedMessage id = "usermanage.action"/></th>
                                     </tr>
                                     
-                                    {arrUsers && arrUsers.length>0 && 
-                                        arrUsers.map((item, index) => {
+                                    {arrTrash && arrTrash.length>0 && 
+                                        arrTrash.map((item, index) => {
                                             return(
                                                 <tr key={index}>
                                                     <td>{item.email}</td>
@@ -111,10 +132,10 @@ class TableUser extends Component {
                                                             <i className="fas fa-pencil-alt"></i>
                                                         </button>
                                                         <button 
-                                                            className='btn-delete'
-                                                            onClick={()=>this.handleDeleteUser(item)} 
+                                                            className='btn-delete undelete'
+                                                            onClick={()=>this.handleUnDeleteUser(item)} 
                                                         >
-                                                            <i className="fas fa-trash-alt"></i>
+                                                            <i className="fas fa-undo"></i>
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -133,15 +154,15 @@ class TableUser extends Component {
                     className={'modal-user-container'}
                     size="lg"
                 >
-                    <ModalHeader toggle={()=>this.toggleDeleteModal()}><FormattedMessage id = "user-modal.delete-title"/></ModalHeader>
+                    <ModalHeader toggle={()=>this.toggleDeleteModal()}><FormattedMessage id = "user-modal.restore-title"/></ModalHeader>
                     <ModalBody>
-                        <div><FormattedMessage id = "user-modal.delete-content"/></div>
+                        <div><FormattedMessage id = "user-modal.undelete-content"/></div>
                     </ModalBody>
                     <ModalFooter>
                         <Button 
-                            color="danger px-3" 
+                            color="primary px-3" 
                             onClick={()=>{this.handleDeleteUserModal()}}
-                        ><FormattedMessage id = "user-modal.delete-btn"/></Button>{' '}
+                        ><FormattedMessage id = "user-modal.restore-btn"/></Button>{' '}
                         <Button color="secondary px-3" onClick={()=>this.toggleDeleteModal()}><FormattedMessage id = "user-modal.cancel-btn"/></Button>
                     </ModalFooter>
                 </Modal>
@@ -164,4 +185,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TableUser);
+export default connect(mapStateToProps, mapDispatchToProps)(TrashUser);
