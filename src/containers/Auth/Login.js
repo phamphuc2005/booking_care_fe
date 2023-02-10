@@ -84,7 +84,7 @@ class Login extends Component {
 
         return (
             <div className="login-background">
-                <div className='text-title'>BOOKING HEALTH</div>
+                <div className='text-title'>-- BOOKING HEALTH --</div>
                 <div className="login-container">
                     <div className="login-content row">
                         <div className="col-12 text-login"><FormattedMessage id = "login.title"/></div>

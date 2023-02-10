@@ -172,7 +172,7 @@ class Register extends Component {
         return (
             <>
                 <div className="register-background">
-                    <div className='text-title'>BOOKING HEALTH</div>
+                    <div className='text-title'>-- BOOKING HEALTH --</div>
                     <div className="register-container">
                         <div className="register-content row">
                             <div className="col-12 text-register"><FormattedMessage id = "register.title"/></div>
