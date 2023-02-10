@@ -52,6 +52,7 @@ class History extends Component {
         let {dataSchedule} = this.state;
         let {language} = this.props;
         // console.log(this.state, this.props.user)
+        console.log(this.state);
         return (
             <>
                 <div className='patient-history-container'>
@@ -67,8 +68,9 @@ class History extends Component {
                                             <th style={{width: '5%'}}>ID</th>
                                             <th style={{width: '15%'}}><FormattedMessage id = "patient-manage.date"/></th>
                                             <th style={{width: '15%'}}><FormattedMessage id = "patient-manage.hour"/></th>
-                                            <th style={{width: '20%'}}><FormattedMessage id = "patient-manage.doctor"/></th>
-                                            <th style={{width: '30%'}}><FormattedMessage id = "patient-manage.clinic"/></th>
+                                            <th style={{width: '15%'}}><FormattedMessage id = "patient-manage.doctor"/></th>
+                                            <th style={{width: '25%'}}><FormattedMessage id = "patient-manage.clinic"/></th>
+                                            <th style={{width: '10%'}}><FormattedMessage id = "patient-manage.bill"/></th>
                                             <th style={{width: '15%'}}><FormattedMessage id = "patient-manage.status"/></th>
                                         </tr>
                                         {dataSchedule && dataSchedule.length>0 ? 
@@ -88,6 +90,7 @@ class History extends Component {
                                                         <td>{time}</td>
                                                         <td>{`${item.doctorData2.firstName} ${item.doctorData2.lastName}`}</td>
                                                         <td>{item.doctorData2.Doctor_Info.nameClinic}</td>
+                                                        <td><a href={item.bill}><FormattedMessage id = "patient-manage.bill"/></a></td>
                                                         <td>
                                                             <div className='status'><FormattedMessage id = "patient-manage.examined"/></div>
                                                         </td>
@@ -95,7 +98,7 @@ class History extends Component {
                                                 )
                                             }) : 
                                             <tr className='no-data'>
-                                                <td colSpan={6}><FormattedMessage id = "doctor.patient-manage.no-data"/></td>
+                                                <td colSpan={7}><FormattedMessage id = "doctor.patient-manage.no-data"/></td>
                                             </tr>
                                         }
 

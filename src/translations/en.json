@@ -263,6 +263,7 @@
         "hour": "Hour",
         "doctor": "Doctor",
         "clinic": "Clinic",
+        "bill": "Bill",
         "status": "Status",
         "action": "Action",
         "cancel": "Cancel appointment",
