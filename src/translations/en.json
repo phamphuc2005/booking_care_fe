@@ -212,17 +212,21 @@
         "list-title": "List of specialties",
         "picture": "Image",
         "edit": "Edit",
-        "delete": "Delete"
+        "delete": "Delete",
+        "restore": "Restore"
     },
     "specialty-modal": {
         "edit-title": "Edit specialty",
         "delete-title": "Delete specialty",
+        "restore-title": "Restore specialty",
         "name": "Specialty's name",
         "image": "Specialty's image",
         "save-btn": "Save",
         "delete-btn": "Delete",
+        "restore-btn": "Restore",
         "cancel-btn": "Cancel",
-        "delete-content": "Are you sure you want to delete?"
+        "delete-content": "Are you sure you want to delete?",
+        "restore-content": "Are you sure you want to restore?"
     },
     "clinic-manage": {
         "title": "Clinic manage",

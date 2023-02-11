@@ -16,7 +16,7 @@
     }
 
     .list-specialty {
-        background-color: #eee;
+        // background-color: #eee;
 
         .table-title {
             background-color: #04AA6D;
@@ -54,6 +54,7 @@
                 background-position: center center;
                 background-repeat: no-repeat;
                 background-size: cover;
+                margin: auto;
           }
           .edit {
             
@@ -82,6 +83,19 @@
             :hover {
                 background-color: transparent;
                 color: red;
+            }
+          }
+
+          .restore-btn {
+            border: none;
+            outline: none;
+            background-color: transparent;
+            color: #666;
+            font-size: large;
+
+            :hover {
+                background-color: transparent;
+                color: chartreuse;
             }
           }
     }

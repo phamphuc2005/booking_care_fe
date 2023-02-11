@@ -104,6 +104,10 @@ const getAllSpecialty = () => {
     return axios.get('/api/get-all-specialty');
 }
 
+const getTrashSpecialty = () => {
+    return axios.get(`/api/get-trash-specialty`);
+}
+
 const editSpecialty = (inputData) => {
     return axios.put('/api/edit-specialty',inputData);
 }
@@ -116,6 +120,12 @@ const deleteSpecialty = (inputId) => {
 
 const getDetailSpecialtyById = (data) => {
     return axios.get(`/api/get-detail-specialty-by-id?id=${data.id}&location=${data.location}`)
+}
+
+const unDeleteSpecialty = (inputId) => {
+    return axios.put('/api/unDelete-specialty',{
+        data: { id: inputId }
+    })
 }
 
 const createClinic = (data) => {
@@ -229,5 +239,7 @@ export {
     deleteComment,
     getUserInfo,
     getTrashUsers,
-    unDeleteUser
+    unDeleteUser,
+    getTrashSpecialty,
+    unDeleteSpecialty
 }

@@ -212,17 +212,21 @@
         "list-title": "Danh sách chuyên khoa",
         "picture": "Ảnh",
         "edit": "Chỉnh sửa",
-        "delete": "Xóa"
+        "delete": "Xóa",
+        "restore": "Khôi phục"
     },
     "specialty-modal": {
         "edit-title": "Chỉnh sửa chuyên khoa",
         "delete-title": "Xóa chuyên khoa",
+        "restore-title": "Khôi phục chuyên khoa",
         "name": "Tên chuyên khoa",
         "image": "Ảnh chuyên khoa",
         "save-btn": "Lưu",
         "delete-btn": "Xóa",
+        "restore-btn": "Khôi phục",
         "cancel-btn": "Hủy",
-        "delete-content": "Bạn có chắc chắn muốn xóa không?"
+        "delete-content": "Bạn có chắc chắn muốn xóa không?",
+        "restore-content": "Bạn có chắc chắn muốn khôi phục không?"
     },
     "clinic-manage": {
         "title": "Quản lý cơ sở y tế",

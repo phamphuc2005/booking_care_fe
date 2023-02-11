@@ -8,10 +8,11 @@ import './SpecialtyManage.scss';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
-import { createSpecialty, getAllSpecialty, editSpecialty, deleteSpecialty } from '../../../services/userService';
+import { createSpecialty, getAllSpecialty, editSpecialty, deleteSpecialty, getTrashSpecialty, unDeleteSpecialty } from '../../../services/userService';
 import { toast } from 'react-toastify';
 import ModalEditSpecialty from './ModalEditSpecialty';
 import ModalDeleteSpecialty from './ModalDeleteSpecialty';
+import ModalUnDeleteSpecialty from './ModalUnDeleteSpecialty';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -32,6 +33,12 @@ class SpecialtyManage extends Component {
             specialtyDelete: {},
             isOpenEdit: false,
             isOpenDelete: false,
+
+            dataTrash_vi: [],
+            dataTrash_en: [],
+            isOpenUnDelete: false,
+            specialtyUnDelete: {},
+
         }
     }
 
@@ -41,6 +48,14 @@ class SpecialtyManage extends Component {
             this.setState({
                 dataSpecialty_vi: res.data_vi ? res.data_vi : [],
                 dataSpecialty_en: res.data_en ? res.data_en : []
+            })
+        }
+
+        let trash = await getTrashSpecialty();
+        if(trash && trash.errCode === 0) {
+            this.setState({
+                dataTrash_vi: trash.data_vi ? trash.data_vi : [],
+                dataTrash_en: trash.data_en ? trash.data_en : []
             })
         }
     }
@@ -146,10 +161,23 @@ class SpecialtyManage extends Component {
         })
     }
 
+    toggleUnDeleteModal = () => {
+        this.setState({
+            isOpenUnDelete: !this.state.isOpenUnDelete,
+        })
+    }
+
     handleDeleteSpecialty = (specialty) => {
         this.setState({
             isOpenDelete: true,
             specialtyDelete: specialty
+        })
+    }
+
+    handleUnDeleteSpecialty = (specialty) => {
+        this.setState({
+            isOpenUnDelete: true,
+            specialtyUnDelete: specialty
         })
     }
 
@@ -171,8 +199,26 @@ class SpecialtyManage extends Component {
         }
     }
 
+    unDeleteSpecialty = async (specialty) => {
+        try {
+            let res = await unDeleteSpecialty(specialty.id);
+            if(res && res.errCode === 0) {
+                this.setState({
+                    isOpenUnDelete: false,
+                })
+                toast.success("Restore specialty for success!");
+                this.componentDidMount();
+            } else {
+                toast.warn(res.errMessage)
+            }
+        } catch (error) {
+            toast.error("Restore specialty for failed!");
+            console.log('Error:', error)
+        }
+    }
+
     render() {
-        let {dataSpecialty_vi, dataSpecialty_en} = this.state;
+        let {dataSpecialty_vi, dataSpecialty_en, dataTrash_vi, dataTrash_en} = this.state;
         return (
             <div className='specialty-manage-container container'>
                 {
@@ -191,6 +237,15 @@ class SpecialtyManage extends Component {
                         toggleFromParent = {this.toggleDeleteModal}
                         currentSpecialty = {this.state.specialtyDelete}
                         deleteSpecialtyModal = {this.doDeleteSpecialty} 
+                    />
+                }
+                {
+                    this.state.isOpenUnDelete &&
+                    <ModalUnDeleteSpecialty
+                        isOpen = {this.state.isOpenUnDelete}
+                        toggleFromParent = {this.toggleUnDeleteModal}
+                        currentSpecialty = {this.state.specialtyUnDelete}
+                        unDeleteSpecialtyModal = {this.unDeleteSpecialty} 
                     />
                 }
                 <div className='title'><FormattedMessage id="specialty-manage.title"/></div>
@@ -248,96 +303,211 @@ class SpecialtyManage extends Component {
                         ><FormattedMessage id="specialty-manage.save-btn"/></button>
                     </div>
                 </div>
-                <div className='row my-4 list-specialty'>
-                    <div className='table-title col-12 mb-2'>-- <FormattedMessage id="specialty-manage.list-title"/> --</div>
-                    <div className='col-12'>
-                        <table id="table-specialty" className='col-12'>
-                            {this.props.language === LANGUAGES.VI ?
-                                <tbody>
-                                    <tr>
-                                        <th style={{width: '10%'}}><FormattedMessage id="specialty-manage.picture"/></th>
-                                        <th style={{width: '50%'}}><FormattedMessage id="specialty-manage.name"/></th>
-                                        <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.edit"/></th>
-                                        <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.delete"/></th>
-                                    </tr>
-                                    {dataSpecialty_vi && dataSpecialty_vi.length>0 && 
-                                        dataSpecialty_vi.map((item, index) => {
-                                            return(
-                                                <tr key={index}>
-                                                    <td>
-                                                        <div 
-                                                            className='background-img img-specialty'
-                                                            style={{backgroundImage: `url(${item.image})`}}
-                                                        >
-                                                        </div>
-                                                    </td>
-                                                    <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name}</td>
-                                                    <td className='edit text-center'>
-                                                        <button 
-                                                            className='edit-btn' 
-                                                            onClick={()=>this.handleEditSpecialty(item.id)}
-                                                        >
-                                                            <i className="fas fa-pencil-alt"></i>
-                                                        </button>
-                                                    </td>
-                                                    <td className='delete text-center'>
-                                                        <button 
-                                                            className='delete-btn'
-                                                            onClick={()=>this.handleDeleteSpecialty(item)} 
-                                                        >
-                                                            <i className="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </td>
+                
+                <div className='nav-list container px-0'>
+                    <ul class="nav nav-pills mt-4" id="pills-tab" role="tablist">
+                        <li class="nav-item nav-item-1">
+                            <a class="nav-link link-1 active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
+                                <i className="fas fa-list"></i>
+                                <FormattedMessage id="specialty-manage.list-title"/>
+                            </a>
+                        </li>
+                        <li class="nav-item item-2">
+                            <a class="nav-link link-2" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                <i className="fas fa-trash-alt"></i> 
+                                <FormattedMessage id = "user-manage.trash"/>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div className='row my-4 list-specialty'>
+                                {/* <div className='table-title col-12 mb-2'>-- <FormattedMessage id="specialty-manage.list-title"/> --</div> */}
+                                <div className='col-12 px-0'>
+                                    <table id="table-specialty" className='col-12'>
+                                        {this.props.language === LANGUAGES.VI ?
+                                            <tbody>
+                                                <tr>
+                                                    <th style={{width: '10%'}}><FormattedMessage id="specialty-manage.picture"/></th>
+                                                    <th style={{width: '50%'}}><FormattedMessage id="specialty-manage.name"/></th>
+                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.edit"/></th>
+                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.delete"/></th>
                                                 </tr>
-                                            )
-                                        })
-                                    }
+                                                {dataSpecialty_vi && dataSpecialty_vi.length>0 && 
+                                                    dataSpecialty_vi.map((item, index) => {
+                                                        return(
+                                                            <tr key={index}>
+                                                                <td>
+                                                                    <div 
+                                                                        className='background-img img-specialty'
+                                                                        style={{backgroundImage: `url(${item.image})`}}
+                                                                    >
+                                                                    </div>
+                                                                </td>
+                                                                <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name}</td>
+                                                                <td className='edit text-center'>
+                                                                    <button 
+                                                                        className='edit-btn' 
+                                                                        onClick={()=>this.handleEditSpecialty(item.id)}
+                                                                    >
+                                                                        <i className="fas fa-pencil-alt"></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td className='delete text-center'>
+                                                                    <button 
+                                                                        className='delete-btn'
+                                                                        onClick={()=>this.handleDeleteSpecialty(item)} 
+                                                                    >
+                                                                        <i className="fas fa-trash-alt"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
 
-                                </tbody> :                 
-                                <tbody>
-                                    <tr>
-                                        <th style={{width: '10%'}}><FormattedMessage id="specialty-manage.picture"/></th>
-                                        <th style={{width: '50%'}}><FormattedMessage id="specialty-manage.name"/></th>
-                                        <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.edit"/></th>
-                                        <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.delete"/></th>
-                                    </tr>
-                                    {dataSpecialty_en && dataSpecialty_en.length>0 && 
-                                        dataSpecialty_en.map((item, index) => {
-                                            return(
-                                                <tr key={index}>
-                                                    <td>
-                                                        <div 
-                                                            className='background-img img-specialty'
-                                                            style={{backgroundImage: `url(${item.image})`}}
-                                                        >
-                                                        </div>
-                                                    </td>
-                                                    <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name}</td>
-                                                    <td className='edit text-center'>
-                                                        <button 
-                                                            className='edit-btn' 
-                                                            onClick={()=>this.handleEditSpecialty(item.id)}
-                                                        >
-                                                            <i className="fas fa-pencil-alt"></i>
-                                                        </button>
-                                                    </td>
-                                                    <td className='delete text-center'>
-                                                        <button 
-                                                            className='delete-btn'
-                                                            onClick={()=>this.handleDeleteSpecialty(item)} 
-                                                        >
-                                                            <i className="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </td>
+                                            </tbody> :                 
+                                            <tbody>
+                                                <tr>
+                                                    <th style={{width: '10%'}}><FormattedMessage id="specialty-manage.picture"/></th>
+                                                    <th style={{width: '50%'}}><FormattedMessage id="specialty-manage.name"/></th>
+                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.edit"/></th>
+                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.delete"/></th>
                                                 </tr>
-                                            )
-                                        })
-                                    }
+                                                {dataSpecialty_en && dataSpecialty_en.length>0 && 
+                                                    dataSpecialty_en.map((item, index) => {
+                                                        return(
+                                                            <tr key={index}>
+                                                                <td>
+                                                                    <div 
+                                                                        className='background-img img-specialty'
+                                                                        style={{backgroundImage: `url(${item.image})`}}
+                                                                    >
+                                                                    </div>
+                                                                </td>
+                                                                <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name}</td>
+                                                                <td className='edit text-center'>
+                                                                    <button 
+                                                                        className='edit-btn' 
+                                                                        onClick={()=>this.handleEditSpecialty(item.id)}
+                                                                    >
+                                                                        <i className="fas fa-pencil-alt"></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td className='delete text-center'>
+                                                                    <button 
+                                                                        className='delete-btn'
+                                                                        onClick={()=>this.handleDeleteSpecialty(item)} 
+                                                                    >
+                                                                        <i className="fas fa-trash-alt"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
 
-                                </tbody>
-                            }
-                        </table>
+                                            </tbody>
+                                        }
+                                    </table>
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div className='row my-4 list-specialty'>
+                                {/* <div className='table-title col-12 mb-2'>-- <FormattedMessage id="specialty-manage.list-title"/> --</div> */}
+                                <div className='col-12 px-0'>
+                                    <table id="table-specialty" className='col-12'>
+                                        {this.props.language === LANGUAGES.VI ?
+                                            <tbody>
+                                                <tr>
+                                                    <th style={{width: '10%'}}><FormattedMessage id="specialty-manage.picture"/></th>
+                                                    <th style={{width: '50%'}}><FormattedMessage id="specialty-manage.name"/></th>
+                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.edit"/></th>
+                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.restore"/></th>
+                                                </tr>
+                                                {dataTrash_vi && dataTrash_vi.length>0 && 
+                                                    dataTrash_vi.map((item, index) => {
+                                                        return(
+                                                            <tr key={index}>
+                                                                <td>
+                                                                    <div 
+                                                                        className='background-img img-specialty'
+                                                                        style={{backgroundImage: `url(${item.image})`}}
+                                                                    >
+                                                                    </div>
+                                                                </td>
+                                                                <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name}</td>
+                                                                <td className='edit text-center'>
+                                                                    <button 
+                                                                        className='edit-btn' 
+                                                                        onClick={()=>this.handleEditSpecialty(item.id)}
+                                                                    >
+                                                                        <i className="fas fa-pencil-alt"></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td className='delete text-center'>
+                                                                    <button 
+                                                                        className='restore-btn'
+                                                                        onClick={()=>this.handleUnDeleteSpecialty(item)} 
+                                                                    >
+                                                                        <i className="fas fa-undo"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
+
+                                            </tbody> :                 
+                                            <tbody>
+                                                <tr>
+                                                    <th style={{width: '10%'}}><FormattedMessage id="specialty-manage.picture"/></th>
+                                                    <th style={{width: '50%'}}><FormattedMessage id="specialty-manage.name"/></th>
+                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.edit"/></th>
+                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.restore"/></th>
+                                                </tr>
+                                                {dataTrash_en && dataTrash_en.length>0 && 
+                                                    dataTrash_en.map((item, index) => {
+                                                        return(
+                                                            <tr key={index}>
+                                                                <td>
+                                                                    <div 
+                                                                        className='background-img img-specialty'
+                                                                        style={{backgroundImage: `url(${item.image})`}}
+                                                                    >
+                                                                    </div>
+                                                                </td>
+                                                                <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name}</td>
+                                                                <td className='edit text-center'>
+                                                                    <button 
+                                                                        className='edit-btn' 
+                                                                        onClick={()=>this.handleEditSpecialty(item.id)}
+                                                                    >
+                                                                        <i className="fas fa-pencil-alt"></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td className='delete text-center'>
+                                                                    <button 
+                                                                        className='restore-btn'
+                                                                        onClick={()=>this.handleUnDeleteSpecialty(item)} 
+                                                                    >
+                                                                        <i className="fas fa-undo"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
+
+                                            </tbody>
+                                        }
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
