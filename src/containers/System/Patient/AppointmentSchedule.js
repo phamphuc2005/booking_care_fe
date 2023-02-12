@@ -148,7 +148,7 @@ class AppointmentSchedule extends Component {
                                                         <td>{date}</td>
                                                         <td>{time}</td>
                                                         <td>{`${item.doctorData2.firstName} ${item.doctorData2.lastName}`}</td>
-                                                        <td>{item.doctorData2.Doctor_Info.nameClinic}</td>
+                                                        <td>{language === LANGUAGES.VI ? item.doctorData2.Doctor_Info.Clinic.name : item.doctorData2.Doctor_Info.Clinic_En.name_en}</td>
                                                         <td>
                                                             <div 
                                                                 className='btn btn-warning action'

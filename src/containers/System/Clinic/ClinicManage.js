@@ -329,22 +329,22 @@ class ClinicManage extends Component {
                 </div>
 
                 <div className='nav-list container px-0'>
-                    <ul class="nav nav-pills mt-4" id="pills-tab" role="tablist">
-                        <li class="nav-item nav-item-1">
-                            <a class="nav-link link-1 active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
+                    <ul className="nav nav-pills mt-4" id="pills-tab" role="tablist">
+                        <li className="nav-item nav-item-1">
+                            <a className="nav-link link-1 active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
                                 <i className="fas fa-list"></i>
                                 <FormattedMessage id = "clinic-manage.list-title"/>
                             </a>
                         </li>
-                        <li class="nav-item item-2">
-                            <a class="nav-link link-2" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">
+                        <li className="nav-item item-2">
+                            <a className="nav-link link-2" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">
                                 <i className="fas fa-trash-alt"></i> 
                                 <FormattedMessage id = "user-manage.trash"/>
                             </a>
                         </li>
                     </ul>
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div className="tab-content" id="pills-tabContent">
+                        <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div className='row my-4 list-clinic'>
                                 {/* <div className='table-title col-12 mb-2'>-- <FormattedMessage id="clinic-manage.list-title"/> --</div> */}
                                 <div className='col-12 px-0'>
@@ -442,7 +442,7 @@ class ClinicManage extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                             <div className='row my-4 list-clinic'>
                                 {/* <div className='table-title col-12 mb-2'>-- <FormattedMessage id="clinic-manage.list-title"/> --</div> */}
                                 <div className='col-12 px-0'>
