@@ -136,12 +136,22 @@ const getAllClinic = () => {
     return axios.get('/api/get-all-clinic');
 }
 
+const getTrashClinic = () => {
+    return axios.get('/api/get-trash-clinic');
+}
+
 const editClinic = (inputData) => {
     return axios.put('/api/edit-clinic',inputData);
 }
 
 const deleteClinic = (inputId) => {
     return axios.delete('/api/delete-clinic',{
+        data: { id: inputId }
+    })
+}
+
+const unDeleteClinic = (inputId) => {
+    return axios.put('/api/unDelete-clinic',{
         data: { id: inputId }
     })
 }
@@ -241,5 +251,7 @@ export {
     getTrashUsers,
     unDeleteUser,
     getTrashSpecialty,
-    unDeleteSpecialty
+    unDeleteSpecialty,
+    getTrashClinic,
+    unDeleteClinic
 }

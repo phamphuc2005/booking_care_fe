@@ -8,10 +8,11 @@ import './ClinicManage.scss';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
-import { createClinic, getAllClinic, editClinic, deleteClinic } from '../../../services/userService';
+import { createClinic, getAllClinic, editClinic, deleteClinic, getTrashClinic, unDeleteClinic } from '../../../services/userService';
 import { toast } from 'react-toastify';
 import ModalEditClinic from './ModalEditClinic';
 import ModalDeleteClinic from './ModalDeleteClinic';
+import ModalUnDeleteClinic from './ModalUnDeleteClinic';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -34,6 +35,11 @@ class ClinicManage extends Component {
             clinicDelete: {},
             isOpenEdit: false,
             isOpenDelete: false,
+
+            dataTrash_vi: [],
+            dataTrash_en: [],
+            isOpenUnDelete: false,
+            clinicUnDelete: {},
         }
     }
 
@@ -43,6 +49,15 @@ class ClinicManage extends Component {
             this.setState({
                 dataClinic_vi: res.data_vi ? res.data_vi : [],
                 dataClinic_en: res.data_en ? res.data_en : []
+
+            })
+        }
+
+        let trash = await getTrashClinic();
+        if(trash && trash.errCode === 0) {
+            this.setState({
+                dataTrash_vi: trash.data_vi ? trash.data_vi : [],
+                dataTrash_en: trash.data_en ? trash.data_en : []
 
             })
         }
@@ -152,10 +167,23 @@ class ClinicManage extends Component {
         })
     }
 
+    toggleUnDeleteModal = () => {
+        this.setState({
+            isOpenUnDelete: !this.state.isOpenUnDelete,
+        })
+    }
+
     handleDeleteClinic = (clinic) => {
         this.setState({
             isOpenDelete: true,
             clinicDelete: clinic
+        })
+    }
+
+    handleUnDeleteClinic = (clinic) => {
+        this.setState({
+            isOpenUnDelete: true,
+            clinicUnDelete: clinic
         })
     }
 
@@ -177,8 +205,26 @@ class ClinicManage extends Component {
         }
     }
 
+    unDeleteClinic = async (clinic) => {
+        try {
+            let res = await unDeleteClinic(this.state.clinicUnDelete);
+            if(res && res.errCode === 0) {
+                this.setState({
+                    isOpenUnDelete: false,
+                })
+                toast.success("Restore clinic for success!");
+                this.componentDidMount();
+            } else {
+                toast.warn(res.errMessage)
+            }
+        } catch (error) {
+            toast.error("Restore clinic for failed!");
+            console.log('Error:', error)
+        }
+    }
+
     render() {
-        let {dataClinic_vi, dataClinic_en} = this.state;
+        let {dataClinic_vi, dataClinic_en, dataTrash_vi, dataTrash_en} = this.state;
         return (
             <div className='clinic-manage-container container'>
                 {
@@ -197,6 +243,15 @@ class ClinicManage extends Component {
                         toggleFromParent = {this.toggleDeleteModal}
                         currentClinic = {this.state.clinicDelete}
                         deleteClinicModal = {this.doDeleteClinic} 
+                    />
+                }
+                {
+                    this.state.isOpenUnDelete &&
+                    <ModalUnDeleteClinic
+                        isOpen = {this.state.isOpenUnDelete}
+                        toggleFromParent = {this.toggleUnDeleteModal}
+                        currentClinic = {this.state.clinicUnDelete}
+                        unDeleteClinicModal = {this.unDeleteClinic} 
                     />
                 }
                 <div className='title'><FormattedMessage id="clinic-manage.title"/></div>
@@ -272,100 +327,219 @@ class ClinicManage extends Component {
                         ><FormattedMessage id="clinic-manage.save-btn"/></button>
                     </div>
                 </div>
-                <div className='row my-4 list-clinic'>
-                    <div className='table-title col-12 mb-2'>-- <FormattedMessage id="clinic-manage.list-title"/> --</div>
-                    <div className='col-12'>
-                        <table id="table-clinic" className='col-12'>
-                            {this.props.language === LANGUAGES.VI ?
-                                <tbody>
-                                    <tr>
-                                        <th style={{width: '10%'}}><FormattedMessage id="clinic-manage.picture"/></th>
-                                        <th style={{width: '25%'}}><FormattedMessage id="clinic-manage.name"/></th>
-                                        <th style={{width: '55%'}}><FormattedMessage id="clinic-manage.address"/></th>
-                                        <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.edit"/></th>
-                                        <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.delete"/></th>
-                                    </tr>
-                                    {dataClinic_vi && dataClinic_vi.length>0 && 
-                                        dataClinic_vi.map((item, index) => {
-                                            return(
-                                                <tr key={index}>
-                                                    <td>
-                                                        <div 
-                                                            className='background-img img-clinic'
-                                                            style={{backgroundImage: `url(${item.image})`}}
-                                                        >
-                                                        </div>
-                                                    </td>
-                                                    <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name}</td>
-                                                    <td style={{textAlign: 'center', fontWeight: '500'}}>{item.address}</td>
-                                                    <td className='edit text-center'>
-                                                        <button 
-                                                            className='edit-btn' 
-                                                            onClick={()=>this.handleEditClinic(item.id)}
-                                                        >
-                                                            <i className="fas fa-pencil-alt"></i>
-                                                        </button>
-                                                    </td>
-                                                    <td className='delete text-center'>
-                                                        <button 
-                                                            className='delete-btn'
-                                                            onClick={()=>this.handleDeleteClinic(item.id)} 
-                                                        >
-                                                            <i className="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </td>
+
+                <div className='nav-list container px-0'>
+                    <ul class="nav nav-pills mt-4" id="pills-tab" role="tablist">
+                        <li class="nav-item nav-item-1">
+                            <a class="nav-link link-1 active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
+                                <i className="fas fa-list"></i>
+                                <FormattedMessage id = "clinic-manage.list-title"/>
+                            </a>
+                        </li>
+                        <li class="nav-item item-2">
+                            <a class="nav-link link-2" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                <i className="fas fa-trash-alt"></i> 
+                                <FormattedMessage id = "user-manage.trash"/>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div className='row my-4 list-clinic'>
+                                {/* <div className='table-title col-12 mb-2'>-- <FormattedMessage id="clinic-manage.list-title"/> --</div> */}
+                                <div className='col-12 px-0'>
+                                    <table id="table-clinic" className='col-12'>
+                                        {this.props.language === LANGUAGES.VI ?
+                                            <tbody>
+                                                <tr>
+                                                    <th style={{width: '10%'}}><FormattedMessage id="clinic-manage.picture"/></th>
+                                                    <th style={{width: '25%'}}><FormattedMessage id="clinic-manage.name"/></th>
+                                                    <th style={{width: '55%'}}><FormattedMessage id="clinic-manage.address"/></th>
+                                                    <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.edit"/></th>
+                                                    <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.delete"/></th>
                                                 </tr>
-                                            )
-                                        })
-                                    }
+                                                {dataClinic_vi && dataClinic_vi.length>0 && 
+                                                    dataClinic_vi.map((item, index) => {
+                                                        return(
+                                                            <tr key={index}>
+                                                                <td>
+                                                                    <div 
+                                                                        className='background-img img-clinic'
+                                                                        style={{backgroundImage: `url(${item.image})`}}
+                                                                    >
+                                                                    </div>
+                                                                </td>
+                                                                <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name}</td>
+                                                                <td style={{textAlign: 'center', fontWeight: '500'}}>{item.address}</td>
+                                                                <td className='edit text-center'>
+                                                                    <button 
+                                                                        className='edit-btn' 
+                                                                        onClick={()=>this.handleEditClinic(item.id)}
+                                                                    >
+                                                                        <i className="fas fa-pencil-alt"></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td className='delete text-center'>
+                                                                    <button 
+                                                                        className='delete-btn'
+                                                                        onClick={()=>this.handleDeleteClinic(item.id)} 
+                                                                    >
+                                                                        <i className="fas fa-trash-alt"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
 
-                                </tbody> :            
-                                <tbody>
-                                    <tr>
-                                        <th style={{width: '10%'}}><FormattedMessage id="clinic-manage.picture"/></th>
-                                        <th style={{width: '25%'}}><FormattedMessage id="clinic-manage.name"/></th>
-                                        <th style={{width: '55%'}}><FormattedMessage id="clinic-manage.address"/></th>
-                                        <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.edit"/></th>
-                                        <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.delete"/></th>
-                                    </tr>
-                                    {dataClinic_en && dataClinic_en.length>0 && 
-                                        dataClinic_en.map((item, index) => {
-                                            return(
-                                                <tr key={index}>
-                                                    <td>
-                                                        <div 
-                                                            className='background-img img-clinic'
-                                                            style={{backgroundImage: `url(${item.image_en})`}}
-                                                        >
-                                                        </div>
-                                                    </td>
-                                                    <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name_en}</td>
-                                                    <td style={{textAlign: 'center', fontWeight: '500'}}>{item.address_en}</td>
-                                                    <td className='edit text-center'>
-                                                        <button 
-                                                            className='edit-btn' 
-                                                            onClick={()=>this.handleEditClinic(item.id_en)}
-                                                        >
-                                                            <i className="fas fa-pencil-alt"></i>
-                                                        </button>
-                                                    </td>
-                                                    <td className='delete text-center'>
-                                                        <button 
-                                                            className='delete-btn'
-                                                            onClick={()=>this.handleDeleteClinic(item.id_en)} 
-                                                        >
-                                                            <i className="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </td>
+                                            </tbody> :            
+                                            <tbody>
+                                                <tr>
+                                                    <th style={{width: '10%'}}><FormattedMessage id="clinic-manage.picture"/></th>
+                                                    <th style={{width: '25%'}}><FormattedMessage id="clinic-manage.name"/></th>
+                                                    <th style={{width: '55%'}}><FormattedMessage id="clinic-manage.address"/></th>
+                                                    <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.edit"/></th>
+                                                    <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.delete"/></th>
                                                 </tr>
-                                            )
-                                        })
-                                    }
+                                                {dataClinic_en && dataClinic_en.length>0 && 
+                                                    dataClinic_en.map((item, index) => {
+                                                        return(
+                                                            <tr key={index}>
+                                                                <td>
+                                                                    <div 
+                                                                        className='background-img img-clinic'
+                                                                        style={{backgroundImage: `url(${item.image_en})`}}
+                                                                    >
+                                                                    </div>
+                                                                </td>
+                                                                <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name_en}</td>
+                                                                <td style={{textAlign: 'center', fontWeight: '500'}}>{item.address_en}</td>
+                                                                <td className='edit text-center'>
+                                                                    <button 
+                                                                        className='edit-btn' 
+                                                                        onClick={()=>this.handleEditClinic(item.id_en)}
+                                                                    >
+                                                                        <i className="fas fa-pencil-alt"></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td className='delete text-center'>
+                                                                    <button 
+                                                                        className='delete-btn'
+                                                                        onClick={()=>this.handleDeleteClinic(item.id_en)} 
+                                                                    >
+                                                                        <i className="fas fa-trash-alt"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
 
-                                </tbody> 
-                            }
-                        </table>
+                                            </tbody> 
+                                        }
+                                    </table>
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div className='row my-4 list-clinic'>
+                                {/* <div className='table-title col-12 mb-2'>-- <FormattedMessage id="clinic-manage.list-title"/> --</div> */}
+                                <div className='col-12 px-0'>
+                                    <table id="table-clinic" className='col-12'>
+                                        {this.props.language === LANGUAGES.VI ?
+                                            <tbody>
+                                                <tr>
+                                                    <th style={{width: '10%'}}><FormattedMessage id="clinic-manage.picture"/></th>
+                                                    <th style={{width: '25%'}}><FormattedMessage id="clinic-manage.name"/></th>
+                                                    <th style={{width: '55%'}}><FormattedMessage id="clinic-manage.address"/></th>
+                                                    <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.edit"/></th>
+                                                    <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.restore"/></th>
+                                                </tr>
+                                                {dataTrash_vi && dataTrash_vi.length>0 && 
+                                                    dataTrash_vi.map((item, index) => {
+                                                        return(
+                                                            <tr key={index}>
+                                                                <td>
+                                                                    <div 
+                                                                        className='background-img img-clinic'
+                                                                        style={{backgroundImage: `url(${item.image})`}}
+                                                                    >
+                                                                    </div>
+                                                                </td>
+                                                                <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name}</td>
+                                                                <td style={{textAlign: 'center', fontWeight: '500'}}>{item.address}</td>
+                                                                <td className='edit text-center'>
+                                                                    <button 
+                                                                        className='edit-btn' 
+                                                                        onClick={()=>this.handleEditClinic(item.id)}
+                                                                    >
+                                                                        <i className="fas fa-pencil-alt"></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td className='delete text-center'>
+                                                                    <button 
+                                                                        className='restore-btn'
+                                                                        onClick={()=>this.handleUnDeleteClinic(item.id)} 
+                                                                    >
+                                                                        <i className="fas fa-undo"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
+
+                                            </tbody> :            
+                                            <tbody>
+                                                <tr>
+                                                    <th style={{width: '10%'}}><FormattedMessage id="clinic-manage.picture"/></th>
+                                                    <th style={{width: '25%'}}><FormattedMessage id="clinic-manage.name"/></th>
+                                                    <th style={{width: '55%'}}><FormattedMessage id="clinic-manage.address"/></th>
+                                                    <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.edit"/></th>
+                                                    <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.restore"/></th>
+                                                </tr>
+                                                {dataTrash_en && dataTrash_en.length>0 && 
+                                                    dataTrash_en.map((item, index) => {
+                                                        return(
+                                                            <tr key={index}>
+                                                                <td>
+                                                                    <div 
+                                                                        className='background-img img-clinic'
+                                                                        style={{backgroundImage: `url(${item.image_en})`}}
+                                                                    >
+                                                                    </div>
+                                                                </td>
+                                                                <td style={{textAlign: 'center', fontWeight: '600'}}>{item.name_en}</td>
+                                                                <td style={{textAlign: 'center', fontWeight: '500'}}>{item.address_en}</td>
+                                                                <td className='edit text-center'>
+                                                                    <button 
+                                                                        className='edit-btn' 
+                                                                        onClick={()=>this.handleEditClinic(item.id_en)}
+                                                                    >
+                                                                        <i className="fas fa-pencil-alt"></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td className='delete text-center'>
+                                                                    <button 
+                                                                        className='restore-btn'
+                                                                        onClick={()=>this.handleUnDeleteClinic(item.id_en)} 
+                                                                    >
+                                                                        <i className="fas fa-undo"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
+
+                                            </tbody> 
+                                        }
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

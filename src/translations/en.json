@@ -239,18 +239,22 @@
         "list-title": "List of clinics",
         "picture": "Image",
         "edit": "Edit",
-        "delete": "Delete"
+        "delete": "Delete",
+        "restore": "Restore"
     },
     "clinic-modal": {
         "edit-title": "Edit clinic",
         "delete-title": "Delete clinic",
+        "restore-title": "Restore clinic",
         "name": "Clinic's name",
         "image": "Clinic's image",
         "address": "Address",
         "save-btn": "Save",
         "delete-btn": "Delete",
+        "restore-btn": "Restore",
         "cancel-btn": "Cancel",
-        "delete-content": "Are you sure you want to delete?"
+        "delete-content": "Are you sure you want to delete?",
+        "restore-content": "Are you sure you want to restore?"
     },
     "patient-manage": {
         "title": "Personal information",

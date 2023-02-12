@@ -239,18 +239,22 @@
         "list-title": "Danh sách cơ sở y tế",
         "picture": "Ảnh",
         "edit": "Sửa",
-        "delete": "Xóa"
+        "delete": "Xóa",
+        "restore": "Khôi phục"
     },
     "clinic-modal": {
         "edit-title": "Chỉnh sửa cơ sở y tế",
         "delete-title": "Xóa cơ sở y tế",
+        "restore-title": "Khôi phục cơ sở y tế",
         "name": "Tên cơ sở y tế",
         "image": "Ảnh cơ sở y tế",
         "address": "Địa chỉ",
         "save-btn": "Lưu",
         "delete-btn": "Xóa",
+        "restore-btn": "Khôi phục",
         "cancel-btn": "Hủy",
-        "delete-content": "Bạn có chắc chắn muốn xóa không?"
+        "delete-content": "Bạn có chắc chắn muốn xóa không?",
+        "restore-content": "Bạn có chắc chắn muốn khôi phục không?"
     },
     "patient-manage": {
         "title": "Thông tin cá nhân",

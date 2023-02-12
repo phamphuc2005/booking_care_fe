@@ -16,7 +16,7 @@
     }
 
     .list-clinic {
-        background-color: #eee;
+        // background-color: #eee;
 
         .table-title {
             background-color: #04AA6D;
@@ -83,6 +83,19 @@
             :hover {
                 background-color: transparent;
                 color: red;
+            }
+          }
+
+          .restore-btn {
+            border: none;
+            outline: none;
+            background-color: transparent;
+            color: #666;
+            font-size: large;
+
+            :hover {
+                background-color: transparent;
+                color: chartreuse;
             }
           }
     }
