@@ -27,9 +27,9 @@ export const adminMenu = [
             // {
             //     name: 'menu.admin.patient-manage', link: '/system/user-patient'
             // },
-            { //quản lý kế hoạch khám bệnh
-                name: 'menu.doctor.schedule-manage', link: '/system/schedule-manage'
-            }
+            // { //quản lý kế hoạch khám bệnh
+            //     name: 'menu.doctor.schedule-manage', link: '/system/schedule-manage'
+            // }
         ]
     },
     { //quản lý phỏng khám

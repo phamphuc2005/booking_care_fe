@@ -232,10 +232,10 @@ class UserManage extends Component {
                                         <i className="fas fa-user-md"></i>
                                         <div className='content-btn'><FormattedMessage id = "menu.admin.crud-doctor"/></div>
                                     </Link>
-                                    <Link to={'/system/schedule-manage'} className='home-btn col-6'>
+                                    {/* <Link to={'/system/schedule-manage'} className='home-btn col-6'>
                                         <i className="fas fa-calendar-alt"></i>
                                         <div className='content-btn'><FormattedMessage id = "menu.doctor.schedule-manage"/></div>
-                                    </Link>
+                                    </Link> */}
                                     <Link to={'/system/clinic-manage'} className='home-btn col-6'>
                                         <i className="fas fa-hospital-alt"></i>
                                         <div className='content-btn'><FormattedMessage id = "menu.admin.crud-clinic"/></div>
