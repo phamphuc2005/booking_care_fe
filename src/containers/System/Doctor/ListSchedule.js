@@ -124,13 +124,13 @@ class ListSchedule extends Component {
             try {
                 let res = await deleteSchedule(item.id);
                 if(res && res.errCode === 0) {
-                    toast.success("Delete schedule for success!");
+                    toast.success("Xóa kế hoạch thành công!");
                     this.componentDidMount();
                 } else {
                     toast.warn(res.errMessage)
                 }
             } catch (error) {
-                toast.error("Delete schedule for failed!");
+                toast.error("Xóa kế hoạch thất bại!");
                 console.log('Error:', error)
             }
         }

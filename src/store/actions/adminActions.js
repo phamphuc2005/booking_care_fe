@@ -98,15 +98,15 @@ export const createNewUser = (data) => {
         try {
             let res = await createNewUserService(data);
             if(res && res.errCode === 0) {
-                toast.success("Create user successfully!");
+                toast.success("Tạo người dùng thành công!");
                 dispatch(createUserSuccess());
                 dispatch(fetchAllUserStart());
             } else {
-                toast.error("Create user failed!");
+                toast.error("Tạo người dùng thất bại!");
                 dispatch(createUserFailed());
             }
         } catch (error) {
-            toast.error("Create user failed!");
+            toast.error("Tạo người dùng thất bại!");
             dispatch(createUserFailed());
             console.log('createNewUser error', error);
         }
@@ -128,11 +128,11 @@ export const fetchAllUserStart = () => {
             if(res && res.errCode === 0) {
                 dispatch(fetchAllUserSuccess(res.users));
             } else {
-                toast.error("Get all user failed!");
+                toast.error("Lấy dữ liệu toàn bộ người dùng thất bại!");
                 dispatch(fetchAllUserFailed());
             }
         } catch (error) {
-            toast.error("Get all user failed!");
+            toast.error("Lấy dữ liệu toàn bộ người dùng thất bại!");
             dispatch(fetchAllUserFailed());
             console.log('fetchAllUserStart error', error);
         }
@@ -153,15 +153,15 @@ export const deleteUser = (userId) => {
         try {
             let res = await deleteUserService(userId);
             if(res && res.errCode === 0) {
-                toast.success("Delete user successfully!");
+                toast.success("Xóa người dùng thành công!");
                 dispatch(deleteUserSuccess());
                 dispatch(fetchAllUserStart());
             } else {
-                toast.error("Delete user failed!");
+                toast.error("Xóa người dùng thất bại!");
                 dispatch(deleteUserFailed());
             }
         } catch (error) {
-            toast.error("Delete user failed!");
+            toast.error("Xóa người dùng thất bại!");
             dispatch(deleteUserFailed());
             console.log('deleteUser error', error);
         }
@@ -181,15 +181,15 @@ export const editUser = (data) => {
         try {
             let res = await editUserService(data);
             if(res && res.errCode === 0) {
-                toast.success("Update user successfully!");
+                toast.success("Cập nhật người dùng thành công!");
                 dispatch(editUserSuccess());
                 dispatch(fetchAllUserStart());
             } else {
-                toast.error("Update user failed!");
+                toast.error("Cập nhật người dùng thất bại!");
                 dispatch(editUserFailed());
             }
         } catch (error) {
-            toast.error("Update user failed!");
+            toast.error("Cập nhật người dùng thất bại!");
             dispatch(editUserFailed());
             console.log('editUser error', error);
         }
@@ -255,19 +255,19 @@ export const saveDetailDoctor = (data) => {
         try {
             let res = await saveDoctorInfo(data);
             if (res && res.errCode === 0){
-                toast.success("Save doctor info successfully!");
+                toast.success("Lưu thông tin bác sĩ thành công!");
                 dispatch({
                     type: actionTypes.SAVE_DOCTOR_INFO_SUCCESS,
                 })
             } else {
-                toast.error("Save doctor info failed!");
+                toast.error("Lưu thông tin bác sĩ thất bại!");
                 dispatch({
                     type: actionTypes.SAVE_DOCTOR_INFO_FAILED,
                 })
             }
         } catch (error) {
             console.log(error)
-            toast.error("Save doctor info failed!");
+            toast.error("Lưu thông tin bác sĩ thất bại!");
             dispatch({
                 type: actionTypes.SAVE_DOCTOR_INFO_FAILED,
             })

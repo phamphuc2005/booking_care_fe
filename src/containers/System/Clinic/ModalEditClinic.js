@@ -100,7 +100,7 @@ class ModalEditClinic extends Component {
         for(let i=0; i<arrInput.length; i++) {
             if(!this.state[arrInput[i]]) {
                 isValid = false;
-                toast.warn('Missing parameter: ' + arrInput[i]);
+                toast.warn('Thiếu dữ liệu: ' + arrInput[i]);
                 break;
             }
         }

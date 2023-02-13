@@ -108,7 +108,7 @@ class SpecialtyManage extends Component {
                 descriptionHTML_en: '',
                 descriptionMarkdown_en: '',
             })
-            toast.success("Create specialty for success!");
+            toast.success("Tạo chuyên khoa thành công!");
             this.componentDidMount();
         } else {
             toast.error(res.errMessage)
@@ -136,13 +136,13 @@ class SpecialtyManage extends Component {
                 this.setState({
                     isOpenEdit: false,
                 })
-                toast.success("Update specialty for success!");
+                toast.success("Cập nhật chuyên khoa thành công!");
                 this.componentDidMount();
             } else {
                 toast.warn(res.errMessage);
             }
         } catch (error) {
-            toast.error("Update specialty for failed!");
+            toast.error("Cập nhật chuyên khoa thất bại!");
             console.log(error)
         }
     }
@@ -180,13 +180,13 @@ class SpecialtyManage extends Component {
                 this.setState({
                     isOpenDelete: false,
                 })
-                toast.success("Delete specialty for success!");
+                toast.success("Xóa chuyên khoa thành công!");
                 this.componentDidMount();
             } else {
                 toast.warn(res.errMessage)
             }
         } catch (error) {
-            toast.error("Delete specialty for failed!");
+            toast.error("Xóa chuyên khoa thất bại!");
             console.log('Error:', error)
         }
     }
@@ -198,13 +198,13 @@ class SpecialtyManage extends Component {
                 this.setState({
                     isOpenUnDelete: false,
                 })
-                toast.success("Restore specialty for success!");
+                toast.success("Khôi phục chuyên khoa thành công!");
                 this.componentDidMount();
             } else {
                 toast.warn(res.errMessage)
             }
         } catch (error) {
-            toast.error("Restore specialty for failed!");
+            toast.error("Khôi phục chuyên khoa thất bại!");
             console.log('Error:', error)
         }
     }

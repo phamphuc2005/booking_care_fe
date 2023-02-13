@@ -83,7 +83,7 @@ class ScheduleManage extends Component {
         let {userInfo} = this.props;
         let result = []
         if(!currentDate) {
-            toast.warning("Invalid date!");
+            toast.warning("Thiếu ngày tháng!");
             return;
         }
         // let formatDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
@@ -100,7 +100,7 @@ class ScheduleManage extends Component {
                     result.push(object);
                 })
             } else {
-                toast.warning("Invalid hour!");
+                toast.warning("Thiếu thời gian!");
                 return;
             }
         }
@@ -111,10 +111,10 @@ class ScheduleManage extends Component {
             maxNumber: this.state.maxNumber
         })
         if(res && res.errCode === 0) {
-            toast.success("Create a plan for success!");
+            toast.success("Tạo kế hoạch thành công!");
             window.location.reload();
         } else {
-            toast.error("Create a plan for failed!");
+            toast.error("Tạo kế hoạch thất bại!");
             console.log('error:', res)
         }
     }

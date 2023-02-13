@@ -73,13 +73,13 @@ class TrashUser extends Component {
                 this.setState({
                     isOpen: false,
                 })
-                toast.success("Restore clinic for success!");
+                toast.success("Khôi phục người dùng thành công!");
                 this.componentDidMount();
             } else {
                 toast.warn(res.errMessage)
             }
         } catch (error) {
-            toast.error("Restore clinic for failed!");
+            toast.error("Khôi phục người dùng thất bại!");
             console.log('Error:', error)
         }
     }

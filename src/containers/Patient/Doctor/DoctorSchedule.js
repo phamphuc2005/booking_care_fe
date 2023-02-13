@@ -127,10 +127,10 @@ class DoctorSchedule extends Component {
                     dataModal: time
                 })
             } else {
-            toast.warn('You are not allowed to schedule medical appointments !')
+            toast.warn('Bạn không có quyền đặt lịch khám bệnh !')
             }
         } else {
-            toast.warn('You need to log in to the system to be able to make an appointment !')
+            toast.warn('Bạn cần đăng nhập vào hệ thống để có thể đặt lịch khám bệnh !')
         }
     }
 

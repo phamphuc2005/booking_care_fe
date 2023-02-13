@@ -139,8 +139,8 @@ class BookingModal extends Component {
                 patientId: this.props.userInfo.id
             })
             if(res && res.errCode === 0) {
-                toast.success("Successful appointment booking!");
-                setTimeout(function(){toast.info("Please check your email to confirm booking information!",{autoClose:false})}.bind(this), 3500);
+                toast.success("Gửi đăng kí đặt lịch thành công!");
+                setTimeout(function(){toast.info("Vui lòng kiểm tra email để xác nhận thông tin đặt lịch!",{autoClose:false})}.bind(this), 3500);
                 
                 this.props.closeBookingModal();
                 this.props.setLoadingData(false)

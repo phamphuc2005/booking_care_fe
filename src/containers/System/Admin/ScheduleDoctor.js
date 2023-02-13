@@ -109,11 +109,11 @@ class ScheduleDoctor extends Component {
         let {selectedDoctor, currentDate, time} = this.state;
         let result = []
         if(selectedDoctor && _.isEmpty(selectedDoctor)) {
-            toast.warning("Invalid doctor!");
+            toast.warning("Thiếu bác sĩ!");
             return;
         }
         if(!currentDate) {
-            toast.warning("Invalid date!");
+            toast.warning("Thiếu ngày tháng!");
             return;
         }
         // let formatDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
@@ -130,7 +130,7 @@ class ScheduleDoctor extends Component {
                     result.push(object);
                 })
             } else {
-                toast.warning("Invalid hour!");
+                toast.warning("Thiếu thời gian!");
                 return;
             }
         }
@@ -141,9 +141,9 @@ class ScheduleDoctor extends Component {
             maxNumber: this.state.maxNumber
         })
         if(res && res.errCode === 0) {
-            toast.success("Create a plan for success!");
+            toast.success("Tạo kế hoạch thành công!");
         } else {
-            toast.error("Create a plan for failed!");
+            toast.error("Tạo kế hoạch thất bại!");
             console.log('error:', res)
         }
     }

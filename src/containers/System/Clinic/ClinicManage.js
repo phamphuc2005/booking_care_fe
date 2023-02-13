@@ -115,7 +115,7 @@ class ClinicManage extends Component {
                 descriptionHTML_en: '',
                 descriptionMarkdown_en: '',
             })
-            toast.success("Create clinic for success!");
+            toast.success("Tạo cơ sở y tế thành công!");
             this.componentDidMount();
         } else {
             toast.error(res.errMessage)
@@ -143,13 +143,13 @@ class ClinicManage extends Component {
                 this.setState({
                     isOpenEdit: false,
                 })
-                toast.success("Update clinic for success!");
+                toast.success("Cập nhật cở sở y tế thành công!");
                 this.componentDidMount();
             } else {
                 toast.warn(res.errMessage);
             }
         } catch (error) {
-            toast.error("Update clinic for failed!");
+            toast.error("Cập nhật cở sở y tế thất bại!");
             console.log(error)
         }
     }
@@ -187,13 +187,13 @@ class ClinicManage extends Component {
                 this.setState({
                     isOpenDelete: false,
                 })
-                toast.success("Delete clinic for success!");
+                toast.success("Xóa cơ sở y tế thành công!");
                 this.componentDidMount();
             } else {
                 toast.warn(res.errMessage)
             }
         } catch (error) {
-            toast.error("Delete clinic for failed!");
+            toast.error("Xóa cơ sở y tế thất bại!");
             console.log('Error:', error)
         }
     }
@@ -205,13 +205,13 @@ class ClinicManage extends Component {
                 this.setState({
                     isOpenUnDelete: false,
                 })
-                toast.success("Restore clinic for success!");
+                toast.success("Khôi phục cơ sở y tế thành công!");
                 this.componentDidMount();
             } else {
                 toast.warn(res.errMessage)
             }
         } catch (error) {
-            toast.error("Restore clinic for failed!");
+            toast.error("Khôi phục cơ sở y tế thất bại!");
             console.log('Error:', error)
         }
     }

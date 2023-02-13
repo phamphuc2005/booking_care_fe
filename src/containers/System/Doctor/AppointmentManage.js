@@ -110,14 +110,14 @@ class AppointmentManage extends Component {
             this.setState({
                 isLoading: false
             })
-            toast.success('Confirm successful!');
+            toast.success('Xác nhận thành công!');
             this.toggleModal();
             await this.getDataAppointment();
         } else {
             this.setState({
                 isLoading: false
             })
-            toast.error('Confirm failed!');
+            toast.error('Xác nhận thất bại!');
             console.log("Error:", res.errMessage)
         }
     }

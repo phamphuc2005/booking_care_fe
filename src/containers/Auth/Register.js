@@ -68,7 +68,7 @@ class Register extends Component {
                 toast.error(check.errMessage)
             } 
             if(check && check.errCode ===0) {
-                toast.success('You have successfully registered your account !')
+                toast.success('Bạn đã đăng ký tài khoản thành công !')
                 this.setState({
                     isOpenModal: false
                 })
@@ -130,7 +130,7 @@ class Register extends Component {
                 
             }
         } else {
-            toast.error('Repeat password is not correct!')
+            toast.error('Mật khẩu nhập lại không chính xác!')
         }
         
     }

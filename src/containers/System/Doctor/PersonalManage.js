@@ -389,13 +389,13 @@ class PersonalManage extends Component {
             let res = await editUserService(this.state)
             if(res && res.errCode === 0) {
 
-                toast.success("Update info for success!");
+                toast.success("Cập nhật thông tin thành công!");
                 this.componentDidMount();
             } else {
                 toast.warn(res.errMessage);
             }
         } catch (error) {
-            toast.error("Update info for failed!");
+            toast.error("Cập nhật thông tin thất bại!");
             console.log(error)
         }
     }

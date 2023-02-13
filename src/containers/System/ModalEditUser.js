@@ -52,7 +52,7 @@ class ModalEditUser extends Component {
         for(let i=0; i<arrInput.length; i++) {
             if(!this.state[arrInput[i]]) {
                 isValid = false;
-                alert('Missing parameter: ' + arrInput[i]);
+                alert('Thiếu dữ liệu: ' + arrInput[i]);
                 break;
             }
         }

@@ -148,7 +148,7 @@ class Comment extends Component {
                 toast.warn(res.errMessage);
             }
         } catch (error) {
-            toast.error("Update comment for failed!");
+            toast.error("Chỉnh sửa bình luận thất bại!");
             console.log(error)
         }
     }
@@ -178,7 +178,7 @@ class Comment extends Component {
                 toast.warn(res.errMessage)
             }
         } catch (error) {
-            toast.error("Delete comment for failed!");
+            toast.error("Xóa bình luận thất bại!");
             console.log('Error:', error)
         }
     }
