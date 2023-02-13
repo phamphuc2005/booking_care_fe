@@ -18,8 +18,10 @@ class HomeHeader extends Component {
         this.state = {
             selectedFilter: 1,
             listDoctors: [],
-            listSpecialty: [],
-            listClinic: [],
+            listSpecialty_vi: [],
+            listClinic_vi: [],
+            listSpecialty_en: [],
+            listClinic_en: [],
             selectedDoctor: '',
             selectedSpecialty: '',
             selectedClinic: '',
@@ -57,23 +59,31 @@ class HomeHeader extends Component {
         }
         if(prevProps.language !== this.props.language){
             let dataSelect = this.buildDataInputSelect(this.props.allDoctors, 'USERS');
-            let {resSpecialty, resClinic} = this.props.allRequiredDoctorInfo
-            let dataSelectSpecialty = this.buildDataInputSelect(resSpecialty, 'SPECIALTY');
-            let dataSelectClinic = this.buildDataInputSelect(resClinic, 'CLINIC');
+            let {resSpecialty_vi, resSpecialty_en, resClinic_vi, resClinic_en} = this.props.allRequiredDoctorInfo
+            let dataSelectSpecialty_vi = this.buildDataInputSelect(resSpecialty_vi, 'SPECIALTY_VI');
+            let dataSelectClinic_vi = this.buildDataInputSelect(resClinic_vi, 'CLINIC_VI');
+            let dataSelectSpecialty_en = this.buildDataInputSelect(resSpecialty_en, 'SPECIALTY_EN');
+            let dataSelectClinic_en = this.buildDataInputSelect(resClinic_en, 'CLINIC_EN');
             
             this.setState({
                 listDoctors: dataSelect,
-                listSpecialty: dataSelectSpecialty,
-                listClinic: dataSelectClinic
+                listSpecialty_vi: dataSelectSpecialty_vi,
+                listClinic_vi: dataSelectClinic_vi,
+                listSpecialty_en: dataSelectSpecialty_en,
+                listClinic_en: dataSelectClinic_en
             })
         }
         if(prevProps.allRequiredDoctorInfo !== this.props.allRequiredDoctorInfo){
-            let { resSpecialty, resClinic} = this.props.allRequiredDoctorInfo
-            let dataSelectSpecialty = this.buildDataInputSelect(resSpecialty, 'SPECIALTY');
-            let dataSelectClinic = this.buildDataInputSelect(resClinic, 'CLINIC');
+            let {resSpecialty_vi, resSpecialty_en, resClinic_vi, resClinic_en} = this.props.allRequiredDoctorInfo
+            let dataSelectSpecialty_vi = this.buildDataInputSelect(resSpecialty_vi, 'SPECIALTY_VI');
+            let dataSelectClinic_vi = this.buildDataInputSelect(resClinic_vi, 'CLINIC_VI');
+            let dataSelectSpecialty_en = this.buildDataInputSelect(resSpecialty_en, 'SPECIALTY_EN');
+            let dataSelectClinic_en = this.buildDataInputSelect(resClinic_en, 'CLINIC_EN');
             this.setState({
-                listSpecialty: dataSelectSpecialty,
-                listClinic: dataSelectClinic
+                listSpecialty_vi: dataSelectSpecialty_vi,
+                listClinic_vi: dataSelectClinic_vi,
+                listSpecialty_en: dataSelectSpecialty_en,
+                listClinic_en: dataSelectClinic_en
             })
         } 
     }
@@ -92,7 +102,7 @@ class HomeHeader extends Component {
                     result.push(object);
                 })
             }
-            if(type === 'SPECIALTY') {
+            if(type === 'SPECIALTY_VI') {
                 inputData.map((item, index) => {
                     let object = {};
                     object.label = item.name;
@@ -100,11 +110,27 @@ class HomeHeader extends Component {
                     result.push(object);
                 })
             }
-            if(type === 'CLINIC') {
+            if(type === 'SPECIALTY_EN') {
                 inputData.map((item, index) => {
                     let object = {};
                     object.label = item.name;
                     object.value = item.id;
+                    result.push(object);
+                })
+            }
+            if(type === 'CLINIC_VI') {
+                inputData.map((item, index) => {
+                    let object = {};
+                    object.label = item.name;
+                    object.value = item.id;
+                    result.push(object);
+                })
+            }
+            if(type === 'CLINIC_EN') {
+                inputData.map((item, index) => {
+                    let object = {};
+                    object.label = item.name_en;
+                    object.value = item.id_en;
                     result.push(object);
                 })
             }
@@ -200,6 +226,8 @@ class HomeHeader extends Component {
         let isLoggedIn = this.props.isLoggedIn;
         let processLogout = this.props.processLogout;
         let {selectedFilter} = this.state;
+        let listClinic = language === LANGUAGES.VI ? this.state.listClinic_vi : this.state.listClinic_en
+        let listSpecialty = language === LANGUAGES.VI ? this.state.listSpecialty_vi : this.state.listSpecialty_en
         return (
             <React.Fragment>
                 <div className='home-header-container'>
@@ -316,7 +344,7 @@ class HomeHeader extends Component {
                                     placeholder={selectedFilter === 1 ? <FormattedMessage id="homeheader.search-doctor"/> : (selectedFilter === 2 ? <FormattedMessage id="homeheader.search-specialty"/> : <FormattedMessage id="homeheader.search-clinic"/>)}
                                     value={selectedFilter === 1 ? this.state.selectedDoctor : (selectedFilter === 2 ? this.state.selectedSpecialty : this.state.selectedClinic)}
                                     onChange={this.handleChangeSelect}
-                                    options={selectedFilter === 1 ? this.state.listDoctors : (selectedFilter === 2 ? this.state.listSpecialty : this.state.listClinic)}
+                                    options={selectedFilter === 1 ? this.state.listDoctors : (selectedFilter === 2 ? listSpecialty : listClinic)}
                                     onKeyDown = {(event) => this.handleKeyDown(event)}
                                 />
                                 <Dropdown className='filter'>
