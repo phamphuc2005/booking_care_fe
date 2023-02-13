@@ -154,7 +154,6 @@ class ScheduleDoctor extends Component {
         let today = new Date(new Date().setDate(new Date().getDate()));
         let choose = language === LANGUAGES.VI ? 'Chọn' : 'Choose option'
 
-        console.log(time, this.state.selectedDoctor)
         return (
             <div className='schedule-manage-container'>
                 <div className='title schedule-manage-title'>

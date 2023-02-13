@@ -160,7 +160,6 @@ class DoctorManage extends Component {
             let dataSelectClinic_vi = this.buildDataInputSelect(resClinic_vi, 'CLINIC_VI');
             let dataSelectSpecialty_en = this.buildDataInputSelect(resSpecialty_en, 'SPECIALTY_EN');
             let dataSelectClinic_en = this.buildDataInputSelect(resClinic_en, 'CLINIC_EN');
-            console.log(dataSelectPrice, dataSelectPayment, dataSelectProvince, dataSelectSpecialty_vi)
             this.setState({
                 listPrice: dataSelectPrice,
                 listPayment: dataSelectPayment,
@@ -302,7 +301,6 @@ class DoctorManage extends Component {
                 selectedClinic: '' 
             })
         }
-        console.log(`Option selected:`, res)
     };
 
     handleChangeSelectDoctorInfo = async (selectedDoctor, name) => {
@@ -312,7 +310,6 @@ class DoctorManage extends Component {
         this.setState({
             ...stateCopy
         })
-        console.log('hahihu:', selectedDoctor, stateName)
     }
 
     handleOnChangeText = (event, id) => {
@@ -325,7 +322,6 @@ class DoctorManage extends Component {
 
     render() {
         let {haveData, listSpecialty_vi} = this.state;
-        console.log('hello', this.state)
         return (
             <div className='container doctor-container'>
                 <div className='title mb-4'><FormattedMessage id = "doctor-manage.title"/></div>

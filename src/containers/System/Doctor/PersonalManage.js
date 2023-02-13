@@ -86,7 +86,6 @@ class PersonalManage extends Component {
                 avatar: ''
             })
         }
-        console.log('doctor', doctor, this.state);
     }
 
     buildDataInputSelect = (inputData, type) => {
@@ -160,12 +159,7 @@ class PersonalManage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(prevProps.allDoctors !== this.props.allDoctors){
-        //     let dataSelect = this.buildDataInputSelect(this.props.allDoctors, 'USERS');
-        //     this.setState({
-        //         listDoctors: dataSelect
-        //     })
-        // }
+
         if(prevProps.language !== this.props.language){
             let dataSelect = this.buildDataInputSelect(this.props.allDoctors, 'USERS');
             let {resPrice, resPayment, resProvince, resSpecialty_vi, resSpecialty_en, resClinic_vi, resClinic_en} = this.props.allRequiredDoctorInfo
@@ -197,7 +191,6 @@ class PersonalManage extends Component {
             let dataSelectClinic_vi = this.buildDataInputSelect(resClinic_vi, 'CLINIC_VI');
             let dataSelectSpecialty_en = this.buildDataInputSelect(resSpecialty_en, 'SPECIALTY_EN');
             let dataSelectClinic_en = this.buildDataInputSelect(resClinic_en, 'CLINIC_EN');
-            console.log(dataSelectPrice, dataSelectPayment, dataSelectProvince, dataSelectSpecialty_vi)
             this.setState({
                 listPrice: dataSelectPrice,
                 listPayment: dataSelectPayment,
@@ -352,7 +345,6 @@ class PersonalManage extends Component {
                 selectedClinic: '' 
             })
         }
-        console.log(`Option selected:`, res)
     };
 
     handleChangeSelectDoctorInfo = async (selectedDoctor, name) => {
@@ -362,7 +354,6 @@ class PersonalManage extends Component {
         this.setState({
             ...stateCopy
         })
-        console.log('hahihu:', selectedDoctor, stateName)
     }
 
     handleOnChangeText = (event, id) => {
@@ -379,7 +370,6 @@ class PersonalManage extends Component {
         this.setState({
             ...copyState
         })
-        console.log('change', this.state);
     }
 
     handleOnChangeImg = async (event) => {
@@ -397,11 +387,8 @@ class PersonalManage extends Component {
     handleEditDoctor = async () => {
         try {
             let res = await editUserService(this.state)
-            console.log('sent', this.state);
             if(res && res.errCode === 0) {
-                // this.setState({
-                //     isOpenEdit: false,
-                // })
+
                 toast.success("Update info for success!");
                 this.componentDidMount();
             } else {
@@ -418,7 +405,6 @@ class PersonalManage extends Component {
         let {userInfo, language} = this.props;
         let genders = this.state.genderArr;
         let positions = this.state.positionArr;
-        console.log('hello', this.state)
         return (
             <div className='container doctor-container'>
                 <div className='title mb-4'><FormattedMessage id = "doctor-manage.doctor-title"/></div>
@@ -468,7 +454,6 @@ class PersonalManage extends Component {
                             <select 
                                 className='form-control gender'
                                 onChange={(event)=>{this.onChangeInput(event, "gender")}}
-                                // value={this.state.gender}
                             >
                                 <option selected disabled hidden>{language === LANGUAGES.VI ? this.state.doctorGender.valueVi : this.state.doctorGender.valueEn}</option>
                                 {genders && genders.length>0 && genders.map((item, index) => {
@@ -485,7 +470,6 @@ class PersonalManage extends Component {
                             <select 
                                 className='form-control positions'
                                 onChange={(event)=>{this.onChangeInput(event, "positionId")}}
-                                // value={this.state.position}
                             >
                                 <option selected disabled hidden>{language === LANGUAGES.VI ? this.state.doctorPosition.valueVi : this.state.doctorPosition.valueEn}</option>
                                 {positions && positions.length>0 && positions.map((item, index) => {

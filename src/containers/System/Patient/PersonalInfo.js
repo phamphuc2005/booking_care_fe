@@ -56,7 +56,6 @@ class PersonalInfo extends Component {
                 avatar: ''
             })
         }
-        console.log('patient', patient, this.state);
     }
 
     buildDataInputSelect = (inputData, type) => {
@@ -93,7 +92,6 @@ class PersonalInfo extends Component {
         this.setState({
             ...copyState
         })
-        console.log('change', this.state);
     }
 
     handleOnChangeImg = async (event) => {
@@ -111,7 +109,6 @@ class PersonalInfo extends Component {
     handleEditPatient = async () => {
         try {
             let res = await editUserService(this.state)
-            console.log('sent', this.state);
             if(res && res.errCode === 0) {
                 toast.success("Update info for success!");
                 this.componentDidMount();
@@ -127,8 +124,6 @@ class PersonalInfo extends Component {
     render() {
         let {userInfo, language} = this.props;
         let genders = this.state.genderArr;
-        console.log('hello', this.state);
-        console.log('userinfo',this.props.userInfo);
         return (
             <div className='container patient-container'>
                 <div className='title mb-4'><FormattedMessage id = "patient-manage.title"/></div>
@@ -182,7 +177,7 @@ class PersonalInfo extends Component {
                             <select 
                                 className='form-control gender'
                                 onChange={(event)=>{this.onChangeInput(event, "gender")}}
-                                // value={this.state.gender}
+
                             >
                                 <option selected disabled hidden>{language === LANGUAGES.VI ? this.state.patientGender.valueVi : this.state.patientGender.valueEn}</option>
                                 {genders && genders.length>0 && genders.map((item, index) => {

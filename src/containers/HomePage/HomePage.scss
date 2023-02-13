@@ -10,7 +10,6 @@
     &::before {
         color: #959595 !important;
         font-family: FontAwesome !important;
-        // content: "\f053" !important;
         font-size: 30px !important;
     }
 
@@ -30,7 +29,6 @@
     &::before {
         color: #959595 !important;
         font-family: FontAwesome !important;
-        // content: "\e258" !important;
         font-size: 30px !important;
     }
 
@@ -78,15 +76,15 @@
                 border-color: #eee;
 
                 &.img-specialty {
-                    // background-image: url('../../assets/specialty/co-xuong-khop.jpg');
+
                 }
 
                 &.img-medicalfacility {
-                    // background-image: url('../../assets/medical_facility/benh-vien-thu-cuc.jpg');
+
                 }
 
                 &.img-doctor {
-                    // background-image: url('../../assets/doctors/anh-dai-dien-bs-1.jpg');
+
                     width: 120px;
                     height: 120px;
                     border-radius: 50%;

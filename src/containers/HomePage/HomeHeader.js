@@ -9,8 +9,6 @@ import { withRouter } from 'react-router';
 import { Dropdown } from 'react-bootstrap';
 import Select from 'react-select';
 import { getUserInfo } from '../../services/userService';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-//   import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 class HomeHeader extends Component {
     constructor(props){
@@ -188,7 +186,6 @@ class HomeHeader extends Component {
         this.setState({
             selectedFilter: event
         })
-        // alert(this.state.selectedFilter)
     }
 
     handleChangeSelect = (name) => {

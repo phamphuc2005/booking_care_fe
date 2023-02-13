@@ -34,7 +34,6 @@ class ModalEditClinic extends Component {
 
     async componentDidMount() {
         let clinic = this.props.currentClinic;
-        console.log('cl:', clinic);
         if (clinic) {
             let res = await getDetailClinicById({
                 id: clinic,
@@ -112,12 +111,10 @@ class ModalEditClinic extends Component {
         let isValid = this.checkValidateInput();
         if(isValid === true) {
             this.props.editClinicModal(this.state);
-            console.log(this.state)
         }
     }
 
     render() {
-        console.log('ress:', this.state);
         return (
             <Modal 
                 isOpen={this.props.isOpen}

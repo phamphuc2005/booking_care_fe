@@ -20,12 +20,7 @@ class DefaultClass extends Component {
 
     
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(this.props.language !== prevProps.language) {
-        //     let allDates = this.getArrDates(this.props.language);
-        //     this.setState({
-        //         allDates: allDates
-        //     })
-        // }
+
     }
 
     render() {

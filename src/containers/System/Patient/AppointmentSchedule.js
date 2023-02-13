@@ -40,34 +40,11 @@ class AppointmentSchedule extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(prevProps.language !== this.props.language){
-        //     let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
-        //     this.setState({
-        //         listDoctors: dataSelect
-        //     })
-        // }
     }
 
     capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-
-    // handleCancelAppointment = async (appointment) => {
-    //     try {
-    //         let res = await cancelAppointment({
-    //             id: appointment.id,
-    //         })
-    //         if(res && res.errCode === 0) {
-    //             toast.success('Hủy đăng ký thành công !');
-    //             this.componentDidMount();
-    //         } else {
-    //             toast.error('Hủy đăng ký không thành công !')
-    //         }
-    //     } catch (error) {
-    //         toast.error("Hủy đăng ký không thành công !");
-    //         console.log(error)
-    //     }
-    // }
 
     toggleCancelModal = () => {
         this.setState({
@@ -103,7 +80,6 @@ class AppointmentSchedule extends Component {
     render() {
         let {dataSchedule} = this.state;
         let {language} = this.props;
-        // console.log(this.state, this.props.user)
         return (
             <>
                 {
@@ -171,11 +147,7 @@ class AppointmentSchedule extends Component {
                         </div>
                     </div>
                 </div>
-                {/* <PatientModal
-                    isOpenModal={isOpenModal}
-                    dataModal={dataModal}
-                    toggleFromParent = {this.toggleModal}
-                /> */}
+
             </>
         );
     }

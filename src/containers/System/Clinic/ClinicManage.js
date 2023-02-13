@@ -65,13 +65,7 @@ class ClinicManage extends Component {
 
     
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(this.props.language !== prevProps.language) {
-        //     let allDates = this.getArrDates(this.props.language);
-        //     this.setState({
-        //         allDates: allDates
-        //     })
-        // }
-        // this.componentDidMount();
+
     }
 
     handleOnChangeInput = (event, id) => {
@@ -127,7 +121,6 @@ class ClinicManage extends Component {
             toast.error(res.errMessage)
             console.log('Error:', res)
         }
-        console.log(this.state)
     }
 
     toggleEditModal = () => {
@@ -452,9 +445,9 @@ class ClinicManage extends Component {
                                                 <tr>
                                                     <th style={{width: '10%'}}><FormattedMessage id="clinic-manage.picture"/></th>
                                                     <th style={{width: '25%'}}><FormattedMessage id="clinic-manage.name"/></th>
-                                                    <th style={{width: '55%'}}><FormattedMessage id="clinic-manage.address"/></th>
-                                                    <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.edit"/></th>
-                                                    <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.restore"/></th>
+                                                    <th style={{width: '50%'}}><FormattedMessage id="clinic-manage.address"/></th>
+                                                    <th style={{width: '7.5%'}}><FormattedMessage id="clinic-manage.edit"/></th>
+                                                    <th style={{width: '7.5%'}}><FormattedMessage id="clinic-manage.restore"/></th>
                                                 </tr>
                                                 {dataTrash_vi && dataTrash_vi.length>0 && 
                                                     dataTrash_vi.map((item, index) => {
@@ -495,9 +488,9 @@ class ClinicManage extends Component {
                                                 <tr>
                                                     <th style={{width: '10%'}}><FormattedMessage id="clinic-manage.picture"/></th>
                                                     <th style={{width: '25%'}}><FormattedMessage id="clinic-manage.name"/></th>
-                                                    <th style={{width: '55%'}}><FormattedMessage id="clinic-manage.address"/></th>
-                                                    <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.edit"/></th>
-                                                    <th style={{width: '5%'}}><FormattedMessage id="clinic-manage.restore"/></th>
+                                                    <th style={{width: '50%'}}><FormattedMessage id="clinic-manage.address"/></th>
+                                                    <th style={{width: '7.5%'}}><FormattedMessage id="clinic-manage.edit"/></th>
+                                                    <th style={{width: '7.5%'}}><FormattedMessage id="clinic-manage.restore"/></th>
                                                 </tr>
                                                 {dataTrash_en && dataTrash_en.length>0 && 
                                                     dataTrash_en.map((item, index) => {

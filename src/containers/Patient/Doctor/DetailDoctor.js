@@ -38,11 +38,7 @@ class DetailDoctor extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(prevProps.topDoctorRedux !== this.props.topDoctorRedux) {
-        //     this.setState({
-        //         arrDoctors: this.props.topDoctorRedux
-        //     })
-        // }
+
     }
 
     setLoading = (setLoading) => {
@@ -50,11 +46,9 @@ class DetailDoctor extends Component {
             ...this.state,
             isLoading: setLoading
         })
-        console.log('load',this.state);
     }
 
     render() {
-        console.log('doctor',this.state.detailDoctor)
         let {language} = this.props;
         let {detailDoctor} = this.state;
         let nameVi = '', nameEn = '';

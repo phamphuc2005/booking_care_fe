@@ -52,12 +52,7 @@ class AppointmentManage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(prevProps.language !== this.props.language){
-        //     let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
-        //     this.setState({
-        //         listDoctors: dataSelect
-        //     })
-        // }
+
     }
 
     handleChangeDate = (date) => {
@@ -127,10 +122,6 @@ class AppointmentManage extends Component {
         }
     }
 
-    // handleConfirmCancel = (appointment) => {
-    //     alert('hello')
-    // }
-
     toggleCancelModal = () => {
         this.setState({
             isOpenCancel: !this.state.isOpenCancel,
@@ -174,8 +165,6 @@ class AppointmentManage extends Component {
     render() {
         let {dataAppointment, isOpenModal, dataModal} = this.state;
         let {language} = this.props;
-        console.log(dataAppointment);
-        // console.log(+this.state.date, this.state.today)
         return (
             <>
                 <LoadingOverlay
@@ -214,7 +203,6 @@ class AppointmentManage extends Component {
                                         {dataAppointment && dataAppointment.length>0 ? 
                                             dataAppointment.map((item, index) => {
                                                 let time = language === LANGUAGES.VI ? item.timeTypeData2.valueVi : item.timeTypeData2.valueEn
-                                                // let gender = 
                                                 return(
                                                     item.patientData != null ?
                                                         <tr key={index} style={{textAlign: 'center'}}>

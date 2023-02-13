@@ -6,7 +6,6 @@ import * as actions from '../../../store/actions';
 
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
-// import style manually
 import 'react-markdown-editor-lite/lib/index.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { toast } from 'react-toastify';
@@ -47,7 +46,6 @@ class TableUser extends Component {
     }
 
     handleDeleteUser = (user) => {
-        // this.props.deleteUserRedux(user.id);
         if(user.roleId === "R0"){
             toast.warn('Không thể xóa quản trị viên !')
         } else {

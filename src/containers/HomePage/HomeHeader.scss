@@ -16,7 +16,6 @@
         .left-content {
             width: 20%;
             display: flex;
-            // border: 1px solid black;
             align-items: center;
             color: white;
             margin-left: -5px;
@@ -31,7 +30,6 @@
                 min-width: 220px;
                 cursor: pointer;
                 margin-left: 5px;
-                // border: 2px solid orange;
                 border-radius: 10px;
                 margin-left: 5px;
             }
@@ -39,7 +37,6 @@
             i {
                 font-size: 28px;
                 cursor: pointer;
-                // margin-right: 10px;
             }
 
             .dropdown {
@@ -69,7 +66,6 @@
         }
         .center-content {
             width: 60%;
-            // border: 1px solid black;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -83,8 +79,6 @@
             }
         }
         .right-content {
-            // width: 20%;
-            // border: 1px solid black;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -204,7 +198,6 @@
                     border: 1px solid white;
                     height: 50px;
                     width: 50px;
-                    // background-image: url('../../assets/images/1355316.png');
                     background-size: cover;
                     background-position: center;
                     background-repeat: no-repeat;
@@ -214,7 +207,6 @@
                 .menu {
                     margin-right: -15px !important;
                     margin-top: 3px;
-                    // border: 2px solid #49bce2;
                     box-shadow: 0px 5px 5px 0px gray;
                     min-width: 160px;
 
@@ -245,12 +237,10 @@
     background: url('../../assets/images/header-background.jpg') center center no-repeat;
     height: 600px;
     background-size: cover;
-    // padding: 15px 0;
     display: flex;
     flex-direction: column;
 
     .banner-up {
-        // border: 1px solid black;
         height: 60%;
         padding-top: 15px;
         background-image: linear-gradient(rgba(0, 0, 0, 0.25),rgba(255, 255, 255, 0.1));
@@ -291,7 +281,6 @@
             }
     
             .inputSelect {
-                // height: 30px;
                 width: 500px;
                 background: transparent;
                 border: none;
@@ -324,7 +313,6 @@
             &:hover {
                 background-color: dodgerblue;
                 box-shadow: 0px 0px 0px 0.2rem #268fff80;
-                // opacity: 0.8;
             }
         }
 
@@ -359,7 +347,6 @@
     }
 
     .banner-down {
-        // border: 1px solid black;
         height: 40%;
         background-image: linear-gradient(rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0.8),rgba(255, 255, 255, 1));
         display: flex;

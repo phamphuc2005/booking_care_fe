@@ -22,12 +22,6 @@ class ListDoctor extends Component {
 
     
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(this.props.language !== prevProps.language) {
-        //     let allDates = this.getArrDates(this.props.language);
-        //     this.setState({
-        //         allDates: allDates
-        //     })
-        // }
         if(prevProps.topDoctorRedux !== this.props.topDoctorRedux) {
             this.setState({
                 arrDoctors: this.props.topDoctorRedux
@@ -36,7 +30,6 @@ class ListDoctor extends Component {
     }
 
     handleViewDetailDoctor = (doctor) => {
-        console.log(doctor);
         if(this.props.history) {
             this.props.history.push(`/detail-doctor/${doctor.id}`)
         }

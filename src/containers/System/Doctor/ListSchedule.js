@@ -101,7 +101,6 @@ class ListSchedule extends Component {
             } else {
 
             }
-            console.log('huhu',res)
         }
     }
 
@@ -110,7 +109,6 @@ class ListSchedule extends Component {
             isOpenModalBooking: true,
             dataModal: time
         })
-        console.log(time)
     }
 
     closeBookingModal = () => {
@@ -126,9 +124,6 @@ class ListSchedule extends Component {
             try {
                 let res = await deleteSchedule(item.id);
                 if(res && res.errCode === 0) {
-                    // this.setState({
-                    //     isOpenDelete: false,
-                    // })
                     toast.success("Delete schedule for success!");
                     this.componentDidMount();
                 } else {
@@ -144,7 +139,6 @@ class ListSchedule extends Component {
     render() {
         let {allDates, allTimes, isOpenModalBooking, dataModal} = this.state;
         let {language} = this.props;
-        console.log(allTimes, allDates);
         return (
             <>
                 <div className='doctor-schedule-container'>
@@ -184,12 +178,6 @@ class ListSchedule extends Component {
                                             {allTimes.map((item, index) => {
                                                 let timeDisplay = language === LANGUAGES.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn;
                                                 return(
-                                                    // <button 
-                                                    //     key={index}
-                                                    //     onClick={()=>this.handleDeleteTime(item)}
-                                                    // >
-                                                    //     {timeDisplay}
-                                                    // </button>
                                                     <tr
                                                     className='schedule-row'
                                                     key={index} style={{textAlign: 'center'}}

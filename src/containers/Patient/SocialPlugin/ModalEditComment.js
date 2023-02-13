@@ -68,7 +68,6 @@ class ModalEditComment extends Component {
         let isValid = this.checkValidateInput();
         if(isValid === true) {
             this.props.editCommentModal(this.state);
-            console.log(this.state)
         }
     }
 

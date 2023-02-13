@@ -32,12 +32,7 @@ class DoctorMoreInfo extends Component {
 
     
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(this.props.language !== prevProps.language) {
-        //     let allDates = this.getArrDates(this.props.language);
-        //     this.setState({
-        //         allDates: allDates
-        //     })
-        // }
+
         if(this.props.doctorID !== prevProps.doctorID) {
             let res = await getMoreDoctorInfo(this.props.doctorID);
             if(res && res.errCode === 0) {
@@ -58,7 +53,6 @@ class DoctorMoreInfo extends Component {
     render() {
         let {isShow, moreInfo} = this.state;
         let {language} = this.props;
-        console.log('more', this.state.moreInfo.Clinic);
         return (
             <div className='doctor-more-info-container'>
                 <div className='content-up'>

@@ -11,15 +11,12 @@
 
     input {
         background-color: white !important;
-        // width: 190%;
     }
 
     .gender {
-        // width: 343px;
     }
 
     .positions {
-        // width: 343px;
     }
 
     .edit-btn {
@@ -31,7 +28,6 @@
 .more-infoo {
     display: flex;
     flex-wrap: wrap;
-    // gap: 12px;
 
     button:hover {
         background-color: gold;
@@ -65,11 +61,6 @@
 .detail_info {
     display: flex;
     flex-wrap: wrap;
-    // gap: 10px;
-
-    // .price, .payment, .province, .name, .address, .note, .specialty, .clinic {
-    //     width: 32.7%;
-    // }
 
     label {
         margin-left: 2px;

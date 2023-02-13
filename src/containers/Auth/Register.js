@@ -99,8 +99,6 @@ class Register extends Component {
     }
     
     handleRegister = async () => {
-        // console.log('username:' + this.state.username)
-        // console.log('password:' + this.state.password)
         this.setState({
             errMessage: ''
         })

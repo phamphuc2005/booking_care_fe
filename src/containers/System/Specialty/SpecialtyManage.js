@@ -62,13 +62,6 @@ class SpecialtyManage extends Component {
 
     
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(this.props.language !== prevProps.language) {
-        //     let allDates = this.getArrDates(this.props.language);
-        //     this.setState({
-        //         allDates: allDates
-        //     })
-        // }
-        // this.componentDidMount();
     }
 
     handleOnChangeInput = (event, id) => {
@@ -121,7 +114,6 @@ class SpecialtyManage extends Component {
             toast.error(res.errMessage)
             console.log('Error:', res)
         }
-        console.log(this.state)
     }
 
     toggleEditModal = () => {
@@ -328,10 +320,10 @@ class SpecialtyManage extends Component {
                                         {this.props.language === LANGUAGES.VI ?
                                             <tbody>
                                                 <tr>
-                                                    <th style={{width: '10%'}}><FormattedMessage id="specialty-manage.picture"/></th>
-                                                    <th style={{width: '50%'}}><FormattedMessage id="specialty-manage.name"/></th>
-                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.edit"/></th>
-                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.delete"/></th>
+                                                    <th style={{width: '15%'}}><FormattedMessage id="specialty-manage.picture"/></th>
+                                                    <th style={{width: '55%'}}><FormattedMessage id="specialty-manage.name"/></th>
+                                                    <th style={{width: '15%'}}><FormattedMessage id="specialty-manage.edit"/></th>
+                                                    <th style={{width: '15%'}}><FormattedMessage id="specialty-manage.delete"/></th>
                                                 </tr>
                                                 {dataSpecialty_vi && dataSpecialty_vi.length>0 && 
                                                     dataSpecialty_vi.map((item, index) => {
@@ -369,10 +361,10 @@ class SpecialtyManage extends Component {
                                             </tbody> :                 
                                             <tbody>
                                                 <tr>
-                                                    <th style={{width: '10%'}}><FormattedMessage id="specialty-manage.picture"/></th>
-                                                    <th style={{width: '50%'}}><FormattedMessage id="specialty-manage.name"/></th>
-                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.edit"/></th>
-                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.delete"/></th>
+                                                    <th style={{width: '15%'}}><FormattedMessage id="specialty-manage.picture"/></th>
+                                                    <th style={{width: '55%'}}><FormattedMessage id="specialty-manage.name"/></th>
+                                                    <th style={{width: '15%'}}><FormattedMessage id="specialty-manage.edit"/></th>
+                                                    <th style={{width: '15%'}}><FormattedMessage id="specialty-manage.delete"/></th>
                                                 </tr>
                                                 {dataSpecialty_en && dataSpecialty_en.length>0 && 
                                                     dataSpecialty_en.map((item, index) => {
@@ -422,10 +414,10 @@ class SpecialtyManage extends Component {
                                         {this.props.language === LANGUAGES.VI ?
                                             <tbody>
                                                 <tr>
-                                                    <th style={{width: '10%'}}><FormattedMessage id="specialty-manage.picture"/></th>
-                                                    <th style={{width: '50%'}}><FormattedMessage id="specialty-manage.name"/></th>
-                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.edit"/></th>
-                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.restore"/></th>
+                                                    <th style={{width: '15%'}}><FormattedMessage id="specialty-manage.picture"/></th>
+                                                    <th style={{width: '55%'}}><FormattedMessage id="specialty-manage.name"/></th>
+                                                    <th style={{width: '15%'}}><FormattedMessage id="specialty-manage.edit"/></th>
+                                                    <th style={{width: '15%'}}><FormattedMessage id="specialty-manage.restore"/></th>
                                                 </tr>
                                                 {dataTrash_vi && dataTrash_vi.length>0 && 
                                                     dataTrash_vi.map((item, index) => {
@@ -463,10 +455,10 @@ class SpecialtyManage extends Component {
                                             </tbody> :                 
                                             <tbody>
                                                 <tr>
-                                                    <th style={{width: '10%'}}><FormattedMessage id="specialty-manage.picture"/></th>
-                                                    <th style={{width: '50%'}}><FormattedMessage id="specialty-manage.name"/></th>
-                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.edit"/></th>
-                                                    <th style={{width: '20%'}}><FormattedMessage id="specialty-manage.restore"/></th>
+                                                    <th style={{width: '15%'}}><FormattedMessage id="specialty-manage.picture"/></th>
+                                                    <th style={{width: '55%'}}><FormattedMessage id="specialty-manage.name"/></th>
+                                                    <th style={{width: '15%'}}><FormattedMessage id="specialty-manage.edit"/></th>
+                                                    <th style={{width: '15%'}}><FormattedMessage id="specialty-manage.restore"/></th>
                                                 </tr>
                                                 {dataTrash_en && dataTrash_en.length>0 && 
                                                     dataTrash_en.map((item, index) => {

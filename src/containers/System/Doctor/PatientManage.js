@@ -45,12 +45,7 @@ class PatientManage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(prevProps.language !== this.props.language){
-        //     let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
-        //     this.setState({
-        //         listDoctors: dataSelect
-        //     })
-        // }
+
     }
 
     handleChangeDate = (date) => {
@@ -85,13 +80,11 @@ class PatientManage extends Component {
             isOpenModal: true,
             dataModal:data
         })
-        console.log('state',data)
     }
 
     render() {
         let {dataPatient, isOpenModal, dataModal} = this.state;
         let {language} = this.props;
-        console.log(this.state)
         return (
             <>
                 <div className='patient-manage-container'>
@@ -120,7 +113,6 @@ class PatientManage extends Component {
                                         {dataPatient && dataPatient.length>0 ? 
                                             dataPatient.map((item, index) => {
                                                 let time = language === LANGUAGES.VI ? item.timeTypeData2.valueVi : item.timeTypeData2.valueEn
-                                                // let gender = language === LANGUAGES.VI ? item.patientData.genderData.valueVi : item.patientData.genderData.valueEn
                                                 return(
                                                     item.patientData != null ?
                                                     <tr

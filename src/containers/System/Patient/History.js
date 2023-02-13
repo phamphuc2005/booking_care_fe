@@ -36,12 +36,7 @@ class History extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(prevProps.language !== this.props.language){
-        //     let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
-        //     this.setState({
-        //         listDoctors: dataSelect
-        //     })
-        // }
+
     }
 
     capitalizeFirstLetter(string) {
@@ -51,8 +46,6 @@ class History extends Component {
     render() {
         let {dataSchedule} = this.state;
         let {language} = this.props;
-        // console.log(this.state, this.props.user)
-        console.log(this.state);
         return (
             <>
                 <div className='patient-history-container'>

@@ -20,19 +20,11 @@ class ConfirmRegisterModal extends Component {
     }
 
     componentDidMount() {
-        // if(this.props.dataModal) {
-        //     this.setState({
-        //         email: this.props.dataModal.email
-        //     })
-        // }
+
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(prevProps.dataModal !== this.props.dataModal){
-        //     this.setState({
-        //         email: this.props.dataModal.email
-        //     })
-        // }
+
     }
 
     toggle = () => {

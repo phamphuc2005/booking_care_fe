@@ -28,7 +28,6 @@ class Doctor extends Component {
     }
 
     handleViewDetailDoctor = (doctor) => {
-        console.log(doctor);
         if(this.props.history) {
             this.props.history.push(`/detail-doctor/${doctor.id}`)
         }
@@ -43,7 +42,6 @@ class Doctor extends Component {
     render() {
         let arrDoctors = this.state.arrDoctors;
         let {language} = this.props;
-        // arrDoctors = arrDoctors.concat(arrDoctors)
         return (
             <div className='section-share section-doctor'>
                 <div className='section-container'>

@@ -27,19 +27,6 @@ class ModalEditSpecialty extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     let specialty = this.props.currentSpecialty;
-    //     if (specialty && !_.isEmpty(specialty)) {
-    //         this.setState({
-    //             id : specialty.id,
-    //             name: specialty.name,
-    //             imageBase64: specialty.imageBase64,
-    //             descriptionHTML: specialty.descriptionHTML,
-    //             descriptionMarkdown: specialty.descriptionMarkdown,
-    //         })
-    //     }
-    // }
-
     async componentDidMount() {
         let specialty = this.props.currentSpecialty;
         if (specialty) {
@@ -116,12 +103,10 @@ class ModalEditSpecialty extends Component {
         let isValid = this.checkValidateInput();
         if(isValid === true) {
             this.props.editSpecialtyModal(this.state);
-            console.log(this.state)
         }
     }
 
     render() {
-        console.log('---------',this.state);
         return (
             <Modal 
                 isOpen={this.props.isOpen}

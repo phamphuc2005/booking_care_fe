@@ -33,16 +33,10 @@ class ListSpecialty extends Component {
 
     
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(this.props.language !== prevProps.language) {
-        //     let allDates = this.getArrDates(this.props.language);
-        //     this.setState({
-        //         allDates: allDates
-        //     })
-        // }
+
     }
 
     handleViewDetailSpecialty = (specialty) => {
-        console.log(specialty);
         if(this.props.history) {
             this.props.history.push(`/detail-specialty/${specialty.id}`)
         }

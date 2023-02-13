@@ -214,7 +214,6 @@ class UserManage extends Component {
                 <div className='container home-page'>
                     <div className='row'>
                         <div className='col-12 home-page-body'>
-                            {/* <div className='title1'><FormattedMessage id = "usermanage.title1"/></div>    */}
                             {this.state.roleId === 'R0' ? 
                             <>
                                 <div className='title2'><FormattedMessage id = "usermanage.title2"/>Admin</div>   

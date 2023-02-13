@@ -108,7 +108,6 @@ class Comment extends Component {
                 toast.warn(res.errMessage)
             } else {
                 toast.error(res.errMessage)
-                console.log('Error:', res)
             }
             this.setState({
                 userId: '',
@@ -199,7 +198,6 @@ class Comment extends Component {
         let {dataHref, width, numPost, language} = this.props;
         let isLoggedIn = this.props.isLoggedIn;
         let {arrComments} = this.state;
-        console.log(this.state);
         let write = language === LANGUAGES.VI ? 'Viết bình luận ...' : 'Write comment ...'
         let old = language === LANGUAGES.VI ? 'Cũ nhất' : 'Oldest';
         let news = language === LANGUAGES.VI ? 'Mới nhất' : 'Newest';

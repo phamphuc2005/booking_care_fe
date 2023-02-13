@@ -6,7 +6,6 @@ import * as actions from '../../../store/actions';
 
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
-// import style manually
 import 'react-markdown-editor-lite/lib/index.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { getTrashUsers, unDeleteUser } from '../../../services/userService';
@@ -19,10 +18,6 @@ import { toast } from 'react-toastify';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 // Finish!
-function handleEditorChange({ html, text }) {
-  console.log('handleEditorChange', html, text);
-}
-
 
 class TrashUser extends Component {
 
@@ -39,7 +34,6 @@ class TrashUser extends Component {
     async componentDidMount() {
         this.props.fetchUserRedux();
         let res = await getTrashUsers();
-        console.log('res', res);
         if(res && res.errCode === 0) {
             this.setState({
                 dataTrash: res.data ? res.data : [],
@@ -56,7 +50,6 @@ class TrashUser extends Component {
     }
 
     handleUnDeleteUser = (user) => {
-        // this.props.deleteUserRedux(user.id);
         this.setState({
             isOpen: true,
             unDeleteId: user.id
@@ -74,10 +67,6 @@ class TrashUser extends Component {
     }
 
     handleDeleteUserModal = async () => {
-        // this.props.deleteUserRedux(this.state.unDeleteId);
-        // this.setState({
-        //     isOpen: false,
-        // })
         try {
             let res = await unDeleteUser(this.state.unDeleteId);
             if(res && res.errCode === 0) {

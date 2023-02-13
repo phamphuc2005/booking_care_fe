@@ -19,7 +19,6 @@ class ListClinic extends Component {
 
     async componentDidMount() {
         let res = await getAllClinic();
-        console.log('res', res);
         if(res && res.errCode === 0) {
             this.setState({
                 dataClinic_vi: res.data_vi ? res.data_vi : [],
@@ -30,16 +29,10 @@ class ListClinic extends Component {
 
     
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(this.props.language !== prevProps.language) {
-        //     let allDates = this.getArrDates(this.props.language);
-        //     this.setState({
-        //         allDates: allDates
-        //     })
-        // }
+
     }
 
     handleViewDetailClinic = (clinic) => {
-        console.log(clinic);
         if(this.props.history) {
             this.props.history.push(`/detail-clinic/${clinic.id}`)
         }
@@ -59,7 +52,6 @@ class ListClinic extends Component {
 
     render() {
         let {dataClinic_vi, dataClinic_en} = this.state;
-        console.log('clinic',this.state);
         return (
             <React.Fragment>
                 <HomeHeader isShowBanner={false}/>

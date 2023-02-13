@@ -116,7 +116,6 @@ class DoctorSchedule extends Component {
             } else {
 
             }
-            console.log('huhu',res)
         }
     }
 
@@ -127,7 +126,6 @@ class DoctorSchedule extends Component {
                     isOpenModalBooking: true,
                     dataModal: time
                 })
-                console.log('time',time)
             } else {
             toast.warn('You are not allowed to schedule medical appointments !')
             }
@@ -147,7 +145,6 @@ class DoctorSchedule extends Component {
     render() {
         let {allDates, allTimes, isOpenModalBooking, dataModal} = this.state;
         let {language} = this.props;
-        // console.log(this.props.setLoadingData);
         return (
             <>
                 <div className='doctor-schedule-container'>

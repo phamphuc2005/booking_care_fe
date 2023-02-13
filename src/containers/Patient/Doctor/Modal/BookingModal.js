@@ -46,7 +46,6 @@ class BookingModal extends Component {
         if(this.props.isLoggedIn === true){
             let response = await getUserInfo({id: this.props.userInfo.id});
             if(response && response.errCode === 0) {
-                console.log(response);
                 this.setState({
                     firstName: response.data.firstName,
                     lastName: response.data.lastName,
@@ -107,12 +106,6 @@ class BookingModal extends Component {
         })
     }
 
-    // handleChangeBirthday = (date) => {
-    //     this.setState({
-    //         birthday: date[0]
-    //     })
-    // }
-
     handleChangeGender = (selectOption) => {
         this.setState({selectGender: selectOption})
     }
@@ -133,7 +126,6 @@ class BookingModal extends Component {
                 fullName: fullName,
                 phoneNumber: this.state.phoneNumber,
                 date: this.props.dataTime.date,
-                // birthday: date,
                 selectGender: selectGender,
                 genders: genders,
                 email: this.state.email,
@@ -192,7 +184,6 @@ class BookingModal extends Component {
     render() {
         let {isOpenModal, closeBookingModal, dataTime, language} = this.props;
         let doctorId = dataTime && !_.isEmpty(dataTime) ? dataTime.doctorId : '';
-        console.log('state',this.state);
         return (
             <Modal isOpen={isOpenModal} className={'booking-modal-container'}>
                 <div className='booking-modal-content'>
@@ -242,14 +233,6 @@ class BookingModal extends Component {
                                     // onChange={(event)=>this.handleOnChangeInput(event, 'email')}
                                 ></input>
                             </div>
-                            {/* <div className='col-6 form-group'>
-                                <label><FormattedMessage id = "patient.booking-modal.birthday"/>:</label>
-                                <DatePicker
-                                    className='form-control'
-                                    onChange={this.handleChangeBirthday}
-                                    value={this.state.birthday}
-                            />
-                            </div> */}
                             <div className='col-6 form-group'>
                                 <label><FormattedMessage id = "patient.booking-modal.gender"/>:</label>
                                 <Select
@@ -259,23 +242,12 @@ class BookingModal extends Component {
                                     placeholder={this.props.language===LANGUAGES.VI?this.state.genderVi:this.state.genderEn}
                                 />
                             </div>
-                            {/* <div className='col-6 form-group'>
-                            <label><FormattedMessage id = "patient.booking-modal.gender"/>:</label>
-                                <input 
-                                    disabled
-                                    className='form-control'
-                                    value={this.props.language===LANGUAGES.VI?this.state.genderVi:this.state.genderEn}
-                                    // value={this.state.phoneNumber}
-                                    // onChange={(event)=>this.handleOnChangeInput(event, 'phoneNumber')}
-                                ></input>
-                            </div> */}
                             <div className='col-6 form-group'>
                                 <label><FormattedMessage id = "patient.booking-modal.phone"/>:</label>
                                 <input 
                                     
                                     className='form-control'
                                     value={this.state.phoneNumber}
-                                    // value={this.state.phoneNumber}
                                     onChange={(event)=>this.handleOnChangeInput(event, 'phoneNumber')}
                                 ></input>
                             </div>
@@ -285,7 +257,6 @@ class BookingModal extends Component {
                                     
                                     className='form-control'
                                     value={this.state.address}
-                                    // value={this.state.address}
                                     onChange={(event)=>this.handleOnChangeInput(event, 'address')}
                                 ></input>
                             </div>

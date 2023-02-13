@@ -65,12 +65,7 @@ class DetailClinic extends Component {
 
     
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(this.props.language !== prevProps.language) {
-        //     let allDates = this.getArrDates(this.props.language);
-        //     this.setState({
-        //         allDates: allDates
-        //     })
-        // }
+
     }
 
     setLoading = (setLoading) => {
@@ -78,7 +73,6 @@ class DetailClinic extends Component {
             ...this.state,
             isLoading: setLoading
         })
-        // console.log('load',this.state);
     }
 
     render() {

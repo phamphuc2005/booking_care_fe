@@ -28,9 +28,6 @@ class DetailSpecialty extends Component {
     async componentDidMount() {
         if(this.props.match && this.props.match.params && this.props.match.params.id){
             let id = this.props.match.params.id;
-            // this.setState({
-                
-            // })
             let res = await getDetailSpecialtyById({
                 id: id,
                 location: 'ALL'
@@ -82,12 +79,7 @@ class DetailSpecialty extends Component {
 
     
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(this.props.language !== prevProps.language) {
-        //     let allDates = this.getArrDates(this.props.language);
-        //     this.setState({
-        //         allDates: allDates
-        //     })
-        // }
+
     }
 
     handeOnChangeSelect = async (event) => {
@@ -136,7 +128,6 @@ class DetailSpecialty extends Component {
             ...this.state,
             isLoading: setLoading
         })
-        // console.log('load',this.state);
     }
 
     render() {

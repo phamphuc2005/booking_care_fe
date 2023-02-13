@@ -15,12 +15,10 @@
         }
     }
     .all-date {
-        // margin-top: 5px;
         margin-bottom: 10px;
 
         select {
             border: none;
-            // border-bottom: 1px solid #ccc;
             color: #337ab9;
             outline: none;
             padding-top: 3px;
@@ -37,13 +35,6 @@
 
 
         .time-container {
-            // display: flex;
-            // gap: 10px;
-            // flex-wrap: wrap;
-
-            // #dropdown-basic {
-            //     color: black;
-            // }
 
             .delete-btn {
                 color: red;
@@ -52,33 +43,6 @@
                     margin-right: 5px;
                 }
             }
-
-            // button {
-            //     // border: 1px solid #fff8ae;
-            //     border: none;
-            //     border-radius: 3px;
-            //     padding: 5px 5px;
-            //     outline: none;
-            //     background-color: #fff8ae;
-            //     width: 142px;
-
-            //     &:hover {
-            //         // border: 1px solid #45c3d2;
-            //         background-color: #45c3d2;
-            //         color: white;
-            //     }
-            // }
-
-            // .text-note {
-            //     margin-top: 10px;
-            //     font-size: 13px;
-            //     width: 500px;
-            // }
-
-            // .text-notice {
-            //     color: red;
-            //     font-style: italic;
-            // }
         }
     }
 
@@ -91,7 +55,6 @@
           }
 
           .schedule-row {
-            //   cursor: pointer;
 
             i {
                 cursor: pointer;
@@ -108,12 +71,6 @@
           }
           
           #table-schedule tr{background-color: white;}
-
-        //   #table-schedule tr:hover {
-        //       background-color: whitesmoke;
-        //   }
-          
-          // #table-schedule tr:hover {background-color: #ddd;}
           
           #table-schedule th {
             padding-top: 12px;

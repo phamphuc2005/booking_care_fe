@@ -44,14 +44,7 @@ class ProfileDoctor extends Component {
     }
     
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        // if(this.props.language !== prevProps.language) {
-        //     let allDates = this.getArrDates(this.props.language);
-        //     this.setState({
-        //         allDates: allDates
-        //     })
-        // }
         if(this.props.doctorId !== prevProps.doctorId) {
-            // this.getDoctorInfo(this.props.doctorId);
             let res = await getProfileDoctor(this.props.doctorId);
             this.setState({
                 profileData: res.data ? res.data : []
@@ -98,7 +91,6 @@ class ProfileDoctor extends Component {
                 description = profileData.Markdown_En.description;
             }
         }
-        console.log('profile', this.state)
         return (
             <div className='profile-doctor'>
                 <div className='content-up'>
